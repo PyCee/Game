@@ -25,12 +25,14 @@ run:
 	character.o terrain.o protag.o draw.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o
 	echo Compiled.
-git:
+git push:
 	clear
-	cd /home/kim/LudumDeMorte/Game
 	echo GitHub...
 	git add .
 	git commit -a
 	git push
+git pull:
+	clear
+	git pull
 goodbye:
 	echo FAREWELL CRUEL WORLD
