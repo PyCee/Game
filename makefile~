@@ -27,10 +27,10 @@ run:
 	echo Compiled.
 git:
 	clear
-	cd /home/kim/LudumDeMorte/Game
 	echo GitHub...
-	git add .
+	git status
 	git commit -a
-	git push
+#	git add -A
+#	git commit
 goodbye:
 	echo FAREWELL CRUEL WORLD
