@@ -108,10 +108,6 @@ int main
 	free(sun2);
 	free(sun3);
 	printf("Del Sequence Ending.\n");
-	
 	printf("%s Ending.\n", PROGRAM_NAME);
-	
-	printf("after: %f\n", radDeg(arccos(0.5)));
-	//printf("after degrees: %f\n", radDeg(arcsin(0.7071)));
 	
 }

@@ -112,6 +112,5 @@ int main
 	printf("%s Ending.\n", PROGRAM_NAME);
 	
 	printf("after: %f\n", radDeg(arccos(0.5)));
-	//printf("after degrees: %f\n", radDeg(arcsin(0.7071)));
 	
 }
