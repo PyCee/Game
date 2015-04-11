@@ -1,0 +1,45 @@
+
+#include "rotation.h"
+
+#include "matrix.h"
+#include "gMath.h"
+#include <math.h>
+
+// TODO free mamory of matricies
+
+Matrix_t *Pitch
+(Matrix_t *matrix, double angle)
+{
+	Matrix_t *pitch;
+	genMatrix(&pitch, 4, 4);
+	IdentityMatrix(pitch);
+	*getMatrixEle(pitch, Y, Y) = cos(angle);
+	*getMatrixEle(pitch, Y, Z) = -1 * sin(angle);
+	*getMatrixEle(pitch, Z, Z) = cos(angle);
+	*getMatrixEle(pitch, Z, Y) = sin(angle);
+	return MultiplyMatricies(matrix, pitch);
+}
+Matrix_t *Yaw
+(Matrix_t *matrix, double angle)
+{
+	Matrix_t *yaw;
+	genMatrix(&yaw, 4, 4);
+	IdentityMatrix(yaw);
+	*getMatrixEle(yaw, X, X) = cos(angle);
+	*getMatrixEle(yaw, X, Y) = -1 * sin(angle);
+	*getMatrixEle(yaw, Y, Y) = cos(angle);
+	*getMatrixEle(yaw, Y, X) = sin(angle);
+	return MultiplyMatricies(matrix, yaw);
+}
+Matrix_t *Rotate
+(Matrix_t *matrix, double angle)
+{
+	Matrix_t *rotate;
+	genMatrix(&rotate, 4, 4);
+	IdentityMatrix(rotate);
+	*getMatrixEle(rotate, X, X) = cos(angle);
+	*getMatrixEle(rotate, X, Z) = -1 * sin(angle);
+	*getMatrixEle(rotate, Z, Z) = cos(angle);
+	*getMatrixEle(rotate, Z, X) = sin(angle);
+	return MultiplyMatricies(matrix, rotate);
+}

@@ -1,0 +1,14 @@
+
+#include <stdint.h>
+#include <stdlib.h>
+
+typedef struct _Timer_t
+{
+	char *CharToChange;
+	char ChangeTo;
+	uint64_t TimeTarget;
+	uint64_t TimeElapsed;
+} Timer_t;
+
+void InitTimer(Timer_t **timer, char *, char , uint64_t);
+void UpdateTimer(Timer_t *, uint64_t);

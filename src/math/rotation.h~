@@ -1,0 +1,19 @@
+
+#ifndef _ROTATE_
+#define _ROTATE_
+
+#define X 0
+#define Y 1
+#define Z 2
+#define W 3
+
+typedef struct _Matrix_t Matrix_t;
+
+// around X axis
+Matrix_t *Pitch(Matrix_t *, double);
+// around Z axis
+Matrix_t *Yaw(Matrix_t *, double);
+// around Y axis
+Matrix_t *Rotate(Matrix_t *, double);
+
+#endif

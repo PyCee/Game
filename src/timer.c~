@@ -1,0 +1,19 @@
+
+#include "timer.h"
+
+void InitTimer(Timer_t **timer, char *charTarget,char changeTo,  uint64_t wantedTime)
+{
+	*timer = malloc(sizeof(Timer_t));
+	(*timer)->CharToChange = charTarget;
+	(*timer)->ChangeTo = changeTo;
+	(*timer)->TimeTarget = wantedTime;
+	(*timer)->TimeElapsed = 0;
+}
+
+void UpdateTimer(Timer_t *timer, uint64_t deltaMS)
+{
+	timer->TimeElapsed += deltaMS;
+	if(timer->TimeElapsed >= timer->TimeTarget){
+		*(timer->CharToChange) = timer->ChangeTo;
+	}
+}

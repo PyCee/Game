@@ -1,0 +1,41 @@
+
+#include "componantPhysics.h"
+#include <stdlib.h>
+
+
+void InitPhysics(ComponantPhysics_t **physics)
+{
+	(*physics) = malloc(sizeof(ComponantPhysics_t));
+	(*physics)->Height = 0.2;
+	(*physics)->Width = 0.2;
+	(*physics)->Length = 0.2;
+	(*physics)->PosX = 0.0;
+	(*physics)->PosY = 0.0;
+	(*physics)->PosZ = 0.0;
+	(*physics)->PosZ = 0.0;
+	(*physics)->VelX = 0.0;
+	(*physics)->VelY = 0.0;
+	(*physics)->VelZ = 0.0;
+	(*physics)->AccX = 0.0;
+	(*physics)->AccY = -0.000005;
+	(*physics)->AccZ = 0.0;
+	(*physics)->JerkX = 0.0;
+	(*physics)->JerkY = 0.0;
+	(*physics)->JerkZ = 0.0;
+	(*physics)->FrictionComponant = 0.0;
+}
+void UpdatePhysics(ComponantPhysics_t *physics, uint64_t deltaMS)
+{
+	physics->AccX += physics->JerkX * deltaMS;
+	physics->AccY += physics->JerkY * deltaMS;
+	physics->AccZ += physics->JerkZ * deltaMS;
+	
+	physics->VelX += physics->AccX * deltaMS;
+	physics->VelY += physics->AccY * deltaMS;
+	physics->VelZ += physics->AccZ * deltaMS;
+	
+	physics->PosX += physics->VelX * deltaMS;
+	physics->PosY += physics->VelY * deltaMS;
+	physics->PosZ += physics->VelZ * deltaMS;
+
+}

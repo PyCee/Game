@@ -1,0 +1,31 @@
+
+#ifndef _COMPONANTPHYSICS_T_
+#define _COMPONANTPHYSICS_T_
+
+#include <stdint.h>
+
+typedef struct _ComponantPhysics_t
+{
+	void (*Update)(struct _ComponantPhysics_t *, uint64_t);
+	double Height;
+	double Width;
+	double Length;
+	double PosX;
+	double PosY;
+	double PosZ;
+	double VelX;
+	double VelY;
+	double VelZ;
+	double AccX;
+	double AccY;
+	double AccZ;
+	double JerkX;
+	double JerkY;
+	double JerkZ;
+	double FrictionComponant;
+} ComponantPhysics_t;
+
+void genPhysics(ComponantPhysics_t **);
+void UpdatePhysics(ComponantPhysics_t *, uint64_t);
+
+#endif
