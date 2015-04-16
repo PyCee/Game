@@ -32,6 +32,7 @@ int main
 	genProtag(&player);
 	
 	BindControlledCharacter(player);
+	printf("initing asd.\n");
 	
 	Character_t *terrain;
 	genTerrain(&terrain);
@@ -60,6 +61,18 @@ int main
 	SDL_GL_SwapWindow(gameWindow);
 	
 	drawInit();
+	
+	Matrix_t *turn1;
+	Matrix_t *turn2;
+	Matrix_t *turn3;
+	genMatrix(&turn1, 1, 4);
+	genMatrix(&turn2, 1, 4);
+	genMatrix(&turn3, 1, 4);
+	*getMatrixEle(turn2, 0, 0) = -0.1;
+	*getMatrixEle(turn3, 0, 0) = 0.1;
+	*getMatrixEle(turn1, 0, 0) = 0.0;
+	*getMatrixEle(turn1, 0, 1) = 0.2;
+	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	while(IAMALIVE == 1){
 	
@@ -70,16 +83,31 @@ int main
 		uint64_t deltaTime = newTime - oldTime;
 		oldTime = newTime;
 		
-		double pos[] = {list[0]->physics.Pos.X, list[0]->physics.Pos.Y};
+		double pos[] = {list[0]->physics->Pos->X, list[0]->physics->Pos->Y};
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glBegin(GL_POLYGON);
- 			glVertex2f(list[1]->physics.Pos.X, list[1]->physics.Pos.Y);
- 			glVertex2f(list[1]->physics.Pos.X + list[1]->physics.Width, list[1]->physics.Pos.Y);
- 			glVertex2f(list[1]->physics.Pos.X + list[1]->physics.Width, list[1]->physics.Pos.Y + list[1]->physics.Height);
- 			glVertex2f(list[1]->physics.Pos.X, list[1]->physics.Pos.Y + list[1]->physics.Height);
+ 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y);
+ 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y);
+ 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y + list[1]->physics->Height);
+ 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height);
 		glEnd();
+		turn1 = Yaw(turn1, 3.1415926 / 20);
+		printf("mag: %f\n", PythagoreanTheoremDim2(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1)));
+		if(*getMatrixEle(turn1, 0, 1) > 0){
+			glBegin(GL_POLYGON);
+ 				glVertex2f(*getMatrixEle(turn2, 0, 0), *getMatrixEle(turn2, 0, 1));
+ 				glVertex2f(*getMatrixEle(turn3, 0, 0), *getMatrixEle(turn3, 0, 1));
+ 				glVertex2f(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1));
+			glEnd();
+		} else if(*getMatrixEle(turn1, 0, 1) < 0){
+			glBegin(GL_POLYGON);
+ 				glVertex2f(*getMatrixEle(turn2, 0, 0), *getMatrixEle(turn2, 0, 1));
+ 				glVertex2f(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1));
+ 				glVertex2f(*getMatrixEle(turn3, 0, 0), *getMatrixEle(turn3, 0, 1));
+			glEnd();
+		}
 		
 		draw();
 		
@@ -88,11 +116,10 @@ int main
 		Update(list[0], deltaTime);
 		
 		char collision = CheckBoundingBoxCollision(list[0], list[1]);
-		
 		if( collision == 1){
-			if(list[0]->physics.Pos.Y < list[1]->physics.Pos.Y + list[1]->physics.Height){
-				list[0]->physics.Pos.Y = list[1]->physics.Pos.Y + list[1]->physics.Height;
-				list[0]->physics.Vel.Y = 0.0;
+			if(list[0]->physics->Pos->Y < list[1]->physics->Pos->Y + list[1]->physics->Height){
+				list[0]->physics->Pos->Y = list[1]->physics->Pos->Y + list[1]->physics->Height;
+				list[0]->physics->Vel->Y = 0.0;
 			}
 		}
 		
@@ -107,7 +134,9 @@ int main
 	free(sun1);
 	free(sun2);
 	free(sun3);
+	freeMatrix(&turn1);
+	freeMatrix(&turn2);
+	freeMatrix(&turn3);
 	printf("Del Sequence Ending.\n");
 	printf("%s Ending.\n", PROGRAM_NAME);
-	
 }

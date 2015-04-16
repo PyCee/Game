@@ -2,18 +2,18 @@
 #include "gMath.h"
 
 #include "matrix.h"
-#include <math.h>
+#include "vector.h"
 
 // TODO free mamory of matricies
 Matrix_t *Transform
-(Matrix_t *matrix, double x, double y, double z)
+(Matrix_t *matrix, Vec3_t *tran)
 {
 	Matrix_t *transform;
 	genMatrix(&transform, 4, 4);
 	ZeroMatrix(transform);
-	*getMatrixEle(transform, 3, 0) = x;
-	*getMatrixEle(transform, 3, 1) = y;
-	*getMatrixEle(transform, 3, 2) = z;
+	*getMatrixEle(transform, 3, 0) = tran->X;
+	*getMatrixEle(transform, 3, 1) = tran->Y;
+	*getMatrixEle(transform, 3, 2) = tran->Z;
 	*getMatrixEle(transform, 3, 3) = 1;
 	return MultiplyMatricies(matrix, transform);
 }

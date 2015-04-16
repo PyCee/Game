@@ -30,6 +30,7 @@ void genMatrix
 	_matrix->height = height;
 	_matrix->width = width;
 	_matrix->ele = malloc(sizeof(double) * height * width);
+	ZeroMatrix(_matrix);
 }
 void freeMatrix
 (Matrix_t **matrix)

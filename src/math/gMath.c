@@ -2,7 +2,7 @@
 #include "gMath.h"
 
 #include "matrix.h"
-
+#include "vector.h"
 #include <math.h>
 
 void mathInit
@@ -64,10 +64,10 @@ double radDeg(double rad)
 double PythagoreanTheoremDim2
 (double X, double Y)
 {
-	return sqrt(Exponant(X, 2) + Exponant(Y, 2));
+	return Exponant(X, 2) + Exponant(Y, 2);
 }
 double PythagoreanTheoremDim3
 (double X, double Y, double Z)
 {
-	return sqrt(Exponant(X, 2) + Exponant(Y, 2) + Exponant(Z, 2));
+	return Exponant(X, 2) + Exponant(Y, 2) + Exponant(Z, 2);
 }

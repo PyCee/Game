@@ -5,8 +5,9 @@
 
 typedef struct _Character_t Character_t;
 
-void genProtag(Character_t **protag);
-void UpdateProtag(Character_t *, uint64_t deltaMS);
+void genProtag(Character_t **);
+void freeProtag(Character_t **);
+void UpdateProtag(Character_t *, uint64_t );
 void Jump(Character_t *);
 
 void setForwardTrue(Character_t *);

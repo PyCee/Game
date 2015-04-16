@@ -2,16 +2,17 @@
 #ifndef _CHARACTER_
 #define _CHARACTER_
 
-#include <stdlib.h>
-#include <stdint.h>
 #include "physics.h"
 
 typedef struct _Character_t
 {
 	void (*Update)(struct _Character_t *, uint64_t);
-	char Control;
-	Physics_t physics;
+	unsigned char Control;
+	Physics_t *physics;
 } Character_t;
+
+void genCharacter(Character_t **);
+void freeCharacter(Character_t **);
 
 void setBounds(Character_t *, double, double);
 void Update(Character_t *, uint64_t);

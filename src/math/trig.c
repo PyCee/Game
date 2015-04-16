@@ -9,10 +9,10 @@ double sin
 {
 	char mult = 1;
 	unsigned char currPrecision = 0;
-	double answer;
+	double answer = 0;
 	while (currPrecision < TRIG_PRECISION)
 	{
-		answer += mult * (Exponant(radians, currPrecision * 2 + 3) / Factorial(currPrecision * 2 + 3));
+		answer += mult * (Exponant(radians, currPrecision * 2 + 1) / Factorial(currPrecision * 2 + 1));
 		mult = mult * -1;
 		currPrecision++;
 	}

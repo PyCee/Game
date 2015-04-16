@@ -8,6 +8,7 @@
 #define TRIG_PRECISION 9
 
 typedef struct _Matrix_t Matrix_t;
+typedef struct _Vec3_t Vec3_t;
 
 void mathInit();
 
@@ -25,7 +26,7 @@ double arcsec(double);
 double arccot(double);
 
 // around space
-Matrix_t *Transform(Matrix_t *, double, double, double);
+Matrix_t *Transform(Matrix_t *, Vec3_t *);
 // around X axis
 Matrix_t *Pitch(Matrix_t *, double);
 // around Z axis
