@@ -1,10 +1,22 @@
 
 #include "options.h"
+#include <stdio.h>
 
 void InitOptions
 ()
 {
 	// load options from file
+	printf("Initing Options.\n");
+	FILE *configFile;
+	if ((configFile = fopen(CONFIG_LOC, "a+")) == NULL)
+	{
+		printf("ERROR::CONFIG::LOCATION::FILE_NOT_FOUND\n");
+	} else
+	{
+		fprintf(configFile, "asd\n");
+		fclose(configFile);
+	}
+	printf("Options Inited.\n");
 }
 void SaveOptions
 ()

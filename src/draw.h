@@ -13,8 +13,8 @@ GLuint VBO;
 
 static GLuint shaderProgram;
 static GLuint shaderVertex;
-#define SHADER_PATH_VERT "shaders/vertex.vert";
+#define SHADER_PATH_VERT "shaders\\vertex.vert";
 static GLuint shaderFragment;
-#define SHADER_PATH_FRAG "shaders/fragment.frag";
+#define SHADER_PATH_FRAG "shaders\\fragment.frag";
 
 #endif

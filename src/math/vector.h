@@ -7,11 +7,13 @@ typedef struct _Vec3_t
 	double X;
 	double Y;
 	double Z;
+	double mag;
 } Vec3_t;
 typedef struct _Vec2_t
 {
 	double X;
 	double Y;
+	double mag;
 } Vec2_t;
 
 void genVec3(Vec3_t **);

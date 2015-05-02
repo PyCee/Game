@@ -5,16 +5,12 @@
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
 **/
 
 #ifndef _OPTIONS_
 #define _OPTIONS_
 
+static const char *CONFIG_LOC = "config/config";
 void InitOptions();
 
 void SaveOptions();

@@ -61,6 +61,7 @@ int main
 	SDL_GL_SwapWindow(gameWindow);
 	
 	drawInit();
+	InitOptions();
 	
 	Matrix_t *turn1;
 	Matrix_t *turn2;
@@ -94,7 +95,6 @@ int main
  			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height);
 		glEnd();
 		turn1 = Yaw(turn1, 3.1415926 / 20);
-		printf("mag: %f\n", PythagoreanTheoremDim2(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1)));
 		if(*getMatrixEle(turn1, 0, 1) > 0){
 			glBegin(GL_POLYGON);
  				glVertex2f(*getMatrixEle(turn2, 0, 0), *getMatrixEle(turn2, 0, 1));
