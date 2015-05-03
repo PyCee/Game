@@ -2,7 +2,7 @@
 #include "globalBinds.h"
 
 #include <stdio.h>
-#include "character.h"
+#include "actor.h"
 
 
 void BindCameraView
@@ -15,20 +15,20 @@ void UnbindCameraView
 ()
 {	cameraView = 0;	}
 void BindMapTerrain
-(Character_t *terrain)
+(Actor_t *terrain)
 {	mapTerrain = terrain;	}
-Character_t *GetMapTerrain
+Actor_t *GetMapTerrain
 ()
 {	return mapTerrain;	}
 void UnbindMapTerrain
 ()
 {	mapTerrain = 0;	}
-void BindControlledCharacter
-(Character_t *character)
-{	controlledCharacter = character;	}
-Character_t *GetControlledCharacter
+void BindControlledActor
+(Actor_t *actor)
+{	controlledActor = actor;	}
+Actor_t *GetControlledActor
 ()
-{	return controlledCharacter;	}
-void UnbindControlledCharacter
+{	return controlledActor;	}
+void UnbindControlledActor
 ()
-{	controlledCharacter = 0;	}
+{	controlledActor = 0;	}

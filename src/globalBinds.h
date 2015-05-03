@@ -3,21 +3,21 @@
 #define _GLOBAL_BINDS_
 
 typedef struct _Camera_t Camera_t;
-typedef struct _Character_t Character_t;
+typedef struct _Actor_t Actor_t;
 
 static Camera_t *cameraView;
 void BindCameraView(Camera_t *);
 Camera_t *GetCameraView();
 void UnbindCameraView();
 
-static Character_t *mapTerrain;
-void BindMapTerrain(Character_t *);
-Character_t *GetMapTerrain();
+static Actor_t *mapTerrain;
+void BindMapTerrain(Actor_t *);
+Actor_t *GetMapTerrain();
 void UnbindMapTerrain();
 
-static Character_t *controlledCharacter;
-void BindControlledCharacter(Character_t *);
-Character_t *GetControlledCharacter();
-void UnbindControlledCharacter();
+static Actor_t *controlledActor;
+void BindControlledActor(Actor_t *);
+Actor_t *GetControlledActor();
+void UnbindControlledActor();
 
 #endif

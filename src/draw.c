@@ -14,8 +14,8 @@ void drawInit()
 	printf("Starting Draw Initialization.\nshaderVertex Initializing.\nshaderVertex Gening.\n");
 	
 	
-	char *shaderSourceVertex = SHADER_PATH_VERT;
-	char *shaderSourceFragment = SHADER_PATH_FRAG;
+	char *shaderSourceVertex = SHADER_VERT_PATH;
+	char *shaderSourceFragment = SHADER_FRAG_PATH;
 	
 	shaderVertex = glCreateShader(GL_VERTEX_SHADER);
 	printf("shaderVertex Gened.\nshaderVertex Linking.\n");

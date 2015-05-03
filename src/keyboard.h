@@ -2,12 +2,12 @@
 #ifndef _KEYBOARD_
 #define _KEYBOARD_
 
-typedef struct _Character_t Character_t;
+typedef struct _Actor_t Actor_t;
 
 char pressed[274];
 char KEYS[274];
-void (*press[274])(Character_t*);
-void (*release[274])(Character_t*);
+void (*press[274])(Actor_t*);
+void (*release[274])(Actor_t*);
 
 void InitKeyboard();
 void DefaultKeyboard();

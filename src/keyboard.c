@@ -3,7 +3,7 @@
 
 #include "keyboard.h"
 
-#include "character.h"
+#include "actor.h"
 #include "protag.h"
 #include "globalBinds.h"
 
@@ -45,7 +45,7 @@ void handleEvents
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym < 274){
 					if(pressed[event.key.keysym.sym] == 0){
-					press[event.key.keysym.sym](GetControlledCharacter());
+					press[event.key.keysym.sym](GetControlledActor());
 					pressed[event.key.keysym.sym] = 1;
 					}
 				}
@@ -53,7 +53,7 @@ void handleEvents
 			case SDL_KEYUP:
 				if (event.key.keysym.sym < 274){
 					if(pressed[event.key.keysym.sym] == 1){
-					release[event.key.keysym.sym](GetControlledCharacter());
+					release[event.key.keysym.sym](GetControlledActor());
 					pressed[event.key.keysym.sym] = 0;
 					}
 				}

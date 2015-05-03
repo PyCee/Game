@@ -5,9 +5,9 @@
 
 #include <stdint.h>
 
-typedef struct _Character_t Character_t;
+typedef struct _Actor_t Actor_t;
 
-void genTerrain(Character_t **);
-void UpdateTerrain(Character_t *, uint64_t deltaMS);
+void genTerrain(Actor_t **);
+void UpdateTerrain(Actor_t *, uint64_t);
 
 #endif

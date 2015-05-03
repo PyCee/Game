@@ -4,10 +4,11 @@ run:
 	echo Compiling...
 	gcc -c src/main.c
 	gcc -c src/options.c
+	gcc -c src/save.c
 	gcc -c src/globalBinds.c
 	gcc -c src/keyboard.c
 	gcc -c src/physics.c
-	gcc -c src/character.c
+	gcc -c src/actor.c
 	gcc -c src/terrain.c
 	gcc -c src/protag.c
 	gcc -c src/draw.c
@@ -18,11 +19,11 @@ run:
 	gcc -c src/math/matrix.c
 	gcc -c src/math/transform.c
 	
-	gcc -g -o bin/Morte main.o options.o globalBinds.o keyboard.o physics.o \
-	character.o terrain.o protag.o draw.o gMath.o trig.o vector.o vertex.o \
+	gcc -g -o bin/Morte main.o options.o save.o globalBinds.o keyboard.o physics.o \
+	actor.o terrain.o protag.o draw.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o -lSDL2 -lGL -lm
-	rm main.o options.o globalBinds.o keyboard.o physics.o \
-	character.o terrain.o protag.o draw.o gMath.o trig.o vector.o vertex.o \
+	rm main.o options.o save.o globalBinds.o keyboard.o physics.o \
+	actor.o terrain.o protag.o draw.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o
 	echo Compiled.
 git push:

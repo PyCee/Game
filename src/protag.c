@@ -1,16 +1,18 @@
 
-#include "character.h"
 #include "protag.h"
 
+#include "actor.h"
+
+#include <stdint.h>
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 #include "math/vector.h"
 
 void genProtag
-(Character_t **protag)
+(Actor_t **protag)
 {
-	genCharacter(protag);
-	Character_t *_protag = *protag;
+	genActor(protag);
+	Actor_t *_protag = *protag;
 	_protag->Update = UpdateProtag;
 	_protag->Control = 1;
 	_protag->physics->Terrain = 0;
@@ -31,14 +33,14 @@ void genProtag
 	_protag->physics->Jrk->Z = 0.0;
 }
 void freeProtag
-(Character_t **protag)
+(Actor_t **protag)
 {
-	Character_t *_protag = *protag;
-	freeCharacter(protag);
+	Actor_t *_protag = *protag;
+	freeActor(protag);
 	*protag = 0;
 }
 void UpdateProtag
-(Character_t *protag, uint64_t deltaMS)
+(Actor_t *protag, uint64_t deltaMS)
 {
 	Vec3_t *_Pos = protag->physics->Pos;
 	if(protag->physics->Pos->Y < -1.0){
@@ -60,49 +62,49 @@ void UpdateProtag
 		glEnd();
 }
 void Jump
-(Character_t *protag)
+(Actor_t *protag)
 {
 	if(protag->Control == 1){
 		protag->physics->Vel->Y += 0.002;
 	}
 }
 void setLeftTrue
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->X += -0.0008;
 }
 void setLeftFalse
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->X += 0.0008;
 }
 void setRightTrue
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->X += 0.0008;
 }
 void setRightFalse
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->X += -0.0008;
 }
 void setForwardTrue
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->Z = 0.0008;
 }
 void setForwardFalse
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->Z += -0.0008;
 }
 void setBackwardTrue
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->Z += -0.0008;
 }
 void setBackwardFalse
-(Character_t *protag)
+(Actor_t *protag)
 {
 	protag->physics->Vel->Z += 0.0008;
 }

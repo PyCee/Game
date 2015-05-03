@@ -1,13 +1,13 @@
 
 #include "terrain.h"
 
-#include "character.h"
+#include "actor.h"
 
 void genTerrain
-(Character_t **terrain)
+(Actor_t **terrain)
 {
-	genCharacter(terrain);
-	Character_t *_terrain = *terrain;
+	genActor(terrain);
+	Actor_t *_terrain = *terrain;
 	_terrain->Update = UpdateTerrain;
 	_terrain->Control = 0;
 	_terrain->physics->Terrain = 1;
@@ -19,6 +19,6 @@ void genTerrain
 	_terrain->physics->Pos->Z = -1 * 1.0;
 }
 void UpdateTerrain
-(Character_t *terrain, uint64_t deltaMS)
+(Actor_t *terrain, uint64_t deltaMS)
 {
 }

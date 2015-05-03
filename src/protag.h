@@ -3,20 +3,21 @@
 #ifndef _PROTAG_
 #define _PROTAG_
 
-typedef struct _Character_t Character_t;
+typedef struct _Actor_t Actor_t;
+#include <stdint.h>
 
-void genProtag(Character_t **);
-void freeProtag(Character_t **);
-void UpdateProtag(Character_t *, uint64_t );
-void Jump(Character_t *);
+void genProtag(Actor_t **);
+void freeProtag(Actor_t **);
+void UpdateProtag(Actor_t *, uint64_t);
+void Jump(Actor_t *);
 
-void setForwardTrue(Character_t *);
-void setForwardFalse(Character_t *);
-void setLeftTrue(Character_t *);
-void setLeftFalse(Character_t *);
-void setBackwardTrue(Character_t *);
-void setBackwardFalse(Character_t *);
-void setRightTrue(Character_t *);
-void setRightFalse(Character_t *);
+void setForwardTrue(Actor_t *);
+void setForwardFalse(Actor_t *);
+void setLeftTrue(Actor_t *);
+void setLeftFalse(Actor_t *);
+void setBackwardTrue(Actor_t *);
+void setBackwardFalse(Actor_t *);
+void setRightTrue(Actor_t *);
+void setRightFalse(Actor_t *);
 
 #endif
