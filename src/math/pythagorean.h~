@@ -1,0 +1,8 @@
+
+#ifndef _PYTHAG_
+#define _PYTHAG_
+
+double PythagoreanTheoremDim2(double, double);
+double PythagoreanTheoremDim3(double, double, double);
+
+#endif

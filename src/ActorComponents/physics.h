@@ -3,7 +3,7 @@
 #define _PHYSICS_
 
 #include <stdint.h>
-#include "math/vector.h"
+#include "../math/vector.h"
 
 #define ACC_GRAVITY 0.000006
 #define BOUNCY_DMG_REDUCTION 0.75
@@ -14,6 +14,7 @@ typedef struct _Physics_t{
 	unsigned char Conductor;
 	unsigned char Bounciness;
 	unsigned short Mass;
+		// in kg
 	double FrictCo;
 	double Height;
 	double Width;
@@ -28,5 +29,7 @@ typedef struct _Physics_t{
 void genPhysics(Physics_t **);
 void freePhysics(Physics_t **);
 void UpdatePhysics(Physics_t *, uint64_t);
+
+unsigned char CheckBoundingBoxCollision(Physics_t *, Physics_t *);
 
 #endif

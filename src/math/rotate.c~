@@ -1,0 +1,19 @@
+
+#include "rotate.h"
+
+#include "matrix.h"
+
+Matrix_t *Pitch
+(Matrix_t *matrix, double angle)
+{
+	angle
+	return 
+}
+void Yaw
+(double *matrix, double angle)
+{
+}
+void Rotate
+(double *matrix, double angle)
+{
+}

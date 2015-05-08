@@ -61,11 +61,25 @@ void drawInit()
 	
 	GLint success;
 	GLchar infoLog[512];
+	FILE *hsd;
+	if((hsd = fopen(SHADER_VERT_PATH, "a")) == 0)
+	{
+		fprintf(hsd, "lllio");
+		printf("asdasd\nasdasd\nasdasd\nadsasdno good path vertex sh.");
+	}
 	glGetShaderiv(shaderVertex, GL_COMPILE_STATUS, &success);
 	if(!success)
 	{
-    glGetShaderInfoLog(shaderVertex, 512, NULL, infoLog);
-    printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED %s\n", infoLog);
+		GLint logLength;
+		glGetShaderiv(shaderVertex, GL_INFO_LOG_LENGTH, &logLength);
+		if (logLength > 0) {
+		GLchar * log = malloc(logLength);
+		glGetShaderInfoLog(shaderVertex, logLength, &logLength, log);
+		fprintf(stderr, "Shader compile log:\n%s\n", log);
+		free(log);
+    //glGetShaderInfoLog(shaderVertex, 512, NULL, infoLog);
+    //printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED %s\n", infoLog);
+    }
 	}
 	glGetShaderiv(shaderFragment, GL_COMPILE_STATUS, &success);
 	if(!success)

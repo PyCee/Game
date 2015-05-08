@@ -1,0 +1,15 @@
+
+#include "gMath.h"
+
+#include <math.h>
+
+double PythagoreanTheoremDim2
+(double X, double Y)
+{
+	return sqrt(pow(X, 2) + pow(Y, 2));
+}
+double PythagoreanTheoremDim3
+(double X, double Y, double Z)
+{
+	return sqrt(pow(X, 2) + pow(Y, 2) + pow(Z, 2));
+}

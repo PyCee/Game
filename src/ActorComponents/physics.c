@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "math/vector.h"
-#include "math/matrix.h"
+#include "../math/vector.h"
+#include "../math/matrix.h"
 
 void genPhysics(Physics_t **physics)
 {
@@ -50,4 +50,17 @@ void UpdatePhysics
 		pos->Y += deltaMS * vel->Y * 1;
 		pos->Z += deltaMS * vel->Z * 1;
 	}
+}
+unsigned char CheckBoundingBoxCollision
+(Physics_t *physicsOne, Physics_t *physicsTwo)
+{
+	if (physicsOne->Pos->X < physicsTwo->Pos->X + physicsTwo->Width &&
+   physicsOne->Pos->X + physicsOne->Width > physicsTwo->Pos->X &&
+   physicsOne->Pos->Y < physicsTwo->Pos->Y + physicsTwo->Height &&
+   physicsOne->Pos->Y + physicsOne->Height > physicsTwo->Pos->Y/* &&
+   physicsOne->Pos->Z < physicsTwo->Pos->Z + physicsTwo->Length &&
+   physicsOne->Pos->Z + physicsOne->Length > physicsTwo->Pos->Z */)
+    // collision detected!
+  	return 1;
+	return 0;
 }
