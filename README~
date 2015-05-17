@@ -4,37 +4,37 @@ Game in c.
 		You may change saves by editing usrData/save### but be warned,
 				Editing these files may be irreversable, proceed with caution.
 
-Ludum De Morte
--bin
-----Morte
+I. Ludum De Morte
+ A. bin
+	1. Morte
 			Executable program.
--res
+ B. res
 		Resources
-----Audio
+	1. Audio
 			Sounds
--src
+ C. src
 		Source code
 			Location of .c and .h files.
--makefile
+ D. makefile
 		Compiles program/links files.
--usrData
+ E. usrData
 		Files that user may change.
-----config
+	1. config
 			Contains saved options.
 				File will be created, if does not exist.
 					Will be default settings.
 			Editing will change in game options.
-----saveOne
+	2. saveOne
 			First save file.
 				File will be created, if does not exist.
 					Will be new save contents.
 			Editing will change in game save.
-----saveTwo
+	3. saveTwo
 			Second save file.
 				File will be created, if does not exist.
 					Will be new save contents.
 			Editing will change in game save.
-----saveThr
+	4. saveThr
 			Third save file.
 				File will be created, if does not exist.
 					Will be new save contents.

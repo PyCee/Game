@@ -95,8 +95,8 @@ int main
 		glBegin(GL_POLYGON);
  			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y);
  			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y);
- 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y + list[1]->physics->Height);
- 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height);
+ 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.5);
+ 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.5);
 		glEnd();
 		turn1 = Roll(turn1, 3.1415926 / 500);
 		if(*getMatrixEle(turn1, 0, 1) > 0){
