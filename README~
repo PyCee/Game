@@ -7,7 +7,10 @@ Game in c.
 I. Ludum De Morte
  A. bin
 	1. Morte
-			Executable program.
+			Executable program for linux.
+	2. Morte.exe
+			Executable Program for windows.
+				(need to test)
  B. res
 		Resources
 	1. Audio

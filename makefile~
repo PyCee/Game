@@ -1,4 +1,3 @@
-
 run:
 	clear
 	echo Compiling...
@@ -28,12 +27,27 @@ run:
 	draw.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o \
 	-lSDL2 -lGL -lm
+	
+	gcc -g -o bin/Morte.exe main.o options.o save.o camera.o globalBinds.o keyboard.o \
+	physics.o audio.o \
+	actor.o terrain.o protag.o gruel.o \
+	draw.o gMath.o trig.o vector.o vertex.o \
+	matrix.o transform.o \
+	-lSDL2 -lGL -lm
+	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	physics.o audio.o \
 	actor.o terrain.o protag.o gruel.o \
 	draw.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o
 	echo Compiled.
+install:
+	sudo apt-get install mingw32 mingw32-binutils mingw32-runtime
+	hg clone https://hg.libsdl.org/SDL SDL
+	cd SDL
+	./configure
+	make
+	sudo make install
 git push:
 	clear
 	echo GitHub...

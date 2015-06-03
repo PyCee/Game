@@ -2,6 +2,9 @@
 #ifndef _KEYBOARD_
 #define _KEYBOARD_
 
+#define KEY_BINDINGS_PATH "usrData/keyBindings"
+#define DEFAULT_KEY_BINDINGS_PATH "usrData/defaultKeyBindings"
+
 typedef struct _Actor_t Actor_t;
 
 char pressed[274];
@@ -16,96 +19,101 @@ void EndGame(void);
 
 void handleEvents(void);
 
-#endif
+void LoadKeyBindings(char *);
+void SaveKeyBindings(void);
 
+void (*KeyFunctions[274 * 2]) (void);
 /*
-	SDLK_ESCAPE top left of keyboard
-	SDLK_F1
-	SDLK_F2
-	SDLK_F3
-	SDLK_F4
-	SDLK_F5
-	SDLK_F6
-	SDLK_F7
-	SDLK_F8
-	SDLK_F9
-	SDLK_F10
-	SDLK_F11
-	SDLK_F12
-	SDLK_1
-	SDLK_2
-	SDLK_3
-	SDLK_4
-	SDLK_5
-	SDLK_6
-	SDLK_7
-	SDLK_8
-	SDLK_9
-	SDLK_0
-	SDLK_MINUS -
-	SDLK_EQUALS =
-	SDLK_BACKSPACE backspace, right of '='
-	SDLK_TAB --	-- tab, left of 'q'
-	SDLK_q
-	SDLK_w
-	SDLK_e
-	SDLK_r
-	SDLK_t
-	SDLK_y
-	SDLK_u
-	SDLK_i
-	SDLK_o
-	SDLK_p
-	SDLK_LEFTBRACKET [ , right of 'p'
-	SDLK_RIGHTBRACKET ] , right of '['
-	SDLK_BACKSLASH \, backslash, right of ']'
-	SDLK_CAPSLOCK caps lock, left of 'a'
-	SDLK_a
-	SDLK_s
-	SDLK_d
-	SDLK_f
-	SDLK_g
-	SDLK_h
-	SDLK_j
-	SDLK_k
-	SDLK_l
-	SDLK_SEMICOLON ;  right of 'l'
-	SDLK_QUOTE '  singular quote, right of ';'
-	SDLK_RSHIFT right shift, left of 'z'
-	SDLK_RETURN enter key, mid-right of screen
-	SDLK_z
-	SDLK_x
-	SDLK_c
-	SDLK_v
-	SDLK_b
-	SDLK_n
-	SDLK_m
-	SDLK_COMMA comma, right of m
-	SDLK_PERIOD .  period, right of comma, 2 right of m
-	SDLK_SLASH /  left of right shift
-	SDLK_LCTRL left control, below left shift
-	SDLK_LALT left alt, below 'x' and 'c'
-	SDLK_SPACE space bar, bottom mid
-	SDLK_RALT right alt, below comma and period
-	SDLK_RCTRL right control, below period and slash
-	SDLK_KP_1 keypad 1
-	SDLK_KP_2 keypad 2
-	SDLK_KP_3 keypad 3
-	SDLK_KP_4 keypad 4
-	SDLK_KP_5 keypad 5
-	SDLK_KP_6 keypad 6
-	SDLK_KP_7 keypad 7
-	SDLK_KP_8 keypad 8
-	SDLK_KP_9 keypad 9
-	SDLK_KP_0 keypad 0
-	SDLK_KP_PERIOD keypad . , period, dot
-	SDLK_KP_DIVIDE keypad / , slash
-	SDLK_KP_MULTIPLY keypad * , multiply
-	SDLK_KP_MINUS keypad - , dash
-	SDLK_KP_PLUS keypad + , plus
-	SDLK_KP_ENTER keypad enter
-	SDLK_UP up arrow
-	SDLK_LEFT left arrow
-	SDLK_DOWN down arrow
-	SDLK_RIGHT right arrow
+KeyBindingStrings[] = {
+	"_ESCAPE",
+	"_F1",
+	"_F2",
+	"_F3",
+	"_F4",
+	"_F5",
+	"_F6",
+	"_F7",
+	"_F8",
+	"_F9",
+	"_F10",
+	"_F11",
+	"_F12",
+	"_1",
+	"_2",
+	"_3",
+	"_4",
+	"_5",
+	"_6",
+	"_7",
+	"_8",
+	"_9",
+	"_0",
+	"_MINUS",
+	"_EQUALS",
+	"_BACKSPACE",
+	"_TAB",
+	"_q",
+	"_w",
+	"_e",
+	"_r",
+	"_t",
+	"_y",
+	"_u",
+	"_i",
+	"_o",
+	"_p",
+	"_LEFTBRACKET",
+	"_RIGHTBRACKET",
+	"_BACKSLASH",
+	"_CAPSLOCK",
+	"_a",
+	"_s",
+	"_d",
+	"_f",
+	"_g",
+	"_h",
+	"_j",
+	"_k",
+	"_l",
+	"_SEMICOLON",
+	"_QUOTE",
+	"_RSHIFT",
+	"_RETURN",
+	"_z",
+	"_x",
+	"_c",
+	"_v",
+	"_b",
+	"_n",
+	"_m",
+	"_COMMA",
+	"_PERIOD",
+	"_SLASH",
+	"_LCTRL",
+	"_LALT",
+	"_SPACE",
+	"_RALT",
+	"_RCTRL",
+	"_KP_1",
+	"_KP_2",
+	"_KP_3",
+	"_KP_4",
+	"_KP_5",
+	"_KP_6",
+	"_KP_7",
+	"_KP_8",
+	"_KP_9",
+	"_KP_0",
+	"_KP_PERIOD",
+	"_KP_DIVIDE",
+	"_KP_MULTIPLY",
+	"_KP_MINUS",
+	"_KP_PLUS",
+	"_KP_ENTER",
+	"_UP",
+	"_LEFT",
+	"_DOWN",
+	"_RIGHT",
+}
 */
+#endif
