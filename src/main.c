@@ -3,7 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL_mixer.h>
 
+#include "dataTypes.h"
 #include "save.h"
 #include "keyboard.h"
 #include "actor.h"
@@ -14,30 +16,38 @@
 #include "terrain.h"
 #include "math/matrix.h"
 #include "math/gMath.h"
+#include "math/normal.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
 #define WINDOW_HEIGHT 480
 
-unsigned char IAMALIVE;
-unsigned char BLINK;
+U8 IAMALIVE;
+U8 BLINK;
 
-int main
-(int argc, char *argv[])
+I32 main
+(I32 argc, I8 *argv[])
 {
 	printf("%s Starting.\nMain Initializing.\n", PROGRAM_NAME);
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
   SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GLContext gameContext = SDL_GL_CreateContext(gameWindow);
 	
+	 //Initialize SDL_mixer
+	 if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
+	 	printf("ERROR::SDL_mixer::NOT::INITIALIZED::SDL_mixer Error: %s\n", Mix_GetError());
+	 }
+	
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	
+	InitOptions();
+	InitKeyboard();
 	
 	Camera_t *camera;
 	genCamera(&camera);
 	
 	Actor_t *player;
 	genProtag(&player);
-	
 	
 	Actor_t *gru;
 	genGruel(&gru);
@@ -49,18 +59,20 @@ int main
 	BindControlledActor(player);
 	BindMapTerrain(terrain);
 	
+	Mix_Music *BGMusic = NULL;
+	//BGMusic = Mix_LoadMUS(""); //get .wav and put path in quotes
+	//Mix_PlayChannel(-1, BGMusic, 4);
+	
 	Actor_t *list[] = {player, terrain, gru};
-	InitKeyboard();
   
 	IAMALIVE = 1;
 	
-	
-	uint64_t oldTime;
-	uint64_t newTime;
+	U64 oldTime;
+	U64 newTime;
 	newTime = SDL_GetTicks();
 	oldTime = newTime;
 	
-	glClearColor(0.0, 1.0, 0.0, 1.0);
+	glClearColor(1.0, 0.0, 1.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(gameWindow);
 	
@@ -77,6 +89,8 @@ int main
 	*getMatrixEle(turn1, 0, 0) = 0.0;
 	*getMatrixEle(turn1, 0, 1) = 0.2;
 	
+	U64 elapsedTime = 0;
+	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	while(IAMALIVE == 1){
 	
@@ -84,20 +98,21 @@ int main
 		SDL_Delay(16);
 		
 		newTime = SDL_GetTicks();
-		uint64_t deltaTime = newTime - oldTime;
+		U64 deltaTime = newTime - oldTime;
 		oldTime = newTime;
 		
-		double pos[] = {list[0]->physics->Pos->X, list[0]->physics->Pos->Y};
+		F64 pos[] = {list[0]->physics->Pos->X, list[0]->physics->Pos->Y};
 		
 		if (BLINK == 0)
 			glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(0.0f, 0.0f, 0.0f);
+		glColor3f(0.0f, 1.0f, 0.0f);
 		glBegin(GL_POLYGON);
  			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y);
  			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y);
- 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.5);
- 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.5);
+ 			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.75);
+ 			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.75);
 		glEnd();
+		
 		turn1 = Roll(turn1, 3.1415926 / 500);
 		if(*getMatrixEle(turn1, 0, 1) > 0){
 			glBegin(GL_POLYGON);
@@ -120,7 +135,7 @@ int main
 		Update(list[0], deltaTime);
 		Update(list[2], deltaTime);
 		
-		char collision = CheckBoundingBoxCollision(list[0]->physics, list[1]->physics);
+		U8 collision = CheckBoundingBoxCollision(list[0]->physics, list[1]->physics);
 		if( collision == 1){
 			if(list[0]->physics->Pos->Y < list[1]->physics->Pos->Y + list[1]->physics->Height){
 				list[0]->physics->Pos->Y = list[1]->physics->Pos->Y + list[1]->physics->Height;
@@ -139,10 +154,10 @@ int main
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.0, 1.0, 0.0, 1.0);
 		}
+		elapsedTime += deltaTime;
 	}
 	printf("MainLoop Ending.\nDel Sequence Starting.\n");
 	drawDel();
-	SDL_Quit();
 	UnbindControlledActor();
 	UnbindMapTerrain();
 	UnbindCameraView();
@@ -152,8 +167,20 @@ int main
 	freeMatrix(&turn1);
 	freeMatrix(&turn2);
 	freeMatrix(&turn3);
-	printf("Del Sequence Ending.\n");
-	printf("%s Ending.\n", PROGRAM_NAME);
-	InitOptions();
+	printf("Del Sequence Ending.\n%s Ending.\nElapsed Time: %"PRId64"ms\n", PROGRAM_NAME, elapsedTime);
 	SaveOptions();
+	DefaultKeyboard();
+	
+	Mix_FreeMusic(BGMusic);
+	BGMusic = NULL;
+	Mix_Quit();
+	SDL_Quit();
+	
+	/*FILE *loadFile;
+	loadFile = fopen(KEY_BINDINGS_PATH, "r");
+	fscanf(loadFile, "%*s %*s");
+	char i = getc(loadFile);
+	if (i == '\n')
+		printf("jfhjfhfjfhfjdj");
+	fclose(loadFile);*/
 }

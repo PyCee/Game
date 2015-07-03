@@ -2,6 +2,9 @@
 #ifndef _VECTOR_
 #define _VECTOR_
 
+typedef struct _Matrix_t Matrix_t;
+void genVec4(Matrix_t **);
+
 typedef struct _Vec3_t
 {
 	double X;

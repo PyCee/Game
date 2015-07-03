@@ -1,4 +1,5 @@
 
+#include "../dataTypes.h"
 #include "matrix.h"
 
 #include <stdlib.h>
@@ -7,8 +8,8 @@
 void printMatrix
 (Matrix_t *matrix)
 {
-	unsigned char indexHeight = 0;
-	unsigned char indexWidth;
+	U8 indexHeight = 0;
+	U8 indexWidth;
 	while (indexHeight < matrix->height)
 	{
 		indexWidth = 0;
@@ -23,13 +24,14 @@ void printMatrix
 	}
 }
 void genMatrix
-(Matrix_t **matrix, unsigned char height, unsigned char width)
+(Matrix_t **matrix, U8 height, U8 width)
 {
 	(*matrix) = malloc(sizeof(Matrix_t));
 	Matrix_t *_matrix = *matrix;
 	_matrix->height = height;
 	_matrix->width = width;
-	_matrix->ele = malloc(sizeof(double) * height * width);
+	_matrix->ele = malloc(sizeof(F64) * height * width);
+	ZeroMatrix(_matrix);
 }
 void freeMatrix
 (Matrix_t **matrix)
@@ -45,8 +47,8 @@ void freeMatrix
 		matrix = NULL;
 	}
 }
-double *getMatrixEle(Matrix_t *matrix, unsigned char height, unsigned char width)
-{	// make single dimension array work 2 dimensional, with height and width being row and collumn
+double *getMatrixEle(Matrix_t *matrix, U8 height, U8 width)
+{
 	if (height < matrix->height && width < matrix->width)
 		return &(matrix->ele[((height) * matrix->width) + width]);
 	printf(" ::: Accessing Matrix[%d, %d]. (remember, indexing starts at zero)\n",
@@ -57,10 +59,10 @@ double *getMatrixEle(Matrix_t *matrix, unsigned char height, unsigned char width
 void ZeroMatrix
 (Matrix_t *matrix)
 {
-	unsigned char height = matrix->height;
-	unsigned char width = matrix->width;
-	unsigned char indexHeight = 0;
-	unsigned char indexWidth;
+	U8 height = matrix->height;
+	U8 width = matrix->width;
+	U8 indexHeight = 0;
+	U8 indexWidth;
 	while (indexHeight < height)
 	{
 		indexWidth = 0;
@@ -77,12 +79,12 @@ void IdentityMatrix
 {
 	if (isMatrixSquare(matrix))
 	{
-		unsigned char height = matrix->height;
-		unsigned char width = matrix->width;
-		unsigned char indexHeight = 0;
+		U8 height = matrix->height;
+		U8 width = matrix->width;
+		U8 indexHeight = 0;
 		while (indexHeight < height)
 		{
-			unsigned char indexWidth = 0;
+			U8 indexWidth = 0;
 			while (indexWidth < width)
 			{
 				if (indexHeight == indexWidth)
@@ -98,12 +100,12 @@ void IdentityMatrix
 void TransposeMatrix
 (Matrix_t **matrix)
 {
-	unsigned char height = (*matrix)->height;
-	unsigned char width = (*matrix)->width;
+	U8 height = (*matrix)->height;
+	U8 width = (*matrix)->width;
 	Matrix_t *answer;
 	genMatrix(&answer, width, height);
-	unsigned char indexHeight = 0;
-	unsigned char indexWidth;
+	U8 indexHeight = 0;
+	U8 indexWidth;
 	while (indexHeight < width)
 	{
 		indexWidth = 0;
@@ -118,7 +120,7 @@ void TransposeMatrix
 	genMatrix(matrix, width, height);
 	*matrix = answer;
 }
-unsigned char isMatrixSquare
+U8 isMatrixSquare
 (Matrix_t *matrix)
 {
 	if (matrix->height == matrix->width)
@@ -128,14 +130,14 @@ unsigned char isMatrixSquare
 Matrix_t *AddMatricies
 (Matrix_t *matrixOne, Matrix_t *matrixTwo)
 {
-	unsigned char height = matrixOne->height;
-	unsigned char width = matrixOne->width;
+	U8 height = matrixOne->height;
+	U8 width = matrixOne->width;
 	Matrix_t *answer;
 	genMatrix(&answer, height, width);
 	if (height == matrixTwo->height && width == matrixTwo->width)
 	{
-		unsigned char indexHeight = 0;
-		unsigned char indexWidth;
+		U8 indexHeight = 0;
+		U8 indexWidth;
 		while (indexHeight < height)
 		{
 			indexWidth = 0;
@@ -156,21 +158,21 @@ Matrix_t *MultiplyMatricies
 (Matrix_t *matrixOne, Matrix_t *matrixTwo)
 {	
 	// dimensions of answer
-	unsigned char height = matrixOne->height;
-	unsigned char width = matrixTwo->width;
+	U8 height = matrixOne->height;
+	U8 width = matrixTwo->width;
 	Matrix_t *answer;
 	genMatrix(&answer, height, width);
 	if (matrixOne->width == matrixTwo->height)
 	{
-		unsigned char indexHeight = 0;
-		unsigned char indexWidth;
+		U8 indexHeight = 0;
+		U8 indexWidth;
 		while (indexHeight < height)
 		{
 			indexWidth = 0;
 			while (indexWidth < width)
 			{
-				double *activeElement = getMatrixEle(answer, indexHeight, indexWidth);
-				unsigned char index = 0;
+				F64 *activeElement = getMatrixEle(answer, indexHeight, indexWidth);
+				U8 index = 0;
 				while (index < matrixOne->width)
 				{
 					*activeElement +=
@@ -187,12 +189,12 @@ Matrix_t *MultiplyMatricies
 	return answer;
 }
 void MultiplyMartixNum
-(Matrix_t *matrix, double number)
+(Matrix_t *matrix, F64 number)
 {
-	unsigned char height = matrix->height;
-	unsigned char width = matrix->width;
-	unsigned char indexHeight = 0;
-	unsigned char indexWidth;
+	U8 height = matrix->height;
+	U8 width = matrix->width;
+	U8 indexHeight = 0;
+	U8 indexWidth;
 	while (indexHeight < height)
 	{
 		indexWidth = 0;

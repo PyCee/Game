@@ -1,7 +1,9 @@
 
+#include "dataTypes.h"
 #include "globalBinds.h"
 
 #include <stdio.h>
+
 #include "camera.h"
 #include "actor.h"
 

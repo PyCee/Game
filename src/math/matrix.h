@@ -3,22 +3,22 @@
 #define _MATRIX_
 
 typedef struct _Matrix_t{
-	unsigned char height;
-	unsigned char width;
-	double *ele;
+	F64 *ele;
+	U8 height;
+	U8 width;
 } Matrix_t;
 
 void printMatrix(Matrix_t *);
 
-void genMatrix(Matrix_t **, unsigned char, unsigned char);
+void genMatrix(Matrix_t **, U8, U8);
 void freeMatrix(Matrix_t **);
-double *getMatrixEle(Matrix_t *, unsigned char, unsigned char);
+F64 *getMatrixEle(Matrix_t *, U8, U8);
 void ZeroMatrix(Matrix_t *);
 void IdentityMatrix(Matrix_t *);
 void TransposeMatrix(Matrix_t **);
-unsigned char isMatrixSquare(Matrix_t *);
+U8 isMatrixSquare(Matrix_t *);
 Matrix_t *AddMatricies(Matrix_t *, Matrix_t *);
 Matrix_t *MultiplyMatricies(Matrix_t *, Matrix_t *);
-void MultiplyMartixNum(Matrix_t *, double);
+void MultiplyMartixNum(Matrix_t *, F64);
 
 #endif

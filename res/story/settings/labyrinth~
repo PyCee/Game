@@ -1,0 +1,23 @@
+< Labyrinth
+	The Labyrinth. A place where only one thing resides--where only madness resides,
+	with it's shell of blood--with it's face of chains--with it's stench of flesh.
+	'Tis a fitting birth place for such a monster.
+	'Tis a fitting tomb for such a man.
+>
+I. Boss: Druggie Bully
+II. Boss Arena
+ A. Pre-Boss Room
+  1. Boss appears
+  2. Boss Injures Protagonist to the point that Protagonist must Limp
+  3. Protagonist escapes Boss into Boss Room Entrance
+ B. Boss Room Entrance
+  1. Show Futility of movement
+  2. Boss appears as Protagonist transitions to the Boss Room
+ C. Boss Room
+  1. Three dimensional. Stairs up and down
+  2. No dead ends
+  3. Few light sources. Bare Flames. Torches held by walls
+  4. Boss moves throughout maze
+   a. Boss chases protagonist in labyrinth
+   b. If boss does not see Protagonist, boss will wander the labyrinth
+    i. boss speaks as he wanders

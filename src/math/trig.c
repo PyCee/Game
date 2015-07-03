@@ -1,9 +1,10 @@
 
+#include "../dataTypes.h"
 #include "gMath.h"
 
 #include <stdio.h>
 #include <math.h>
-
+/*
 double sin
 (double radians)
 {

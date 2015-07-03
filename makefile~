@@ -14,40 +14,36 @@ run:
 	gcc -c src/protag.c
 	gcc -c src/gruel.c
 	gcc -c src/draw.c
+	gcc -c src/localTimeLine.c
+	gcc -c src/dataTypes.c
 	gcc -c src/math/gMath.c
 	gcc -c src/math/trig.c
 	gcc -c src/math/vector.c
 	gcc -c src/math/vertex.c
 	gcc -c src/math/matrix.c
 	gcc -c src/math/transform.c
+	gcc -c src/math/normal.c
 	
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	physics.o audio.o \
 	actor.o terrain.o protag.o gruel.o \
-	draw.o gMath.o trig.o vector.o vertex.o \
-	matrix.o transform.o \
-	-lSDL2 -lGL -lm
-	
-	gcc -g -o bin/Morte.exe main.o options.o save.o camera.o globalBinds.o keyboard.o \
-	physics.o audio.o \
-	actor.o terrain.o protag.o gruel.o \
-	draw.o gMath.o trig.o vector.o vertex.o \
-	matrix.o transform.o \
-	-lSDL2 -lGL -lm
+	draw.o localTimeLine.o dataTypes.o gMath.o trig.o vector.o vertex.o \
+	matrix.o transform.o normal.o \
+	-lSDL2 -lSDL2_mixer -lGL -lm
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	physics.o audio.o \
 	actor.o terrain.o protag.o gruel.o \
-	draw.o gMath.o trig.o vector.o vertex.o \
-	matrix.o transform.o
+	draw.o localTimeLine.o gMath.o trig.o vector.o vertex.o \
+	matrix.o transform.o normal.o
 	echo Compiled.
 install:
-	sudo apt-get install mingw32 mingw32-binutils mingw32-runtime
-	hg clone https://hg.libsdl.org/SDL SDL
-	cd SDL
-	./configure
-	make
-	sudo make install
+	sudo apt-get install libsdl2-dev
+	sudo apt-get install libsdl2-mixer-dev
+#	cd SDL
+#	./configure
+#	make
+#	sudo make install
 git push:
 	clear
 	echo GitHub...

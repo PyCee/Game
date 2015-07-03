@@ -8,9 +8,6 @@
 typedef struct _Actor_t Actor_t;
 
 char pressed[274];
-char KEYS[274];
-void (*press[274])(void);
-void (*release[274])(void);
 
 void InitKeyboard(void);
 void DefaultKeyboard(void);
@@ -19,10 +16,24 @@ void EndGame(void);
 
 void handleEvents(void);
 
-void LoadKeyBindings(char *);
+void LoadKeyBindings(void);
 void SaveKeyBindings(void);
 
-void (*KeyFunctions[274 * 2]) (void);
+// Key --> Function
+void (*keyFunctions[274 * 2]) (void);
+
+// Function --> Key
+static U8 functionKeys[274]; // In order of Key Bindings list
+
+#define STR_SAVE_FILE_EXIT "Exit_Game: %c\n"
+#define STR_SAVE_FILE_FOREWARD "Move_Foreward: %c\n"
+#define STR_SAVE_FILE_LEFT "Move_Left: %c\n"
+#define STR_SAVE_FILE_BACKWARD "Move_Backward: %c\n"
+#define STR_SAVE_FILE_RIGHT "Move_Right: %c\n"
+#define STR_SAVE_FILE_JUMP "Jump: %c\n"
+#define STR_SAVE_FILE_b "b %c\n"
+
+#define STR_SAVE_FILE_LIST_KEY_STRINGS "Valid_keys:_\'Esc\'_"
 /*
 KeyBindingStrings[] = {
 	"_ESCAPE",

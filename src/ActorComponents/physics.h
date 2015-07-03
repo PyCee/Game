@@ -10,15 +10,15 @@
 
 typedef struct _Physics_t{
 	
-	unsigned char Terrain;
-	unsigned char Conductor;
-	unsigned char Bounciness;
-	unsigned short Mass;
+	F64 FrictCo;
+	F64 Height;
+	F64 Width;
+	F64 Length;
+	U16 Mass;
 		// in kg
-	double FrictCo;
-	double Height;
-	double Width;
-	double Length;
+	U8 Terrain;
+	U8 Conductor;
+	U8 Elasticity;
 	
 	Vec3_t *Pos;
 	Vec3_t *Vel;
@@ -28,8 +28,9 @@ typedef struct _Physics_t{
 
 void genPhysics(Physics_t **);
 void freePhysics(Physics_t **);
-void UpdatePhysics(Physics_t *, uint64_t);
+void UpdatePhysics(Physics_t *, U64);
 
 unsigned char CheckBoundingBoxCollision(Physics_t *, Physics_t *);
+void DrawBoundingBox(Physics_t *);
 
 #endif

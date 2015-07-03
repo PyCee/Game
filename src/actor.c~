@@ -1,10 +1,10 @@
 
+#include "dataTypes.h"
 #include "actor.h"
 
 #include <stdlib.h>
-#include <stdint.h>
 #include <stdio.h>
-
+#include "math/normal.h"
 #include "ActorComponents/physics.h"
 
 void genActor
@@ -14,6 +14,7 @@ void genActor
 	Actor_t *_actor = *actor;
 	AssignActorID(_actor);
 	genPhysics(&(_actor->physics));
+	genNormal3(&(_actor->direction));
 	_actor->Update = UselessUpdate;
 	_actor->Health = HEALTH_MAX;
 }
@@ -31,27 +32,28 @@ void AssignActorID
 	actor->ActorID = actorID;
 	actorID++;
 }
-unsigned long getActorID
+U64 getActorID
 (Actor_t *actor)
 {
 	return actor->ActorID;
 }
 void Update
-(Actor_t *actor, uint64_t deltaMS)
+(Actor_t *actor, U64 deltaMS)
 {
 	UpdatePhysics(actor->physics, deltaMS);
 	actor->Update(actor, deltaMS);
+	DrawBoundingBox(actor->physics);
 }
-void UselessUpdate(Actor_t *actor, uint64_t deltaMS){}
+void UselessUpdate(Actor_t *actor, U64 deltaMS){}
 
 void Move
-(Actor_t *actor, double x, double y)
+(Actor_t *actor, F64 x, F64 y)
 {
 	actor->physics->Pos->X += x;
 	actor->physics->Pos->Y += y;
 }
 void setPos
-(Actor_t *actor, double x, double y)
+(Actor_t *actor, F64 x, F64 y)
 {
 	actor->physics->Pos->X = x;
 	actor->physics->Pos->Y = y;

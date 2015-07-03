@@ -2,18 +2,14 @@
 #ifndef _CAMERA_
 #define _CAMERA_
 
-typedef struct _Vec3_t Vec3_t;
+typedef struct _Actor_t Actor_t;
 
-typedef struct _Camera_t
-{
-	Vec3_t *Pos;
-	Vec3_t *Norm;
-} Camera_t;
+typedef struct _Actor_t Camera_t;
 
 void genCamera(Camera_t **);
 void freeCamera(Camera_t **);
-void CameraPitch(Camera_t *, double);
-void CameraYaw(Camera_t *, double);
-void CameraRoll(Camera_t *, double);
+void CameraPitch(Camera_t *, F64);
+void CameraYaw(Camera_t *, F64);
+void CameraRoll(Camera_t *, F64);
 
 #endif

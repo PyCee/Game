@@ -1,9 +1,18 @@
+
+
+#include "../dataTypes.h"
 #include "vector.h"
 
 #include "gMath.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "matrix.h"
 
+void genVec4
+(Matrix_t **matrix)
+{
+	genMatrix(matrix, 1, 4);
+}
 void genVec3
 (Vec3_t **vec3)
 {

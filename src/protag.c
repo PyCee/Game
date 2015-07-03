@@ -1,9 +1,11 @@
 
+#include "dataTypes.h"
 #include "protag.h"
 
 #include "actor.h"
 
 #include <stdint.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 #include "math/vector.h"
@@ -19,10 +21,10 @@ void genProtag
 	_protag->physics->Terrain = 0;
 	_protag->physics->Height = 0.2;
 	_protag->physics->Width = 0.2;
-	_protag->physics->Length = 0.2;
+	_protag->physics->Length = 0.0;
 	_protag->physics->Pos->X = -1 * 0.75;
 	_protag->physics->Pos->Y = -1 * 0.75;
-	_protag->physics->Pos->Z = 1;
+	_protag->physics->Pos->Z = 2.5;
 }
 void freeProtag
 (Actor_t **protag)
@@ -32,17 +34,8 @@ void freeProtag
 	*protag = 0;
 }
 void UpdateProtag
-(Actor_t *protag, uint64_t deltaMS)
+(Actor_t *protag, U64 deltaMS)
 {
-	Vec3_t *_Pos = protag->physics->Pos;
-	
-	glColor3f(1.0f, 0.0f, 0.0f);
-		glBegin(GL_POLYGON);
- 			glVertex2f(_Pos->X / _Pos->Z, _Pos->Y / _Pos->Z);
- 			glVertex2f((_Pos->X + protag->physics->Width) / _Pos->Z, _Pos->Y / _Pos->Z);
- 			glVertex2f((_Pos->X + protag->physics->Width) / _Pos->Z, (_Pos->Y + protag->physics->Height) / _Pos->Z);
- 			glVertex2f(_Pos->X / _Pos->Z, (_Pos->Y + protag->physics->Height) / _Pos->Z);
-		glEnd();
 }
 void Jump
 (void)

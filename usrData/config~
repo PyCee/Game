@@ -1,6 +1,7 @@
-Sound Level: 17
-Music Level: 9
-Sound Effects Level: 5
-Field Of View: 100
-Brightness: 12
-Mouse Sensitivity: 2
+Sound_Level: 1
+Music_Level: 2
+Sound_Effects_Level: 3
+Field_Of_View: 100
+Brightness: 5
+Mouse_Sensitivity: 6
+Lock_Mouse_To_Screen: 0

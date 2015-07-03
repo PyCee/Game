@@ -7,14 +7,14 @@ Game in c.
 I. Ludum De Morte
  A. bin
 	1. Morte
-			Executable program for linux.
+		Executable program for linux.
 	2. Morte.exe
-			Executable Program for windows.
+		Executable Program for windows.
 				(need to test)
  B. res
-		Resources
+	Resources
 	1. Audio
-			Sounds
+		Sounds
  C. src
 		Source code
 			Location of .c and .h files.
@@ -23,22 +23,22 @@ I. Ludum De Morte
  E. usrData
 		Files that user may change.
 	1. config
-			Contains saved options.
-				File will be created, if does not exist.
-					Will be default settings.
-			Editing will change in game options.
+		Contains saved options.
+			File will be created, if does not exist.
+				Will be default settings.
+		Editing will change in game options.
 	2. saveOne
-			First save file.
-				File will be created, if does not exist.
-					Will be new save contents.
-			Editing will change in game save.
+		First save file.
+			File will be created, if does not exist.
+				Will be new save contents.
+		Editing will change in game save.
 	3. saveTwo
-			Second save file.
-				File will be created, if does not exist.
-					Will be new save contents.
-			Editing will change in game save.
+		Second save file.
+			File will be created, if does not exist.
+				Will be new save contents.
+		Editing will change in game save.
 	4. saveThr
-			Third save file.
-				File will be created, if does not exist.
-					Will be new save contents.
-			Editing will change in game save.
+		Third save file.
+			File will be created, if does not exist.
+				Will be new save contents.
+		Editing will change in game save.

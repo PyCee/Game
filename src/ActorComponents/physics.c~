@@ -1,6 +1,8 @@
 
+#include "../dataTypes.h"
 #include "physics.h"
 
+#include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -63,4 +65,15 @@ unsigned char CheckBoundingBoxCollision
     // collision detected!
   	return 1;
 	return 0;
+}
+void DrawBoundingBox
+(Physics_t *physics)
+{
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glBegin(GL_POLYGON);
+ 		glVertex2f(physics->Pos->X / physics->Pos->Z, physics->Pos->Y / physics->Pos->Z);
+ 		glVertex2f((physics->Pos->X + physics->Width) / physics->Pos->Z, physics->Pos->Y / physics->Pos->Z);
+ 		glVertex2f((physics->Pos->X + physics->Width) / physics->Pos->Z, (physics->Pos->Y + physics->Height) / physics->Pos->Z);
+ 		glVertex2f(physics->Pos->X / physics->Pos->Z, (physics->Pos->Y + physics->Height) / physics->Pos->Z);
+	glEnd();
 }

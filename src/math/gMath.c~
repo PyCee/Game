@@ -1,4 +1,5 @@
 
+#include "../dataTypes.h"
 #include "gMath.h"
 
 #include "matrix.h"
@@ -10,20 +11,20 @@ void mathInit
 {
 	
 }
-uint64_t Larger(uint64_t num1, uint64_t num2)
+U64 Larger(U64 num1, U64 num2)
 {
 	if (num1 > num2)
 		return num1;
 	return num2;
 }
-uint64_t Smaller(uint64_t num1, uint64_t num2)
+U64 Smaller(U64 num1, U64 num2)
 {
 	if (num1 < num2)
 		return num1;
 	return num2;
 }
 // returns remainder of dividend / divisor
-uint64_t Mod(uint64_t dividend, uint64_t divisor)
+U64 Mod(U64 dividend, U64 divisor)
 {
 	if (dividend > divisor)
 		return Mod(dividend - divisor, divisor);
@@ -33,11 +34,11 @@ uint64_t Mod(uint64_t dividend, uint64_t divisor)
 }
 
 // returns quotient of dividend / divisor
-uint64_t Div(uint64_t dividend, uint64_t divisor)
+U64 Div(U64 dividend, U64 divisor)
 {
-	return (uint64_t) (dividend / divisor);
+	return (U64) (dividend / divisor);
 }
-double Exponant(double base, unsigned char exponant)
+F64 Exponant(F64 base, U8 exponant)
 {
 	if (exponant == 0)
 		return 1;
@@ -45,7 +46,7 @@ double Exponant(double base, unsigned char exponant)
 		return base;
 	return base * Exponant(base, exponant - 1);
 }
-uint64_t Factorial(unsigned char fac)
+U64 Factorial(U8 fac)
 {
 	if (fac == 0)
 		return 0;
@@ -53,21 +54,21 @@ uint64_t Factorial(unsigned char fac)
 		return 1;
 	return fac * Factorial(fac - 1);
 }
-double degRad(double deg)
+F64 degRad(F64 deg)
 {
 	return deg * PI / 180;
 }
-double radDeg(double rad)
+F64 radDeg(F64 rad)
 {
 	return rad * 180 / PI;
 }
-double PythagoreanTheoremDim2
-(double X, double Y)
+F64 PythagoreanTheoremDim2
+(F64 X, F64 Y)
 {
 	return sqrt(Exponant(X, 2) + Exponant(Y, 2));
 }
-double PythagoreanTheoremDim3
-(double X, double Y, double Z)
+F64 PythagoreanTheoremDim3
+(F64 X, F64 Y, F64 Z)
 {
 	return sqrt(Exponant(X, 2) + Exponant(Y, 2) + Exponant(Z, 2));
 }

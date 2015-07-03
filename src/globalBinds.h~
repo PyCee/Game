@@ -2,7 +2,7 @@
 #ifndef _GLOBAL_BINDS_
 #define _GLOBAL_BINDS_
 
-typedef struct _Camera_t Camera_t;
+typedef struct _Actor_t Camera_t;
 typedef struct _Actor_t Actor_t;
 
 static Camera_t *cameraView;

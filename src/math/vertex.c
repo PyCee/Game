@@ -1,4 +1,5 @@
 
+#include "../dataTypes.h"
 #include "vertex.h"
 
 #include <stdlib.h>

@@ -12,7 +12,7 @@ typedef struct _Physics_t{
 	
 	unsigned char Terrain;
 	unsigned char Conductor;
-	unsigned char Bounciness;
+	unsigned char Elasticity;
 	unsigned short Mass;
 		// in kg
 	double FrictCo;
@@ -31,5 +31,6 @@ void freePhysics(Physics_t **);
 void UpdatePhysics(Physics_t *, uint64_t);
 
 unsigned char CheckBoundingBoxCollision(Physics_t *, Physics_t *);
+void DrawBoundingBox(Physics_t *);
 
 #endif
