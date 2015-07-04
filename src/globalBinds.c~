@@ -6,6 +6,7 @@
 
 #include "camera.h"
 #include "actor.h"
+#include "globalTimeLine.h"
 
 void BindCameraView
 (Camera_t *camera)
@@ -34,3 +35,12 @@ Actor_t *GetMapTerrain
 void UnbindMapTerrain
 (void)
 {	mapTerrain = 0;	}
+void BindGlobalTimeLine
+(globalTimeLine_t *timeLine)
+{	globalTimeLine = timeLine;	}
+globalTimeLine_t *GetGlobalTimeLine
+(void)
+{	return globalTimeLine;	}
+void UnbindGlobalTimeLine
+(void)
+{	globalTimeLine = 0;	}

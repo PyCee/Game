@@ -15,6 +15,7 @@ run:
 	gcc -c src/gruel.c
 	gcc -c src/draw.c
 	gcc -c src/localTimeLine.c
+	gcc -c src/globalTimeLine.c
 	gcc -c src/dataTypes.c
 	gcc -c src/math/gMath.c
 	gcc -c src/math/trig.c
@@ -27,14 +28,14 @@ run:
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	physics.o audio.o \
 	actor.o terrain.o protag.o gruel.o \
-	draw.o localTimeLine.o dataTypes.o gMath.o trig.o vector.o vertex.o \
+	draw.o localTimeLine.o globalTimeLine.o dataTypes.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o normal.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	physics.o audio.o \
 	actor.o terrain.o protag.o gruel.o \
-	draw.o localTimeLine.o gMath.o trig.o vector.o vertex.o \
+	draw.o localTimeLine.o globalTimeLine.o dataTypes.o gMath.o trig.o vector.o vertex.o \
 	matrix.o transform.o normal.o
 	echo Compiled.
 install:

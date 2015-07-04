@@ -40,27 +40,27 @@ void UpdateProtag
 void Jump
 (void)
 {
-	if(GetControlledActor()->Control == 1){
-		GetControlledActor()->physics->Vel->Y += 0.002;
+	if(getControlledActor()->Control == 1){
+		getControlledActor()->physics->Vel->Y += 0.002;
 	}
 }
 void ControlledActorForward
 (void)
 {
-	GetControlledActor()->physics->Vel->Z += 1 * SPEED_FORWARD;
+	getControlledActor()->physics->Vel->Z += 1 * SPEED_FORWARD;
 }
 void ControlledActorLeft
 (void)
 {
-	GetControlledActor()->physics->Vel->X += -1 * SPEED_FORWARD;
+	getControlledActor()->physics->Vel->X += -1 * SPEED_FORWARD;
 }
 void ControlledActorBackward
 (void)
 {
-	GetControlledActor()->physics->Vel->Z += -1 * SPEED_FORWARD;
+	getControlledActor()->physics->Vel->Z += -1 * SPEED_FORWARD;
 }
 void ControlledActorRight
 (void)
 {
-	GetControlledActor()->physics->Vel->X += 1 * SPEED_FORWARD;
+	getControlledActor()->physics->Vel->X += 1 * SPEED_FORWARD;
 }

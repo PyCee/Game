@@ -166,9 +166,9 @@ void handleEvents
         break;
       case SDL_MOUSEMOTION:
       	// Tilt Global Camera
-      	CameraYaw(GetCameraView(), event.motion.xrel);
-      	CameraPitch(GetCameraView(), event.motion.yrel);
-      	PrintNormal3(GetCameraView()->direction);
+      	CameraYaw(getCameraView(), event.motion.xrel);
+      	CameraPitch(getCameraView(), event.motion.yrel);
+      	PrintNormal3(getCameraView()->direction);
       	break;
 			default:
 				break;

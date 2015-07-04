@@ -12,6 +12,7 @@
 #include "protag.h"
 #include "gruel.h"
 #include "draw.h"
+#include "globalTimeLine.h"
 #include "globalBinds.h"
 #include "terrain.h"
 #include "math/matrix.h"
@@ -43,6 +44,9 @@ I32 main
 	InitOptions();
 	InitKeyboard();
 	
+	globalTimeLine_t *globalTimeLine;
+	genGlobalTimeLine(&globalTimeLine);
+	
 	Camera_t *camera;
 	genCamera(&camera);
 	
@@ -58,6 +62,7 @@ I32 main
 	BindCameraView(camera);
 	BindControlledActor(player);
 	BindMapTerrain(terrain);
+	BindGlobalTimeLine(globalTimeLine);
 	
 	Mix_Music *BGMusic = NULL;
 	//BGMusic = Mix_LoadMUS(""); //get .wav and put path in quotes
@@ -67,14 +72,8 @@ I32 main
   
 	IAMALIVE = 1;
 	
-	U64 oldTime;
-	U64 newTime;
-	newTime = SDL_GetTicks();
-	oldTime = newTime;
-	
-	glClearColor(1.0, 0.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
-	SDL_GL_SwapWindow(gameWindow);
 	
 	drawInit();
 	
@@ -89,23 +88,20 @@ I32 main
 	*getMatrixEle(turn1, 0, 0) = 0.0;
 	*getMatrixEle(turn1, 0, 1) = 0.2;
 	
-	U64 elapsedTime = 0;
-	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	while(IAMALIVE == 1){
 	
 		SDL_GL_SwapWindow(gameWindow);
 		SDL_Delay(16);
 		
-		newTime = SDL_GetTicks();
-		U64 deltaTime = newTime - oldTime;
-		oldTime = newTime;
+		updateGlobalTimeLine(getGlobalTimeLine());
 		
 		F64 pos[] = {list[0]->physics->Pos->X, list[0]->physics->Pos->Y};
 		
+		glClearColor(0.0, 0.0, 0.0, 1.0);
 		if (BLINK == 0)
 			glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(0.0f, 1.0f, 0.0f);
+		glColor3f(0.3f, 1.0f, 0.4f);
 		glBegin(GL_POLYGON);
  			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y);
  			glVertex2f(list[1]->physics->Pos->X + list[1]->physics->Width, list[1]->physics->Pos->Y);
@@ -113,6 +109,7 @@ I32 main
  			glVertex2f(list[1]->physics->Pos->X, list[1]->physics->Pos->Y + list[1]->physics->Height + 0.75);
 		glEnd();
 		
+		glColor3f(1.0f, 0.85f, 0.2f);
 		turn1 = Roll(turn1, 3.1415926 / 500);
 		if(*getMatrixEle(turn1, 0, 1) > 0){
 			glBegin(GL_POLYGON);
@@ -132,8 +129,8 @@ I32 main
 		
 		handleEvents();
 		
-		Update(list[0], deltaTime);
-		Update(list[2], deltaTime);
+		Update(list[0], getPrevFrameDuration(getGlobalTimeLine()));
+		Update(list[2], getPrevFrameDuration(getGlobalTimeLine()));
 		
 		U8 collision = CheckBoundingBoxCollision(list[0]->physics, list[1]->physics);
 		if( collision == 1){
@@ -150,24 +147,23 @@ I32 main
 			}
 		}
 		if (BLINK == 1){
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0.0, 1.0, 0.0, 1.0);
+			glClearColor(0.0, 0.0, 0.0, 1.0);
+			glClear(GL_COLOR_BUFFER_BIT);
 		}
-		elapsedTime += deltaTime;
 	}
-	printf("MainLoop Ending.\nDel Sequence Starting.\n");
+	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
 	drawDel();
 	UnbindControlledActor();
 	UnbindMapTerrain();
 	UnbindCameraView();
+	UnbindGlobalTimeLine();
 	freeCamera(&camera);
 	freeActor(&player);
 	freeActor(&terrain);
+	freeGlobalTimeLine(&globalTimeLine);
 	freeMatrix(&turn1);
 	freeMatrix(&turn2);
 	freeMatrix(&turn3);
-	printf("Del Sequence Ending.\n%s Ending.\nElapsed Time: %"PRId64"ms\n", PROGRAM_NAME, elapsedTime);
 	SaveOptions();
 	DefaultKeyboard();
 	
