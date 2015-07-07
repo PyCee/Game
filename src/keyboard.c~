@@ -5,7 +5,7 @@
 
 #include <SDL2/SDL.h>
 #include "camera.h"
-#include "actor.h"
+#include "dyn_actors.h"
 #include "protag.h"
 #include "globalBinds.h"
 #include "math/normal.h"
@@ -87,7 +87,7 @@ void handleEvents
 						keyFunctions[2 * event.key.keysym.sym]();
 						pressed[event.key.keysym.sym] = 1;
 					}
-				}
+				}// for mods, test with SDLK_---
 				if(event.key.keysym.mod & KMOD_NUM){
 					printf("%d\n", KMOD_NUM);
 					printf("aaskdjuir\n");
@@ -168,7 +168,7 @@ void handleEvents
       	// Tilt Global Camera
       	CameraYaw(getCameraView(), event.motion.xrel);
       	CameraPitch(getCameraView(), event.motion.yrel);
-      	PrintNormal3(getCameraView()->direction);
+      	PrintNormal3(Dyn_Actors.direction[getCameraView()].forward);
       	break;
 			default:
 				break;

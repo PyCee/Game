@@ -4,36 +4,15 @@
 
 #include <stdlib.h>
 #include "math/gMath.h"
-#include "actor.h"
+#include "dyn_actors.h"
 
 
-void genCamera
-(Camera_t **camera)
+U8 genCamera
+(void)
 {
-	genActor(camera);
-	Camera_t *_camera = *camera;
+	U8 actorID = AddActor();
 }
-void freeCamera
-(Camera_t **camera)
+void updateCamera
+(U8 actorID)
 {
-	freeActor(camera);
-	*camera = 0;
-}
-void CameraPitch
-(Camera_t *camera, F64 angle)
-{
-	camera->direction = Pitch(camera->direction, degRad(angle));
-	NormalizeNormal3(camera->direction);
-}
-void CameraYaw
-(Camera_t *camera, F64 angle)
-{
-	camera->direction = Yaw(camera->direction, degRad(angle));
-	NormalizeNormal3(camera->direction);
-}
-void CameraRoll
-(Camera_t *camera, F64 angle)
-{
-	camera->direction = Roll(camera->direction, degRad(angle));
-	NormalizeNormal3(camera->direction);
 }

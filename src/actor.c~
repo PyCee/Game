@@ -17,14 +17,16 @@ void genActor
 	genNormal3(&(_actor->direction));
 	_actor->Update = UselessUpdate;
 	_actor->Health = HEALTH_MAX;
+	_actor->ActorName = UNDEFINED_ACTOR_NAME;
 }
 void freeActor
 (Actor_t **actor)
 {
 	Actor_t *_actor = *actor;
-	freePhysics(&(_actor->physics));
+	if (_actor->physics)
+		freePhysics(&(_actor->physics));
 	free(*actor);
-	*actor = 0;
+	*actor = NULL;
 }
 void AssignActorID
 (Actor_t *actor)

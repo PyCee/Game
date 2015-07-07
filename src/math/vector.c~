@@ -3,69 +3,48 @@
 #include "../dataTypes.h"
 #include "vector.h"
 
-#include "gMath.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "gMath.h"
 #include "matrix.h"
 
-void genVec4
-(Matrix_t **matrix)
+void genVec2
+(Vec2_t *vec)
 {
-	genMatrix(matrix, 1, 4);
+	genMatrix(vec, 1, 3);
 }
 void genVec3
-(Vec3_t **vec3)
+(Vec3_t *vec)
 {
-	*vec3 = malloc(sizeof(Vec3_t));
-	Vec3_t *_vec3 = *vec3;
-	_vec3->X = 0;
-	_vec3->Y = 0;
-	_vec3->Z = 0;
-	_vec3->mag = 1;
-}
-void genVec2
-(Vec2_t **vec2)
-{
-	*vec2 = malloc(sizeof(Vec2_t));
-	Vec2_t *_vec2 = *vec2;
-	_vec2->X = 0;
-	_vec2->Y = 0;
-	_vec2->mag = 1;
+	genMatrix(vec, 1, 4);
 }
 
-void freeVec3
-(Vec3_t **vec3)
-{
-	free(*vec3);
-}
 void freeVec2
-(Vec2_t **vec2)
+(Vec2_t *vec)
 {
-	free(*vec2);
+	freeMatrix(vec);
 }
-void NormalizeVec3
-(Vec3_t *vec3)
+void freeVec3
+(Vec3_t *vec)
 {
-	double change = PythagoreanTheoremDim3(vec3->X, vec3->Y, vec3->Z);
-	if (change == 0)
-		vec3->mag = 1;
-	else
-	{
-	vec3->X = vec3->X / change;
-	vec3->Y = vec3->Y / change;
-	vec3->Z = vec3->Z / change;
-	vec3->mag = vec3->mag * change;
-	}
+	printf("asdasdasdasd\n");
+	freeMatrix(vec);
 }
-void NormalizeVec2
-(Vec2_t *vec2)
+void PrintVec2
+(Vec2_t vec)
 {
-	double change = PythagoreanTheoremDim2(vec2->X, vec2->Y);
-	if (change == 0)
-	{
-		vec2->mag = 1;
-	}
-	vec2->X = vec2->X / change;
-	vec2->Y = vec2->Y / change;
-	vec2->mag = vec2->mag * change;
+	printf("[ %f, %f]\n", getVecX(vec), getVecY(vec));
 }
+void PrintVec3
+(Vec3_t vec)
+{
+	printf("[ %f, %f, %f]\n", getVecX(vec), getVecY(vec), getVecZ(vec));
+}
+
+F64		*		getVecXPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 0);			}
+F64		*		getVecYPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 1);			}
+F64		*		getVecZPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 2);			}
+F64				getVecX				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 0);		}
+F64				getVecY				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 1);		}
+F64				getVecZ				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 2);		}

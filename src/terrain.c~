@@ -2,24 +2,24 @@
 #include "dataTypes.h"
 #include "terrain.h"
 
-#include "actor.h"
+#include "dyn_actors.h"
+#include <stdio.h>
 
-void genTerrain
-(Actor_t **terrain)
+U8 genTerrain
+(void)
 {
-	genActor(terrain);
-	Actor_t *_terrain = *terrain;
-	_terrain->Update = UpdateTerrain;
-	_terrain->Control = 0;
-	_terrain->physics->Terrain = 1;
-	_terrain->physics->Height = 0.2;
-	_terrain->physics->Width = 20.0;
-	_terrain->physics->Length = 0.2;
-	_terrain->physics->Pos->X = -1 * 10.0;
-	_terrain->physics->Pos->Y = -1 * 1.0;
-	_terrain->physics->Pos->Z = -1 * 1.0;
+	U8 actorID = AddActor();
+	Dyn_Actors.identifier[actorID].ActorName = TERRAIN_NAME;
+	assignAIUpdate(actorID, UpdateTerrain);
+	Dyn_Actors.collisions[actorID].Height = 0.2;
+	Dyn_Actors.collisions[actorID].Width = 10.0;
+	Dyn_Actors.collisions[actorID].Length = 0.2;
+	*getPosXPtr(actorID) = 1 * 0.0;
+	*getPosYPtr(actorID) = -1 * 1.0;
+	*getPosZPtr(actorID) = 1 * 1.0;
+	return actorID;
 }
 void UpdateTerrain
-(Actor_t *terrain, uint64_t deltaMS)
+(U8 actorID, U16 deltaMS)
 {
 }

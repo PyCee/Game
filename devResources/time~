@@ -3,6 +3,7 @@ I. Dealing with Time
  A. Measured in Milliseconds
  A. Books
   1. Game Engine Architecture
- 	 i. 
+   i. p 310, 7.4 Abstract Timelines
+ 	 i. p 312, 7.5 Measuring and Dealing with Time
    i. p 505, 11.4.1 The Local Time Line
    i. p 511, 11.4.3 Comparison of Local and Global Clocks

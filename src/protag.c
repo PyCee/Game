@@ -2,7 +2,7 @@
 #include "dataTypes.h"
 #include "protag.h"
 
-#include "actor.h"
+#include "dyn_actors.h"
 
 #include <stdint.h>
 #include <SDL2/SDL.h>
@@ -11,56 +11,48 @@
 #include "math/vector.h"
 #include "globalBinds.h"
 
-void genProtag
-(Actor_t **protag)
+U8 genProtag
+(void)
 {
-	genActor(protag);
-	Actor_t *_protag = *protag;
-	_protag->Update = UpdateProtag;
-	_protag->Control = 1;
-	_protag->physics->Terrain = 0;
-	_protag->physics->Height = 0.2;
-	_protag->physics->Width = 0.2;
-	_protag->physics->Length = 0.0;
-	_protag->physics->Pos->X = -1 * 0.75;
-	_protag->physics->Pos->Y = -1 * 0.75;
-	_protag->physics->Pos->Z = 2.5;
-}
-void freeProtag
-(Actor_t **protag)
-{
-	Actor_t *_protag = *protag;
-	freeActor(protag);
-	*protag = 0;
+	U8 actorID = AddActor();
+	Dyn_Actors.identifier[actorID].ActorName = PROTAG_NAME;
+	assignAIUpdate(actorID, UpdateProtag);
+	setBounds(actorID, 0.2, 0.2, 0.0);
+	*getPosXPtr(actorID) = -1 * 0.75;
+	*getPosYPtr(actorID) = -1 * 0.75;
+	*getPosZPtr(actorID) = 1.0;
+	return actorID;
 }
 void UpdateProtag
-(Actor_t *protag, U64 deltaMS)
+(U8 actorID, U16 deltaMS)
 {
 }
 void Jump
 (void)
 {
-	if(getControlledActor()->Control == 1){
-		getControlledActor()->physics->Vel->Y += 0.002;
-	}
+	*getVelYPtr(getControlledActor()) += 0.002;
 }
 void ControlledActorForward
 (void)
 {
-	getControlledActor()->physics->Vel->Z += 1 * SPEED_FORWARD;
+	*getVelZPtr(getControlledActor()) += 1 * SPEED_FORWARD;
+	*getVelZPtr(getCameraView()) += 1 * SPEED_FORWARD;
 }
 void ControlledActorLeft
 (void)
 {
-	getControlledActor()->physics->Vel->X += -1 * SPEED_FORWARD;
+	*getVelXPtr(getControlledActor()) -= 1 * SPEED_FORWARD;
+	*getVelXPtr(getCameraView()) -= 1 * SPEED_FORWARD;
 }
 void ControlledActorBackward
 (void)
 {
-	getControlledActor()->physics->Vel->Z += -1 * SPEED_FORWARD;
+	*getVelZPtr(getControlledActor()) -= 1 * SPEED_FORWARD;
+	*getVelZPtr(getCameraView()) -= 1 * SPEED_FORWARD;
 }
 void ControlledActorRight
 (void)
 {
-	getControlledActor()->physics->Vel->X += 1 * SPEED_FORWARD;
+	*getVelXPtr(getControlledActor()) += 1 * SPEED_FORWARD;
+	*getVelXPtr(getCameraView()) += 1 * SPEED_FORWARD;
 }

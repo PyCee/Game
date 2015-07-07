@@ -27,15 +27,15 @@ double arccot(double);
 */
 
 // around space
-Matrix_t *Transform(Matrix_t *, F64, F64, F64);
+Matrix_t *Transform(Matrix_t, F64, F64, F64);
 
 // Rotations are in Radians, and counter-clockwise
 // around X axis
-Matrix_t *Pitch(Matrix_t *, F64);
+Matrix_t *Pitch(Matrix_t, F64);
 // around Y axis
-Matrix_t *Yaw(Matrix_t *, F64);
+Matrix_t *Yaw(Matrix_t, F64);
 // around Z axis
-Matrix_t *Roll(Matrix_t *, F64);
+Matrix_t *Roll(Matrix_t, F64);
 
 F64 PythagoreanTheoremDim2(F64, F64);
 F64 PythagoreanTheoremDim3(F64, F64, F64);

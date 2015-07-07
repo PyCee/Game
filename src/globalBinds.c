@@ -5,36 +5,36 @@
 #include <stdio.h>
 
 #include "camera.h"
-#include "actor.h"
+#include "dyn_actors.h"
 #include "globalTimeLine.h"
 
 void BindCameraView
-(Camera_t *camera)
+(U8 camera)
 {	cameraView = camera;	}
-Camera_t *getCameraView
+U8 getCameraView
 (void)
 {	return cameraView;	}
 void UnbindCameraView
 (void)
-{	cameraView = 0;	}
+{	cameraView = MAX_ACTOR_COUNT;	}
 void BindControlledActor
-(Actor_t *actor)
-{	controlledActor = actor;	}
-Actor_t *getControlledActor
+(U8 protag)
+{	controlledActor = protag;	}
+U8 getControlledActor
 (void)
 {	return controlledActor;	}
 void UnbindControlledActor
 (void)
-{	controlledActor = 0;	}
+{	controlledActor = MAX_ACTOR_COUNT;	}
 void BindMapTerrain
-(Actor_t *terrain)
+(U8 terrain)
 {	mapTerrain = terrain;	}
-Actor_t *getMapTerrain
+U8 getMapTerrain
 (void)
 {	return mapTerrain;	}
 void UnbindMapTerrain
 (void)
-{	mapTerrain = 0;	}
+{	mapTerrain = MAX_ACTOR_COUNT;	}
 void BindGlobalTimeLine
 (globalTimeLine_t *timeLine)
 {	globalTimeLine = timeLine;	}
@@ -43,4 +43,4 @@ globalTimeLine_t *getGlobalTimeLine
 {	return globalTimeLine;	}
 void UnbindGlobalTimeLine
 (void)
-{	globalTimeLine = 0;	}
+{	globalTimeLine = NULL;	}

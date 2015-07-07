@@ -1,0 +1,79 @@
+
+#include "../dataTypes.h"
+#include "physics.h"
+
+#include <SDL2/SDL_opengl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include "../math/vector.h"
+#include "../math/matrix.h"
+
+void genPhysics(Physics_t **physics)
+{
+	*physics = malloc(sizeof(Physics_t));
+	Physics_t *_physics = *physics;
+	genVec3(&(_physics->Pos));
+	genVec3(&(_physics->Vel));
+	genVec3(&(_physics->Acc));
+	genVec3(&(_physics->Jrk));
+	_physics->Height = 0;
+	_physics->Width = 0;
+	_physics->Length = 0;
+}
+void freePhysics(Physics_t **physics)
+{
+	Physics_t *_physics = *physics;
+	freeVec3(&(_physics->Pos));
+	_physics->Pos = 0;
+	freeVec3(&(_physics->Vel));
+	_physics->Vel = 0;
+	freeVec3(&(_physics->Acc));
+	_physics->Acc = 0;
+	freeVec3(&(_physics->Jrk));
+	_physics->Jrk = 0;
+}
+
+void UpdatePhysics
+(Physics_t *physics, U64 deltaMS)
+{
+	if (physics->Terrain == 0){
+		Vec3_t *jrk = physics->Jrk;
+		Vec3_t *acc = physics->Acc;
+		Vec3_t *vel = physics->Vel;
+		Vec3_t *pos = physics->Pos;
+		*getVecX(acc) += deltaMS * *getVecX(jrk) * 1;
+		*getVecY(acc) += deltaMS * *getVecX(jrk) * 1;
+		*getVecZ(acc) += deltaMS * *getVecX(jrk) * 1;
+		*getVecX(vel) += deltaMS * *getVecX(acc) * 1;
+		*getVecY(vel) += deltaMS * (*getVecY(acc) * 1 - ACC_GRAVITY);
+		*getVecZ(vel) += deltaMS * *getVecZ(acc) * 1;
+		*getVecX(pos) += deltaMS * *getVecX(vel) * 1;
+		*getVecY(pos) += deltaMS * *getVecY(vel) * 1;
+		*getVecZ(pos) += deltaMS * *getVecZ(vel) * 1;
+	}
+}
+unsigned char CheckBoundingBoxCollision
+(Physics_t *physicsOne, Physics_t *physicsTwo)
+{
+	if (*getVecX(physicsOne->Pos) < *getVecX(physicsTwo->Pos) + physicsTwo->Width &&
+   *getVecX(physicsOne->Pos) + physicsOne->Width > *getVecX(physicsTwo->Pos) &&
+   *getVecY(physicsOne->Pos) < *getVecY(physicsTwo->Pos) + physicsTwo->Height &&
+   *getVecY(physicsOne->Pos) + physicsOne->Height > *getVecY(physicsTwo->Pos)/* &&
+   *getVecZ(physicsOne->Pos) < *getVecZ(physicsTwo->Pos) + physicsTwo->Length &&
+   *getVecZ(physicsOne->Pos) + physicsOne->Length > *getVecZ(physicsTwo->Pos) */)
+    // collision detected!
+  	return 1;
+	return 0;
+}
+void DrawBoundingBox
+(Physics_t *physics)
+{
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glBegin(GL_POLYGON);
+ 		glVertex2f(*getVecX(physics->Pos) / *getVecZ(physics->Pos), *getVecY(physics->Pos) / *getVecZ(physics->Pos));
+ 		glVertex2f((*getVecX(physics->Pos) + physics->Width) / *getVecZ(physics->Pos), *getVecY(physics->Pos) / *getVecZ(physics->Pos));
+ 		glVertex2f((*getVecX(physics->Pos) + physics->Width) / *getVecZ(physics->Pos), (*getVecY(physics->Pos) + physics->Height) / *getVecZ(physics->Pos));
+ 		glVertex2f(*getVecX(physics->Pos) / *getVecZ(physics->Pos), (*getVecY(physics->Pos) + physics->Height) / *getVecZ(physics->Pos));
+	glEnd();
+}

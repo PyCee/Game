@@ -2,28 +2,27 @@
 #ifndef _GLOBAL_BINDS_
 #define _GLOBAL_BINDS_
 
-typedef struct _Actor_t Camera_t;
-typedef struct _Actor_t Actor_t;
 typedef struct _globalTimeLine_t globalTimeLine_t;
 
-static Camera_t *cameraView;
-void BindCameraView(Camera_t *);
-Camera_t *getCameraView(void);
-void UnbindCameraView(void);
+static		U8											cameraView;
+static		U8											controlledActor;
+static		U8											mapTerrain;
+static		globalTimeLine_t		*		globalTimeLine;
 
-static Actor_t *controlledActor;
-void BindControlledActor(Actor_t *);
-Actor_t *getControlledActor(void);
-void UnbindControlledActor(void);
+void 										BindCameraView					(U8);
+U8 											getCameraView						(void);
+void										UnbindCameraView				(void);
 
-static Actor_t *mapTerrain;
-void BindMapTerrain(Actor_t *);
-Actor_t *getMapTerrain(void);
-void UnbindMapTerrain(void);
+void										BindControlledActor			(U8);
+U8											getControlledActor			(void);
+void										UnbindControlledActor		(void);
 
-static globalTimeLine_t *globalTimeLine;
-void BindGlobalTimeLine(globalTimeLine_t *);
-globalTimeLine_t *getGlobalTimeLine(void);
-void UnbindGlobalTimeLine(void);
+void										BindMapTerrain					(U8);
+U8											getMapTerrain						(void);
+void										UnbindMapTerrain				(void);
+
+void										BindGlobalTimeLine			(globalTimeLine_t *);
+globalTimeLine_t		*		getGlobalTimeLine				(void);
+void										UnbindGlobalTimeLine		(void);
 
 #endif /* _GLOBAL_BINDS */

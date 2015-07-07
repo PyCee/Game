@@ -1,0 +1,9 @@
+
+#ifndef _AI_
+#define _AI_
+
+typedef struct _AI_t{
+	void (*Update)(U16, U16);
+}
+
+#endif
