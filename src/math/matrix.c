@@ -25,29 +25,35 @@ void printMatrix
 }
 double *getMatrixEle(Matrix_t *matrix, U8 height, U8 width)
 {
-	if (height < matrix->height && width < matrix->width)
-		return &(matrix->ele[((height) * matrix->width) + width]);
-	printf(" ::: Accessing Matrix[%d, %d]. (remember, indexing starts at zero)\n",
-			 height, width);
-	printf(" ::: ::: Matrix Height: %d\n ::: ::: Matrix Width: %d\n", matrix->height, matrix->width);
-	return 0;
+		return matrix->ele[height][width];
 }
 void genMatrix
 (Matrix_t *matrix, U8 height, U8 width)
 {
 	matrix->height = height;
 	matrix->width = width;
-	matrix->ele = malloc(sizeof(F64) * height * width);
+	matrix->ele = malloc(sizeof(F64) * height);
+	U8 row = 0;
+	while (row < height)
+	{
+		matrix->ele[row] = malloc(sizeof(F64) * width);
+		row++;
+	}
 	ZeroMatrix(matrix);
 }
 void freeMatrix
 (Matrix_t *matrix)
 {
-	static U8 freedMat = 0;
-	if (matrix != NULL)
+	if (matrix->ele)
 	{
- 		free(matrix);
-		matrix = NULL;
+		U8 row = 0;
+		while (row < height)
+		{
+			if (matrix->ele[row])
+				free(matrix->ele[row])
+			row++;
+		}
+		free(matrix->ele);
 	}
 }
 void copyMatrix
@@ -201,7 +207,7 @@ Matrix_t *MultiplyMatricies
 	return answer;
 }
 Matrix_t *MultiplyMartixNum
-(Matrix_t matrix, F64 number)
+(Matrix_t matrix, F32 number)
 {
 	U8 height = matrix.height;
 	U8 width = matrix.width;

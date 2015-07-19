@@ -4,9 +4,9 @@
 
 typedef struct _LocalTimeLine_t{
 	U64 startTime;
-	U32 duration;
 	U32 currTime;
 	F32 playBackRate;
+	F32 duration;
 	U8 replay;
 	U8 replayed;
 	U8 isPaused;

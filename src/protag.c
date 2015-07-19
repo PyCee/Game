@@ -2,25 +2,24 @@
 #include "dataTypes.h"
 #include "protag.h"
 
-#include "dyn_actors.h"
+#include "actors.h"
 
 #include <stdint.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
-#include "math/vector.h"
 #include "globalBinds.h"
 
 U8 genProtag
 (void)
 {
-	U8 actorID = AddActor();
-	Dyn_Actors.identifier[actorID].ActorName = PROTAG_NAME;
+	U8 actorID = addDyn_Actor();
+	Actors.identifier[actorID].ActorName = PROTAG_NAME;
 	assignAIUpdate(actorID, UpdateProtag);
 	setBounds(actorID, 0.2, 0.2, 0.0);
-	*getPosXPtr(actorID) = -1 * 0.75;
-	*getPosYPtr(actorID) = -1 * 0.75;
-	*getPosZPtr(actorID) = 1.0;
+	setPosX(actorID, -1 * 0.75);
+	setPosY(actorID, -1 * 0.75);
+	setPosZ(actorID, 1 * 1.0);
 	return actorID;
 }
 void UpdateProtag
@@ -30,29 +29,29 @@ void UpdateProtag
 void Jump
 (void)
 {
-	*getVelYPtr(getControlledActor()) += 0.002;
+	setVelY(getControlledActor(), getVelY(getControlledActor()) + 1 * 0.002);
 }
 void ControlledActorForward
 (void)
 {
-	*getVelZPtr(getControlledActor()) += 1 * SPEED_FORWARD;
-	*getVelZPtr(getCameraView()) += 1 * SPEED_FORWARD;
+	setVelZ(getControlledActor(), getVelZ(getControlledActor()) + 1 * SPEED_FORWARD);
+	setVelZ(getCameraView(), getVelZ(getCameraView()) + 1 * SPEED_FORWARD);
 }
 void ControlledActorLeft
 (void)
 {
-	*getVelXPtr(getControlledActor()) -= 1 * SPEED_FORWARD;
-	*getVelXPtr(getCameraView()) -= 1 * SPEED_FORWARD;
+	setVelX(getControlledActor(), getVelX(getControlledActor()) - 1 * SPEED_FORWARD);
+	setVelX(getCameraView(), getVelX(getCameraView()) - 1 * SPEED_FORWARD);
 }
 void ControlledActorBackward
 (void)
 {
-	*getVelZPtr(getControlledActor()) -= 1 * SPEED_FORWARD;
-	*getVelZPtr(getCameraView()) -= 1 * SPEED_FORWARD;
+	setVelZ(getControlledActor(), getVelZ(getControlledActor()) - 1 * SPEED_FORWARD);
+	setVelZ(getCameraView(), getVelZ(getCameraView()) - 1 * SPEED_FORWARD);
 }
 void ControlledActorRight
 (void)
 {
-	*getVelXPtr(getControlledActor()) += 1 * SPEED_FORWARD;
-	*getVelXPtr(getCameraView()) += 1 * SPEED_FORWARD;
+	setVelX(getControlledActor(), getVelX(getControlledActor()) + 1 * SPEED_FORWARD);
+	setVelX(getCameraView(), getVelX(getCameraView()) + 1 * SPEED_FORWARD);
 }

@@ -17,8 +17,6 @@ void genLocalTimeLine
 	_timeLine->duration = 0;
 	_timeLine->currTime = 0;
 	_timeLine->playBackRate = 1;
-	_timeLine->replay = 1;
-	_timeLine->replayed = 1;
 	_timeLine->isPaused = 1;
 }
 void freeLocalTimeLine

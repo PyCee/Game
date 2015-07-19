@@ -1,0 +1,10 @@
+
+#ifndef _ANGLES_
+#define _ANGLES_
+
+#define PI 3.14159265358979323846
+
+F32 DegreesToRadians(F32);
+F32 RadiansToDegrees(F32);
+
+#endif /* _ANGLES_ */

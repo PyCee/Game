@@ -4,13 +4,13 @@
 
 #include <stdlib.h>
 #include "math/gMath.h"
-#include "dyn_actors.h"
+#include "actors.h"
 
 
 U8 genCamera
 (void)
 {
-	U8 actorID = AddActor();
+	U8 actorID = addDyn_Actor();
 }
 void updateCamera
 (U8 actorID)

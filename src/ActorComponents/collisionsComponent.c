@@ -1,0 +1,91 @@
+
+#include "../dataTypes.h"
+#include "collisionsComponent.h"
+
+#include "../actors.h"
+#include <SDL2/SDL_opengl.h>
+
+void genCollisionsComponent
+(U8 actorID)
+{
+	Actors.collisions[actorID].Height = 1;
+	Actors.collisions[actorID].Width = 1;
+	Actors.collisions[actorID].Length = 1;
+}
+void freeCollisionsComponent
+(U8 actorID)
+{
+	Actors.collisions[actorID].Height = 0;
+	Actors.collisions[actorID].Width = 0;
+	Actors.collisions[actorID].Length = 0;
+}
+void updateCollisionsComponent
+(U8 actorID, U16 deltaMS)
+{
+	DrawBoundingBox(actorID);
+}
+void setBounds
+(U8 actorID, F32 height, F32 width, F32 length)
+{
+	Actors.collisions[actorID].Height	=	height;
+	Actors.collisions[actorID].Width	=	width;
+	Actors.collisions[actorID].Length	=	length;
+}
+U8 CheckBoundingBoxCollision
+(U8 actorIDOne, U8 actorIDTwo)
+{
+	if (getVectorX(Actors.physics[actorIDOne].Pos)	- getWidth(actorIDOne) * 0.5 <
+					getVectorX(Actors.physics[actorIDTwo].Pos) + getWidth(actorIDTwo) * 0.5 &&
+   		getVectorX(Actors.physics[actorIDOne].Pos)	+ getWidth(actorIDOne) * 0.5 >
+   				getVectorX(Actors.physics[actorIDTwo].Pos) - getWidth(actorIDTwo) * 0.5 &&
+   		getVectorY(Actors.physics[actorIDOne].Pos)	<
+   				getVectorY(Actors.physics[actorIDTwo].Pos) + getHeight(actorIDTwo) &&
+   		getVectorY(Actors.physics[actorIDOne].Pos)	+
+   				getHeight(actorIDOne) > getVectorY(Actors.physics[actorIDTwo].Pos)/* &&
+   		getVectorZ(Actors.physics[actorIDOne].Pos)	- getLength(actorIDOne) * 0.5	<
+   				getVectorZ(Actors.physics[actorIDTwo].Pos) + getLength(actorIDTwo) * 0.5 &&
+   		getVectorZ(Actors.physics[actorIDOne].Pos)	+ getLength(actorIDOne) * 0.5 >
+   				getVectorZ(Actors.physics[actorIDTwo].Pos)	- getLength(actorIDTwo) * 0.5 */)
+    // Bounding Boxes Overlapping!
+  	return 1;
+  // Bounding Boxes Not Overlapping...
+	return 0;
+}
+void DrawBoundingBox
+(U8 actorID)
+{
+	F64 X = getPosX(actorID);
+	F64 Y = getPosY(actorID);
+	F64 Z = getPosZ(actorID);
+	// TODO: update this function once drawing/rendering is fully impllimented
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glBegin(GL_POLYGON);
+ 		glVertex2f((X - getWidth(actorID) * 0.5) / Z, Y / Z);
+ 		glVertex2f((X + getWidth(actorID) * 0.5) / Z, Y / Z);
+ 		glVertex2f((X + getWidth(actorID) * 0.5) / Z, (Y + getHeight(actorID)) / Z);
+ 		glVertex2f((X - getWidth(actorID) * 0.5) / Z, (Y + getHeight(actorID)) / Z);
+	glEnd();
+	
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glBegin(GL_POLYGON);
+ 		glVertex2f((X - getWidth(actorID) * 0.5 / 8) / Z, Y / Z);
+ 		glVertex2f((X + getWidth(actorID) * 0.5 / 8) / Z, Y / Z);
+ 		glVertex2f((X + getWidth(actorID) * 0.5 / 8) / Z, (Y + getHeight(actorID) / 8) / Z);
+ 		glVertex2f((X - getWidth(actorID) * 0.5 / 8) / Z, (Y + getHeight(actorID) / 8) / Z);
+	glEnd();
+}
+F64 getHeight
+(U8 actorID)
+{
+	return Actors.collisions[actorID].Height;
+}
+F64 getWidth
+(U8 actorID)
+{
+	return Actors.collisions[actorID].Width;
+}
+F64 getLength
+(U8 actorID)
+{
+	return Actors.collisions[actorID].Length;
+}

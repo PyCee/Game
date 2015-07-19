@@ -1,0 +1,14 @@
+
+I. Lighting
+ A. Books
+  1. Game Engine Architecture
+   i. p 427, 10.1.3.2 The Pong Lighting Model
+    ii. equation on p 428
+     iii. lightIntensity = surfaceAmbianceReflectance * ambiantLightIntensity +
+     				for (each light source){
+     					diffuseReflectivity * DotProduct(surfaceNormal, vertexToLight) + 
+     					specularReflectivity * DotProduct(reflectedVertexToLight, vertexToCamera) /\ surfaceSpecularGlossiness
+     					* lightColorIntensity
+     				}
+     		with reflectedVertexToLight = surfaceNormal scaled by (2 * DotProduct(surfaceNormal, vertexToLight))
+     						- vertexToLight

@@ -3,7 +3,7 @@
 #define _MATRIX_
 
 typedef struct _Matrix_t{
-	F64 *ele;
+	F64 **ele;
 	U8 height;
 	U8 width;
 } Matrix_t;
@@ -19,5 +19,5 @@ void						TransposeMatrix			(Matrix_t *);
 U8							isMatrixSquare			(Matrix_t );
 Matrix_t		*		AddMatricies				(Matrix_t, Matrix_t);
 Matrix_t		*		MultiplyMatricies		(Matrix_t, Matrix_t);
-Matrix_t		*		MultiplyMartixNum		(Matrix_t, F64);
+Matrix_t		*		MultiplyMartixNum		(Matrix_t, F32);
 #endif

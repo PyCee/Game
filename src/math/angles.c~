@@ -1,0 +1,12 @@
+
+#include "../dataTypes.h"
+#include "angles.h"
+
+F32 DegreesToRadians(F32 degrees)
+{
+	return degrees * PI / 180;
+}
+F32 RadiansToDegrees(F32 radians)
+{
+	return radians * 180 / PI;
+}

@@ -1,15 +1,15 @@
 
-#ifndef _WORLD_
-#define _WORLD_
+#ifndef _GAME_WORLD_
+#define _GAME_WORLD_
 
 
-typedef struct _World_t{
+typedef struct _GameWorld_t{
 	F64 Height;
 	F64 Width;
 	F64 Length;
-} World_t;
+} GameWorld_t;
 
-void genWorld(World_t **);
-void freeWorld(World_t **);
+void genGameWorld(Game_World_t **);
+void freeGameWorld(Game_World_t **);
 
-#endif /* _WORLD_ */
+#endif /* _GAME_WORLD_ */

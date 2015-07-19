@@ -1,0 +1,126 @@
+
+#include "dataTypes.h"
+#include "sta_actors.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include "math/vector.h"
+#include "math/normal.h"
+#include "math/matrix.h"
+
+
+void genAllSta_Actors
+(void)
+{
+	U8 actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		Sta_Actors.ActiveActor[actorID] = 0;
+		genSta_Actor(actorID);
+		actorID++;
+	}
+}
+void freeAllSta_Actors
+(void)
+{
+	U8 actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		freeSta_Actor(actorID);
+		actorID++;
+	}
+}
+void genSta_Actor
+(U8 actorID)
+{
+	if (Sta_Actors.ActiveActor[actorID])
+		return;
+	else
+	printf("Gening Sta_Actor %d\n", actorID);
+	genIdentifierComponent(actorID);
+	genAudioComponent(actorID);
+	genDirectionComponent(actorID);
+	genPhysicsComponent(actorID);
+	genCollisionsComponent(actorID);
+	genRenderComponent(actorID);
+}
+void freeSta_Actor
+(U8 actorID)
+{
+	if (!Sta_Actors.ActiveActor[actorID])
+		return;
+	printf("Freeing Sta_Actor %d\n", actorID);
+	freeRenderComponent(actorID);
+	freeCollisionsComponent(actorID);
+	freePhysicsComponent(actorID);
+	freeDirectionComponent(actorID);
+	freeAudioComponent(actorID);
+	freeIdentifierComponent(actorID);
+	Sta_Actors.ActiveActor[actorID] = 0;
+}
+void updateSta_Actors
+(void)
+{
+	U8 actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		if (Sta_Actors.ActiveActor[actorID])
+		{
+			updateAudioComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+		}
+		actorID++;
+	}
+	actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		if (Sta_Actors.ActiveActor[actorID])
+		{
+			updatePhysicsComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+		}
+		actorID++;
+	}
+	actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		if (Sta_Actors.ActiveActor[actorID])
+		{
+			updateCollisionsComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+		}
+		actorID++;
+	}
+	actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		if (Sta_Actors.ActiveActor[actorID])
+		{
+			updateRenderComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+		}
+		actorID++;
+	}
+}
+U8 AddSta_Actor
+(void)
+{
+	U8 firstInactiveActor = getFirstInactiveSta_Actor();
+	if (firstInactiveActor < MAX_STA_ACTOR_COUNT)
+	{
+		Sta_Actors.ActiveActor[firstInactiveActor] = 1;
+		printf("Adding ActorID: %d\n", firstInactiveActor);
+		return firstInactiveActor;
+	}
+	return MAX_STA_ACTOR_COUNT;
+}
+U8 getFirstInactiveSta_Actor
+(void)
+{
+	U8 actorID = 0;
+	while (actorID < MAX_STA_ACTOR_COUNT)
+	{
+		if (!Sta_Actors.ActiveActor[actorID])
+			return actorID;
+		actorID++;
+	}
+	printf("ERROR::AddActor(void) called after ActiveActors array was filled::\
+			First Inactive Actor: %d::MAX_STA_ACTOR_COUNT: %d\n", getFirstInactiveSta_Actor(), MAX_STA_ACTOR_COUNT);
+	return MAX_STA_ACTOR_COUNT;
+}

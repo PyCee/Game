@@ -5,10 +5,11 @@
 
 #include <SDL2/SDL.h>
 #include "camera.h"
-#include "dyn_actors.h"
+#include "actors.h"
 #include "protag.h"
 #include "globalBinds.h"
-#include "math/normal.h"
+#include "ActorComponents/physics/vector.h"
+#include "ActorComponents/direction/normal.h"
 
 extern U8 IAMALIVE;
 extern U8 BLINK;
@@ -168,7 +169,7 @@ void handleEvents
       	// Tilt Global Camera
       	DirectionYaw(getCameraView(), event.motion.xrel);
       	DirectionPitch(getCameraView(), event.motion.yrel);
-      	PrintNormal3(Dyn_Actors.direction[getCameraView()].forward);
+      	PrintNormal(Actors.direction[getCameraView()].forward);
       	break;
 			default:
 				break;

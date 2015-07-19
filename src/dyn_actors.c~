@@ -13,10 +13,10 @@ void genAllDyn_Actors
 (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		Dyn_Actors.ActiveActor[actorID] = 0;
-		genActor(actorID);
+		genDyn_Actor(actorID);
 		actorID++;
 	}
 }
@@ -24,13 +24,13 @@ void freeAllDyn_Actors
 (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
-		freeActor(actorID);
+		freeDyn_Actor(actorID);
 		actorID++;
 	}
 }
-void genActor
+void genDyn_Actor
 (U8 actorID)
 {
 	if (Dyn_Actors.ActiveActor[actorID])
@@ -43,13 +43,15 @@ void genActor
 	genDirectionComponent(actorID);
 	genPhysicsComponent(actorID);
 	genCollisionsComponent(actorID);
+	genRenderComponent(actorID);
 }
-void freeActor
+void freeDyn_Actor
 (U8 actorID)
 {
 	if (!Dyn_Actors.ActiveActor[actorID])
 		return;
 	printf("Freeing Actor %d\n", actorID);
+	freeRenderComponent(actorID);
 	freeCollisionsComponent(actorID);
 	freePhysicsComponent(actorID);
 	freeDirectionComponent(actorID);
@@ -62,7 +64,7 @@ void updateDyn_Actors
 (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		if (Dyn_Actors.ActiveActor[actorID])
 		{
@@ -71,7 +73,7 @@ void updateDyn_Actors
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		if (Dyn_Actors.ActiveActor[actorID])
 		{
@@ -80,7 +82,7 @@ void updateDyn_Actors
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		if (Dyn_Actors.ActiveActor[actorID])
 		{
@@ -89,7 +91,7 @@ void updateDyn_Actors
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		if (Dyn_Actors.ActiveActor[actorID])
 		{
@@ -97,30 +99,39 @@ void updateDyn_Actors
 		}
 		actorID++;
 	}
+	actorID = 0;
+	while (actorID < MAX_DYN_ACTOR_COUNT)
+	{
+		if (Dyn_Actors.ActiveActor[actorID])
+		{
+			updateRenderComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+		}
+		actorID++;
+	}
 }
-U8 AddActor
+U8 AddDyn_Actor
 (void)
 {
 	U8 firstInactiveActor = getFirstInactiveDyn_Actor();
-	if (firstInactiveActor < MAX_ACTOR_COUNT)
+	if (firstInactiveActor < MAX_DYN_ACTOR_COUNT)
 	{
 		Dyn_Actors.ActiveActor[firstInactiveActor] = 1;
 		printf("Adding ActorID: %d\n", firstInactiveActor);
 		return firstInactiveActor;
 	}
-	return MAX_ACTOR_COUNT;
+	return MAX_DYN_ACTOR_COUNT;
 }
 U8 getFirstInactiveDyn_Actor
 (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
+	while (actorID < MAX_DYN_ACTOR_COUNT)
 	{
 		if (!Dyn_Actors.ActiveActor[actorID])
 			return actorID;
 		actorID++;
 	}
 	printf("ERROR::AddActor(void) called after ActiveActors array was filled::\
-			First Inactive Actor: %d::MAX_ACTOR_COUNT: %d\n", MAX_ACTOR_COUNT, getFirstInactiveDyn_Actor());
-	return MAX_ACTOR_COUNT;
+			First Inactive Actor: %d::MAX_DYN_ACTOR_COUNT: %d\n", getFirstInactiveDyn_Actor(), MAX_DYN_ACTOR_COUNT);
+	return MAX_DYN_ACTOR_COUNT;
 }

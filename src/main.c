@@ -8,17 +8,14 @@
 #include "dataTypes.h"
 #include "save.h"
 #include "keyboard.h"
-#include "dyn_actors.h"
+#include "actors.h"
 #include "protag.h"
-#include "gruel.h"
 #include "draw.h"
 #include "globalTimeLine.h"
 #include "globalBinds.h"
 #include "terrain.h"
-#include "math/matrix.h"
-#include "math/gMath.h"
-#include "math/normal.h"
-#include "math/vector.h"
+#include "ActorComponents/physics/vector.h"
+#include "math/angles.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
@@ -51,7 +48,7 @@ I32 main
 	genGlobalTimeLine(&globalTimeLine);
 	BindGlobalTimeLine(globalTimeLine);
 	
-	genAllDyn_Actors();
+	genAllActors();
 	
 	U8 ter = genTerrain();
 	U8 pro = genProtag();
@@ -72,17 +69,6 @@ I32 main
 	
 	drawInit();
 	
-	Matrix_t *turn1 = malloc(sizeof(Matrix_t));
-	Matrix_t *turn2 = malloc(sizeof(Matrix_t));
-	Matrix_t *turn3 = malloc(sizeof(Matrix_t));
-	genMatrix(turn1, 1, 4);
-	genMatrix(turn2, 1, 4);
-	genMatrix(turn3, 1, 4);
-	*getMatrixEle(turn2, 0, 0) = -0.1;
-	*getMatrixEle(turn3, 0, 0) = 0.1;
-	*getMatrixEle(turn1, 0, 0) = 0.0;
-	*getMatrixEle(turn1, 0, 1) = 0.2;
-	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	while(IAMALIVE == 1){
 	
@@ -94,25 +80,6 @@ I32 main
 		
 		updateGlobalTimeLine(getGlobalTimeLine());
 		
-		//<CL "basic drawing">
-		
-		glColor3f(1.0f, 0.85f, 0.2f);
-		turn1 = Roll(*turn1, 3.1415926 / 500);
-		if(*getMatrixEle(turn1, 0, 1) > 0){
-			glBegin(GL_POLYGON);
- 				glVertex2f(*getMatrixEle(turn2, 0, 0), *getMatrixEle(turn2, 0, 1));
- 				glVertex2f(*getMatrixEle(turn3, 0, 0), *getMatrixEle(turn3, 0, 1));
- 				glVertex2f(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1));
-			glEnd();
-		} else if(*getMatrixEle(turn1, 0, 1) < 0){
-			glBegin(GL_POLYGON);
- 				glVertex2f(*getMatrixEle(turn2, 0, 0), *getMatrixEle(turn2, 0, 1));
- 				glVertex2f(*getMatrixEle(turn1, 0, 0), *getMatrixEle(turn1, 0, 1));
- 				glVertex2f(*getMatrixEle(turn3, 0, 0), *getMatrixEle(turn3, 0, 1));
-			glEnd();
-		}
-		//</CL>
-		
 		draw();
 		
 		//<CL "physics upgrade: collisions">
@@ -120,17 +87,19 @@ I32 main
 		U8 collision = CheckBoundingBoxCollision(pro, ter);
 		if( collision == 1){
 			if(getPosY(pro) < getPosY(ter) + getHeight(ter)){
-				*getPosYPtr(pro) = getPosY(ter) + getHeight(ter);
-				*getVecYPtr(&(Dyn_Actors.physics[getControlledActor()].Vel)) = 0.0;
+				setPosY(pro, getPosY(ter) + getHeight(ter));
+				setVelY(pro, 0.0);
 			}
 		}
+		//</CL>
+		handleEvents();
+		updateActors();
+		//<CL>
 		if (BLINK == 1){
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT);
 		}
 		//</CL>
-		handleEvents();
-		updateDyn_Actors();
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
 	drawDel();
@@ -138,11 +107,8 @@ I32 main
 	UnbindMapTerrain();
 	UnbindCameraView();
 	UnbindGlobalTimeLine();
-	freeAllDyn_Actors();
+	freeAllActors();
 	freeGlobalTimeLine(&globalTimeLine);
-	freeMatrix(turn1);
-	freeMatrix(turn2);
-	freeMatrix(turn3);
 	SaveOptions();
 	DefaultKeyboard();
 	
@@ -150,6 +116,17 @@ I32 main
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
+	
+	Vector_t asd;
+	genVector(&asd);
+	setVectorX(&asd, 0);
+	setVectorY(&asd, 1);
+	setVectorZ(&asd, 0);
+	PrintVector(asd);
+	NormalizeNormal(&asd);
+	copyVector(&asd, *PitchVector(asd, 90));//DegreesToRadians(90)));
+	NormalizeNormal(&asd);
+	PrintVector(asd);
 	
 	/*FILE *loadFile;
 	loadFile = fopen(KEY_BINDINGS_PATH, "r");

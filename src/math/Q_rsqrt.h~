@@ -1,0 +1,7 @@
+
+#ifndef _Q_RSQRT_
+#define _Q_RSQRT_
+
+F32 Q_rsqrt(F32, F32, F32);
+
+#endif /* _Q_RSQRT_ */

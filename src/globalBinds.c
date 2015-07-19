@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #include "camera.h"
-#include "dyn_actors.h"
+#include "actors.h"
 #include "globalTimeLine.h"
 
 void BindCameraView

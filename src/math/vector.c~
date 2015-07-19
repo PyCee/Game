@@ -9,42 +9,51 @@
 #include "gMath.h"
 #include "matrix.h"
 
-void genVec2
-(Vec2_t *vec)
-{
-	genMatrix(vec, 1, 3);
-}
-void genVec3
-(Vec3_t *vec)
+void genVector
+(Vector_t *vec)
 {
 	genMatrix(vec, 1, 4);
 }
-
-void freeVec2
-(Vec2_t *vec)
+void freeVector
+(Vector_t *vec)
 {
 	freeMatrix(vec);
 }
-void freeVec3
-(Vec3_t *vec)
+void copyVector
+(Vector_t *recieve, Vector_t *send)
 {
-	printf("asdasdasdasd\n");
-	freeMatrix(vec);
+	copyMatrix(recieve, send);
 }
-void PrintVec2
-(Vec2_t vec)
+Vector_t * addVectors
+(Vector_t vecOne, Vector_t vecTwo)
 {
-	printf("[ %f, %f]\n", getVecX(vec), getVecY(vec));
+	return addMatricies(vecOne, vecTwo);
 }
-void PrintVec3
-(Vec3_t vec)
+Vector_t * subtractVectors
+(Vector_t vecOne, Vector_t vecTwo)
+{
+	return addMatricies(vecOne, MultiplyMartixNum(vecTwo, -1));
+}
+Vector_t * scaleVector
+(Vector_t vector, F32 scale)
+{
+	return MultiplyMatrixNum(vector, scale);
+}
+F32 DotProduct
+(Vector_t vecOne, Vector_t vecTwo)
+{
+	return getVecX(vecOne) * getVecX(vecTwo) + getVecX(vecOne) * getVecZ(vecTwo) + getVecZ(vecOne) * getVecZ(vecTwo);
+}
+F32 CrossProduct(Vector_t, Vector_t);
+void PrintVector
+(Vector_t vec)
 {
 	printf("[ %f, %f, %f]\n", getVecX(vec), getVecY(vec), getVecZ(vec));
 }
 
-F64		*		getVecXPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 0);			}
-F64		*		getVecYPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 1);			}
-F64		*		getVecZPtr		(Matrix_t *vec)		{		return getMatrixEle(vec, 0, 2);			}
-F64				getVecX				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 0);		}
-F64				getVecY				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 1);		}
-F64				getVecZ				(Matrix_t vec)		{		return *getMatrixEle(&vec, 0, 2);		}
+F64		*		getVecXPtr		(Vector_t *vec)		{		return getMatrixEle(vec, 0, 0);			}
+F64		*		getVecYPtr		(Vector_t *vec)		{		return getMatrixEle(vec, 0, 1);			}
+F64		*		getVecZPtr		(Vector_t *vec)		{		return getMatrixEle(vec, 0, 2);			}
+F64				getVecX				(Vector_t vec)		{		return *getMatrixEle(&vec, 0, 0);		}
+F64				getVecY				(Vector_t vec)		{		return *getMatrixEle(&vec, 0, 1);		}
+F64				getVecZ				(Vector_t vec)		{		return *getMatrixEle(&vec, 0, 2);		}

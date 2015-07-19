@@ -7,14 +7,14 @@
 
 // TODO: free mamory of matricies
 Matrix_t *Transform
-(Matrix_t *matrix, F64 x, F64 y, F64 z)
+(Matrix_t matrix, F64 x, F64 y, F64 z)
 {
-	Matrix_t *transform;
+	Matrix_t transform;
 	genMatrix(&transform, 4, 4);
-	*getMatrixEle(transform, 3, 0) = x;
-	*getMatrixEle(transform, 3, 1) = y;
-	*getMatrixEle(transform, 3, 2) = z;
-	*getMatrixEle(transform, 3, 3) = 1;
+	*getMatrixEle(&transform, 3, 0) = x;
+	*getMatrixEle(&transform, 3, 1) = y;
+	*getMatrixEle(&transform, 3, 2) = z;
+	*getMatrixEle(&transform, 3, 3) = 1;
 	return MultiplyMatricies(matrix, transform);
 }
 

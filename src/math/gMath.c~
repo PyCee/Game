@@ -38,14 +38,6 @@ U64 Div(U64 dividend, U64 divisor)
 {
 	return (U64) (dividend / divisor);
 }
-F64 Exponant(F64 base, U8 exponant)
-{
-	if (exponant == 0)
-		return 1;
-	if (exponant == 1)
-		return base;
-	return base * Exponant(base, exponant - 1);
-}
 U64 Factorial(U8 fac)
 {
 	if (fac == 0)
@@ -61,14 +53,4 @@ F64 degRad(F64 deg)
 F64 radDeg(F64 rad)
 {
 	return rad * 180 / PI;
-}
-F64 PythagoreanTheoremDim2
-(F64 X, F64 Y)
-{
-	return sqrt(Exponant(X, 2) + Exponant(Y, 2));
-}
-F64 PythagoreanTheoremDim3
-(F64 X, F64 Y, F64 Z)
-{
-	return sqrt(Exponant(X, 2) + Exponant(Y, 2) + Exponant(Z, 2));
 }

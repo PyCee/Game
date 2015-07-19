@@ -1,41 +1,43 @@
 
-#ifndef _DYN_ACTORS_
-#define _DYN_ACTORS_
+#ifndef _DYNAMIC_ACTORS_
+#define _DYNAMIC_ACTORS_
 
-#include "DynActorComponents/identifierComponent.h"
-#include "DynActorComponents/AIComponent.h"
-#include "DynActorComponents/audioComponent.h"
-#include "DynActorComponents/directionComponent.h"
-#include "DynActorComponents/physicsComponent.h"
-#include "DynActorComponents/collisionsComponent.h"
+#include "ActorComponents/identifierComponent.h"
+#include "ActorComponents/AIComponent.h"
+#include "ActorComponents/audioComponent.h"
+#include "ActorComponents/directionComponent.h"
+#include "ActorComponents/physicsComponent.h"
+#include "ActorComponents/collisionsComponent.h"
+#include "ActorComponents/renderComponent.h"
 
-#define MAX_ACTOR_COUNT 10
+#define MAX_DYN_ACTOR_COUNT 10
 typedef struct _Dyn_Actors_t
 {
 	// Various Components used by every Dynamic Actor
-	IdentifierComponent_t		identifier		[MAX_ACTOR_COUNT];
-	AIComponent_t 					AI						[MAX_ACTOR_COUNT];
-	AudioComponent_t				audio					[MAX_ACTOR_COUNT];
-	DirectionComponent_t		direction			[MAX_ACTOR_COUNT];
-	PhysicsComponent_t 			physics				[MAX_ACTOR_COUNT];
-	CollisionsComponent_t		collisions		[MAX_ACTOR_COUNT];
+	IdentifierComponent_t		identifier		[MAX_DYN_ACTOR_COUNT];
+	AIComponent_t 					AI						[MAX_DYN_ACTOR_COUNT];
+	AudioComponent_t				audio					[MAX_DYN_ACTOR_COUNT];
+	DirectionComponent_t		direction			[MAX_DYN_ACTOR_COUNT];
+	PhysicsComponent_t 			physics				[MAX_DYN_ACTOR_COUNT];
+	CollisionsComponent_t		collisions		[MAX_DYN_ACTOR_COUNT];
+	RenderComponent_t				render				[MAX_DYN_ACTOR_COUNT];
 	
-	U8	 										ActiveActor		[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
+	U8	 										ActiveActor		[MAX_DYN_ACTOR_COUNT]; // Tells whether an Actor is active or not
 } Dyn_Actors_t;
 
 Dyn_Actors_t Dyn_Actors;
 
 void	genAllDyn_Actors						(void);
 void	freeAllDyn_Actors						(void);
-void	genActor										(U8);
-void	freeActor										(U8);
+void	genDyn_Actor								(U8);
+void	freeDyn_Actor								(U8);
 void	updateDyn_Actors						(void);
 U8		getFirstInactiveDyn_Actor		(void);
-U8 		AddActor										(void);
+U8 		AddDyn_Actor								(void);
 
 /*
 void Move(Dyn_Actors_t *, F64, F64);
 void setPos(Dyn_Actors_t *, F64, F64);
 */
 
-#endif /* _DYN_ACTOR_ */
+#endif /* _DYNAMIC_ACTOR_ */
