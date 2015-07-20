@@ -35,7 +35,7 @@ I32 main
 	SDL_GLContext gameContext = SDL_GL_CreateContext(gameWindow);
 	
 	 //Initialize SDL_mixer
-	 if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
+	 if(  Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
 	 	printf("ERROR::SDL_mixer::NOT::INITIALIZED::SDL_mixer Error: %s\n", Mix_GetError());
 	 }
 	

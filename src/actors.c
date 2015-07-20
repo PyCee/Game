@@ -7,13 +7,11 @@
 #include "ActorComponents/physics/vector.h"
 #include "ActorComponents/direction/normal.h"
 
-static U8 getFirstInactiveActor
-(void)
+static U8 getFirstInactiveActor (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (!Actors.ActiveActor[actorID])
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( !Actors.ActiveActor[actorID] )
 			return actorID;
 		actorID++;
 	}
@@ -22,12 +20,10 @@ static U8 getFirstInactiveActor
 	// TODO: What Should I Return Here? For An Invalid actorID.
 	return actorID;
 }
-static U8 AddActor
-(void)
+static U8 AddActor (void)
 {
 	U8 firstInactiveActor = getFirstInactiveActor();
-	if (firstInactiveActor < MAX_ACTOR_COUNT)
-	{
+	if ( firstInactiveActor < MAX_ACTOR_COUNT ) {
 		Actors.ActiveActor[firstInactiveActor] = 1;
 		printf("Adding ActorID: %d\n", firstInactiveActor);
 		return firstInactiveActor;
@@ -35,26 +31,22 @@ static U8 AddActor
 	// TODO: What Should I Return Here? For An Invalid actorID.
 	return firstInactiveActor;
 }
-U8 addDyn_Actor
-(void)
+U8 addDyn_Actor (void)
 {
 	U8 actorID = AddActor();
 	Actors.ActorType[actorID] = DYN;
 	return actorID;
 }
-U8 addSta_Actor
-(void)
+U8 addSta_Actor (void)
 {
 	U8 actorID = AddActor();
 	Actors.ActorType[actorID] = STA;
 	return actorID;
 }
-static void genActor
-(U8 actorID)
+static void genActor (U8 actorID)
 {
-	if (Actors.ActiveActor[actorID])
+	if ( Actors.ActiveActor[actorID] )
 		return;
-	else
 	printf("Gening Actor %d\n", actorID);
 	genIdentifierComponent(actorID);
 	genTimeLineComponent(actorID);
@@ -66,31 +58,26 @@ static void genActor
 	genLightingComponent(actorID);
 	genRenderComponent(actorID);
 }
-void genAllActors
-(void)
+void genAllActors (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
+	while ( actorID < MAX_ACTOR_COUNT ) {
 		Actors.ActiveActor[actorID] = 0;
 		genActor(actorID);
 		actorID++;
 	}
 }
-void freeAllActors
-(void)
+void freeAllActors (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
+	while ( actorID < MAX_ACTOR_COUNT ) {
 		freeActor(actorID);
 		actorID++;
 	}
 }
-void freeActor
-(U8 actorID)
+void freeActor (U8 actorID)
 {
-	if (!Actors.ActiveActor[actorID])
+	if ( !Actors.ActiveActor[actorID] )
 		return;
 	printf("Freeing Actor %d\n", actorID);
 	freeRenderComponent(actorID);
@@ -104,65 +91,58 @@ void freeActor
 	freeIdentifierComponent(actorID);
 	Actors.ActiveActor[actorID] = 0;
 }
-void updateActors
-(void)
+void updateActors (void)
 {
 	U8 actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-				updateTimeLineComponent(actorID);
+	U16 localTime[MAX_ACTOR_COUNT];
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			localTime[actorID] = updateTimeLineComponent(actorID);
+			printf("local time: %hu\n", localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
 			if (Actors.ActorType[actorID] != STA)
-				updateAIComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+				updateAIComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-			updateAudioComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			updateAudioComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-			updateDirectionComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			updateDirectionComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
 			if (Actors.ActorType[actorID] != STA)
-				updatePhysicsComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+				updatePhysicsComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-			updateCollisionsComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			updateCollisionsComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-			updateLightingComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			updateLightingComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
-	while (actorID < MAX_ACTOR_COUNT)
-	{
-		if (Actors.ActiveActor[actorID])
-			updateRenderComponent(actorID, getPrevFrameDuration(getGlobalTimeLine()));
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			updateRenderComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 }

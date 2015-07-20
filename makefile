@@ -25,7 +25,6 @@ run:
 	gcc -c src/terrain.c
 	gcc -c src/protag.c
 	gcc -c src/draw.c
-	gcc -c src/localTimeLine.c
 	gcc -c src/globalTimeLine.c
 	gcc -c src/dataTypes.c
 	gcc -c src/math/gMath.c
@@ -40,7 +39,7 @@ run:
 	lightingComponent.o reflection.o color.o \
 	renderComponent.o \
 	actors.o terrain.o protag.o \
-	draw.o localTimeLine.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
+	draw.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
 	angles.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm
 	
@@ -52,7 +51,7 @@ run:
 	lightingComponent.o reflection.o color.o \
 	renderComponent.o \
 	actors.o terrain.o protag.o \
-	draw.o localTimeLine.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
+	draw.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
 	angles.o
 	
 	echo Compiled.

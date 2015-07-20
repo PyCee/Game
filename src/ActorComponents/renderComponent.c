@@ -5,15 +5,12 @@
 #include "../actors.h"
 
 
-void genRenderComponent
-(U8 actorID)
+void genRenderComponent (U8 actorID)
 {
 }
-void freeRenderComponent
-(U8 actorID)
+void freeRenderComponent (U8 actorID)
 {
 }
-void updateRenderComponent
-(U8 actorID, U16 deltaMS)
+void updateRenderComponent (U8 actorID, U16 deltaMS)
 {
 }

@@ -9,9 +9,10 @@
 #include "../globalTimeLine.h"
 #include "../globalBinds.h"
 
-void genTimeLineComponent
-(U8 actorID)
+void genTimeLineComponent (U8 actorID)
 {
+	UnpauseTimeLine(actorID);
+	Actors.timeLine[actorID].playBackRate = 0.5;
 	/**timeLine = malloc(sizeof(TimeLine_t));
 	TimeLine_t *_timeLine = *timeLine;
 	_timeLine->startTime = getCurrentTime(getGlobalTimeLine());
@@ -20,70 +21,43 @@ void genTimeLineComponent
 	_timeLine->playBackRate = 1;
 	_timeLine->isPaused = 1;*/
 }
-void freeTimeLineComponent
-(U8 actorID)
+void freeTimeLineComponent (U8 actorID)
 {
-	/*free(*timeLine);
-	*timeLine = NULL;*/
 }
-void setTimeLineComponentStart
-(U8 actorID, U64 time)
+void mapTimeLine (U8 actorID)
 {
-	//timeLine->startTime = time;
 }
-void setTimeLineDuration
-(U8 actorID, U32 _duration)
-{
-	//timeLine->duration = _duration;
-}
-void MapTimeLineComponent
-(U8 actorID, U32 scale)
-{
-	/*
-	timeLine->duration = timeLine->duration / abs(scale);
-	I8 forward = scale / abs(scale);
-	
-	if (forward == 1)
-		timeLine->currTime = 0;
-		// Map TimeLine Forwards
-	else
-		timeLine->currTime = timeLine->duration;
-		// Map TimeLine Backwards
-	
-	UnpauseTimeLine(timeLine);
-	*/
-}
-void PauseTimeLineComponent
-(U8 actorID)
+void PauseTimeLine (U8 actorID)
 {
 	Actors.timeLine[actorID].isPaused = 1;
 }
-void UnpauseTimeLineComponent
-(U8 actorID)
+void UnpauseTimeLine (U8 actorID)
 {
 	Actors.timeLine[actorID].isPaused = 0;
 }
-void updateTimeLineComponent
-(U8 actorID)
+U16 updateTimeLineComponent (U8 actorID)
 {
-	Actors.timeLine[actorID].currTime += getPrevFrameDuration(getGlobalTimeLine());
-	/*if (!isTimeLinePaused(timeLine))
-		timeLine->currTime += deltaMS * timeLine->playBackRate;
-	if (timeLine->currTime > timeLine->duration) {
+	if ( isTimeLinePaused( actorID ) )
+		return 0;
+	
+	U16 lastFrameTime = getPrevFrameDuration(getGlobalTimeLine()) * Actors.timeLine[actorID].playBackRate;
+	Actors.timeLine[actorID].currTime += lastFrameTime;
+	/*if (timeLine->currTime > timeLine->duration) {
 		timeLine->currTime -= timeLine->duration;
 		timeLine->replayed++;
 	}*/
+	return lastFrameTime;
 }
-U8 isTimeLineComponentPaused
+U8 isTimeLinePaused
 (U8 actorID)
 {
 	return Actors.timeLine[actorID].isPaused;
 }
-U8 isTimeLineComponentOver
+U8 isTimeLineOver
 (U8 actorID)
 {
 	//if (timeLine->replayed <= timeLine->replay) 
 		return 0;
-	PauseTimeLineComponent(actorID);
+	pauseTimeLine(actorID);
 	return 1;
 }
