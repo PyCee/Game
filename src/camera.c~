@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "math/gMath.h"
 #include "actors.h"
+//#include "actorComponents/renderComponent.h"
 
 
 U8 genCamera
@@ -15,4 +16,5 @@ U8 genCamera
 void updateCamera
 (U8 actorID)
 {
+	
 }

@@ -16,7 +16,7 @@ U8 genProtag
 	U8 actorID = addDyn_Actor();
 	Actors.identifier[actorID].ActorName = PROTAG_NAME;
 	assignAIUpdate(actorID, UpdateProtag);
-	setBounds(actorID, 0.2, 0.2, 0.0);
+	setBounds(actorID, 0.2, 0.2);
 	setPosX(actorID, -1 * 0.75);
 	setPosY(actorID, -1 * 0.75);
 	setPosZ(actorID, 1 * 1.0);

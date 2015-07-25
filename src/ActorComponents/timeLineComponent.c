@@ -12,14 +12,7 @@
 void genTimeLineComponent (U8 actorID)
 {
 	UnpauseTimeLine(actorID);
-	Actors.timeLine[actorID].playBackRate = 2.0;
-	/**timeLine = malloc(sizeof(TimeLine_t));
-	TimeLine_t *_timeLine = *timeLine;
-	_timeLine->startTime = getCurrentTime(getGlobalTimeLine());
-	_timeLine->duration = 0;
-	_timeLine->currTime = 0;
-	_timeLine->playBackRate = 1;
-	_timeLine->isPaused = 1;*/
+	Actors.timeLine[actorID].playBackRate = 1.0;
 }
 void freeTimeLineComponent (U8 actorID)
 {

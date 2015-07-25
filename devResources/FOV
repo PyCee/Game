@@ -1,0 +1,13 @@
+
+I. FOV
+	A. Field of view
+		1. world view to camera view
+			i. equation: X = X * 90 /  Z * FOV
+			i. equation: Y = Y * 90 /  Z * FOV
+			i. FOV of 90
+				ii. equation: x = x / Z
+			i. FOV of 135
+				ii. equation: x = x / 1.5 * Z
+			i. FOV of 45
+				ii. equation: x = x / .5 * Z
+			

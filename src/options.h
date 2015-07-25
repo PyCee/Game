@@ -57,7 +57,7 @@ void DefaultAllVideoOptions(void);
 
 void DefaultFieldOfView(void);
 static U8 FieldOfView = 0;
-#define DEFAULT_FIELD_OF_VIEW 100
+#define DEFAULT_FIELD_OF_VIEW 120
 #define MAX_FIELD_OF_VIEW 150
 #define MIN_FIELD_OF_VIEW	70
 

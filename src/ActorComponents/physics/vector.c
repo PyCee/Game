@@ -85,8 +85,8 @@ Vector_t	*	RollVector				(Vector_t vec, F32 rad)
 	rad = -1 * rad;
 	Vector_t * roll = malloc(sizeof(Vector_t));
 	genVector(roll);
-	setVectorX(roll, getVectorX(vec) * cos(rad) - getVectorY(vec) * sin(rad));
-	setVectorY(roll, getVectorY(vec) * cos(rad) + getVectorX(vec) * sin(rad));
+	setVectorX(roll, getVectorX(vec) * cos(rad) + getVectorY(vec) * sin(rad));
+	setVectorY(roll, getVectorY(vec) * cos(rad) - getVectorX(vec) * sin(rad));
 	return roll;
 }
 void				PrintVector				(Vector_t vec)

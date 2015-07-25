@@ -18,15 +18,12 @@ void freeNormal
 void NormalizeNormal
 (Normal_t *normal)
 {
-	F32 vectorX = getVectorX(*normal);
-	F32 vectorY = getVectorY(*normal);
-	F32 vectorZ = getVectorZ(*normal);
-	F32 change = PythagoreanTheorum(vectorX, vectorY, vectorZ);
+	F32 change = PythagoreanTheorum( getVectorX(*normal),  getVectorY(*normal),  getVectorZ(*normal) );
 	if (change == 0)
 		return;
-	setVectorX(normal, vectorX / change);
-	setVectorY(normal, vectorY / change);
-	setVectorZ(normal, vectorZ / change);
+	setVectorX(normal,  getVectorX(*normal) / change);
+	setVectorY(normal,  getVectorY(*normal) / change);
+	setVectorZ(normal,  getVectorZ(*normal) / change);
 }
 void PrintNormal
 (Normal_t normal)

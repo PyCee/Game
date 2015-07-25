@@ -4,12 +4,7 @@
 
 #define CAMERA_NAME "CAMERA"
 
-typedef struct _Dyn_Actor_t Camera_t;
-
 U8 genCamera(void);
 void updateCamera(U8);
-void CameraPitch(Camera_t *, F64);
-void CameraYaw(Camera_t *, F64);
-void CameraRoll(Camera_t *, F64);
 
 #endif

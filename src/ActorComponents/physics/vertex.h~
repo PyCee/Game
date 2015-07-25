@@ -2,15 +2,15 @@
 #ifndef _VERTEX_
 #define _VERTEX_
 
-#include "../direction/normal.h"
+#include "vector.h"
+typedef struct _Vector_t Normal_t;
 
 typedef struct _Vertex_t{
-	//Normal_t		SurfaceNormal;
+	Normal_t		surfaceNormal;
 	F32					Pos												[3];
-	/*F32					AmbiantReflectivity;
-	F32					DiffuseReflectivity;
-	F32					SpecularReflectivity;
-	*/
+	F32					ambiantReflectivity;
+	F32					diffuseReflectivity;
+	F32					specularReflectivity;
 } Vertex_t;
 
 void genVertex(Vertex_t *);

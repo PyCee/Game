@@ -13,7 +13,6 @@ U8 genTerrain
 	assignAIUpdate(actorID, UpdateTerrain);
 	Actors.collisions[actorID].Height = 0.2;
 	Actors.collisions[actorID].Width = 10.0;
-	Actors.collisions[actorID].Length = 0.2;
 	setPosX(actorID, 1 * 0.0);
 	setPosY(actorID, -1 * 1.0);
 	setPosZ(actorID, 1 * 1.0);

@@ -98,7 +98,6 @@ void updateActors (void)
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		if ( Actors.ActiveActor[actorID] )
 			localTime[actorID] = updateTimeLineComponent(actorID);
-			printf("local time: %hu\n", localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;

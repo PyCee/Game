@@ -4,48 +4,42 @@
 
 #include "../actors.h"
 #include <SDL2/SDL_opengl.h>
+#include <math.h>
 
 void genCollisionsComponent
 (U8 actorID)
 {
 	Actors.collisions[actorID].Height = 1;
 	Actors.collisions[actorID].Width = 1;
-	Actors.collisions[actorID].Length = 1;
+	Actors.collisions[actorID].drawBounds = 1;
 }
 void freeCollisionsComponent
 (U8 actorID)
 {
 	Actors.collisions[actorID].Height = 0;
 	Actors.collisions[actorID].Width = 0;
-	Actors.collisions[actorID].Length = 0;
 }
 void updateCollisionsComponent
 (U8 actorID, U16 deltaMS)
 {
-	DrawBoundingBox(actorID);
 }
 void setBounds
-(U8 actorID, F32 height, F32 width, F32 length)
+(U8 actorID, F32 height, F32 width)
 {
 	Actors.collisions[actorID].Height	=	height;
 	Actors.collisions[actorID].Width	=	width;
-	Actors.collisions[actorID].Length	=	length;
 }
 U8 CheckBoundingBoxCollision
 (U8 actorIDOne, U8 actorIDTwo)
 {
-	if (getVectorX(Actors.physics[actorIDOne].Pos)	- getWidth(actorIDOne) * 0.5 <
-					getVectorX(Actors.physics[actorIDTwo].Pos) + getWidth(actorIDTwo) * 0.5 &&
-   		getVectorX(Actors.physics[actorIDOne].Pos)	+ getWidth(actorIDOne) * 0.5 >
-   				getVectorX(Actors.physics[actorIDTwo].Pos) - getWidth(actorIDTwo) * 0.5 &&
-   		getVectorY(Actors.physics[actorIDOne].Pos)	<
-   				getVectorY(Actors.physics[actorIDTwo].Pos) + getHeight(actorIDTwo) &&
-   		getVectorY(Actors.physics[actorIDOne].Pos)	+
-   				getHeight(actorIDOne) > getVectorY(Actors.physics[actorIDTwo].Pos)/* &&
-   		getVectorZ(Actors.physics[actorIDOne].Pos)	- getLength(actorIDOne) * 0.5	<
-   				getVectorZ(Actors.physics[actorIDTwo].Pos) + getLength(actorIDTwo) * 0.5 &&
-   		getVectorZ(Actors.physics[actorIDOne].Pos)	+ getLength(actorIDOne) * 0.5 >
-   				getVectorZ(Actors.physics[actorIDTwo].Pos)	- getLength(actorIDTwo) * 0.5 */)
+	F32 Xsq = pow( getPosX(actorIDOne) - getPosX(actorIDTwo), 2);
+	F32 Zsq = pow( getPosZ(actorIDOne) - getPosZ(actorIDTwo), 2);
+	F32 distance = Xsq + Zsq;
+	if ( distance < pow(getWidth(actorIDOne), 2) + pow(getWidth(actorIDTwo), 2) &&
+   		getPosY(actorIDOne)	<
+   				getPosY(actorIDTwo) + getHeight(actorIDTwo) &&
+   		getPosY(actorIDOne)	+
+   				getHeight(actorIDOne) > getPosY(actorIDTwo) )
     // Bounding Boxes Overlapping!
   	return 1;
   // Bounding Boxes Not Overlapping...
@@ -83,9 +77,4 @@ F64 getWidth
 (U8 actorID)
 {
 	return Actors.collisions[actorID].Width;
-}
-F64 getLength
-(U8 actorID)
-{
-	return Actors.collisions[actorID].Length;
 }

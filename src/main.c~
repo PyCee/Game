@@ -31,7 +31,7 @@ I32 main
 {
 	printf("%s Starting.\nMain Initializing.\n", PROGRAM_NAME);
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
-  SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GLContext gameContext = SDL_GL_CreateContext(gameWindow);
 	
 	 //Initialize SDL_mixer

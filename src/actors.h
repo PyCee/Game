@@ -2,6 +2,8 @@
 #ifndef _ACTORS_
 #define _ACTORS_
 
+#include "actorCounts.h"
+
 #include "ActorComponents/identifierComponent.h"
 #include "ActorComponents/timeLineComponent.h"
 #include "ActorComponents/AIComponent.h"
@@ -11,11 +13,6 @@
 #include "ActorComponents/collisionsComponent.h"
 #include "ActorComponents/lightingComponent.h"
 #include "ActorComponents/renderComponent.h"
-
-#define DYN 0
-#define STA 1
-
-#define MAX_ACTOR_COUNT 20
 typedef struct _Actors_t
 {
 	// Various Components used by every Dynamic Actor

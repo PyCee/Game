@@ -41,7 +41,7 @@ run:
 	actors.o terrain.o protag.o \
 	draw.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
 	angles.o \
-	-lSDL2 -lSDL2_mixer -lGL -lm
+	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
@@ -58,6 +58,7 @@ run:
 install:
 	sudo apt-get install libsdl2-dev
 	sudo apt-get install libsdl2-mixer-dev
+	sudo apt-get install libassimp-dev # library for importing 3d models
 #	cd SDL
 #	./configure
 #	make

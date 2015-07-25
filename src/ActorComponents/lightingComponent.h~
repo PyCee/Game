@@ -5,8 +5,7 @@
 typedef struct _Vertex_t Vertex_t;
 #include "lighting/color.h"
 
-#define MAX_LIGHT_COUNT/*_PER_ACTOR */ 1
-// Allows actors to have own light sources. Multiple, simply to allow for less limits.
+#include "../actorCounts.h"
 
 typedef struct _LightingComponent_t{
 	Color_t					intensity						[MAX_LIGHT_COUNT];
