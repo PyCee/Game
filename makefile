@@ -24,7 +24,7 @@ run:
 	gcc -c src/actors.c
 	gcc -c src/terrain.c
 	gcc -c src/protag.c
-	gcc -c src/draw.c
+	gcc -c src/shaders/shaders.c
 	gcc -c src/globalTimeLine.c
 	gcc -c src/dataTypes.c
 	gcc -c src/math/gMath.c
@@ -39,7 +39,7 @@ run:
 	lightingComponent.o reflection.o color.o \
 	renderComponent.o \
 	actors.o terrain.o protag.o \
-	draw.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
+	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
 	angles.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
@@ -51,25 +51,28 @@ run:
 	lightingComponent.o reflection.o color.o \
 	renderComponent.o \
 	actors.o terrain.o protag.o \
-	draw.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
+	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
 	angles.o
 	
 	echo Compiled.
 install:
-	sudo apt-get install libsdl2-dev
+	sudo apt-get install libsdl2-dev # library that handels window creation and input
 	sudo apt-get install libsdl2-mixer-dev
 	sudo apt-get install libassimp-dev # library for importing 3d models
+	git config --global user.email "Kpampusch@yahoo.com"
+	git config --global user.name "NotSarcastic"
+	git config --global core.editor gedit
 #	cd SDL
 #	./configure
 #	make
 #	sudo make install
-git push:
+push:
 	clear
 	echo GitHub...
 	git add .
 	git commit -a
 	git push
-git pull:
+pull:
 	clear
 	git pull
 goodbye:

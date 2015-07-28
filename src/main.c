@@ -10,12 +10,11 @@
 #include "keyboard.h"
 #include "actors.h"
 #include "protag.h"
-#include "draw.h"
 #include "globalTimeLine.h"
 #include "globalBinds.h"
-#include "terrain.h"
 #include "ActorComponents/physics/vector.h"
 #include "math/angles.h"
+#include "shaders/shaders.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
@@ -67,20 +66,22 @@ I32 main
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
 	
-	drawInit();
+	//drawInit();
+	genShaders();
 	
 	printf("Main Initialized.\nMain Loop Starting.\n");
-	while(IAMALIVE == 1){
+	
+	while( IAMALIVE == 1 ) {
 	
 		SDL_GL_SwapWindow(gameWindow);
 		SDL_Delay(16);
 		
-		glClearColor(0.1, 0.1, 0.1, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.9, 0.1, 0.1, 1.0);
+		//glClear(GL_COLOR_BUFFER_BIT);
 		
 		updateGlobalTimeLine(getGlobalTimeLine());
 		
-		draw();
+		//draw();
 		
 		//<CL "physics upgrade: collisions">
 		
@@ -94,15 +95,10 @@ I32 main
 		//</CL>
 		handleEvents();
 		updateActors();
-		//<CL>
-		if (BLINK == 1){
-			glClearColor(0.0, 0.0, 0.0, 1.0);
-			glClear(GL_COLOR_BUFFER_BIT);
-		}
-		//</CL>
+		tmpDraw();
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	drawDel();
+	//drawDel();
 	UnbindControlledActor();
 	UnbindMapTerrain();
 	UnbindCameraView();
@@ -118,10 +114,7 @@ I32 main
 	SDL_Quit();
 	
 	Vector_t asd;
-	genVector(&asd);
-	setVectorX(&asd, 0);
-	setVectorY(&asd, 1);
-	setVectorZ(&asd, 0);
+	genVector(&asd, 0, 1, 0);
 	PrintVector(asd);
 	NormalizeNormal(&asd);
 	copyVector(&asd, *PitchVector(asd, 90));//DegreesToRadians(90)));

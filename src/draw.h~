@@ -13,10 +13,10 @@ void draw();
 GLuint VAO;
 GLuint VBO;
 
-static GLuint shaderProgram;
-static GLuint shaderVertex;
+GLuint shaderProgram;
+GLuint shaderVertex;
 #define SHADER_VERT_PATH "src/shaders/vertex.vert"
-static GLuint shaderFragment;
+GLuint shaderFragment;
 #define SHADER_FRAG_PATH "src/shaders/fragment.frag"
 
 #endif

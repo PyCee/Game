@@ -1,14 +1,8 @@
 
-#ifndef _DRAW_
-#define _DRAW_
+#ifndef _SHADERS_
+#define _SHADERS_
 
-//TODO: Draw far to near
-
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
-
-void draw();
-
 
 GLuint VAO;
 GLuint VBO;
@@ -19,4 +13,9 @@ GLuint shaderVertex;
 GLuint shaderFragment;
 #define SHADER_FRAG_PATH "src/shaders/fragment.frag"
 
-#endif
+GLuint loadShaderFromFile( const U8 *, GLenum);
+void genShaders(void);
+
+void tmpDraw(void);
+
+#endif /* _SHADERS */

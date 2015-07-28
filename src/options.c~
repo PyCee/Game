@@ -9,18 +9,15 @@ void InitOptions
 	// load options from file
 	printf("Initing Options.\n");
 	FILE *configFile;
-	if ((configFile = fopen(CONFIG_PATH, "r")) == NULL)
-	{
+	if ((configFile = fopen(CONFIG_PATH, "r")) == NULL) {
 		if ((configFile = fopen(CONFIG_PATH, "a+")) == NULL)
 			printf("ERROR::CONFIG::LOCATION::FILE_NOT_CREATED\n");
-		else
-		{
+		else {
 			fclose(configFile);
 			DefaultAllOptions();
 			SaveOptions();
 		}
-	} else
-	{
+	} else {
 		fscanf(configFile, " %*s %hhu", &SoundLevel);
 		fscanf(configFile, " %*s %hhu", &MusicLevel);
 		fscanf(configFile, " %*s %hhu", &SoundEffectsLevel);

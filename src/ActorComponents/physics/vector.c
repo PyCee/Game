@@ -8,11 +8,11 @@
 #include <math.h>
 
 void genVector
-(Vector_t *vec)
+(Vector_t *vec, F32 X, F32 Y, F32 Z)
 {
-	setVectorX(vec, 0);
-	setVectorY(vec, 0);
-	setVectorZ(vec, 0);
+	setVectorX(vec, X);
+	setVectorY(vec, Y);
+	setVectorZ(vec, Z);
 }
 void freeVector
 (Vector_t *vec)
@@ -64,7 +64,7 @@ Vector_t * PitchVector				(Vector_t vec, F32 rad)
 {
 	rad = -1 * rad;
 	Vector_t * pitch = malloc(sizeof(Vector_t));
-	genVector(pitch);
+	genVector(pitch, 0, 0, 0);
 	setVectorY(pitch, getVectorY(vec) * cos(rad) - getVectorZ(vec) * sin(rad));
 	setVectorZ(pitch, getVectorZ(vec) * cos(rad) + getVectorY(vec) * sin(rad));
 	return pitch;
@@ -74,7 +74,7 @@ Vector_t	* YawVector					(Vector_t vec, F32 rad)
 {
 	rad = -1 * rad;
 	Vector_t * yaw = malloc(sizeof(Vector_t));
-	genVector(yaw);
+	genVector(yaw, 0, 0, 0);
 	setVectorX(yaw, getVectorX(vec) * cos(rad) - getVectorZ(vec) * sin(rad));
 	setVectorZ(yaw, getVectorZ(vec) * cos(rad) + getVectorX(vec) * sin(rad));
 	return yaw;
@@ -84,7 +84,7 @@ Vector_t	*	RollVector				(Vector_t vec, F32 rad)
 {
 	rad = -1 * rad;
 	Vector_t * roll = malloc(sizeof(Vector_t));
-	genVector(roll);
+	genVector(roll, 0, 0, 0);
 	setVectorX(roll, getVectorX(vec) * cos(rad) + getVectorY(vec) * sin(rad));
 	setVectorY(roll, getVectorY(vec) * cos(rad) - getVectorX(vec) * sin(rad));
 	return roll;

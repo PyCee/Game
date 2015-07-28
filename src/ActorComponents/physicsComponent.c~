@@ -12,10 +12,10 @@
 void genPhysicsComponent
 (U8 actorID)
 {
-	genVector(&(Actors.physics[actorID].Pos));
-	genVector(&(Actors.physics[actorID].Vel));
-	genVector(&(Actors.physics[actorID].Acc));
-	genVector(&(Actors.physics[actorID].Jrk));
+	genVector(&(Actors.physics[actorID].Pos), 0, 0, 0);
+	genVector(&(Actors.physics[actorID].Vel), 0, 0, 0);
+	genVector(&(Actors.physics[actorID].Acc), 0, 0, 0);
+	genVector(&(Actors.physics[actorID].Jrk), 0, 0, 0);
 }
 void freePhysicsComponent
 (U8 actorID)
@@ -38,11 +38,11 @@ void updatePhysicsComponent
 	setPosY(actorID, getPosY(actorID) + (deltaMS * getVelY(actorID) * 1));
 	setPosZ(actorID, getPosZ(actorID) + (deltaMS * getVelZ(actorID) * 1));
 }
-void		setSpeed			(U8 actorID, U8 speed)		{		Actors.physics[actorID].Speed = speed;			}
+void setSpeed			(U8 actorID, U8 speed)		{		Actors.physics[actorID].Speed = speed;			}
 
-void		setPosX		(U8 actorID, F32 set)		{		setVectorX(&(Actors.physics[actorID].Pos), set);				}
-void		setPosY		(U8 actorID, F32 set)		{		setVectorY(&(Actors.physics[actorID].Pos), set);				}
-void		setPosZ		(U8 actorID, F32 set)		{		setVectorZ(&(Actors.physics[actorID].Pos), set);				}
+void setPosX		(U8 actorID, F32 set)		{		setVectorX(&(Actors.physics[actorID].Pos), set);				}
+void setPosY		(U8 actorID, F32 set)		{		setVectorY(&(Actors.physics[actorID].Pos), set);				}
+void setPosZ		(U8 actorID, F32 set)		{		setVectorZ(&(Actors.physics[actorID].Pos), set);				}
 F32			getPosX		(U8 actorID)						{		return getVectorX(Actors.physics[actorID].Pos);					}
 F32			getPosY		(U8 actorID)						{		return getVectorY(Actors.physics[actorID].Pos);					}
 F32			getPosZ		(U8 actorID)						{		return getVectorZ(Actors.physics[actorID].Pos);					}

@@ -11,7 +11,7 @@ void genCollisionsComponent
 {
 	Actors.collisions[actorID].Height = 1;
 	Actors.collisions[actorID].Width = 1;
-	Actors.collisions[actorID].drawBounds = 1;
+	Actors.collisions[actorID].drawBounds = 0;
 }
 void freeCollisionsComponent
 (U8 actorID)
@@ -34,8 +34,8 @@ U8 CheckBoundingBoxCollision
 {
 	F32 Xsq = pow( getPosX(actorIDOne) - getPosX(actorIDTwo), 2);
 	F32 Zsq = pow( getPosZ(actorIDOne) - getPosZ(actorIDTwo), 2);
-	F32 distance = Xsq + Zsq;
-	if ( distance < pow(getWidth(actorIDOne), 2) + pow(getWidth(actorIDTwo), 2) &&
+	F32 distanceSq = Xsq + Zsq;
+	if ( distanceSq < pow(getWidth(actorIDOne), 2) + pow(getWidth(actorIDTwo), 2) &&
    		getPosY(actorIDOne)	<
    				getPosY(actorIDTwo) + getHeight(actorIDTwo) &&
    		getPosY(actorIDOne)	+
@@ -52,7 +52,7 @@ void DrawBoundingBox
 	F64 Y = getPosY(actorID);
 	F64 Z = getPosZ(actorID);
 	// TODO: update this function once drawing/rendering is fully impllimented
-	glColor3f(0.0f, 0.0f, 0.0f);
+	glColor3f(0.4f, 0.0f, 0.0f);
 	glBegin(GL_POLYGON);
  		glVertex2f((X - getWidth(actorID) * 0.5) / Z, Y / Z);
  		glVertex2f((X + getWidth(actorID) * 0.5) / Z, Y / Z);

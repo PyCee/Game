@@ -9,7 +9,7 @@
 void genNormal
 (Normal_t *normal)
 {
-	genVector(normal);
+	genVector(normal, 0, 0, 1);
 }
 void freeNormal
 (Normal_t *normal)
