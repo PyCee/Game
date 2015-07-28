@@ -12,8 +12,9 @@
 #include "protag.h"
 #include "globalTimeLine.h"
 #include "globalBinds.h"
-#include "ActorComponents/physics/vector.h"
+#include "actorComponents/physics/vector.h"
 #include "math/angles.h"
+#include "math/quaternions.h"
 #include "shaders/shaders.h"
 
 #define PROGRAM_NAME "LDM"
@@ -113,14 +114,14 @@ I32 main
 	Mix_Quit();
 	SDL_Quit();
 	
-	Vector_t asd;
+	/*Vector_t asd;
 	genVector(&asd, 0, 1, 0);
 	PrintVector(asd);
 	NormalizeNormal(&asd);
 	copyVector(&asd, *PitchVector(asd, 90));//DegreesToRadians(90)));
 	NormalizeNormal(&asd);
 	PrintVector(asd);
-	
+	*/
 	/*FILE *loadFile;
 	loadFile = fopen(KEY_BINDINGS_PATH, "r");
 	fscanf(loadFile, "%*s %*s");
@@ -128,4 +129,14 @@ I32 main
 	if (i == '\n')
 		printf("jfhjfhfjfhfjdj");
 	fclose(loadFile);*/
+	Vector_t rotate;
+	genVector(&rotate, 1.0, 0.0, 0.0);
+	//PrintVector(rotate);
+	
+	Vector_t turn;
+	genVector(&turn, 0.0, 1.0, 0.0);
+	//PrintVector(rotate);
+	
+	rotateVector(&rotate, turn, 45);
+	PrintVector(rotate);
 }

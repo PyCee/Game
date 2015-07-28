@@ -7,20 +7,20 @@ run:
 	gcc -c src/camera.c
 	gcc -c src/globalBinds.c
 	gcc -c src/keyboard.c
-	gcc -c src/ActorComponents/identifierComponent.c
-	gcc -c src/ActorComponents/timeLineComponent.c
-	gcc -c src/ActorComponents/AIComponent.c
-	gcc -c src/ActorComponents/audioComponent.c
-	gcc -c src/ActorComponents/directionComponent.c
-	gcc -c src/ActorComponents/direction/normal.c
-	gcc -c src/ActorComponents/physicsComponent.c
-	gcc -c src/ActorComponents/physics/vector.c
-	gcc -c src/ActorComponents/physics/vertex.c
-	gcc -c src/ActorComponents/collisionsComponent.c
-	gcc -c src/ActorComponents/lightingComponent.c
-	gcc -c src/ActorComponents/lighting/reflection.c
-	gcc -c src/ActorComponents/lighting/color.c
-	gcc -c src/ActorComponents/renderComponent.c
+	gcc -c src/actorComponents/identifierComponent.c
+	gcc -c src/actorComponents/timeLineComponent.c
+	gcc -c src/actorComponents/AIComponent.c
+	gcc -c src/actorComponents/audioComponent.c
+	gcc -c src/actorComponents/directionComponent.c
+	gcc -c src/actorComponents/direction/normal.c
+	gcc -c src/actorComponents/physicsComponent.c
+	gcc -c src/actorComponents/physics/vector.c
+	gcc -c src/actorComponents/physics/vertex.c
+	gcc -c src/actorComponents/collisionsComponent.c
+	gcc -c src/actorComponents/lightingComponent.c
+	gcc -c src/actorComponents/lighting/reflection.c
+	gcc -c src/actorComponents/lighting/color.c
+	gcc -c src/actorComponents/renderComponent.c
 	gcc -c src/actors.c
 	gcc -c src/terrain.c
 	gcc -c src/protag.c
@@ -30,6 +30,7 @@ run:
 	gcc -c src/math/gMath.c
 	gcc -c src/math/pythag.c
 	gcc -c src/math/angles.c
+	gcc -c src/math/quaternions.c
 	
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
@@ -40,7 +41,7 @@ run:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o \
+	angles.o quaternions.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
@@ -52,7 +53,7 @@ run:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o
+	angles.o quaternions.o
 	
 	echo Compiled.
 install:

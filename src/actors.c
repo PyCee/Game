@@ -4,8 +4,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "ActorComponents/physics/vector.h"
-#include "ActorComponents/direction/normal.h"
+#include "actorComponents/physics/vector.h"
+#include "actorComponents/direction/normal.h"
 
 static U8 getFirstInactiveActor (void)
 {

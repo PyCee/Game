@@ -8,8 +8,8 @@
 #include "actors.h"
 #include "protag.h"
 #include "globalBinds.h"
-#include "ActorComponents/physics/vector.h"
-#include "ActorComponents/direction/normal.h"
+#include "actorComponents/physics/vector.h"
+#include "actorComponents/direction/normal.h"
 
 extern U8 IAMALIVE;
 extern U8 BLINK;
