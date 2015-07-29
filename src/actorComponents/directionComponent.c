@@ -7,6 +7,7 @@
 #include "../math/gMath.h"
 #include "../math/angles.h"
 #include "direction/normal.h"
+#include "../math/quaternion.h"
 
 void genDirectionComponent
 (U8 actorID)
@@ -29,18 +30,15 @@ void	updateDirectionComponent	(U8 actorID, U16 deltaMS)
 void DirectionPitch
 (U8 actorID, F32 angle)
 {
-	copyVector(&(Actors.direction[actorID].forward), *PitchVector(Actors.direction[actorID].forward, DegreesToRadians(angle)) );
-	NormalizeNormal(&(Actors.direction[actorID].forward));
+	rotateVector(&(Actors.direction[actorID].forward), i, angle);
 }
 void DirectionYaw
 (U8 actorID, F32 angle)
 {
-	copyVector(&(Actors.direction[actorID].forward), *YawVector(Actors.direction[actorID].forward, DegreesToRadians(angle)) );
-	NormalizeNormal(&(Actors.direction[actorID].forward));
+	rotateVector(&(Actors.direction[actorID].forward), j, angle);
 }
 void DirectionRoll
 (U8 actorID, F32 angle)
 {
-	copyVector(&(Actors.direction[actorID].forward), *RollVector(Actors.direction[actorID].forward, DegreesToRadians(angle)) );
-	NormalizeNormal(&(Actors.direction[actorID].forward));
+	rotateVector(&(Actors.direction[actorID].forward), k, angle);
 }

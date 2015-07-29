@@ -55,9 +55,9 @@ GLuint loadShaderFromFile( const U8 * path, GLenum shaderType )
 }
 GLfloat sunasd[] =
 {
-	-0.2f, 0.9f, 0.0f,
-	-0.2f, 0.7f, 0.0f,
-	0.2f, 0.9f, 0.0f
+	0.0f, 0.2f, 0.0f,
+	0.0f, 0.0f, 0.0f,
+	0.2f, 0.2f, 0.0f
 };
 void genShaders(void)
 {

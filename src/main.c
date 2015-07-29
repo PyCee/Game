@@ -14,7 +14,7 @@
 #include "globalBinds.h"
 #include "actorComponents/physics/vector.h"
 #include "math/angles.h"
-#include "math/quaternions.h"
+#include "math/quaternion.h"
 #include "shaders/shaders.h"
 
 #define PROGRAM_NAME "LDM"
@@ -61,7 +61,11 @@ I32 main
 	//Mix_PlayChannel(-1, BGMusic, 4);
 	
 	U8 list[] = {pro, ter};
-  
+	
+	i = ( Vector_t ) { 1.0, 0.0, 0.0 };
+	j = ( Vector_t ) { 0.0, 1.0, 0.0 };
+	k = ( Vector_t ) { 0.0, 0.0, 1.0 };
+	
 	IAMALIVE = 1;
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);

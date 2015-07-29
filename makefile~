@@ -30,7 +30,7 @@ run:
 	gcc -c src/math/gMath.c
 	gcc -c src/math/pythag.c
 	gcc -c src/math/angles.c
-	gcc -c src/math/quaternions.c
+	gcc -c src/math/quaternion.c
 	
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
@@ -41,7 +41,7 @@ run:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o quaternions.o \
+	angles.o quaternion.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
@@ -53,7 +53,7 @@ run:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o quaternions.o
+	angles.o quaternion.o
 	
 	echo Compiled.
 install:
@@ -62,7 +62,6 @@ install:
 	sudo apt-get install libassimp-dev # library for importing 3d models
 	git config --global user.email "Kpampusch@yahoo.com"
 	git config --global user.name "NotSarcastic"
-	git config --global core.editor gedit
 #	cd SDL
 #	./configure
 #	make

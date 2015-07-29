@@ -64,7 +64,7 @@ Vector_t * PitchVector				(Vector_t vec, F32 rad)
 {
 	rad = -1 * rad;
 	Vector_t * pitch = malloc(sizeof(Vector_t));
-	genVector(pitch);
+	genVector(pitch, 0, 0, 0);
 	setVectorY(pitch, getVectorY(vec) * cos(rad) - getVectorZ(vec) * sin(rad));
 	setVectorZ(pitch, getVectorZ(vec) * cos(rad) + getVectorY(vec) * sin(rad));
 	return pitch;
@@ -84,7 +84,7 @@ Vector_t	*	RollVector				(Vector_t vec, F32 rad)
 {
 	rad = -1 * rad;
 	Vector_t * roll = malloc(sizeof(Vector_t));
-	genVector(roll);
+	genVector(roll, 0, 0, 0);
 	setVectorX(roll, getVectorX(vec) * cos(rad) + getVectorY(vec) * sin(rad));
 	setVectorY(roll, getVectorY(vec) * cos(rad) - getVectorX(vec) * sin(rad));
 	return roll;

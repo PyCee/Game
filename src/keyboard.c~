@@ -91,7 +91,6 @@ void handleEvents
 				}// for mods, test with SDLK_---
 				if(event.key.keysym.mod & KMOD_NUM){
 					printf("%d\n", KMOD_NUM);
-					printf("aaskdjuir\n");
 				} else if(event.key.keysym.mod & KMOD_LALT){
 					printf("%d\n", KMOD_LALT);
 					
@@ -151,7 +150,7 @@ void handleEvents
 					default:
 						break;
 				}
-        break;
+    			    break;
 			case SDL_MOUSEBUTTONUP:
 				switch(event.button.button){
 					case SDL_BUTTON_LEFT:
@@ -164,12 +163,12 @@ void handleEvents
 					default:
 						break;
 				}
-        break;
-      case SDL_MOUSEMOTION:
-      	// Tilt Global Camera
-      	DirectionYaw(getCameraView(), event.motion.xrel);
-      	DirectionPitch(getCameraView(), event.motion.yrel);
-      	PrintNormal(Actors.direction[getCameraView()].forward);
+				break;
+			case SDL_MOUSEMOTION:
+			// Tilt Global Camera
+				DirectionYaw(getCameraView(), event.motion.xrel);
+				DirectionPitch(getCameraView(), event.motion.yrel);
+				PrintNormal(Actors.direction[getCameraView()].forward);
       	break;
 			default:
 				break;

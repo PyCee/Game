@@ -3,7 +3,7 @@
 #define _VECTOR_
 
 typedef struct _Vector_t{
-	F32		point		[3];
+	F32 point [3];
 } Vector_t;
 
 void 		genVector			(Vector_t *, F32, F32, F32);
@@ -32,4 +32,10 @@ void		setVectorZ			(Vector_t *, F32);
 F32		getVectorX			(Vector_t);
 F32		getVectorY			(Vector_t);
 F32		getVectorZ			(Vector_t);
+
+
+Vector_t i;
+Vector_t j;
+Vector_t k;
+
 #endif

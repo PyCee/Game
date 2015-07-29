@@ -1,6 +1,6 @@
 
 #include "../dataTypes.h"
-#include "quaternions.h"
+#include "quaternion.h"
 #include <math.h>
 #include "angles.h"
 #include <stdio.h>
@@ -54,10 +54,7 @@ void rotateVector(Vector_t *rotate, Vector_t around, F32 angle)
 	Quaternion_t * quaAround = UnitQuaternion(around, angle);
 	Quaternion_t * quaConjugate = ConjugateQuaternion(*quaAround);
 	Quaternion_t * result = HProduct( *( HProduct( *quaAround, *quaRotate ) ), *quaConjugate );
-	if ( result->val[0] != 0.0 ) {
-		printf( "ERROR:: result of rotateVector(Vector_t *, Vector_t, F32) not a Pure Quaternion.\n Non-zero valure is %f\n", result->val[0] );
-		return;
-	}
+	
 	rotate->point[0] = result->val[1];
 	rotate->point[1] = result->val[2];
 	rotate->point[2] = result->val[3];
