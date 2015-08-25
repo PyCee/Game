@@ -5,6 +5,6 @@
 #define CAMERA_NAME "CAMERA"
 
 U8 genCamera(void);
-void updateCamera(U8);
+void updateCamera(U8, U16);
 
 #endif

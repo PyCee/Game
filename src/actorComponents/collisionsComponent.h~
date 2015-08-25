@@ -16,7 +16,6 @@ void	freeCollisionsComponent		(U8);
 void	updateCollisionsComponent	(U8, U16);
 void	setBounds			(U8, F32, F32);
 U8	CheckBoundingBoxCollision	(U8, U8);
-void	DrawBoundingBox			(U8);
 
 
 F64 getHeight(U8);

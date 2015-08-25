@@ -6,56 +6,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Quaternion_t * PureQuaternion(Vector_t vector)
+vec4 PureQuaternion(vec3 vector)
 {
-	Quaternion_t * result = malloc(sizeof(Quaternion_t));
-	result->val[0] = 0.0;
-	result->val[1] = vector.point[0];
-	result->val[2] = vector.point[1];
-	result->val[3] = vector.point[2];
-	return result;
+	vec4 result;
+	result.vec[0] = 0.0;
+	result.vec[1] = vector.vec[0];
+	result.vec[2] = vector.vec[1];
+	result.vec[3] = vector.vec[2];
+	return genVec4(0.0, vector.vec[0], vector.vec[1], vector.vec[2]);
 }
-Quaternion_t * UnitQuaternion(Vector_t vector, F32 angle)
+vec4 UnitQuaternion(vec3 vector, F32 angle)
 {
-	Quaternion_t * result = malloc(sizeof(Quaternion_t));
+	vec4 result;
 	F32 radians = DegreesToRadians(angle / 2.0);
-	result->val[0] = cos(radians);
-	result->val[1] = sin(radians) * vector.point[0];
-	result->val[2] = sin(radians) * vector.point[1];
-	result->val[3] = sin(radians) * vector.point[2];
+	result.vec[0] = cos(radians);
+	result.vec[1] = sin(radians) * vector.vec[0];
+	result.vec[2] = sin(radians) * vector.vec[1];
+	result.vec[3] = sin(radians) * vector.vec[2];
 	return result;
 }
-Quaternion_t * ConjugateQuaternion(Quaternion_t qua)
+vec4 ConjugateQuaternion(vec4 qua)
 {
-	Quaternion_t * result = malloc(sizeof(Quaternion_t));
-	result->val[0] = qua.val[0];
-	result->val[1] = -1 * qua.val[1];
-	result->val[2] = -1 * qua.val[2];
-	result->val[3] = -1 * qua.val[3];
+	vec4 result;
+	result.vec[0] = qua.vec[0];
+	result.vec[1] = -1 * qua.vec[1];
+	result.vec[2] = -1 * qua.vec[2];
+	result.vec[3] = -1 * qua.vec[3];
 	return result;
 }
 // returns Hamilton Product of Quaternions
-Quaternion_t * HProduct(Quaternion_t quaOne, Quaternion_t quaTwo)
+vec4 HProduct(vec4 quaOne, vec4 quaTwo)
 {
-	Quaternion_t * result = malloc(sizeof(Quaternion_t));
-	result->val[0] = quaOne.val[0] * quaTwo.val[0] - quaOne.val[1] * quaTwo.val[1] + quaOne.val[2] * quaTwo.val[2] + quaOne.val[3] * quaTwo.val[3];
+	vec4 result;
+	result.vec[0] = quaOne.vec[0] * quaTwo.vec[0] - quaOne.vec[1] * quaTwo.vec[1] + quaOne.vec[2] * quaTwo.vec[2] + quaOne.vec[3] * quaTwo.vec[3];
 	U8 index = 1;
 	while ( index <= 3 ) {
-		result->val[index] = quaOne.val[0] * quaTwo.val[index] + quaTwo.val[0] * quaOne.val[index] +
-			quaOne.val[ ( ( index + 0 ) % 3 ) + 1] * quaTwo.val[ ( ( index + 1 ) % 3 ) + 1] -
-			quaOne.val[ ( ( index + 1 ) % 3 ) + 1] * quaTwo.val[ ( ( index + 0 ) % 3 ) + 1];
+		result.vec[index] = quaOne.vec[0] * quaTwo.vec[index] + quaTwo.vec[0] * quaOne.vec[index] +
+			quaOne.vec[ ( ( index + 0 ) % 3 ) + 1] * quaTwo.vec[ ( ( index + 1 ) % 3 ) + 1] -
+			quaOne.vec[ ( ( index + 1 ) % 3 ) + 1] * quaTwo.vec[ ( ( index + 0 ) % 3 ) + 1];
 		index++;
 	}
 	return result;
 }
-void rotateVector(Vector_t *rotate, Vector_t around, F32 angle)
+vec3 rotateVec3(vec3 rotate, vec3 around, F32 angle)
 {
-	Quaternion_t * quaRotate = PureQuaternion(*rotate);
-	Quaternion_t * quaAround = UnitQuaternion(around, angle);
-	Quaternion_t * quaConjugate = ConjugateQuaternion(*quaAround);
-	Quaternion_t * result = HProduct( *( HProduct( *quaAround, *quaRotate ) ), *quaConjugate );
+	vec4 quaRotate = PureQuaternion(rotate);
+	vec4 quaAround = UnitQuaternion(around, angle);
+	vec4 quaConjugate = ConjugateQuaternion(quaAround);
+	vec4 result = HProduct( ( HProduct( quaAround, quaRotate ) ), quaConjugate );
 	
-	rotate->point[0] = result->val[1];
-	rotate->point[1] = result->val[2];
-	rotate->point[2] = result->val[3];
+	return genVec3(result.vec[1], result.vec[2], result.vec[3]);
 }

@@ -3,6 +3,7 @@
 #define _RENDER_COMPONENT_
 
 #include "../actorCounts.h"
+#include <SDL2/SDL_opengl.h>
 
 #define MAX_X 10
 #define MIN_X 1
@@ -15,11 +16,20 @@
 #define RANGE_Z MAX_Z - MIN_Z
 
 typedef struct _RenderComponent_t{
-
+	
+	GLuint	BoundingBoxVBO;
+	F32 	BoundingBoxVerticies[24];
+	U8	render;
 } RenderComponent_t;
 
-U8 ActorCulling[MAX_ACTOR_COUNT];
+U16 BoundingBoxIndices[36];
+GLuint BoundingBoxIBO;
 
+GLint ActorWorldPositionLoc;
+GLint ActorRotateVectorLoc;
+GLint ActorRotateAngleLoc;
+
+void initRender(void);
 void genRenderComponent(U8);
 void freeRenderComponent(U8);
 void updateRenderComponent(U8, U16);

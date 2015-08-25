@@ -17,9 +17,7 @@ U8 genProtag
 	Actors.identifier[actorID].ActorName = PROTAG_NAME;
 	assignAIUpdate(actorID, UpdateProtag);
 	setBounds(actorID, 0.2, 0.2);
-	setPosX(actorID, -1 * 0.75);
-	setPosY(actorID, -1 * 0.75);
-	setPosZ(actorID, 1 * 1.0);
+	setPos(actorID, genVec3(0.0, 0.3, 1.0));
 	return actorID;
 }
 void UpdateProtag

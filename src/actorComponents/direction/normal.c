@@ -6,27 +6,22 @@
 #include "../physics/vector.h"
 #include "../../math/pythag.h"
 
-void genNormal
-(Normal_t *normal)
+Normal_t genNormal(void)
 {
-	genVector(normal, 0, 0, 1);
-}
-void freeNormal
-(Normal_t *normal)
-{
+	return genVec3(0, 0, 1);
 }
 void NormalizeNormal
 (Normal_t *normal)
 {
-	F32 change = PythagoreanTheorum( getVectorX(*normal),  getVectorY(*normal),  getVectorZ(*normal) );
+	F32 change = PythagoreanTheorum( getVec3X(*normal),  getVec3Y(*normal),  getVec3Z(*normal) );
 	if (change == 0)
 		return;
-	setVectorX(normal,  getVectorX(*normal) / change);
-	setVectorY(normal,  getVectorY(*normal) / change);
-	setVectorZ(normal,  getVectorZ(*normal) / change);
+	setVec3X(normal,  getVec3X(*normal) / change);
+	setVec3Y(normal,  getVec3Y(*normal) / change);
+	setVec3Z(normal,  getVec3Z(*normal) / change);
 }
 void PrintNormal
 (Normal_t normal)
 {
-	PrintVector(normal);
+	PrintVec3(normal);
 }

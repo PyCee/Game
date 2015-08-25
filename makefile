@@ -1,4 +1,4 @@
-run:
+compile:
 	clear
 	echo Compiling...
 	gcc -c src/main.c
@@ -9,7 +9,6 @@ run:
 	gcc -c src/keyboard.c
 	gcc -c src/actorComponents/identifierComponent.c
 	gcc -c src/actorComponents/timeLineComponent.c
-	gcc -c src/actorComponents/AIComponent.c
 	gcc -c src/actorComponents/audioComponent.c
 	gcc -c src/actorComponents/directionComponent.c
 	gcc -c src/actorComponents/direction/normal.c
@@ -17,6 +16,7 @@ run:
 	gcc -c src/actorComponents/physics/vector.c
 	gcc -c src/actorComponents/physics/vertex.c
 	gcc -c src/actorComponents/collisionsComponent.c
+	gcc -c src/actorComponents/AIComponent.c
 	gcc -c src/actorComponents/lightingComponent.c
 	gcc -c src/actorComponents/lighting/reflection.c
 	gcc -c src/actorComponents/lighting/color.c
@@ -33,10 +33,10 @@ run:
 	gcc -c src/math/quaternion.c
 	
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
-	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
+	identifierComponent.o timeLineComponent.o audioComponent.o \
 	directionComponent.o normal.o \
 	physicsComponent.o vector.o vertex.o \
-	collisionsComponent.o \
+	collisionsComponent.o AIComponent.o \
 	lightingComponent.o reflection.o color.o \
 	renderComponent.o \
 	actors.o terrain.o protag.o \
@@ -56,6 +56,8 @@ run:
 	angles.o quaternion.o
 	
 	echo Compiled.
+run:
+	./bin/Morte
 install:
 	sudo apt-get install libsdl2-dev # library that handels window creation and input
 	sudo apt-get install libsdl2-mixer-dev

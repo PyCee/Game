@@ -18,7 +18,7 @@
 // Calculate reflected light at specific vertex.
 void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, U8 light[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT], F32 specularGlossiness)
 {
-	U8 actorID = 0;
+	/*U8 actorID = 0;
 	U8 lightID = 0;
 	Normal_t *vertexToCamera = subtractVectors( Actors.direction[getCameraView()].forward, vertex.surfaceNormal );
 	Normal_t vertexToLight[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT];
@@ -60,5 +60,5 @@ void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, U8 light[MAX_ACT
 			lightID++;	
      		}
 		actorID++;
-	}
+	}*/
 }

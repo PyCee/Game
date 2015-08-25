@@ -4,9 +4,14 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "ActorComponents/physics/vector.h"
-#include "ActorComponents/direction/normal.h"
+#include "actorComponents/physics/vector.h"
+#include "actorComponents/direction/normal.h"
 
+
+void initActorComponents(void)
+{
+	initRender();
+}
 static U8 getFirstInactiveActor (void)
 {
 	U8 actorID = 0;
@@ -50,11 +55,11 @@ static void genActor (U8 actorID)
 	printf("Gening Actor %d\n", actorID);
 	genIdentifierComponent(actorID);
 	genTimeLineComponent(actorID);
-	genAIComponent(actorID);
 	genAudioComponent(actorID);
 	genDirectionComponent(actorID);
 	genPhysicsComponent(actorID);
 	genCollisionsComponent(actorID);
+	genAIComponent(actorID);
 	genLightingComponent(actorID);
 	genRenderComponent(actorID);
 }
@@ -82,11 +87,11 @@ void freeActor (U8 actorID)
 	printf("Freeing Actor %d\n", actorID);
 	freeRenderComponent(actorID);
 	freeLightingComponent(actorID);
+	freeAIComponent(actorID);
 	freeCollisionsComponent(actorID);
 	freePhysicsComponent(actorID);
 	freeDirectionComponent(actorID);
 	freeAudioComponent(actorID);
-	freeAIComponent(actorID);
 	freeTimeLineComponent(actorID);
 	freeIdentifierComponent(actorID);
 	Actors.ActiveActor[actorID] = 0;
@@ -98,13 +103,6 @@ void updateActors (void)
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		if ( Actors.ActiveActor[actorID] )
 			localTime[actorID] = updateTimeLineComponent(actorID);
-		actorID++;
-	}
-	actorID = 0;
-	while ( actorID < MAX_ACTOR_COUNT ) {
-		if ( Actors.ActiveActor[actorID] )
-			if (Actors.ActorType[actorID] != STA)
-				updateAIComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
@@ -130,6 +128,13 @@ void updateActors (void)
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		if ( Actors.ActiveActor[actorID] )
 			updateCollisionsComponent(actorID, localTime[actorID]);
+		actorID++;
+	}
+	actorID = 0;
+	while ( actorID < MAX_ACTOR_COUNT ) {
+		if ( Actors.ActiveActor[actorID] )
+			if (Actors.ActorType[actorID] != STA)
+				updateAIComponent(actorID, localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;

@@ -11,11 +11,8 @@ U8 genTerrain
 	U8 actorID = addSta_Actor();
 	Actors.identifier[actorID].ActorName = TERRAIN_NAME;
 	assignAIUpdate(actorID, UpdateTerrain);
-	Actors.collisions[actorID].Height = 0.2;
-	Actors.collisions[actorID].Width = 10.0;
-	setPosX(actorID, 1 * 0.0);
-	setPosY(actorID, -1 * 1.0);
-	setPosZ(actorID, 1 * 1.0);
+	setBounds(actorID, 10.0, 0.2);
+	setPos(actorID, genVec3(0.0, -1.0, 5.5));
 	return actorID;
 }
 void UpdateTerrain

@@ -28,7 +28,9 @@ U8 BLINK;
 
 I32 main
 (I32 argc, I8 *argv[])
-{
+{	
+	IAMALIVE = 1;
+
 	printf("%s Starting.\nMain Initializing.\n", PROGRAM_NAME);
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
 	SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
@@ -48,6 +50,7 @@ I32 main
 	genGlobalTimeLine(&globalTimeLine);
 	BindGlobalTimeLine(globalTimeLine);
 	
+	initActorComponents();
 	genAllActors();
 	
 	U8 ter = genTerrain();
@@ -62,31 +65,24 @@ I32 main
 	
 	U8 list[] = {pro, ter};
 	
-	i = ( Vector_t ) { 1.0, 0.0, 0.0 };
-	j = ( Vector_t ) { 0.0, 1.0, 0.0 };
-	k = ( Vector_t ) { 0.0, 0.0, 1.0 };
-	
-	IAMALIVE = 1;
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
 	
 	//drawInit();
-	genShaders();
 	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
 	while( IAMALIVE == 1 ) {
 	
 		SDL_GL_SwapWindow(gameWindow);
+		
 		SDL_Delay(16);
 		
-		glClearColor(0.9, 0.1, 0.1, 1.0);
-		//glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT);
 		
 		updateGlobalTimeLine(getGlobalTimeLine());
-		
-		//draw();
 		
 		//<CL "physics upgrade: collisions">
 		
@@ -100,7 +96,6 @@ I32 main
 		//</CL>
 		handleEvents();
 		updateActors();
-		tmpDraw();
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
 	//drawDel();
@@ -133,14 +128,4 @@ I32 main
 	if (i == '\n')
 		printf("jfhjfhfjfhfjdj");
 	fclose(loadFile);*/
-	Vector_t rotate;
-	genVector(&rotate, 1.0, 0.0, 0.0);
-	//PrintVector(rotate);
-	
-	Vector_t turn;
-	genVector(&turn, 0.0, 1.0, 0.0);
-	//PrintVector(rotate);
-	
-	rotateVector(&rotate, turn, 45);
-	PrintVector(rotate);
 }
