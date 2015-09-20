@@ -1,0 +1,110 @@
+<!--#include file="page_header.html" -->
+<title>Game Characters</title>
+<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+<!--#include file="content_header.html" -->
+<h1>Characters</h1>
+<p>
+	<div style = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_protagonist.html">Protagonist</a> </h2>
+			The Controlled actor.
+		</div>
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_p2.html">P2</a> </h2>
+		</div>
+	</div>
+	<div class = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_angel.html">The Angel</a> </h2>
+			Sends you out to meet other characters.
+		</div>
+	</div>
+	<div class = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_cannibal.html">The Cannibal</a> </h2>
+			Gluttony
+		</div>
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters.html">The <!--TODO think of character--></a> </h2>
+			Lust
+		</div>
+	</div>
+	<div class = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_queen.html">The Queen</a> </h2>
+			Envy
+		</div>
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_monster.html">The Monster</a> </h2>
+			Wrath
+		</div>
+	</div>
+	<div class = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_king.html">The King</a> </h2>
+			Greedaaa
+		</div>
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_prince.html">The Prince</a> </h2>
+			Pride
+		</div>
+	</div>
+	<div class = "wide">
+		<div style = "
+			height:auto;
+			width:45%;
+			margin:auto;
+			display:inline-block;
+			vertical-align:top;">
+			<h2> <a href="characters/char_priest.html">The Priest</a> </h2>
+			Sloth
+		</div>
+	</div>
+</p>
+<!--#include file="content_footer.html" -->
+<!--#include file="page_footer.html" -->

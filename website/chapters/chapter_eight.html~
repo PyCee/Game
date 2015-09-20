@@ -1,0 +1,14 @@
+<!--#include virtual="../page_header.html" -->
+<title>Game Mechanics</title>
+<!--#include file="chapter_content_header.html" -->
+<p>
+	Depending on choices made in the chapter seven, the protagonist may be placed in 
+	<div class="wide">
+		<a href = "heaven.html"> <img src = "" alt = "heaven" /> </a>
+		or
+		<a href = "hell.html"> <img src = "" alt = "hell" /> </a>
+	</div>
+	
+</p>
+<!--#include virtual="../content_footer.html" -->
+<!--#include virtual="../page_footer.html" -->

@@ -77,5 +77,8 @@ push:
 pull:
 	clear
 	git pull
+site:
+	sudo cp -r website/. ../../../var/www/html
+	echo Website Updated.
 goodbye:
 	echo FAREWELL CRUEL WORLD

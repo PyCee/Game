@@ -1,0 +1,64 @@
+<!--#include virtual="../page_header.html" -->
+<title>Game Ch Prologue</title>
+<!--#include file="chapter_content_header.html" -->
+<p>
+	<h1>Prologue</h1>
+	The prologue starts off with the <a href="../characters/char_protagonist.html">Protagonist</a> being </br>
+	in a cage in a dimly lit room with one window.</br>
+	In the room there is plenty of old furniture convered with sheets</br>
+	He can hear a drunk man grumbling to himself, sitting in a rocking chair.</br>
+	The man stumbles over and smashes a bottle against the bars.</br></br></br>
+	<i>STOP LOOKING AT ME!</br>
+	STOP IT!</br>
+	GO TO SLEEP!</i></br></br>
+	The Protagonist flinches/closes his eyes on reflex.</br>
+	-choice "Stop...", "Who are you...", ""</br>
+	The man continues to stare for several seconds in silence,</br>
+	until he goes back to mumbling to himself in the rocking chair.</br>
+	Close eyes to advance to next day.</br>
+	Wake up. Rocking chair is empty.</br>
+	Hear scratching sound behind him.</br>
+	When he turns around he sees a girl,</br>
+	about the age of 15-25, in another cage behind him.</br>
+	The scratching stops.</br>
+	-choice: ask who she is, silence:</br>
+	---if ask who she is{</br></br>
+		<i>Who...Who are you?</i>}</br></br></br>
+	---if silence{</br>
+		Nothing happens.}</br>
+	Either way, she does not say anything</br>
+	and there is silence for set time (15s, enough to build up unease).</br>
+	He sees shadows creeping around. Over another 10-15s they get closer</br>
+	He must close his eyes to advance to the next day.</br>
+	He opens his eyes to the man yelling at the wall angrily.</br>
+	
+	</br></br></br>
+	He opens his eyes to find the cage open.</br>
+	He gets out and stands up.</br>
+	-interactions:</br>
+	---required: { Knife on floor next to rocking chair. }</br>
+	---optional: { Look out window and see sea. }</br>
+	---optional: { See the cage where the girl was is also open and empty. }</br>
+	
+	</br></br></br></br>
+	in a dream of people being burned at the stake. The dream ends with </br>
+	him <a href="../mechanics.html">closing his eyes</a> (triggered by the player holding RMB).</br>
+	
+	</br></br>
+	<div class="wide">
+		<div>
+			<a href = "../story.html">
+				<img src="" alt="Back To" />
+				<img src="" alt="Story Selection" />
+			</a>
+		</div><!--
+		--><div>
+			<a href = "chapter_one.html">
+				<img src="" alt="Proceed To" />
+				<img src="" alt="Chapter One" />
+			 </a>
+		</div>
+	</div>
+</p>
+<!--#include virtual="../content_footer.html" -->
+<!--#include virtual="../page_footer.html" -->

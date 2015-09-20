@@ -1,0 +1,13 @@
+<!--#include file="page_header.html" -->
+<title>Game Mechanics</title>
+<!--#include file="content_header.html" -->
+<p>
+	Depending on choices made in the story final chapter may be placed in 
+	<div style="height:250; width:auto; background-color:black;">
+		<a href = "heaven.html"> <img src = "" alt = "heaven" /> </a>
+		<a href = "hell.html"> <img src = "" alt = "hell" /> </a>
+	</div>
+	
+</p>
+<!--#include file="content_footer.html" -->
+<!--#include file="page_footer.html" -->

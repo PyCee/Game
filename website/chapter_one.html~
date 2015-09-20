@@ -1,0 +1,24 @@
+<!--#include file="page_header.html" -->
+<title>Game Ch 1</title>
+<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+<!--#include file="content_header.html" -->
+<a href = "story.html"><u><h3>back to chapter selection</h3></u></a>
+<h1>Chapter One</h1>
+<p>
+	The chapter (and the game) starts off with the <a href="">Protagonist</a> being in a dream of people being burned.
+	The dream ends with him <a href="">closing his eyes</a> (triggered by the player holding RMB).
+	
+	Wake up in room in orphanage. Can walk around
+</p>
+<div class="wide">
+	<h3>
+		<div style="height:20px; width:50%; margin:auto; display:inline-block;">
+			<a href = "story.html"><u>back to Story</u></a>
+		</div><!--
+		--><div style="height:20px; width:50%; margin:auto; display:inline-block;">
+			<a href = "chapter_two.html"><u>proceed to Chapter Two</u></a>
+		</div>
+	</h3>
+</div>
+<!--#include file="content_footer.html" -->
+<!--#include file="page_footer.html" -->
