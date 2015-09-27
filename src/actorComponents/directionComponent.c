@@ -25,7 +25,7 @@ void	freeDirectionComponent
 }
 void	updateDirectionComponent	(U8 actorID, U16 deltaMS)
 {
-	NormalizeNormal(&(Actors.direction[actorID].forward));
+	Actors.direction[actorID].forward = NormalizeNormal(Actors.direction[actorID].forward);
 	//PrintVec3(Actors.direction[actorID].forward);
 }
 void DirectionPitch

@@ -2,7 +2,7 @@
 #ifndef _COLLISIONS_COMPONENT_
 #define _COLLISIONS_COMPONENT_
 
-#include "../actorCounts.h"
+#include "../actorSelection.h"
 
 // when collisions are based off of actual character (not bounding box), change to circular bounds.
 typedef struct _CollisionsComponent_t{

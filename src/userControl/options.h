@@ -59,7 +59,7 @@ void DefaultFieldOfView(void);
 static U8 FieldOfView = 0;
 #define DEFAULT_FIELD_OF_VIEW 120
 #define MAX_FIELD_OF_VIEW 150
-#define MIN_FIELD_OF_VIEW	70
+#define MIN_FIELD_OF_VIEW 70
 
 void DefaultBrightness(void);
 static U8 Brightness = 0;
@@ -70,10 +70,10 @@ static U8 Brightness = 0;
 void DefaultAllControlOptions(void);
 
 void DefaultMouseSensitivity(void);
-static U8 MouseSensitivity = 0;
-#define DEFAULT_MOUSE_SENSITIVITY 6
+#define DEFAULT_MOUSE_SENSITIVITY 1
 #define MAX_MOUSE_SENSITIVITY 255
 #define MIN_MOUSE_SENSITIVITY 0
+static U8 MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
 
 void DefaultMouseLock(void);
 static U8 MouseLock = 1;

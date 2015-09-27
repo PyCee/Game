@@ -4,11 +4,14 @@
 
 #include <stdlib.h>
 #include "math/gMath.h"
+#include "math/matrix.h"
+#include "math/quaternion.h"
 #include "actors.h"
 #include "shaders/shaders.h"
 #include "actorComponents/physicsComponent.h"
 #include <SDL2/SDL_opengl.h>
 #include <math.h>
+#include <stdio.h>
 
 
 U8 genCamera
@@ -18,17 +21,23 @@ U8 genCamera
 	assignAIUpdate( actorID, updateCamera );
 	setPos(actorID, genVec3(0.0, 0.0, 0.0));
 	setBounds(actorID, 0.0, 0.0);
+	return actorID;
 }
 void updateCamera (U8 actorID, U16 deltaMS)
 {
-	GLint cameraWorldPositionLoc = glGetUniformLocation( shaderProgram, "cameraWorldPosition" );
-	GLint cameraRotateVectorLoc = glGetUniformLocation( shaderProgram, "cameraRotateVector" );
-	GLint cameraRotateAngleLoc = glGetUniformLocation( shaderProgram, "cameraRotateAngle" );
+	setPos(actorID, genVec3(0, 0, 0));
+	GLint CameraPlacementLoc = glGetUniformLocation( shaderProgram, "cameraPlacement" );
 	
-	glUniform3f( cameraWorldPositionLoc, getPosX( actorID ), getPosY( actorID ), getPosZ( actorID ) );
+	// creates rotation matrix
+	printf("creating camera rotation matrix\n");
+	F32 angle = (F32) (-1 * acos(dotVec3(k, Actors.direction[actorID].forward)));
+	//printf("angle = %f\n", angle);
+	vec3 around = crossVec3(k, Actors.direction[actorID].forward);
+	around = NormalizeNormal(around);
+	//PrintVec3(around);
+	mat4 cameraPlacement = QuaternionToRotationMatrix(UnitQuaternion(around, angle));
+	cameraPlacement = translateMat4(cameraPlacement, scaleVec3(genVec3(getPosX(actorID), getPosY(actorID), getPosZ(actorID)), -1));
+	//printMat4(cameraPlacement);
 	
-	vec3 cameraOrient = cross( k, Actors.direction[actorID].forward );
-	glUniform3f( cameraRotateVectorLoc, cameraOrient.vec[0], cameraOrient.vec[1], cameraOrient.vec[2] );
-	
-	glUniform1f( cameraRotateAngleLoc, acos( dot( Actors.direction[actorID].forward, k ) ) );
+	glUniformMatrix4fv(CameraPlacementLoc, 1, GL_TRUE, &cameraPlacement.mat[0][0]);
 }

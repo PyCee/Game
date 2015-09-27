@@ -10,8 +10,11 @@
 #include <SDL2/SDL_opengl.h>
 #include <string.h>
 #include <math.h>
+#include "../math/matrix.h"
+#include "../math/quaternion.h"
 
 #include "../shaders/shaders.h"
+#define PImm 3.1415926535897932384
 void initRender ( void )
 {
 	printf("Initializing Render.\n");
@@ -58,19 +61,19 @@ void initRender ( void )
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
 	
-	ActorWorldPositionLoc = glGetUniformLocation( shaderProgram, "actorWorldPosition" );
+	ActorPlacementLoc = glGetUniformLocation( shaderProgram, "actorPlacement" );
 	if (ActorWorldPositionLoc == -1) {
-		printf("ERROR::ActorWorldPositionLoc Not Found\n");
+		printf("ERROR::actorPlacementLoc Not Found\n");
 	}
-	/*ActorRotateVectorLoc = glGetUniformLocation( shaderProgram, "actorRotateVector" );
-	if (ActorRotateVectorLoc == -1) {
-		printf("ActorRotateVectorLoc Not Found\n");
+	WorldPlacementLoc = glGetUniformLocation( shaderProgram, "worldPlacement" );
+	if (ActorWorldPositionLoc == -1) {
+		printf("ERROR::worldPlacementLoc Not Found\n");
 	}
-	ActorRotateAngleLoc = glGetUniformLocation( shaderProgram, "actorRotateAngle" );
-	if (ActorRotateAngleLoc == -1) {
-		printf("ActorRotateAngleLoc Not Found\n");
+	CameraPlacementLoc = glGetUniformLocation( shaderProgram, "cameraPlacement" );
+	if (ActorWorldPositionLoc == -1) {
+		printf("ERROR::cameraPlacementLoc Not Found\n");
 	}
-	*/
+	
 	
 	glEnable(GL_CULL_FACE); // enables face culling    
 	glCullFace(GL_BACK); // tells OpenGL to cull back faces (the sane default setting)
@@ -80,21 +83,7 @@ void initRender ( void )
 void genRenderComponent (U8 actorID)
 {
 	Actors.render[actorID].render = 1;
-	/*Actors.render[actorID].BoundingBoxVerticies[0] = getWidth(actorID) * -1 * 0.5;
-	Actors.render[actorID].BoundingBoxVerticies[1] = 0.0;
-	Actors.render[actorID].BoundingBoxVerticies[2] = 0.0;
 	
-	Actors.render[actorID].BoundingBoxVerticies[3] = getWidth(actorID) * 1 * 0.5;
-	Actors.render[actorID].BoundingBoxVerticies[4] = 0.0;
-	Actors.render[actorID].BoundingBoxVerticies[5] = 0.0;
-	
-	Actors.render[actorID].BoundingBoxVerticies[6] = getWidth(actorID) * 1 * 0.5;
-	Actors.render[actorID].BoundingBoxVerticies[7] = getHeight(actorID);
-	Actors.render[actorID].BoundingBoxVerticies[8] = 0.0;
-	
-	Actors.render[actorID].BoundingBoxVerticies[9] = getWidth(actorID) * -1 * 0.5;
-	Actors.render[actorID].BoundingBoxVerticies[10] = getHeight(actorID);
-	Actors.render[actorID].BoundingBoxVerticies[11] = 0.0;*/
 	Actors.render[actorID].BoundingBoxVerticies[0] = getWidth(actorID) * -1 * 0.5;
 	Actors.render[actorID].BoundingBoxVerticies[1] = 0.0;
 	Actors.render[actorID].BoundingBoxVerticies[2] = getWidth(actorID) * -1 * 0.5;
@@ -138,9 +127,10 @@ void freeRenderComponent (U8 actorID)
 }
 void updateRenderComponent (U8 actorID, U16 deltaMS)
 {
-	if ( Actors.render[actorID].render == 0 ) // we have chosen not to render this actor
+	// TODO: more culling
+	/*if ( Actors.render[actorID].render == 0 ) // we have chosen not to render this actor
 		return;
-	/*
+	
 	if (ActorRotateVectorLoc != -1) {
 		vec3 cameraOrient = cross( k, Actors.direction[actorID].forward );
 		glUniform3f( ActorRotateVectorLoc, cameraOrient.vec[0], cameraOrient.vec[1], cameraOrient.vec[2] );
@@ -149,12 +139,23 @@ void updateRenderComponent (U8 actorID, U16 deltaMS)
 		glUniform1f( ActorRotateAngleLoc, acos( dot( Actors.direction[actorID].forward, k ) ) );
 	}
 	*/
+	// culling done, something is to be rendered
+	if (WorldPlacementLoc != -1) {
+		mat4 worldPlacement = genIdentityMat4();
+		worldPlacement = translateMat4(worldPlacement, genVec3(getPosX(actorID), getPosY(actorID), getPosZ(actorID)));
+		if(actorID == getControlledActor()){
+		
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(k, 45));
+			worldPlacement = translateMat4(worldPlacement, genVec3(getPosX(actorID), getPosY(actorID), getPosZ(actorID)));
+			//printMat4(worldPlacement);
+		}
+		//printf("now printing worldplacement mat4\n");
+		//printMat4(worldPlacement);
+		glUniformMatrix4fv(WorldPlacementLoc, 1, GL_TRUE, &worldPlacement.mat[0][0]);
+	} else
+		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
 	if ( Actors.collisions[actorID].drawBounds ) {//&& actorID == getControlledActor()) {
-		PrintVec3(Actors.physics[actorID].Pos);
-		if (ActorWorldPositionLoc != -1)
-			glUniform3fv( ActorWorldPositionLoc, 1, Actors.physics[actorID].Pos.vec);
-		else
-			printf("ERROR::ActorWorldPositionLoc is Equal to -1\n");
+		//PrintVec3(Actors.physics[actorID].Pos);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, Actors.render[actorID].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
@@ -170,28 +171,3 @@ void updateRenderComponent (U8 actorID, U16 deltaMS)
 	// Draw model
 	
 }
-// returns 1 if in range
-//TODO: make culling based on field of view
-//TODO: put culling in graphics pipeline
-/*static U8 XCulling( U8 actorID )
-{
-	F32 ZPer = ( getPosZ(actorID) - MIN_Z ) / RANGE_Z;
-	return ( getPosX(actorID) + getWidth(actorID) < -1 * RANGE_X * ZPer ^ getPosX(actorID) > RANGE_X * ZPer ) ? 0 : 1;
-}
-static U8 YCulling( U8 actorID )
-{
-	F32 ZPer = ( getPosZ(actorID) - MIN_Z ) / RANGE_Z;
-	return ( getPosY(actorID) + getHeight(actorID) < -1 * RANGE_Y * ZPer ^ getPosY(actorID) > RANGE_Y * ZPer ) ? 0 : 1;
-}
-
-static U8 ZCulling( U8 actorID )
-{
-	return ( getPosZ(actorID) + getWidth(actorID) < MIN_Z ) ? 0 : 1;
-	
-	// use next line only if there is to be a limit on how far away something is (in terms of Z)
-	//return ( getPosZ(actorID) + getWidth(actorID) < MIN_Z ^ getPosZ(actorID) - getWidth(actorID) > MAX_Z ) ? 0 : 1;
-}
-static U8 Cull( U8 actorID )
-{
-	return ZCulling( actorID ) || XCulling( actorID ) || YCulling( actorID );
-}*/

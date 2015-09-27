@@ -1,15 +1,16 @@
 
-#include "dataTypes.h"
+#include "../dataTypes.h"
 #include "keyboard.h"
 
 
 #include <SDL2/SDL.h>
-#include "camera.h"
-#include "actors.h"
-#include "protag.h"
-#include "globalBinds.h"
-#include "actorComponents/physics/vector.h"
-#include "actorComponents/direction/normal.h"
+#include "../camera.h"
+#include "options.h"
+#include "../actors.h"
+#include "../protag.h"
+#include "../globalBinds.h"
+#include "../actorComponents/physics/vector.h"
+#include "../actorComponents/direction/normal.h"
 
 extern U8 IAMALIVE;
 extern U8 BLINK;
@@ -71,6 +72,7 @@ void UselessFunction
 void EndGame
 (void)
 {
+	printf("Endgamecalled \n");
 	IAMALIVE = 0;
 }
 void handleEvents
@@ -166,9 +168,8 @@ void handleEvents
 				break;
 			case SDL_MOUSEMOTION:
 				// Tilt Global Camera
-				DirectionYaw(getCameraView(), event.motion.xrel);
-				DirectionPitch(getCameraView(), event.motion.yrel);
-				PrintNormal(Actors.direction[getCameraView()].forward);
+				//DirectionYaw(getCameraView(), event.motion.xrel * MouseSensitivity);
+				DirectionPitch(getCameraView(), event.motion.yrel * MouseSensitivity);
       	break;
 			default:
 				break;

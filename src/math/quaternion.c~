@@ -19,10 +19,11 @@ vec4 UnitQuaternion(vec3 vector, F32 angle)
 {
 	vec4 result;
 	F32 radians = DegreesToRadians(angle / 2.0);
+	F32 sinAngle = sin(radians);
 	result.vec[0] = cos(radians);
-	result.vec[1] = sin(radians) * vector.vec[0];
-	result.vec[2] = sin(radians) * vector.vec[1];
-	result.vec[3] = sin(radians) * vector.vec[2];
+	result.vec[1] = sinAngle * vector.vec[0];
+	result.vec[2] = sinAngle * vector.vec[1];
+	result.vec[3] = sinAngle * vector.vec[2];
 	return result;
 }
 vec4 ConjugateQuaternion(vec4 qua)
@@ -56,4 +57,31 @@ vec3 rotateVec3(vec3 rotate, vec3 around, F32 angle)
 	vec4 result = HProduct( ( HProduct( quaAround, quaRotate ) ), quaConjugate );
 	
 	return genVec3(result.vec[1], result.vec[2], result.vec[3]);
+}
+mat4 QuaternionToRotationMatrix(vec4 qua)
+{
+	mat4 rotation;
+	F32 w = qua.vec[0];
+	F32 x = qua.vec[1];
+	F32 y = qua.vec[2];
+	F32 z = qua.vec[3];
+	
+	rotation.mat[0][0] = 1 - 2 * y * y - 2 * z * z;
+	rotation.mat[0][1] = 2 * x * y - 2 * z * w;
+	rotation.mat[0][2] = 2 * x * z + 2 * y * w;
+	rotation.mat[0][3] = 0;
+	rotation.mat[1][0] = 2 * x * y + 2 * z * w;
+	rotation.mat[1][1] = 1 - 2 * x * x - 2 * z * z;
+	rotation.mat[1][2] = 2 * y * z - 2 * x * w;
+	rotation.mat[1][3] = 0;
+	rotation.mat[2][0] = 2 * x * z - 2 * y * w;
+	rotation.mat[2][1] = 2 * y * z + 2 * x * w;
+	rotation.mat[2][2] = 1 - 2 * x * x - 2 * y * y;
+	rotation.mat[2][3] = 0;
+	rotation.mat[3][0] = 0;
+	rotation.mat[3][1] = 0;
+	rotation.mat[3][2] = 0;
+	rotation.mat[3][3] = 1;
+	
+	return rotation;
 }

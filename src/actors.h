@@ -2,7 +2,7 @@
 #ifndef _ACTORS_
 #define _ACTORS_
 
-#include "actorCounts.h"
+#include "actorSelection.h"
 
 #include "actorComponents/identifierComponent.h"
 #include "actorComponents/timeLineComponent.h"

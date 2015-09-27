@@ -2,11 +2,11 @@ compile:
 	clear
 	echo Compiling...
 	gcc -c src/main.c
-	gcc -c src/options.c
-	gcc -c src/save.c
+	gcc -c src/userControl/options.c
+	gcc -c src/userControl/save.c
 	gcc -c src/camera.c
 	gcc -c src/globalBinds.c
-	gcc -c src/keyboard.c
+	gcc -c src/userControl/keyboard.c
 	gcc -c src/actorComponents/identifierComponent.c
 	gcc -c src/actorComponents/timeLineComponent.c
 	gcc -c src/actorComponents/audioComponent.c
@@ -31,6 +31,7 @@ compile:
 	gcc -c src/math/pythag.c
 	gcc -c src/math/angles.c
 	gcc -c src/math/quaternion.c
+	gcc -c src/math/matrix.c
 	
 	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
 	identifierComponent.o timeLineComponent.o audioComponent.o \
@@ -41,7 +42,7 @@ compile:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o quaternion.o \
+	angles.o quaternion.o matrix.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
 	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
@@ -53,7 +54,7 @@ compile:
 	renderComponent.o \
 	actors.o terrain.o protag.o \
 	shaders.o globalTimeLine.o dataTypes.o gMath.o pythag.o \
-	angles.o quaternion.o
+	angles.o quaternion.o matrix.o
 	
 	echo Compiled.
 run:

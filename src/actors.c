@@ -75,10 +75,14 @@ void genAllActors (void)
 void freeAllActors (void)
 {
 	U8 actorID = 0;
+	U8 actorCount = 0;
 	while ( actorID < MAX_ACTOR_COUNT ) {
+		if(Actors.ActiveActor[actorID])
+			actorCount++;
 		freeActor(actorID);
 		actorID++;
 	}
+	printf("Freed %i Actors.\n", actorCount);
 }
 void freeActor (U8 actorID)
 {
@@ -133,7 +137,7 @@ void updateActors (void)
 	actorID = 0;
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		if ( Actors.ActiveActor[actorID] )
-			if (Actors.ActorType[actorID] != STA)
+			//if (Actors.ActorType[actorID] != STA)
 				updateAIComponent(actorID, localTime[actorID]);
 		actorID++;
 	}

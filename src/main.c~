@@ -6,12 +6,12 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "dataTypes.h"
-#include "save.h"
-#include "keyboard.h"
+#include "userControl/save.h"
+#include "userControl/keyboard.h"
 #include "actors.h"
 #include "protag.h"
 #include "globalTimeLine.h"
-#include "globalBinds.h"
+#include "actorSelection.h"
 #include "actorComponents/physics/vector.h"
 #include "math/angles.h"
 #include "math/quaternion.h"
@@ -28,10 +28,12 @@ U8 BLINK;
 
 I32 main
 (I32 argc, I8 *argv[])
-{
+{	
+	IAMALIVE = 1;
+
 	printf("%s Starting.\nMain Initializing.\n", PROGRAM_NAME);
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
-	SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 500, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GLContext gameContext = SDL_GL_CreateContext(gameWindow);
 	
 	 //Initialize SDL_mixer
@@ -53,7 +55,9 @@ I32 main
 	
 	U8 ter = genTerrain();
 	U8 pro = genProtag();
-	BindCameraView(genCamera());
+	U8 cam = genCamera();
+	BindCameraView(cam);
+	
 	BindMapTerrain(ter);
 	BindControlledActor(pro);
 	
@@ -63,7 +67,6 @@ I32 main
 	
 	U8 list[] = {pro, ter};
 	
-	IAMALIVE = 1;
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
@@ -97,7 +100,6 @@ I32 main
 		updateActors();
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	//drawDel();
 	UnbindControlledActor();
 	UnbindMapTerrain();
 	UnbindCameraView();

@@ -18,4 +18,5 @@ U8 genTerrain
 void UpdateTerrain
 (U8 actorID, U16 deltaMS)
 {
+	setPos(actorID, genVec3(0.0, -1.0, 5.5));
 }

@@ -10,15 +10,18 @@ Normal_t genNormal(void)
 {
 	return genVec3(0, 0, 1);
 }
-void NormalizeNormal
-(Normal_t *normal)
+Normal_t NormalizeNormal
+(Normal_t normal)
 {
-	F32 change = PythagoreanTheorum( getVec3X(*normal),  getVec3Y(*normal),  getVec3Z(*normal) );
-	if (change == 0)
-		return;
-	setVec3X(normal,  getVec3X(*normal) / change);
-	setVec3Y(normal,  getVec3Y(*normal) / change);
-	setVec3Z(normal,  getVec3Z(*normal) / change);
+	Normal_t normalized;
+	F32 change = PythagoreanTheorum( normal.vec[0],  normal.vec[1],  normal.vec[2] );
+	if (change == 0){
+		return normal;
+	}
+	normalized.vec[0] = normal.vec[0]/change;
+	normalized.vec[1] = normal.vec[1]/change;
+	normalized.vec[2] = normal.vec[2]/change;
+	return normalized;
 }
 void PrintNormal
 (Normal_t normal)

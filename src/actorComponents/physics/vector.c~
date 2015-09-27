@@ -43,19 +43,19 @@ vec3 scaleVec3
 {
 	return genVec3(getVec3X(vector) * scale, getVec3Y(vector) * scale, getVec3Z(vector) * scale);
 }
-F32 dot
+F32 dotVec3
 (vec3 vecOne, vec3 vecTwo)
 {
 	return getVec3X(vecOne) * getVec3X(vecTwo) + getVec3X(vecOne) * getVec3Z(vecTwo) + getVec3Z(vecOne) * getVec3Z(vecTwo);
 }
-vec3 cross(vec3 vecOne, vec3 vecTwo)
+vec3 crossVec3(vec3 vecOne, vec3 vecTwo)
 {
 	F32 X = vecOne.vec[1] * vecTwo.vec[2] - vecOne.vec[2] * vecTwo.vec[1];
 	F32 Y = vecOne.vec[2] * vecTwo.vec[0] - vecOne.vec[0] * vecTwo.vec[2];
 	F32 Z = vecOne.vec[0] * vecTwo.vec[1] - vecOne.vec[1] * vecTwo.vec[0];
 	return genVec3(X, Y, Z);
 }
-void				PrintVec3				(vec3 vec)
+void	PrintVec3	(vec3 vec)
 {
 	printf("[ %f, %f, %f]\n", getVec3X(vec), getVec3Y(vec), getVec3Z(vec));
 }

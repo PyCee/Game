@@ -7,7 +7,7 @@ typedef struct _vec3 Normal_t;
 
 vec3 genNormal(void);
 
-void NormalizeNormal(Normal_t *);
+Normal_t NormalizeNormal(Normal_t);
 
 void PrintNormal(Normal_t);
 #endif
