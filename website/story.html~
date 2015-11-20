@@ -1,27 +1,12 @@
-<!--#include file="page_header.html" -->
+<!--#include virtual="/page_header.html" -->
 <title>Game Story</title>
-<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-<!--#include file="content_header.html" -->
+<!--#include virtual="/content_header.html" -->
 <h2>
-	<a href = "chapters/chapter_prologue.html"> Prologue:  </a> 
+	<a href = "chapters/chapter_one.html">Chapter One</a> 
 	</br>
-	<a href = "chapters/chapter_one.html"> Chapter One:  </a> 
+	<a href = "chapters/chapter_two.html">Chapter Two</a> 
 	</br>
-	<a href = "chapters/chapter_two.html"> Chapter Two:  </a> 
+	<a href = "chapters/chapter_three.html">Chapter Three</a> 
 	</br>
-	<a href = "chapters/chapter_three.html"> Chapter Three:  </a> 
-	</br>
-	<a href = "chapters/chapter_four.html"> Chapter Four:  </a> 
-	</br>
-	<a href = "chapters/chapter_five.html"> Chapter Five:  </a> 
-	</br>
-	<a href = "chapters/chapter_six.html"> Chapter Six:  </a> 
-	</br>
-	<a href = "chapters/chapter_seven.html"> Chapter Seven:  </a> 
-	</br>
-	<a href = "chapters/chapter_eight.html"> Chapter Eight: </a>
-	<a href = "chapters/chapter_heaven.html"> Heaven </a>Or
-	<a href = "chapters/chapter_hell.html"> Hell </a>
 </h2>
-<!--#include file="content_footer.html" -->
-<!--#include file="page_footer.html" -->
+<!--#include virtual="/footer.html" -->

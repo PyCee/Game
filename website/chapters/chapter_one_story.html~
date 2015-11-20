@@ -1,0 +1,40 @@
+<!--#include virtual="/page_header.html" -->
+<title>Game Chapter One Story</title>
+<!--#include virtual="/content_header.html" -->
+
+<h2> Chapter One Story</h2></br>
+Chapter One starts with the <a href="/monsters/protagonist.html">Protagonist</a> wandering desert dunes.</br></br>
+<i id="dessert">Setting: Sand</br></br>
+Trigger: Movement to certain area</br>
+Result: Monsters appear to fight the protagonist</br></br>
+~Start basic fighting tutorial~</br></br>
+Trigger: 25% Monsters Defeated</br>
+Result: Sandstorm Appears</br></br></i>
+While moving forward, cliff walls (of which the protagonist is at the bottom)</br>
+come together and force the protagonist to a certain area.</br></br>
+<i>Trigger: Movement to certain area</br>
+Result: Sandstorm lessens(still obscures distant vision, but other side of arena is somewhat visible)</br></br></i>
+You keep going forward.</br></br>
+<i id="sand_arena"> Setting: The walls widen out to form a large circle(arena).</br>
+The sand is blown down from the right slope. It is piled up in the ____ side of the circle.</br>
+The right wall slopes out steeply(about 75 degrees out of circle), with holes(windows) in the side.</br>
+As the wall goes around the circle, it slopes into the circle (about 80 degrees) on the left.</br></br></i>
+Explore the area.
+
+
+</br></br>
+<div class="wide">
+	<div>
+		<a href = "/story.html">
+			<img src="back_to.jpg" alt="Back To" />
+			<img src="" alt="Chapter Selection" />
+		</a>
+	</div><!--
+	--><div>
+		<a href = "chapter_two.html">
+			<img src="proceed_to.jpg" alt="Proceed To" />
+			<img src="" alt="Chapter Two" />
+		 </a>
+	</div>
+</div>
+<!--#include virtual="/footer.html" -->

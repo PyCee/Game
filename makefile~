@@ -79,6 +79,7 @@ pull:
 	clear
 	git pull
 site:
+	clear
 	sudo cp -r website/. ../../../var/www/html
 	echo Website Updated.
 goodbye:

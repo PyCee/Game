@@ -1,0 +1,15 @@
+<!--#include virtual="/page_header.html" -->
+<title>Game Chapter One Setting</title>
+<!--#include virtual="/content_header.html" -->
+<h2> Chapter One Setting</h2></br></br></br>
+<div id="sand">
+Desert: Sand</br></br></br></br></br></br></br></br>
+</div>
+<div id="arena">
+Setting: The walls widen out to form a large circle(arena).</br></br></br>
+The sand is blown down from the right slope. It is piled up in the ____ side of the circle.</br></br></br>
+The right wall slopes out steeply(about 75 degrees out of circle), with holes(windows) in the side.</br></br></br>
+As the wall goes around the circle, it slopes into the circle (about 80 degrees) on the left.</br></br></br></br>
+</div>
+
+<!--#include virtual="/footer.html" -->

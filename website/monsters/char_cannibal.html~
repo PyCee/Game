@@ -1,0 +1,8 @@
+<!--#include virtual="../page_header.html" -->
+<title>Game Char Protagonist</title>
+<!--#include file="char_content_header.html" -->
+<p>	
+	<h1>Cannibal</h1>
+</p>
+<!--#include virtual="../content_footer.html" -->
+<!--#include virtual="../page_footer.html" -->
