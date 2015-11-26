@@ -78,7 +78,7 @@ a:active {
 	margin-left:auto;
 	margin-right:auto;
 	display:block;
-} /* To make text not centered, surround with <div style="height:auto; width:100% text-align:left;"> </div> */
+}
 .wide {
 	height:auto;
 	width:100%;

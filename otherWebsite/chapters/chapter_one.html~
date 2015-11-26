@@ -1,0 +1,104 @@
+<!--#include virtual="../page_header.html" -->
+<title>Game Ch 1</title>
+<!--#include file="chapter_content_header.html" -->
+<p>
+	<h1>Chapter One</h1>
+	Wake up in room in orphanage. Can walk around and talk to several residents.</br></br>
+	Person in charge of orphanage pulls protagonist aside and tells him to win a</br>
+	fighting tournement for money prize.</br>
+	<!--TODO> make reason for need of money </TODO-->
+	Tells protagonist to find weapon at burnt down blacksmith's house then head to the underground arena.</br></br></br>
+	Something along the lines of:</br>
+	<i>"I've never been to the place myself. Rumor's all the beggars</br>
+	go there to take stuff off the bodies 'fore they're gotten rid of...</br>
+	But they won't let you in if they don't think you can fight.</br>
+	We need to get you a weapon...</br>
+	The hunters burnt down a blacksmith's house earlier in (place).</br>
+	Should still be somthin sharp-like in the ashes...</br>
+	Go make 'em bleed."</br></br>
+	Instructions: Press 't' to open map </i></br></br>
+	
+	Protagonist heads to blacksmith's house. Confronted by hunters while searching for weapon,</br>
+	he can choose to ignore them and search for a weapon while they talk at him,</br>
+	or talk to them and get beat up then look throughout ruins.</br>
+	Either way, the protagonist finds a <a href="../mechanics/mec_knife.html">knife</a>.</br>
+	After a few test swings(swing using LMB) he realizes the knife glowed when swung. </br></br>
+	He headed to the arena.</br>
+	He and another are called out to drag a body away. The bodies are thrown down a chute.</br>
+	Fight in arena.</br>
+	Win first fight.</br>
+	Start second fight, get hurt, hear voice.</br></br></br>
+	<i>"Just close your eyes.</br>
+	I can make this work out in your favor.</br>
+	Just give me control."</br></br>
+	Instructions: Close your eyes with RMB</i></br></br>
+	
+	Open Eyes and see opponent dead. Head back to waiting area.</br>
+	Give control to P2 at beginning of third fight, win.</br></br>
+	Told to drag body to chute. Told to wait until everyone has left.</br>
+	Once eveyone has left, he is told to follow the person who has been giving him orders.</br>
+	He is told to wait in a room with a body. He is locked in the room.</br>
+	Given water, but no food. Days go by.</br>
+	The person who delivers water says nothing.</br>
+	The voice in his head says</br></br></br>
+	<i>If you don't eat the body, you will die.</br>
+	They are not going to let you out of here.</br>
+	The smell's only gonna get worse.</br>
+	Would you rather chew on the bones.</br>
+	I'll do it. Just close your eyes.</i></br></br>
+	-choice: eat, close eyes, refuse</br>
+	---if ate{</br>
+		<i>Look... I just need you to remain within your mind.</br>
+		Can you promise me that you won't do anything like that again?</br>
+		Don't do it again.</i>}</br></br>
+	---if closed eyes{</br>
+		<i>words.</i>}</br>
+	After the choice, he is invited to dinner with the person in charge of the arena fights.</br>
+	When the meat is brought out.</br></br></br>
+	<i>This is today's newest winner.</br>
+	He made it to the last round, and now he graces our presence.</br>
+	---if ate or closed eyes{</br>
+		<i>I can tell that you didn't enjoy your last meal.</br>
+		It was unpleasent, I know. No one likes eating raw. But we all had to start there.</i>}</br>
+	---if refused{</br>
+		<i>Now, I need you to do something.</br>
+		I need you to eat this.</i>}</br>
+		-choice: eat, close eyes, refuse</br>
+		---if eat or close eyes{</br>
+			<i>That's better. Now we can all be friends.</i>}</br>
+		---if refuse{</br>
+			<i>That's not very polite. I made this meal for you and me to have a nice talk over.</br>
+			I'm going to ask once more. I'd be careful in your place,</br>
+			your answer may send you back to that little cell you know all too well.</i>}</br>
+			-choice: eat, close eyes, refuse</br>
+			---if eat or close eyes</br>
+				Good.</br>
+			---if refuse</br>
+				I guess that's just how it is. Have fun.</br>
+				Remember, the smell doesn't fade with time.</br>
+			*sent back into cell</br>
+				-choice: eat, close eyes, refuse</br>
+				---if eat or close eyes</br>
+	
+				---if refuse</br>
+				*wake up next morning with body partially eaten.</br>
+				*brought back to dinner table</br></i>
+	
+	</br></br>
+	<div class="wide">
+		<div>
+			<a href = "chapter_prologue.html">
+				<img src="" alt="Back To" />
+				<img src="" alt="Prologue" />
+			</a>
+		</div><!--
+		--><div>
+			<a href = "chapter_two.html">
+				<img src="" alt="Proceed To" />
+				<img src="" alt="Chapter Two" />
+			 </a>
+		</div>
+	</div>
+</p>
+<!--#include virtual="../content_footer.html" -->
+<!--#include virtual="../page_footer.html" -->

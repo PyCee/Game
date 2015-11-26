@@ -4,9 +4,9 @@
 <p>
 	Depending on choices made in the chapter seven, the protagonist may be placed in 
 	<div class="wide">
-		<a href = "heaven.html"> <img src = "" alt = "heaven" /> </a>
+		<a href = "chapter_heaven.html"> <img src = "" alt = "heaven" /> </a>
 		or
-		<a href = "hell.html"> <img src = "" alt = "hell" /> </a>
+		<a href = "chapter_hell.html"> <img src = "" alt = "hell" /> </a>
 	</div>
 	
 </p>
