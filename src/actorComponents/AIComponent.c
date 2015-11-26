@@ -3,18 +3,18 @@
 
 #include "../actors.h"
 
-void genAIComponent(U8 actorID) {
-	assignAIUpdate(actorID, UselessUpdate);
+void genAIComponent() {
+	assignAIUpdate(UselessUpdate);
 }
-void freeAIComponent(U8 actorID) {
-	assignAIUpdate(actorID, UselessUpdate);
+void freeAIComponent() {
+	assignAIUpdate(UselessUpdate);
 }
-void updateAIComponent(U8 actorID, U16 deltaMS) {
-	Actors.AI[actorID].update(actorID, deltaMS);
+void updateAIComponent(U16 deltaMS) {
+	Actors.AI[getActor()].update(deltaMS);
 }
-void assignAIUpdate(U8 actorID, void (*updateFunction)(U8, U16)) {
-	Actors.AI[actorID].update = updateFunction;
+void assignAIUpdate(void (*updateFunction)(U16)) {
+	Actors.AI[getActor()].update = updateFunction;
 }
 
-void UselessUpdate(U8 actorID, U16 deltaMS) {
+void UselessUpdate(U16 deltaMS) {
 }

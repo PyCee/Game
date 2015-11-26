@@ -7,7 +7,7 @@ typedef struct _IdentifierComponent_t {
 	U8 * ActorName;
 } IdentifierComponent_t;
 
-void genIdentifierComponent(U8);
-void freeIdentifierComponent(U8);
+void genIdentifierComponent();
+void freeIdentifierComponent();
 
 #endif /* _IDENTIFIER_COMPONENT_ */

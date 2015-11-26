@@ -2,7 +2,7 @@
 #include "../dataTypes.h"
 #include "audioComponent.h"
 
-#include "../dyn_actors.h"
+#include "../actors.h"
 void genAudioComponent
 (U8 actorID)
 {

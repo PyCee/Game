@@ -11,7 +11,7 @@
 #define SPEED_RIGHT 0.0008
 
 U8			genProtag									(void);
-void		UpdateProtag							(U8, U16);
+void		UpdateProtag							(U16);
 void		Jump											(void);
 
 void		ControlledActorForward		(void);

@@ -167,10 +167,11 @@ void handleEvents
 				}
 				break;
 			case SDL_MOUSEMOTION:
-				// Tilt Global Camera
-				//DirectionYaw(getCameraView(), event.motion.xrel * MouseSensitivity);
-				DirectionPitch(getCameraView(), event.motion.yrel * MouseSensitivity);
-      	break;
+				// Rotate Global Camera
+				bindActor(getCameraView());
+				DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
+				//DirectionPitch(event.motion.yrel * MouseSensitivity / 256);
+      				break;
 			default:
 				break;
 		}

@@ -6,8 +6,8 @@ typedef struct _AudioComponent_t {
 	
 } AudioComponent_t;
 
-void	genAudioComponent				(U8);
-void	freeAudioComponent			(U8);
-void	updateAudioComponent		(U8, U16);
+void	genAudioComponent				();
+void	freeAudioComponent			();
+void	updateAudioComponent		(U16);
 
 #endif /* _AUDIO_COMPONENT_ */

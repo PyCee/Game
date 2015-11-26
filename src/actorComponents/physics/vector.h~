@@ -25,8 +25,4 @@ F32	getVec3X	(vec3);
 F32	getVec3Y	(vec3);
 F32	getVec3Z	(vec3);
 
-vec3 i;
-vec3 j;
-vec3 k;
-
 #endif

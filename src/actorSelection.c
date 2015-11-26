@@ -23,7 +23,7 @@ void bindLight(U8 light)
 {
 	if(light >= MAX_LIGHT_COUNT || light < 0)
 		printf("Invalid LightID bound.\n LightID = %i.\n", light);
-	currentLight = light
+	currentLight = light;
 }
 U8 getLight(void)
 {
