@@ -49,6 +49,7 @@ I32 main
 	globalTimeLine_t *globalTimeLine;
 	genGlobalTimeLine(&globalTimeLine);
 	BindGlobalTimeLine(globalTimeLine);
+	printf("IAMALIVE: %d\n", IAMALIVE);
 	
 	initActorComponents();
 	genAllActors();
@@ -57,6 +58,7 @@ I32 main
 	U8 pro = genProtag();
 	U8 cam = genCamera();
 	BindCameraView(cam);
+	printf("IAMALIVE: %d\n", IAMALIVE);
 	
 	BindMapTerrain(ter);
 	BindControlledActor(pro);
@@ -73,8 +75,10 @@ I32 main
 	
 	//drawInit();
 	
+	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
+	printf("IAMALIVE: %d\n", IAMALIVE);
 	while( IAMALIVE == 1 ) {
 	
 		SDL_GL_SwapWindow(gameWindow);

@@ -5,8 +5,6 @@
 #include <SDL2/SDL_opengl.h>
 
 //GLuint VAO;
-GLuint VBO;
-GLuint IBO;
 
 GLuint shaderProgram;
 GLuint shaderVertex;

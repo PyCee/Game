@@ -19,7 +19,6 @@ U8 getActor(void)
 {
 	return currentActor;
 }
-
 void bindLight(U8 light)
 {
 	if(light >= MAX_LIGHT_COUNT || light < 0)
@@ -30,7 +29,6 @@ U8 getLight(void)
 {
 	return currentLight;
 }
-
 void bindCameraView(U8 camera)
 {
 	cameraView = camera;

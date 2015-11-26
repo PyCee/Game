@@ -2,7 +2,7 @@
 #ifndef _RENDER_COMPONENT_
 #define _RENDER_COMPONENT_
 
-#include "../actorCounts.h"
+#include "../actorSelection.h"
 #include <SDL2/SDL_opengl.h>
 
 #define MAX_X 10

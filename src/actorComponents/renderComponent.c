@@ -147,7 +147,6 @@ void updateRenderComponent (U8 actorID, U16 deltaMS)
 		
 			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(k, 45));
 			worldPlacement = translateMat4(worldPlacement, genVec3(getPosX(actorID), getPosY(actorID), getPosZ(actorID)));
-			//printMat4(worldPlacement);
 		}
 		//printf("now printing worldplacement mat4\n");
 		//printMat4(worldPlacement);
@@ -155,14 +154,13 @@ void updateRenderComponent (U8 actorID, U16 deltaMS)
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
 	if ( Actors.collisions[actorID].drawBounds ) {//&& actorID == getControlledActor()) {
-		//PrintVec3(Actors.physics[actorID].Pos);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, Actors.render[actorID].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
-		glEnableVertexAttribArray(0);
+
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-		glDisableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		

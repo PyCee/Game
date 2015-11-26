@@ -1,7 +1,8 @@
-#version 330
+#version 130
 
-layout (location = 0) in vec3 localPosition;
+//layout (location = 0) in vec3 localPosition;
 
+in vec3 localPosition;
 uniform vec3 actorWorldPosition;
 uniform vec3 actorRotateVector;
 uniform vec3 actorRotateAngle;
