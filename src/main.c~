@@ -48,8 +48,7 @@ I32 main
 	
 	globalTimeLine_t *globalTimeLine;
 	genGlobalTimeLine(&globalTimeLine);
-	BindGlobalTimeLine(globalTimeLine);
-	printf("IAMALIVE: %d\n", IAMALIVE);
+	bindGlobalTimeLine(globalTimeLine);
 	
 	initActorComponents();
 	genAllActors();
@@ -57,11 +56,9 @@ I32 main
 	U8 ter = genTerrain();
 	U8 pro = genProtag();
 	U8 cam = genCamera();
-	BindCameraView(cam);
-	printf("IAMALIVE: %d\n", IAMALIVE);
-	
-	BindMapTerrain(ter);
-	BindControlledActor(pro);
+	bindCameraView(cam);
+	bindMapTerrain(ter);
+	bindControlledActor(pro);
 	
 	Mix_Music *BGMusic = NULL;
 	//BGMusic = Mix_LoadMUS(""); //get .wav and put path in quotes
@@ -91,46 +88,46 @@ I32 main
 		updateGlobalTimeLine(getGlobalTimeLine());
 		
 		//<CL "physics upgrade: collisions">
-		
-		U8 collision = CheckBoundingBoxCollision(pro, ter);
+		bindActor(pro);
+		U8 collision = CheckBoundingBoxCollision(ter);
+		vec3 proPos = Actors.physics[getActor()].Pos;
+		bindActor(ter);
+		vec3 terPos = Actors.physics[getActor()].Pos;
 		if( collision == 1){
-			if(getPosY(pro) < getPosY(ter) + getHeight(ter)){
-				setPosY(pro, getPosY(ter) + getHeight(ter));
-				setVelY(pro, 0.0);
+			if(proPos.vec[1] < terPos.vec[1] + getHeight()){
+				F32 terHeight = getHeight();
+				bindActor(pro);
+				setPos(genVec3(proPos.vec[0], terPos.vec[1] + terHeight, proPos.vec[2]));
+				vec3 proVel = Actors.physics[getActor()].Vel;
+				setVel(genVec3(proVel.vec[0], 0.0, proVel.vec[2]));
 			}
 		}
+		printf("%i\n", collision);
 		//</CL>
 		handleEvents();
 		updateActors();
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	UnbindControlledActor();
-	UnbindMapTerrain();
-	UnbindCameraView();
-	UnbindGlobalTimeLine();
+	bindCameraView(0);
+	bindMapTerrain(0);
+	bindControlledActor(0);
+	bindGlobalTimeLine(0);
 	freeAllActors();
 	freeGlobalTimeLine(&globalTimeLine);
 	SaveOptions();
 	DefaultKeyboard();
+	
+	vec3 asd = k;
+	printVec3(asd);
+	asd = rotateVec3(asd, i, -45);
+	printVec3(asd);
+	//asd = rotateVec3(asd, j, 45);
+	//asd = NormalizeNormal(asd);
+	//printVec3(asd);
 	
 	Mix_FreeMusic(BGMusic);
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
 	
-	/*Vector_t asd;
-	genVector(&asd, 0, 1, 0);
-	PrintVector(asd);
-	NormalizeNormal(&asd);
-	copyVector(&asd, *PitchVector(asd, 90));//DegreesToRadians(90)));
-	NormalizeNormal(&asd);
-	PrintVector(asd);
-	*/
-	/*FILE *loadFile;
-	loadFile = fopen(KEY_BINDINGS_PATH, "r");
-	fscanf(loadFile, "%*s %*s");
-	char i = getc(loadFile);
-	if (i == '\n')
-		printf("jfhjfhfjfhfjdj");
-	fclose(loadFile);*/
 }

@@ -8,10 +8,9 @@
 #include "../physics/vertex.h"
 #include "../physics/vector.h"
 #include "../direction/normal.h"
-#include "../../globalBinds.h"
+#include "../../actorSelection.h"
 #include "../lightingComponent.h"
 #include "../../actors.h"
-#include "../../actorCounts.h"
 
 // TODO: test any and every aspect.
 

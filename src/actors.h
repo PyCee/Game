@@ -33,11 +33,11 @@ typedef struct _Actors_t
 Actors_t Actors;
 
 void	initActorComponents(void);
-U8 	addDyn_Actor						(void);
-U8 	addSta_Actor						(void);
+void 	addDyn_Actor						(void);
+void 	addSta_Actor						(void);
 void	genAllActors						(void);
 void	freeAllActors						(void);
-void	freeActor						(U8);
+void	freeActor						(void);
 void	updateActors						(void);
 
 #endif /* _ACTOR_ */

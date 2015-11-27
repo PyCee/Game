@@ -15,10 +15,10 @@ typedef struct _LightingComponent_t{
 
 Color_t AmbiantLight;
 
-void		genLightingComponent			(U8);
-void		freeLightingComponent			(U8);
-void		updateLightingComponent		(U8, U32);
-U8			getFirstInactiveLight			(U8);
-U8			addLight									(U8, Vertex_t *);
+void		genLightingComponent			(void);
+void		freeLightingComponent			(void);
+void		updateLightingComponent		(U32);
+void			getFirstInactiveLight			();
+void			addLight									(Vertex_t *);
 
 #endif /* _LIGHTING_ */

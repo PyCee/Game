@@ -13,16 +13,16 @@ typedef struct _TimeLineComponent_t{
 	U8 isPaused;
 } TimeLineComponent_t;
 
-void genTimeLineComponent(U8);
-void freeTimeLineComponent(U8);
-U16 updateTimeLineComponent(U8);
-void mapTimeLine(U8);
-void PauseTimeLine(U8);
-void UnpauseTimeLine(U8);
+void genTimeLineComponent();
+void freeTimeLineComponent();
+U16 updateTimeLineComponent();
+void mapTimeLine();
+void PauseTimeLine();
+void UnpauseTimeLine();
 
 U16 getAdvanceTime(void);
 
-U8 isTimeLinePaused(U8);
-U8 isTimeLineOver(U8);
+U8 isTimeLinePaused();
+U8 isTimeLineOver();
 
 #endif /*  _TIME_LINE_COMPONENT_*/

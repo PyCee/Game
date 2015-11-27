@@ -6,7 +6,7 @@
 #include "../actors.h"
 
 void genLightingComponent
-(U8 actorID)
+()
 {
 	AmbiantLight.Red = 128;
 	AmbiantLight.Green = 128;
@@ -16,40 +16,40 @@ void genLightingComponent
 	U8 lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT)
 	{
-		Actors.lighting[actorID].originatingPoint[lightID] = 0;
-		genColor(&(Actors.lighting[actorID].intensity[lightID]));
-		Actors.lighting[actorID].ActiveLights[lightID] = 0;
+		bindLight(lightID);
+		Actors.lighting[getActor()].originatingPoint[getLight()] = 0;
+		genColor(&(Actors.lighting[getActor()].intensity[getLight()]));
+		Actors.lighting[getActor()].ActiveLights[getLight()] = 0;
 		lightID++;
 	}
 }
 void freeLightingComponent
-(U8 actorID)
+()
 {
 }
 void updateLightingComponent
-(U8 actorID, U32 deltaMS)
+(U32 deltaMS)
 {
 }
-U8 getFirstInactiveLight
-(U8 actorID)
+void bindFirstInactiveLight
+()
 {
 	U8 lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT)
 	{
-		if (Actors.lighting[actorID].ActiveLights[lightID] == 0)
-			return lightID;
+		bindLight(lightID);
+		if (Actors.lighting[getActor()].ActiveLights[getLight()] == 0)
+			return;
 		lightID++;
 	}
 	printf("ERROR::getFirstInactiveLight(void) called after ActiveLights array was filled::\
-			First Inactive Light: %d::MAX_LIGHT_COUNT: %d\n", lightID, MAX_LIGHT_COUNT);
-	return lightID;
+			First Inactive Light: %d::MAX_LIGHT_COUNT: %d\n", getLight(), MAX_LIGHT_COUNT);
+	bindLight(lightID);
 }
-U8 addLight
-(U8 actorID, Vertex_t * origin)
+void addLight
+(Vertex_t * origin)
 {
-	U8 lightID = getFirstInactiveLight(actorID);
-	Actors.lighting[actorID].originatingPoint[lightID] = origin;
-	Actors.lighting[actorID].ActiveLights[lightID] = 1;
-	
-	return lightID;
+	bindFirstInactiveLight();
+	Actors.lighting[getActor()].originatingPoint[getLight()] = origin;
+	Actors.lighting[getActor()].ActiveLights[getLight()] = 1;
 }

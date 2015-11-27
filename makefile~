@@ -5,7 +5,7 @@ compile:
 	gcc -c src/userControl/options.c
 	gcc -c src/userControl/save.c
 	gcc -c src/camera.c
-	gcc -c src/globalBinds.c
+	gcc -c src/actorSelection.c
 	gcc -c src/userControl/keyboard.c
 	gcc -c src/actorComponents/identifierComponent.c
 	gcc -c src/actorComponents/timeLineComponent.c
@@ -33,7 +33,7 @@ compile:
 	gcc -c src/math/quaternion.c
 	gcc -c src/math/matrix.c
 	
-	gcc -g -o bin/Morte main.o options.o save.o camera.o globalBinds.o keyboard.o \
+	gcc -g -o bin/Morte main.o options.o save.o camera.o actorSelection.o keyboard.o \
 	identifierComponent.o timeLineComponent.o audioComponent.o \
 	directionComponent.o normal.o \
 	physicsComponent.o vector.o vertex.o \
@@ -45,7 +45,7 @@ compile:
 	angles.o quaternion.o matrix.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
-	rm main.o options.o save.o camera.o globalBinds.o keyboard.o \
+	rm main.o options.o save.o camera.o actorSelection.o keyboard.o \
 	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
 	directionComponent.o normal.o \
 	physicsComponent.o vector.o vertex.o \
