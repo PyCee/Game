@@ -80,7 +80,21 @@ pull:
 	git pull
 site:
 	clear
-	sudo cp -r website/. ../../../var/www/html
+	sudo rm -r ../../../var/www/html/*
+	sudo cp -r website/. ../../../var/www/ldm.com/public_html
 	echo Website Updated.
+set-up website:
+	clear
+	sudo apt-get purge apache2
+	sudo apt-get install apache2
+	sudo mkdir -p /var/www/ldm.com/public_html
+	sudo cp website/apache2.game.conf /etc/apache2/sites-available/ldm.com.conf
+	sudo a2enmod include
+	sudo a2ensite ldm.com.conf
+	sudo a2dissite 000-default.conf
+	sudo service apache2 restart
+	sudo cp -r website/. /var/www/ldm.com/public_html
+take-down website:
+	sudo rm /var/www/html/.
 goodbye:
 	echo FAREWELL CRUEL WORLD
