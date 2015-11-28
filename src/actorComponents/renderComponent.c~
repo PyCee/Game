@@ -145,7 +145,7 @@ void updateRenderComponent(U16 deltaMS)
 		worldPlacement = translateMat4(worldPlacement, Actors.physics[getActor()].Pos);
 		if(getActor() == getControlledActor()){
 		
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(k, 30));
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(j, 0));
 			worldPlacement = translateMat4(worldPlacement, Actors.physics[getActor()].Pos);
 			//printMat4(worldPlacement);
 		}
@@ -159,10 +159,10 @@ void updateRenderComponent(U16 deltaMS)
 		
 		glBindBuffer(GL_ARRAY_BUFFER, Actors.render[getActor()].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
-		glEnableVertexAttribArray(0);
+
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-		glDisableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		

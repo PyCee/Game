@@ -72,8 +72,10 @@ I32 main
 	
 	//drawInit();
 	
+	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
+	printf("IAMALIVE: %d\n", IAMALIVE);
 	while( IAMALIVE == 1 ) {
 	
 		SDL_GL_SwapWindow(gameWindow);
