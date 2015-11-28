@@ -14,7 +14,6 @@ typedef struct _PhysicsComponent_t {
 	vec3 Acc;
 	vec3 Jrk;
 	U16 Mass;// Measured in Grams
-	U8 Elasticity;
 	U8 Speed;
 } PhysicsComponent_t;
 
@@ -22,7 +21,7 @@ void genPhysicsComponent();
 void freePhysicsComponent();
 void updatePhysicsComponent(U16);
 
-void setSpeed( U8);
+void setSpeed(U8);
 void setPos(vec3);
 void setVel(vec3);
 void setAcc(vec3);

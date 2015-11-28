@@ -80,7 +80,7 @@ pull:
 	git pull
 site:
 	clear
-	sudo rm -r ../../../var/www/html/*
+	sudo rm -r ../../../var/www/ldm.com/public_html/*
 	sudo cp -r website/. ../../../var/www/ldm.com/public_html
 	echo Website Updated.
 set-up website:
