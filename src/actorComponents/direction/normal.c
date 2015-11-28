@@ -26,5 +26,5 @@ Normal_t NormalizeNormal
 void PrintNormal
 (Normal_t normal)
 {
-	PrintVec3(normal);
+	printVec3(normal);
 }

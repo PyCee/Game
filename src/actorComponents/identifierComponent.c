@@ -3,9 +3,9 @@
 
 #include "../actors.h"
 
-void genIdentifierComponent(U8 actorID) {
-	Actors.identifier[actorID].ActorName = UNDEFINED_NAME;
+void genIdentifierComponent() {
+	Actors.identifier[getActor()].ActorName = UNDEFINED_NAME;
 }
-void freeIdentifierComponent(U8 actorID) {
-	Actors.identifier[actorID].ActorName = 0;
+void freeIdentifierComponent() {
+	Actors.identifier[getActor()].ActorName = 0;
 }

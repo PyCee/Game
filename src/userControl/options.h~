@@ -70,7 +70,7 @@ static U8 Brightness = 0;
 void DefaultAllControlOptions(void);
 
 void DefaultMouseSensitivity(void);
-#define DEFAULT_MOUSE_SENSITIVITY 1
+#define DEFAULT_MOUSE_SENSITIVITY 48
 #define MAX_MOUSE_SENSITIVITY 255
 #define MIN_MOUSE_SENSITIVITY 0
 static U8 MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;

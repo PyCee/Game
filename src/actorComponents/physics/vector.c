@@ -55,7 +55,7 @@ vec3 crossVec3(vec3 vecOne, vec3 vecTwo)
 	F32 Z = vecOne.vec[0] * vecTwo.vec[1] - vecOne.vec[1] * vecTwo.vec[0];
 	return genVec3(X, Y, Z);
 }
-void	PrintVec3	(vec3 vec)
+void	printVec3	(vec3 vec)
 {
 	printf("[ %f, %f, %f]\n", getVec3X(vec), getVec3Y(vec), getVec3Z(vec));
 }

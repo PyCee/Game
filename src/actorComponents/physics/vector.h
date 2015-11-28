@@ -17,16 +17,12 @@ vec3	scaleVec3	(vec3, F32);
 F32	dotVec3		(vec3, vec3);
 vec3	crossVec3	(vec3, vec3);
 
-void	PrintVec3	(vec3);
+void	printVec3	(vec3);
 void	setVec3X	(vec3 *, F32);
 void	setVec3Y	(vec3 *, F32);
 void	setVec3Z	(vec3 *, F32);
 F32	getVec3X	(vec3);
 F32	getVec3Y	(vec3);
 F32	getVec3Z	(vec3);
-
-vec3 i;
-vec3 j;
-vec3 k;
 
 #endif

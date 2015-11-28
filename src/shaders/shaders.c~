@@ -7,6 +7,42 @@
 #include <string.h>
 //p#include "../main.c"
 extern U8 IAMALIVE;
+void genShaders(void)
+{
+	
+	printf("Loading Vertex Shader.\n");
+	shaderVertex = loadShaderFromFile(SHADER_VERT_PATH, GL_VERTEX_SHADER);
+	printf("Vertex Shader Loaded.\nLoading Fragment Shader.\n");
+	shaderFragment = loadShaderFromFile(SHADER_FRAG_PATH, GL_FRAGMENT_SHADER);
+	printf("Vertex Shader Loaded.\n");
+
+	shaderProgram = glCreateProgram();
+	printf("shaderProgram Gened.\nshaderProgram Attaching Shaders.\n");
+	glAttachShader(shaderProgram, shaderVertex);
+	glAttachShader(shaderProgram, shaderFragment);
+	
+	glEnableVertexAttribArray(0);
+	glBindAttribLocation(shaderProgram, 0, "localPosition");
+
+	printf("shaderProgram Shaders Attached.\nLinking shaderProgram.\n");
+	glLinkProgram(shaderProgram);
+	printf("Linked shaderProgram.\n");
+	
+	GLint Success;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &Success);
+	if (Success == 0) {
+		GLchar ErrorLog[1024];
+		glGetProgramInfoLog(shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
+		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
+		
+		IAMALIVE = 0; // Ends game so error may be fixed.
+	}
+	
+	glValidateProgram(shaderProgram);
+	glUseProgram(shaderProgram);
+	
+	
+}
 // take file and load it into c-string
 static U8 * loadShaderSource(const U8 * path)
 {
@@ -55,31 +91,4 @@ GLuint loadShaderFromFile( const U8 * path, GLenum shaderType )
 	}
 
 	return shader;
-}
-void genShaders(void)
-{
-	
-	shaderVertex = loadShaderFromFile(SHADER_VERT_PATH, GL_VERTEX_SHADER);
-	shaderFragment = loadShaderFromFile(SHADER_FRAG_PATH, GL_FRAGMENT_SHADER);
-
-	shaderProgram = glCreateProgram();
-	printf("shaderProgram Gened.\nshaderProgram Attaching Shaders.\n");
-	glAttachShader(shaderProgram, shaderVertex);
-	glAttachShader(shaderProgram, shaderFragment);
-	glLinkProgram(shaderProgram);
-	
-	GLint Success;
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &Success);
-	if (Success == 0) {
-		GLchar ErrorLog[1024];
-		glGetProgramInfoLog(shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
-		
-		IAMALIVE = 0; // Ends game so error may be fixed.
-	}
-	
-	glValidateProgram(shaderProgram);
-	glUseProgram(shaderProgram);
-	
-	
 }

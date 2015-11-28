@@ -5,7 +5,7 @@
 typedef struct _Vertex_t Vertex_t;
 #include "lighting/color.h"
 
-#include "../actorCounts.h"
+#include "../actorSelection.h"
 
 typedef struct _LightingComponent_t{
 	Color_t					intensity						[MAX_LIGHT_COUNT];

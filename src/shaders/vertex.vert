@@ -1,6 +1,4 @@
-#version 330
-
-layout (location = 0) in vec3 localPosition;
+#version 130
 
 uniform vec3 actorWorldPosition;
 uniform vec3 actorRotateVector;
@@ -11,10 +9,12 @@ uniform vec3 cameraRotateAngle;
 uniform float ScreenScale;
 uniform int FOV;
 
+in vec3 localPosition;
 uniform mat4 actorPlacement;
 uniform mat4 worldPlacement;
 uniform mat4 cameraPlacement;
 
+out float col;
 
 vec3 QuaternionRotation( vec3, vec3, float );
 
@@ -22,7 +22,9 @@ void main()
 {
 	//gl_Position = vec4(position + actorWorldPosition, 1.0);
 	
-	gl_Position = cameraPlacement * worldPlacement * vec4(localPosition, 1.0);
+	gl_Position = worldPlacement * vec4(localPosition, 1.0);
+	col = gl_Position.z;
+	//gl_Position = cameraPlacement * worldPlacement * vec4(localPosition, 1.0);
 	
 	/*
 	vec3 actorTransformed = QuaternionRotation( position, actorRotateVector, actorRotateAngle );
