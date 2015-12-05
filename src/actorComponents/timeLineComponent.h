@@ -1,8 +1,7 @@
-
 #ifndef _TIME_LINE_COMPONENT_
 #define _TIME_LINE_COMPONENT_
 
-typedef struct _TimeLineComponent_t{
+typedef struct _TimeLineComponent_t {
 	U64 startTime;
 	U32 currTime;
 	F32 playBackRate;

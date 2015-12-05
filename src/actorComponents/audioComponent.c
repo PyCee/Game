@@ -1,17 +1,10 @@
-
 #include "../dataTypes.h"
 #include "audioComponent.h"
 
 #include "../actors.h"
-void genAudioComponent
-()
-{
+void genAudioComponent() {
 }
-void freeAudioComponent
-()
-{
+void freeAudioComponent() {
 }
-void updateAudioComponent
-(U16 deltaMS)
-{
+void updateAudioComponent(U16 deltaMS) {
 }

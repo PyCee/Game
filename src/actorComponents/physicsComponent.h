@@ -13,7 +13,7 @@ typedef struct _PhysicsComponent_t {
 	vec3 Vel;
 	vec3 Acc;
 	vec3 Jrk;
-	U16 Mass;// Measured in Grams
+	U16 Mass; // Measured in Grams
 	U8 Speed;
 } PhysicsComponent_t;
 
