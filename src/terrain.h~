@@ -10,6 +10,6 @@
 typedef struct _Dyn_Actor_t Terrain_t;
 
 U8 genTerrain(void);
-void UpdateTerrain(U8, U16);
+void UpdateTerrain(U16);
 
 #endif

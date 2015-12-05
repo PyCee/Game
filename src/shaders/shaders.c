@@ -1,11 +1,11 @@
 
 #include "../dataTypes.h"
 #include "shaders.h"
+#include "../loadFiles.h"
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-//p#include "../main.c"
 extern U8 IAMALIVE;
 void genShaders(void)
 {
@@ -43,25 +43,11 @@ void genShaders(void)
 	
 	
 }
-// take file and load it into c-string
-static U8 * loadShaderSource(const U8 * path)
-{
-	U8 * shaderSource;
-	FILE *source;
-	if ( (source = fopen( path, "r" ) ) == NULL )
-		return 0;
-	fseek( source,  0, SEEK_END );
-	U32 length = ftell( source );
-	fseek( source,  0, SEEK_SET );
-	shaderSource = malloc( length );
-	fread( shaderSource, length, 1, source );
-	fclose( source );
-	return shaderSource;
-}
 GLuint loadShaderFromFile( const U8 * path, GLenum shaderType )
 {
 	const GLchar * shaderSource[1];
-	shaderSource[0] = loadShaderSource( path );
+	U8 *fileSource = readFile( path );
+	shaderSource[0] = fileSource;
 	GLuint length[1];
 	GLuint result;
 
@@ -89,6 +75,6 @@ GLuint loadShaderFromFile( const U8 * path, GLenum shaderType )
 		
 		IAMALIVE = 0; // Ends game so error may be fixed.
 	}
-
+	free(fileSource);
 	return shader;
 }

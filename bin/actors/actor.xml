@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor>
+	<identifier>
+		<name>Cruelty</name>
+		<type>static</type>
+	</identifier>
+	<audio>
+		
+	</audio>
+	<physics>
+		<mass>1</mass>
+		<speed>1</speed>
+	</physics>
+	<collisions>
+		<height>1</height>
+		<width>1</width>
+		<radius>1</radius><!--To replace height and width once there is a working collision detection system-->
+	</collisions>
+	<AI>
+		<update>function</update>
+	</AI>
+	<lighting>
+		
+	</lighting>
+	<rendering>
+		<model>models/asdlkjasdlkjy.model</model>
+	</rendering>
+</actor>

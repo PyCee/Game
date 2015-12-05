@@ -2,13 +2,15 @@
 <title>Game Story</title>
 <!--#include virtual="/content_header.html" -->
 <h2>
-	<a href = "/chapters/chapter_one.html#desert">Desert</a>
+	<a href = "/Settings/desert.html">Desert</a>
 	</br>
-	<a href = "/chapters/chapter_one.html#sand_arena">Sand Arena</a>
+	<a href = "/Settings/sand_arena.html">Sand Arena</a>
 	</br>
-	<a href = "/chapters/chapter_one.html#arena_viewing">Arena Viewing</a>
+	<a href = "/Settings/arena_viewing.html">Arena Viewing</a>
 	</br>
-	<a href = "/chapters/chapter_one.html#monster_cells">Monster Cells</a>
+	<a href = "/Settings/monster_storage.html">Monster Storage</a>
+	</br>
+	<a href = "/Settings/god_hand.html">Hand of God</a>
 	</br>
 </h2>
 <!--#include virtual="/footer.html" -->

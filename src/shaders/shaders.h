@@ -8,9 +8,9 @@
 
 GLuint shaderProgram;
 GLuint shaderVertex;
-#define SHADER_VERT_PATH "src/shaders/vertex.vert"
+#define SHADER_VERT_PATH "../src/shaders/vertex.vert"
 GLuint shaderFragment;
-#define SHADER_FRAG_PATH "src/shaders/fragment.frag"
+#define SHADER_FRAG_PATH "../src/shaders/fragment.frag"
 
 GLuint loadShaderFromFile( const U8 *, GLenum);
 void genShaders(void);

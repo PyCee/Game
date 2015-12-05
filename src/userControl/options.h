@@ -14,7 +14,7 @@ Controls
 #ifndef _OPTIONS_
 #define _OPTIONS_
 
-#define CONFIG_PATH "usrData/config"
+#define CONFIG_PATH "../usrData/config"
 
 #define STR_SOUND_LEVEL "Sound_Level:"
 #define STR_MUSIC_LEVEL "Music_Level:"

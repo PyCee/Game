@@ -10,7 +10,7 @@ U8 genTerrain
 (void)
 {
 	addSta_Actor();
-	Actors.identifier[getActor()].ActorName = TERRAIN_NAME;
+	Actors.identifier[getActor()].actorName = TERRAIN_NAME;
 	assignAIUpdate(UpdateTerrain);
 	setBounds(10.0, 0.2);
 	setPos(genVec3(0.0, -1.0, 5.5));

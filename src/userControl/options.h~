@@ -14,7 +14,7 @@ Controls
 #ifndef _OPTIONS_
 #define _OPTIONS_
 
-#define CONFIG_PATH "usrData/config"
+#define CONFIG_PATH "../usrData/config"
 
 #define STR_SOUND_LEVEL "Sound_Level:"
 #define STR_MUSIC_LEVEL "Music_Level:"
@@ -70,7 +70,7 @@ static U8 Brightness = 0;
 void DefaultAllControlOptions(void);
 
 void DefaultMouseSensitivity(void);
-#define DEFAULT_MOUSE_SENSITIVITY 48
+#define DEFAULT_MOUSE_SENSITIVITY 128
 #define MAX_MOUSE_SENSITIVITY 255
 #define MIN_MOUSE_SENSITIVITY 0
 static U8 MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;

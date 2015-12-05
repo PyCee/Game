@@ -6,6 +6,8 @@ compile:
 	gcc -c src/userControl/save.c
 	gcc -c src/camera.c
 	gcc -c src/actorSelection.c
+	gcc -c src/loadFiles.c
+	gcc -c src/loadActorData.c
 	gcc -c src/userControl/keyboard.c
 	gcc -c src/actorComponents/identifierComponent.c
 	gcc -c src/actorComponents/timeLineComponent.c
@@ -33,7 +35,7 @@ compile:
 	gcc -c src/math/quaternion.c
 	gcc -c src/math/matrix.c
 	
-	gcc -g -o bin/Morte main.o options.o save.o camera.o actorSelection.o keyboard.o \
+	gcc -g -o bin/Morte main.o options.o save.o camera.o actorSelection.o loadFiles.o loadActorData.o keyboard.o \
 	identifierComponent.o timeLineComponent.o audioComponent.o \
 	directionComponent.o normal.o \
 	physicsComponent.o vector.o vertex.o \
@@ -45,7 +47,7 @@ compile:
 	angles.o quaternion.o matrix.o \
 	-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
 	
-	rm main.o options.o save.o camera.o actorSelection.o keyboard.o \
+	rm main.o options.o save.o camera.o actorSelection.o loadFiles.o loadActorData.o keyboard.o \
 	identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
 	directionComponent.o normal.o \
 	physicsComponent.o vector.o vertex.o \
@@ -58,7 +60,7 @@ compile:
 	
 	echo Compiled.
 run:
-	./bin/Morte
+	cd bin;./Morte;cd ..
 install:
 	sudo apt-get install libsdl2-dev # library that handels window creation and input
 	sudo apt-get install libsdl2-mixer-dev
@@ -78,23 +80,18 @@ push:
 pull:
 	clear
 	git pull
-site:
-	clear
-	sudo rm -r ../../../var/www/ldm.com/public_html/*
-	sudo cp -r website/. ../../../var/www/ldm.com/public_html
-	echo Website Updated.
-set-up website:
-	clear
-	sudo apt-get purge apache2
-	sudo apt-get install apache2
-	sudo mkdir -p /var/www/ldm.com/public_html
-	sudo cp website/apache2.game.conf /etc/apache2/sites-available/ldm.com.conf
-	sudo a2enmod include
-	sudo a2ensite ldm.com.conf
-	sudo a2dissite 000-default.conf
-	sudo service apache2 restart
-	sudo cp -r website/. /var/www/ldm.com/public_html
-take-down website:
-	sudo rm /var/www/html/.
+update site:
+	cd website
+	make update website
+	cd ../
+start website:
+	echo hi
+	cd website
+	make set-up website
+	cd ../
+end website:
+	cd website
+	make take-down website
+	cd ../
 goodbye:
 	echo FAREWELL CRUEL WORLD

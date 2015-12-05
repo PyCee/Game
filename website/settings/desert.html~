@@ -1,0 +1,15 @@
+<!--#include virtual="/page_header.html" -->
+<title>Game Setting: Monster Storage</title>
+<!--#include virtual="/content_header.html" -->
+<h3>Setting: <u>Monster Storage</u></h3></br>
+In the right side of the arena, there is a series of tunnels leading to holding cells for monsters.</br>
+The tunnels form a non-complex maze.</br>
+Most cells are open and empty. TODO: How are the cells sealed?</br>
+Several cells in the farther back have blood splatered on the floor/walls.</br>
+Traversing to the back cells, a monster is sleeping, injured.</br></br>
+Trigger: Walking near the monster.</br>
+Result: The monster wakes up and--stumbleing--chases the protagonist,</br>
+attacking if it gets within range.</br></br>
+Trigger: Protagonist leaves cells while Monster is chasing them.</br>
+Result: Monster will go back to the back cell and sleep.</br>
+<!--#include virtual="/footer.html" -->

@@ -14,7 +14,7 @@ U8 genProtag
 (void)
 {
 	addDyn_Actor();
-	Actors.identifier[getActor()].ActorName = PROTAG_NAME;
+	Actors.identifier[getActor()].actorName = PROTAG_NAME;
 	assignAIUpdate(UpdateProtag);
 	setBounds(0.2, 0.2);
 	setPos(genVec3(0.0, 0.3, 1.0));

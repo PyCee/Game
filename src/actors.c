@@ -35,12 +35,12 @@ static void AddActor(void)
 void addDyn_Actor(void)
 {
 	AddActor();
-	Actors.ActorType[getActor()] = DYN;
+	Actors.identifier[getActor()].type = "dynamic";
 }
 void addSta_Actor(void)
 {
 	AddActor();
-	Actors.ActorType[getActor()] = STA;
+	Actors.identifier[getActor()].type = "static";
 }
 static void genActor(void)
 {
@@ -124,7 +124,7 @@ void updateActors (void)
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		bindActor(actorID);
 		if ( Actors.ActiveActor[getActor()] )
-			if (Actors.ActorType[actorID] != STA)
+			if (Actors.identifier[getActor()].type != "static")
 				updatePhysicsComponent(localTime[actorID]);
 		actorID++;
 	}

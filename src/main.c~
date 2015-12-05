@@ -16,18 +16,19 @@
 #include "math/angles.h"
 #include "math/quaternion.h"
 #include "shaders/shaders.h"
+#include "loadFiles.h"
+#include "loadActorData.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
 #define WINDOW_HEIGHT 480
 
-U8 IAMALIVE;
-U8 BLINK;
+char IAMALIVE;
 
 //<CL>change later</CL> ideas to be kept, but implimented differently as to apply globally
 
-I32 main
-(I32 argc, I8 *argv[])
+int main
+(int argc, char *argv[])
 {	
 	IAMALIVE = 1;
 
@@ -53,9 +54,9 @@ I32 main
 	initActorComponents();
 	genAllActors();
 	
-	U8 ter = genTerrain();
-	U8 pro = genProtag();
-	U8 cam = genCamera();
+	unsigned char ter = genTerrain();
+	unsigned char pro = genProtag();
+	unsigned char cam = genCamera();
 	bindCameraView(cam);
 	bindMapTerrain(ter);
 	bindControlledActor(pro);
@@ -64,7 +65,7 @@ I32 main
 	//BGMusic = Mix_LoadMUS(""); //get .wav and put path in quotes
 	//Mix_PlayChannel(-1, BGMusic, 4);
 	
-	U8 list[] = {pro, ter};
+	char list[] = {pro, ter};
 	
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -76,6 +77,7 @@ I32 main
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
 	printf("IAMALIVE: %d\n", IAMALIVE);
+	IAMALIVE = 0;
 	while( IAMALIVE == 1 ) {
 	
 		SDL_GL_SwapWindow(gameWindow);
@@ -117,17 +119,15 @@ I32 main
 	SaveOptions();
 	DefaultKeyboard();
 	
-	vec3 asd = k;
-	printVec3(asd);
-	asd = rotateVec3(asd, i, -45);
-	printVec3(asd);
-	//asd = rotateVec3(asd, j, 45);
-	//asd = NormalizeNormal(asd);
-	//printVec3(asd);
-	
 	Mix_FreeMusic(BGMusic);
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
 	
+	char *got = readXMLElements(readFile("actors/actor.xml"), "<speed>");
+	printf("The house has %s rooms.\n", got);
+	free(got);
+	
+	printf("%s Ended.\n", PROGRAM_NAME);
+	loadActorData("actors/actor.xml");
 }

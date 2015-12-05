@@ -2,8 +2,8 @@
 #ifndef _KEYBOARD_
 #define _KEYBOARD_
 
-#define KEY_BINDINGS_PATH "usrData/keyBindings"
-#define DEFAULT_KEY_BINDINGS_PATH "usrData/defaultKeyBindings"
+#define KEY_BINDINGS_PATH "../usrData/keyBindings"
+#define DEFAULT_KEY_BINDINGS_PATH "../usrData/defaultKeyBindings"
 
 typedef struct _Actor_t Actor_t;
 

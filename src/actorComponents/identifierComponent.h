@@ -4,7 +4,8 @@
 #define UNDEFINED_NAME "UNDEFINED_NAME"
 
 typedef struct _IdentifierComponent_t {
-	U8 * ActorName;
+	unsigned char * name;
+	unsigned char *type;
 } IdentifierComponent_t;
 
 void genIdentifierComponent();

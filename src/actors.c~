@@ -35,12 +35,12 @@ static void AddActor(void)
 void addDyn_Actor(void)
 {
 	AddActor();
-	Actors.ActorType[getActor()] = DYN;
+	Actors.identifier[getActor()].type = "dynamic";
 }
 void addSta_Actor(void)
 {
 	AddActor();
-	Actors.ActorType[getActor()] = STA;
+	Actors.identifier[getActor()].type = "static";
 }
 static void genActor(void)
 {
@@ -85,17 +85,14 @@ void genAllActors (void)
 }
 void freeAllActors (void)
 {
-	printf("Adding ActorID\n");
 	U8 actorID = 0;
 	U8 actorCount = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
-		printf("Adding ActorID\n");
 		bindActor(actorID);
 		if(Actors.ActiveActor[getActor()])
 			actorCount++;
 		freeActor();
 		actorID++;
-		printf("Adding ActorID\n");
 	}
 	printf("Freed %i Actors.\n", actorCount);
 }

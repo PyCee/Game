@@ -27,7 +27,6 @@ typedef struct _Actors_t
 	RenderComponent_t		render			[MAX_ACTOR_COUNT];
 	
 	U8	 			ActiveActor		[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
-	U8				ActorType		[MAX_ACTOR_COUNT];
 } Actors_t;
 
 Actors_t Actors;

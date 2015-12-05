@@ -4,8 +4,8 @@
 #include "../actors.h"
 
 void genIdentifierComponent() {
-	Actors.identifier[getActor()].ActorName = UNDEFINED_NAME;
+	Actors.identifier[getActor()].actorName = UNDEFINED_NAME;
 }
 void freeIdentifierComponent() {
-	Actors.identifier[getActor()].ActorName = 0;
+	Actors.identifier[getActor()].actorName = 0;
 }

@@ -1,0 +1,28 @@
+<!--#include virtual="/page_header.html" -->
+<title>Game Chapter Two</title>
+<!--#include virtual="/content_header.html" -->
+
+<h2> Chapter Two</h2></br>
+
+The protagonist slides down an icy slope.</br>
+TODO: beat up from fall? How much?</br>
+Slides into an icy underground lake.</br></br>
+<i>~Start basic swimming tutorial~</i></br></br>
+Has to make way through caves up to the surface.</br>
+
+</br></br>
+<div class="wide">
+	<div>
+		<a href = "chapter_one.html">
+			<img src="back_to.jpg" alt="Back To" />
+			<img src="" alt="Chapter One" />
+		</a>
+	</div><!--
+	--><div>
+		<a href = "chapter_three.html">
+			<img src="proceed_to.jpg" alt="Proceed To" />
+			<img src="" alt="Chapter Three" />
+		 </a>
+	</div>
+</div>
+<!--#include virtual="/footer.html" -->

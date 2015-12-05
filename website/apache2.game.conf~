@@ -1,10 +1,10 @@
 <VirtualHost *:80>
 	ServerAdmin Kpampusch@yahoo.com
-	DocumentRoot /var/www/ldm.com/public_html
-	ServerName ldm.com
-	ServerAlias www.ldm.com
+	DocumentRoot /var/www/game.com/public_html
+	ServerName game.com
+	ServerAlias www.game.com
 	
-	<Directory /var/www/ldm.com>
+	<Directory /var/www/game.com>
 		Options +Includes
 		AddHandler server-parsed .html
 	</Directory>
