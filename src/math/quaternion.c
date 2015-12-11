@@ -1,5 +1,4 @@
 
-#include "../dataTypes.h"
 #include "quaternion.h"
 #include <math.h>
 #include "angles.h"
@@ -15,11 +14,11 @@ vec4 PureQuaternion(vec3 vector)
 	result.vec[3] = vector.vec[2];
 	return genVec4(0.0, vector.vec[0], vector.vec[1], vector.vec[2]);
 }
-vec4 UnitQuaternion(vec3 vector, F32 angle)
+vec4 UnitQuaternion(vec3 vector, float angle)
 {
 	vec4 result;
-	F32 radians = DegreesToRadians(angle / 2.0);
-	F32 sinAngle = sin(radians);
+	float radians = DegreesToRadians(angle / 2.0);
+	float sinAngle = sin(radians);
 	result.vec[0] = cos(radians);
 	result.vec[1] = sinAngle * vector.vec[0];
 	result.vec[2] = sinAngle * vector.vec[1];
@@ -40,7 +39,7 @@ vec4 HProduct(vec4 quaOne, vec4 quaTwo)
 {
 	vec4 result;
 	result.vec[0] = quaOne.vec[0] * quaTwo.vec[0] - quaOne.vec[1] * quaTwo.vec[1] + quaOne.vec[2] * quaTwo.vec[2] + quaOne.vec[3] * quaTwo.vec[3];
-	U8 index = 1;
+	unsigned char index = 1;
 	while ( index <= 3 ) {
 		result.vec[index] = quaOne.vec[0] * quaTwo.vec[index] + quaTwo.vec[0] * quaOne.vec[index] +
 			quaOne.vec[ ( ( index + 0 ) % 3 ) + 1] * quaTwo.vec[ ( ( index + 1 ) % 3 ) + 1] -
@@ -49,7 +48,7 @@ vec4 HProduct(vec4 quaOne, vec4 quaTwo)
 	}
 	return result;
 }
-vec3 rotateVec3(vec3 rotate, vec3 around, F32 angle)
+vec3 rotateVec3(vec3 rotate, vec3 around, float angle)
 {
 	vec4 quaRotate = PureQuaternion(rotate);
 	vec4 quaAround = UnitQuaternion(around, angle);
@@ -61,10 +60,10 @@ vec3 rotateVec3(vec3 rotate, vec3 around, F32 angle)
 mat4 QuaternionToRotationMatrix(vec4 qua)
 {
 	mat4 rotation;
-	F32 w = qua.vec[0];
-	F32 x = qua.vec[1];
-	F32 y = qua.vec[2];
-	F32 z = qua.vec[3];
+	float w = qua.vec[0];
+	float x = qua.vec[1];
+	float y = qua.vec[2];
+	float z = qua.vec[3];
 	
 	rotation.mat[0][0] = 1 - 2 * y * y - 2 * z * z;
 	rotation.mat[0][1] = 2 * x * y - 2 * z * w;

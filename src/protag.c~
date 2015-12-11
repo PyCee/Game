@@ -1,27 +1,24 @@
 
-#include "dataTypes.h"
 #include "protag.h"
 
 #include "actors.h"
-
 #include <stdint.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 #include "actorSelection.h"
 
-U8 genProtag
+unsigned char genProtag
 (void)
 {
 	addDyn_Actor();
-	Actors.identifier[getActor()].ActorName = PROTAG_NAME;
 	assignAIUpdate(UpdateProtag);
 	setBounds(0.2, 0.2);
 	setPos(genVec3(0.0, 0.3, 1.0));
 	return getActor();
 }
 void UpdateProtag
-(U16 deltaMS)
+(unsigned short deltaMS)
 {
 }
 void Jump

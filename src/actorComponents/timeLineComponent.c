@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "timeLineComponent.h"
 
 #include <stdlib.h>
@@ -6,27 +6,26 @@
 #include "../actors.h"
 
 #include "../globalTimeLine.h"
-#include "../globalBinds.h"
 
 void genTimeLineComponent() {
-	UnpauseTimeLine(getActor());
+	unpauseTimeLine(getActor());
 	Actors.timeLine[getActor()].playBackRate = 1.0;
 }
 void freeTimeLineComponent() {
 }
 void mapTimeLine() {
 }
-void PauseTimeLine() {
+void pauseTimeLine() {
 	Actors.timeLine[getActor()].isPaused = 1;
 }
-void UnpauseTimeLine() {
+void unpauseTimeLine() {
 	Actors.timeLine[getActor()].isPaused = 0;
 }
-U16 updateTimeLineComponent() {
+unsigned short updateTimeLineComponent() {
 	if (isTimeLinePaused(getActor()))
 		return 0;
 
-	U16 lastFrameTime = getPrevFrameDuration(getGlobalTimeLine())
+	unsigned short lastFrameTime = getPrevFrameDuration(getGlobalTimeLine())
 			* Actors.timeLine[getActor()].playBackRate;
 	Actors.timeLine[getActor()].currTime += lastFrameTime;
 	/*if (timeLine->currTime > timeLine->duration) {
@@ -35,10 +34,10 @@ U16 updateTimeLineComponent() {
 	 }*/
 	return lastFrameTime;
 }
-U8 isTimeLinePaused() {
+unsigned char isTimeLinePaused() {
 	return Actors.timeLine[getActor()].isPaused;
 }
-U8 isTimeLineOver() {
+unsigned char isTimeLineOver() {
 	//if (timeLine->replayed <= timeLine->replay) 
 	return 0;
 	pauseTimeLine(getActor());

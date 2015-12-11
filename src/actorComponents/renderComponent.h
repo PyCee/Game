@@ -14,14 +14,14 @@
 #define MIN_Z 0
 #define RANGE_Z MAX_Z - MIN_Z
 
-typedef struct _RenderComponent_t {
+typedef struct _RenderComponent {
 
 	GLuint BoundingBoxVBO;
-	F32 BoundingBoxVerticies[24];
-	U8 render;
-} RenderComponent_t;
+	float BoundingBoxVerticies[24];
+	unsigned char render;
+} RenderComponent;
 
-U16 BoundingBoxIndices[36];
+unsigned short BoundingBoxIndices[36];
 GLuint BoundingBoxIBO;
 
 GLint ActorWorldPositionLoc;
@@ -35,6 +35,6 @@ GLint CameraPlacementLoc;
 void initRender(void);
 void genRenderComponent();
 void freeRenderComponent();
-void updateRenderComponent(U16);
+void updateRenderComponent(unsigned short);
 
 #endif /* _RENDER_COMPONENT_ */

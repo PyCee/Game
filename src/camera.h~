@@ -4,7 +4,7 @@
 
 #define CAMERA_NAME "CAMERA"
 
-U8 genCamera(void);
-void updateCamera(U16);
+unsigned char genCamera(void);
+void updateCamera(unsigned short);
 
 #endif

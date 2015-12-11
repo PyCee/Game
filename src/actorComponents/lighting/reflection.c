@@ -1,5 +1,4 @@
 
-#include "../../dataTypes.h"
 #include "reflection.h"
 
 #include "../lightingComponent.h"
@@ -15,10 +14,10 @@
 // TODO: test any and every aspect.
 
 // Calculate reflected light at specific vertex.
-void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, U8 light[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT], F32 specularGlossiness)
+void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, unsigned char light[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT], float specularGlossiness)
 {
-	/*U8 actorID = 0;
-	U8 lightID = 0;
+	/*unsigned char actorID = 0;
+	unsigned char lightID = 0;
 	Normal_t *vertexToCamera = subtractVectors( Actors.direction[getCameraView()].forward, vertex.surfaceNormal );
 	Normal_t vertexToLight[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT];
 	while ( actorID < MAX_ACTOR_COUNT ) {

@@ -3,10 +3,10 @@
 #define _COLOR_
 
 typedef struct _Color_t{
-	U8		Red;
-	U8		Green;
-	U8		Blue;
-	U8		Alpha;
+	unsigned char		Red;
+	unsigned char		Green;
+	unsigned char		Blue;
+	unsigned char		Alpha;
 } Color_t;
 
 void genColor(Color_t *);

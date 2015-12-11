@@ -1,17 +1,10 @@
 
-#include "../dataTypes.h"
 #include "audioComponent.h"
 
 #include "../actors.h"
-void genAudioComponent
-(U8 actorID)
-{
+void genAudioComponent() {
 }
-void freeAudioComponent
-(U8 actorID)
-{
+void freeAudioComponent() {
 }
-void updateAudioComponent
-(U8 actorID, U16 deltaMS)
-{
+void updateAudioComponent(unsigned short deltaMS) {
 }

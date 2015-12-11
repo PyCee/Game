@@ -4,7 +4,7 @@
 
 #define PI 3.14159265358979323846
 
-F64 DegreesToRadians(F64);
-F64 RadiansToDegrees(F64);
+double DegreesToRadians(double);
+double RadiansToDegrees(double);
 
 #endif /* _ANGLES_ */

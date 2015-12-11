@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "renderComponent.h"
 
 #include "../actors.h"
@@ -122,7 +122,7 @@ void genRenderComponent() {
 }
 void freeRenderComponent() {
 }
-void updateRenderComponent(U16 deltaMS) {
+void updateRenderComponent(unsigned short deltaMS) {
 	// TODO: more culling
 	/*if ( Actors.render[getActor()].render == 0 ) // we have chosen not to render this actor
 	 return;

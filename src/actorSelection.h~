@@ -6,27 +6,27 @@
 #define STA 1
 
 #define MAX_ACTOR_COUNT 20
-U8 currentActor;
-void bindActor(U8);
-U8 getActor(void);
+unsigned char currentActor;
+void bindActor(unsigned char);
+unsigned char getActor(void);
 
 #define MAX_LIGHT_COUNT/*_PER_ACTOR */ 1
 // Allows actors to have own light sources. Multiple, simply to allow for less limits.
-U8 currentLight;
-void bindLight(U8);
-U8 getLight(void);
+unsigned char currentLight;
+void bindLight(unsigned char);
+unsigned char getLight(void);
 
-static	U8 cameraView;
-void bindCameraView (U8);
-U8 getCameraView (void);
+static	unsigned char cameraView;
+void bindCameraView (unsigned char);
+unsigned char getCameraView (void);
 
-static	U8 controlledActor;
-void bindControlledActor (U8);
-U8 getControlledActor (void);
+static	unsigned char controlledActor;
+void bindControlledActor (unsigned char);
+unsigned char getControlledActor (void);
 
-static	U8 mapTerrain;
-void bindMapTerrain (U8);
-U8 getMapTerrain (void);
+static	unsigned char mapTerrain;
+void bindMapTerrain (unsigned char);
+unsigned char getMapTerrain (void);
 
 typedef struct _globalTimeLine_t globalTimeLine_t;
 

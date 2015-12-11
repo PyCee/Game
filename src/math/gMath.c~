@@ -1,9 +1,7 @@
 
-#include "../dataTypes.h"
 #include "gMath.h"
 
 #include "matrix.h"
-
 #include <math.h>
 
 void mathInit
@@ -11,20 +9,20 @@ void mathInit
 {
 	
 }
-U64 Larger(U64 num1, U64 num2)
+unsigned long Larger(unsigned long num1, unsigned long num2)
 {
 	if (num1 > num2)
 		return num1;
 	return num2;
 }
-U64 Smaller(U64 num1, U64 num2)
+unsigned long Smaller(unsigned long num1, unsigned long num2)
 {
 	if (num1 < num2)
 		return num1;
 	return num2;
 }
 // returns remainder of dividend / divisor
-U64 Mod(U64 dividend, U64 divisor)
+unsigned long Mod(unsigned long dividend, unsigned long divisor)
 {
 	if (dividend > divisor)
 		return Mod(dividend - divisor, divisor);
@@ -34,23 +32,15 @@ U64 Mod(U64 dividend, U64 divisor)
 }
 
 // returns quotient of dividend / divisor
-U64 Div(U64 dividend, U64 divisor)
+unsigned long Div(unsigned long dividend, unsigned long divisor)
 {
-	return (U64) (dividend / divisor);
+	return (unsigned long) (dividend / divisor);
 }
-U64 Factorial(U8 fac)
+unsigned long Factorial(unsigned char fac)
 {
 	if (fac == 0)
 		return 0;
 	if (fac == 1)
 		return 1;
 	return fac * Factorial(fac - 1);
-}
-F64 degRad(F64 deg)
-{
-	return deg * PI / 180;
-}
-F64 radDeg(F64 rad)
-{
-	return rad * 180 / PI;
 }

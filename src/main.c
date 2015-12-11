@@ -5,7 +5,6 @@
 #include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "dataTypes.h"
 #include "userControl/save.h"
 #include "userControl/keyboard.h"
 #include "actors.h"
@@ -16,7 +15,8 @@
 #include "math/angles.h"
 #include "math/quaternion.h"
 #include "shaders/shaders.h"
-#include "loadFiles.h"
+#include "fileSupport/loadFiles.h"
+#include "fileSupport/XML.h"
 #include "loadActorData.h"
 
 #define PROGRAM_NAME "LDM"
@@ -27,8 +27,7 @@ char IAMALIVE;
 
 //<CL>change later</CL> ideas to be kept, but implimented differently as to apply globally
 
-int main
-(int argc, char *argv[])
+int main(int argc, char *argv[])
 {	
 	IAMALIVE = 1;
 
@@ -46,6 +45,7 @@ int main
 	
 	InitOptions();
 	InitKeyboard();
+	DefaultKeyboard();
 	
 	globalTimeLine_t *globalTimeLine;
 	genGlobalTimeLine(&globalTimeLine);
@@ -77,9 +77,7 @@ int main
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
 	printf("IAMALIVE: %d\n", IAMALIVE);
-	IAMALIVE = 0;
 	while( IAMALIVE == 1 ) {
-	
 		SDL_GL_SwapWindow(gameWindow);
 		
 		SDL_Delay(16);
@@ -91,25 +89,29 @@ int main
 		
 		//<CL "physics upgrade: collisions">
 		bindActor(pro);
-		U8 collision = CheckBoundingBoxCollision(ter);
+		unsigned char collision = CheckBoundingBoxCollision(ter);
 		vec3 proPos = Actors.physics[getActor()].Pos;
 		bindActor(ter);
 		vec3 terPos = Actors.physics[getActor()].Pos;
 		if( collision == 1){
 			if(proPos.vec[1] < terPos.vec[1] + getHeight()){
-				F32 terHeight = getHeight();
+				float terHeight = getHeight();
 				bindActor(pro);
 				setPos(genVec3(proPos.vec[0], terPos.vec[1] + terHeight, proPos.vec[2]));
 				vec3 proVel = Actors.physics[getActor()].Vel;
 				setVel(genVec3(proVel.vec[0], 0.0, proVel.vec[2]));
 			}
 		}
-		printf("%i\n", collision);
+		///printf("%i\n", collision);
 		//</CL>
 		handleEvents();
 		updateActors();
+		if(getElapsedTime(globalTimeLine) > 5000)
+			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
+	bindActor(1);
+	loadActorData("actors/actor.xml");
 	bindCameraView(0);
 	bindMapTerrain(0);
 	bindControlledActor(0);
@@ -124,10 +126,5 @@ int main
 	Mix_Quit();
 	SDL_Quit();
 	
-	char *got = readXMLElements(readFile("actors/actor.xml"), "<speed>");
-	printf("The house has %s rooms.\n", got);
-	free(got);
-	
 	printf("%s Ended.\n", PROGRAM_NAME);
-	loadActorData("actors/actor.xml");
 }

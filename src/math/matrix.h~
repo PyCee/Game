@@ -5,7 +5,7 @@
 #include "../actorComponents/physics/vector.h"
 
 typedef struct _mat4{
-	F32 mat[4][4];
+	float mat[4][4];
 } mat4;
 mat4 genZeroMat4(void);
 mat4 genIdentityMat4(void);

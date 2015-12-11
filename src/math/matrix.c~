@@ -1,5 +1,4 @@
 
-#include "../dataTypes.h"
 #include "matrix.h"
 
 #include <stdlib.h>
@@ -8,8 +7,8 @@
 mat4 genZeroMat4(void)
 {
 	mat4 result;
-	U8 row = 0;
-	U8 col = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
 	while (row < 4) {
 		col = 0;
 		while (col < 4) {
@@ -23,8 +22,8 @@ mat4 genZeroMat4(void)
 mat4 genIdentityMat4(void)
 {
 	mat4 result;
-	U8 row = 0;
-	U8 col = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
 	while (row < 4) {
 		col = 0;
 		while (col < 4) {
@@ -41,8 +40,8 @@ mat4 genIdentityMat4(void)
 mat4 transposeMat4(mat4 mat)
 {
 	mat4 result;
-	U8 row = 0;
-	U8 col = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
 	while (row < 4) {
 		col = 0;
 		while (col < 4) {
@@ -55,8 +54,8 @@ mat4 transposeMat4(mat4 mat)
 }
 void printMat4(mat4 mat)
 {
-	U8 row = 0;
-	U8 col = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
 	printf("Printing mat4:\n");
 	while (row < 4) {
 		printf("[ ");
@@ -68,13 +67,12 @@ void printMat4(mat4 mat)
 		printf("]\n");
 		row++;
 	}
-	printf("printmat4 called\n");
 }
 mat4 addMatrices(mat4 mat1, mat4 mat2)
 {
 	mat4 result;
-	U8 row = 0;
-	U8 col = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
 	while (row < 4) {
 		col = 0;
 		while (col < 4) {
@@ -88,9 +86,9 @@ mat4 addMatrices(mat4 mat1, mat4 mat2)
 mat4 multiplyMatrices(mat4 mat1, mat4 mat2)
 {
 	mat4 result;
-	U8 row = 0;
-	U8 col = 0;
-	U8 index = 0;
+	unsigned char row = 0;
+	unsigned char col = 0;
+	unsigned char index = 0;
 	while (row < 4) {
 		col = 0;
 		while (col < 4) {

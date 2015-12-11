@@ -3,7 +3,7 @@
 #define _Q_RSQRT_
 
 // faster square root, less acurate
-F32 Q_rsqrt(F32, F32, F32);
+//float Q_rsqrt(float, float, float);
 
 // look at using SSE on x86
 

@@ -1,0 +1,13 @@
+
+#ifndef _READ_XML_FILES_
+#define _READ_XML_FILES_
+
+typedef _XMLElement{
+	U8 *tag;
+	U8 *attribute;
+	U8 *children;
+} XMLElement;
+
+unsigned char *readXMLElements(const unsigned char *, const unsigned char *);
+
+#endif /* _READ_XML_FILES_ */

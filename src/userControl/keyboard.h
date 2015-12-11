@@ -11,7 +11,6 @@ char pressed[274];
 
 void InitKeyboard(void);
 void DefaultKeyboard(void);
-void UselessFunction(void);
 void EndGame(void);
 
 void handleEvents(void);
@@ -19,11 +18,12 @@ void handleEvents(void);
 void LoadKeyBindings(void);
 void SaveKeyBindings(void);
 
+unsigned char detectWhilePaused[274 * 2];
 // Key --> Function
 void (*keyFunctions[274 * 2]) (void);
 
 // Function --> Key
-static U8 functionKeys[274]; // In order of Key Bindings list
+static unsigned char functionKeys[274]; // In order of Key Bindings list
 
 #define STR_SAVE_FILE_EXIT "Exit_Game: %c\n"
 #define STR_SAVE_FILE_FOREWARD "Move_Foreward: %c\n"

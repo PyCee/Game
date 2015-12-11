@@ -4,14 +4,13 @@
 
 #include <stdint.h>
 
-#define PROTAG_NAME "PROTAG"
 #define SPEED_FORWARD 0.0008
 #define SPEED_LEFT 0.0008
 #define SPEED_BACKWARD 0.0008
 #define SPEED_RIGHT 0.0008
 
-U8			genProtag									(void);
-void		UpdateProtag							(U16);
+unsigned char			genProtag									(void);
+void		UpdateProtag							(unsigned short);
 void		Jump											(void);
 
 void		ControlledActorForward		(void);

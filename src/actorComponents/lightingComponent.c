@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "lightingComponent.h"
 #include <stdio.h>
 #include "lighting/color.h"
@@ -10,7 +10,7 @@ void genLightingComponent() {
 	AmbiantLight.Blue = 128;
 	AmbiantLight.Alpha = 128;
 
-	U8 lightID = 0;
+	unsigned char lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT) {
 		bindLight(lightID);
 		Actors.lighting[getActor()].originatingPoint[getLight()] = 0;
@@ -21,10 +21,10 @@ void genLightingComponent() {
 }
 void freeLightingComponent() {
 }
-void updateLightingComponent(U32 deltaMS) {
+void updateLightingComponent(unsigned short deltaMS) {
 }
 void bindFirstInactiveLight() {
-	U8 lightID = 0;
+	unsigned char lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT) {
 		bindLight(lightID);
 		if (Actors.lighting[getActor()].ActiveLights[getLight()] == 0)

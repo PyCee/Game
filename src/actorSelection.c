@@ -1,55 +1,53 @@
 
-#include "dataTypes.h"
 #include "actorSelection.h"
 
 #include <stdio.h>
-
 #include "camera.h"
 #include "actors.h"
 #include "globalTimeLine.h"
 
 
-void bindActor(U8 actor)
+void bindActor(unsigned char actor)
 {
 	if(actor >= MAX_ACTOR_COUNT || actor < 0)
 		printf("Invalid ActorID bound.\n ActorID = %i.\n", actor);
 	currentActor = actor;
 }
-U8 getActor(void)
+unsigned char getActor(void)
 {
 	return currentActor;
 }
-void bindLight(U8 light)
+void bindLight(unsigned char light)
 {
 	if(light >= MAX_LIGHT_COUNT || light < 0)
 		printf("Invalid LightID bound.\n LightID = %i.\n", light);
 	currentLight = light;
 }
-U8 getLight(void)
+unsigned char getLight(void)
 {
 	return currentLight;
 }
-void bindCameraView(U8 camera)
+void bindCameraView(unsigned char camera)
 {
 	cameraView = camera;
 }
-U8 getCameraView(void)
+unsigned char getCameraView(void)
 {
 	return cameraView;
 }
-void bindControlledActor(U8 protag)
+void bindControlledActor(unsigned char protag)
 {
 	controlledActor = protag;
 }
-U8 getControlledActor(void)
+unsigned char getControlledActor(void)
 {
 	return controlledActor;
 }
-void bindMapTerrain(U8 terrain)
+void bindMapTerrain(unsigned char terrain)
 {
 	mapTerrain = terrain;
 }
-U8 getMapTerrain(void)
+unsigned char getMapTerrain(void)
 {
 	return mapTerrain;
 }

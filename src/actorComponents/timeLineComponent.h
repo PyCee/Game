@@ -1,27 +1,27 @@
 #ifndef _TIME_LINE_COMPONENT_
 #define _TIME_LINE_COMPONENT_
 
-typedef struct _TimeLineComponent_t {
-	U64 startTime;
-	U32 currTime;
-	F32 playBackRate;
-	F32 duration;
-	U16 lastFrameTime;
-	U8 replay;
-	U8 replayed;
-	U8 isPaused;
-} TimeLineComponent_t;
+typedef struct _TimeLineComponent {
+	unsigned long startTime;
+	unsigned int currTime;
+	float playBackRate;
+	float duration;
+	unsigned short lastFrameTime;
+	unsigned char replay;
+	unsigned char replayed;
+	unsigned char isPaused;
+} TimeLineComponent;
 
 void genTimeLineComponent();
 void freeTimeLineComponent();
-U16 updateTimeLineComponent();
+unsigned short updateTimeLineComponent();
 void mapTimeLine();
-void PauseTimeLine();
-void UnpauseTimeLine();
+void pauseTimeLine();
+void unpauseTimeLine();
 
-U16 getAdvanceTime(void);
+unsigned short getAdvanceTime(void);
 
-U8 isTimeLinePaused();
-U8 isTimeLineOver();
+unsigned char isTimeLinePaused();
+unsigned char isTimeLineOver();
 
 #endif /*  _TIME_LINE_COMPONENT_*/

@@ -14,20 +14,21 @@
 #include "actorComponents/renderComponent.h"
 typedef struct _Actors_t {
 	// Various Components used by every Dynamic Actor
-	IdentifierComponent_t identifier[MAX_ACTOR_COUNT];
-	TimeLineComponent_t timeLine[MAX_ACTOR_COUNT];
-	AudioComponent_t audio[MAX_ACTOR_COUNT];
-	DirectionComponent_t direction[MAX_ACTOR_COUNT];
-	PhysicsComponent_t physics[MAX_ACTOR_COUNT];
-	CollisionsComponent_t collisions[MAX_ACTOR_COUNT];
-	AIComponent_t AI[MAX_ACTOR_COUNT];
-	LightingComponent_t lighting[MAX_ACTOR_COUNT];
-	RenderComponent_t render[MAX_ACTOR_COUNT];
+	IdentifierComponent identifier[MAX_ACTOR_COUNT];
+	TimeLineComponent timeLine[MAX_ACTOR_COUNT];
+	AudioComponent audio[MAX_ACTOR_COUNT];
+	DirectionComponent direction[MAX_ACTOR_COUNT];
+	PhysicsComponent physics[MAX_ACTOR_COUNT];
+	CollisionsComponent collisions[MAX_ACTOR_COUNT];
+	AIComponent AI[MAX_ACTOR_COUNT];
+	LightingComponent lighting[MAX_ACTOR_COUNT];
+	RenderComponent render[MAX_ACTOR_COUNT];
 
-	U8 ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
+	unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
 } Actors_t;
 
 Actors_t Actors;
+unsigned char allActorsPaused;
 
 void initActorComponents(void);
 void addDyn_Actor(void);
@@ -36,5 +37,7 @@ void genAllActors(void);
 void freeAllActors(void);
 void freeActor(void);
 void updateActors(void);
+void UselessFunction(void);
+void toggleAllPause(void);
 
 #endif /* _ACTOR_ */

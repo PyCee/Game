@@ -1,4 +1,4 @@
-Exit_Game: p
+Exit_Game: t
 Move_Foreward: w
 Move_Left: a
 Move_Backward: s

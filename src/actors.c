@@ -1,4 +1,4 @@
-#include "dataTypes.h"
+
 #include "actors.h"
 
 #include <stdlib.h>
@@ -6,12 +6,14 @@
 #include "actorComponents/physics/vector.h"
 #include "actorComponents/direction/normal.h"
 #include "actorSelection.h"
+#include <strings.h>
 
 void initActorComponents(void) {
 	initRender();
+	allActorsPaused = 0;
 }
 static void bindFirstInactiveActor(void) {
-	U8 actorID = 0;
+	unsigned char actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (!Actors.ActiveActor[getActor()])
@@ -67,7 +69,7 @@ void freeActor(void) {
 	Actors.ActiveActor[getActor()] = 0;
 }
 void genAllActors(void) {
-	U8 actorID = 0;
+	unsigned char actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		Actors.ActiveActor[getActor()] = 0;
@@ -76,8 +78,8 @@ void genAllActors(void) {
 	}
 }
 void freeAllActors(void) {
-	U8 actorID = 0;
-	U8 actorCount = 0;
+	unsigned char actorID = 0;
+	unsigned char actorCount = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (Actors.ActiveActor[getActor()])
@@ -88,8 +90,8 @@ void freeAllActors(void) {
 	printf("Freed %i Actors.\n", actorCount);
 }
 void updateActors(void) {
-	U8 actorID = 0;
-	U16 localTime[MAX_ACTOR_COUNT];
+	unsigned char actorID = 0;
+	unsigned short localTime[MAX_ACTOR_COUNT];
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (Actors.ActiveActor[getActor()])
@@ -114,7 +116,7 @@ void updateActors(void) {
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (Actors.ActiveActor[getActor()])
-			if (Actors.identifier[getActor()].type != "static")
+			if (strcmp(Actors.identifier[getActor()].type, "static"))
 				updatePhysicsComponent(localTime[actorID]);
 		actorID++;
 	}
@@ -146,5 +148,30 @@ void updateActors(void) {
 		if (Actors.ActiveActor[getActor()])
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
+	}
+}
+void UselessFunction
+(void)
+{
+}
+void toggleAllPause(void)
+{
+	printf("Toggle pause called.\n");
+	unsigned char actorID = 0;
+	if(allActorsPaused){
+		while (actorID < MAX_ACTOR_COUNT) {
+			bindActor(actorID);
+			unpauseTimeLine();
+			actorID++;
+		}
+		allActorsPaused = 0;
+	}
+	else{
+		while (actorID < MAX_ACTOR_COUNT) {
+			bindActor(actorID);
+			pauseTimeLine();
+			actorID++;
+		}
+		allActorsPaused = 1;
 	}
 }

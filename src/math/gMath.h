@@ -9,9 +9,9 @@
 
 typedef struct _Matrix_t Matrix_t;
 
-U64 Mod(U64, U64);
-U64 Div(U64, U64);
-F64 Exponant(F64, U8);
-U64 Factorial(U8);
+unsigned long Mod(unsigned long, unsigned long);
+unsigned long Div(unsigned long, unsigned long);
+double Exponant(double, unsigned char);
+unsigned long Factorial(unsigned char);
 
 #endif

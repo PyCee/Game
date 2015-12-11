@@ -1,12 +1,11 @@
 
-#include "../dataTypes.h"
 #include "shaders.h"
-#include "../loadFiles.h"
+#include "../fileSupport/loadFiles.h"
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-extern U8 IAMALIVE;
+extern unsigned char IAMALIVE;
 void genShaders(void)
 {
 	
@@ -43,10 +42,10 @@ void genShaders(void)
 	
 	
 }
-GLuint loadShaderFromFile( const U8 * path, GLenum shaderType )
+GLuint loadShaderFromFile( const unsigned char * path, GLenum shaderType )
 {
 	const GLchar * shaderSource[1];
-	U8 *fileSource = readFile( path );
+	unsigned char *fileSource = readFile( path );
 	shaderSource[0] = fileSource;
 	GLuint length[1];
 	GLuint result;

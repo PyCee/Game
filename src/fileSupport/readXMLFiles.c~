@@ -1,0 +1,39 @@
+
+#include "readXMLFiles.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+unsigned char *readXMLElements(const unsigned char *source, const unsigned char *elementOpen)
+{
+	if(elementOpen[0] != '<' || elementOpen[strlen(elementOpen) - 1] != '>'){
+		printf("\'%s\' is not a valid xml element", elementOpen);
+		return;
+	}
+	if(!strstr(source, elementOpen)){
+		printf("\'%s\' is not an xml element present in the file.\n", elementOpen);
+		return;
+	}
+	unsigned char *elementClose = malloc(sizeof(char) * (strlen(elementOpen) + 2));
+	elementClose[0] = '<';
+	elementClose[1] = '/';
+	unsigned char index;
+	for(index = 1; index < strlen(elementOpen); index++){
+		elementClose[index + 1] = elementOpen[index];
+	}
+	
+	unsigned char* startIndex = strstr(source, elementOpen) + (strlen(elementOpen) * sizeof(char));
+	unsigned char* endIndex = strstr(source, elementClose);
+	unsigned char *tmpSource = startIndex;
+	unsigned int subStringLen = endIndex - startIndex;
+	unsigned char *subString = malloc(subStringLen);
+	while(tmpSource < endIndex){
+		*subString = *tmpSource;
+		subString += sizeof(char);
+		tmpSource += sizeof(char);
+	}
+	*subString = '\0';
+	startIndex = 0;
+	endIndex = 0;
+	tmpSource = 0;
+	return subString - subStringLen;
+}

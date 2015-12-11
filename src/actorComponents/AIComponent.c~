@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "AIComponent.h"
 
 #include "../actors.h"
@@ -9,12 +9,12 @@ void genAIComponent() {
 void freeAIComponent() {
 	assignAIUpdate(UselessUpdate);
 }
-void updateAIComponent(U16 deltaMS) {
+void updateAIComponent(unsigned short deltaMS) {
 	Actors.AI[getActor()].update(deltaMS);
 }
-void assignAIUpdate(void (*updateFunction)(U8, U16)) {
+void assignAIUpdate(void (*updateFunction)(unsigned short)) {
 	Actors.AI[getActor()].update = updateFunction;
 }
 
-void UselessUpdate(U16 deltaMS) {
+void UselessUpdate(unsigned short deltaMS) {
 }

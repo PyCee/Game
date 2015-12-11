@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "physicsComponent.h"
 
 #include "../actors.h"
@@ -18,7 +18,7 @@ void freePhysicsComponent() {
 	// Don't free vectors since they were not dynamically allocated
 }
 
-void updatePhysicsComponent(U16 deltaMS) {
+void updatePhysicsComponent(unsigned short deltaMS) {
 	setAcc(
 			genVec3(getAcc().vec[0] + deltaMS * getJrk().vec[0] * 1,
 					getAcc().vec[1] + deltaMS * getJrk().vec[1] * 1,
@@ -33,8 +33,8 @@ void updatePhysicsComponent(U16 deltaMS) {
 					getPos().vec[1] + deltaMS * getVel().vec[1] * 1,
 					getPos().vec[2] + deltaMS * getVel().vec[2] * 1));
 }
-void setSpeed(U8 speed) {
-	Actors.physics[getActor()].Speed = speed;
+void setSpeed(unsigned char speed) {
+	Actors.physics[getActor()].speed = speed;
 }
 void setPos(vec3 pos) {
 	Actors.physics[getActor()].Pos = pos;

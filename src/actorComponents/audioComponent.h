@@ -1,12 +1,12 @@
 #ifndef _AUDIO_COMPONENT_
 #define _AUDIO_COMPONENT_
 
-typedef struct _AudioComponent_t {
+typedef struct _AudioComponent {
 
-} AudioComponent_t;
+} AudioComponent;
 
 void genAudioComponent();
 void freeAudioComponent();
-void updateAudioComponent(U16);
+void updateAudioComponent(unsigned short);
 
 #endif /* _AUDIO_COMPONENT_ */

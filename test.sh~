@@ -1,0 +1,33 @@
+#!/bin/bash
+clear
+echo Compiling...
+for file in **
+do
+	echo "$file"
+	gcc "$file"
+done
+
+gcc -g -o bin/Morte main.o options.o save.o camera.o actorSelection.o loadFiles.o loadActorData.o XML.o keyboard.o \
+identifierComponent.o timeLineComponent.o audioComponent.o \
+directionComponent.o normal.o \
+physicsComponent.o vector.o vertex.o \
+collisionsComponent.o AIComponent.o \
+lightingComponent.o reflection.o color.o \
+renderComponent.o \
+actors.o terrain.o protag.o \
+shaders.o globalTimeLine.o gMath.o pythag.o \
+angles.o quaternion.o matrix.o \
+-lSDL2 -lSDL2_mixer -lGL -lm -lassimp
+
+rm main.o options.o save.o camera.o actorSelection.o loadFiles.o loadActorData.o XML.o keyboard.o \
+identifierComponent.o timeLineComponent.o AIComponent.o audioComponent.o \
+directionComponent.o normal.o \
+physicsComponent.o vector.o vertex.o \
+collisionsComponent.o \
+lightingComponent.o reflection.o color.o \
+renderComponent.o \
+actors.o terrain.o protag.o \
+shaders.o globalTimeLine.o gMath.o pythag.o \
+angles.o quaternion.o matrix.o
+
+echo Compiled

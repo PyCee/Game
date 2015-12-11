@@ -4,9 +4,9 @@
 #include "physics/vector.h"
 #include "direction/normal.h"
 
-typedef struct _DirectionComponent_t {
+typedef struct _DirectionComponent {
 	Normal_t forward;
-} DirectionComponent_t;
+} DirectionComponent;
 
 vec3 i;
 vec3 j;
@@ -14,9 +14,9 @@ vec3 k;
 
 void genDirectionComponent();
 void freeDirectionComponent();
-void updateDirectionComponent(U16);
+void updateDirectionComponent(unsigned short);
 
-void DirectionPitch(F32);
-void DirectionYaw(F32);
-void DirectionRoll(F32);
+void DirectionPitch(float);
+void DirectionYaw(float);
+void DirectionRoll(float);
 #endif /* _DIRECTION_COMPONENT_ */

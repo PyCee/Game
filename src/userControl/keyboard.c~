@@ -1,19 +1,15 @@
 
-#include "../dataTypes.h"
 #include "keyboard.h"
-
 
 #include <SDL2/SDL.h>
 #include "../camera.h"
 #include "options.h"
 #include "../actors.h"
 #include "../protag.h"
-#include "../globalBinds.h"
 #include "../actorComponents/physics/vector.h"
 #include "../actorComponents/direction/normal.h"
 
-extern U8 IAMALIVE;
-extern U8 BLINK;
+extern unsigned char IAMALIVE;
 
 void InitKeyboard
 (void)
@@ -31,7 +27,7 @@ void InitKeyboard
 	} else {
 		LoadKeyBindings();
 	}
-	U16 index = 0;
+	unsigned short index = 0;
 	while(index < 274){
 		pressed[index] = 0;
 		index++;
@@ -40,14 +36,20 @@ void InitKeyboard
 void DefaultKeyboard
 (void)
 {
-	U16 keys = 0;
+	unsigned short keys = 0;
 	while (keys < 274 * 2){
 		keyFunctions[keys] = UselessFunction;
+		detectWhilePaused[keys] = 0;
 		keys++;
 	}
-	keyFunctions[2 * SDLK_p] = EndGame;
+	keyFunctions[2 * SDLK_p] = toggleAllPause;
 	keyFunctions[2 * SDLK_p + 1] = UselessFunction;
+	detectWhilePaused[2 * SDLK_p] = 1;
 	functionKeys[0] = 'p';
+	keyFunctions[2 * SDLK_t] = EndGame;
+	keyFunctions[2 * SDLK_t + 1] = UselessFunction;
+	detectWhilePaused[2 * SDLK_t] = 1;
+	functionKeys[0] = 't';
 	keyFunctions[2 * SDLK_w] = ControlledActorForward;
 	keyFunctions[2 * SDLK_w + 1] = ControlledActorBackward;
 	functionKeys[1] = 'w';
@@ -86,9 +88,11 @@ void handleEvents
 				break;
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym < 274){
-					if(pressed[event.key.keysym.sym] == 0){
-						keyFunctions[2 * event.key.keysym.sym]();
-						pressed[event.key.keysym.sym] = 1;
+					if((!allActorsPaused) || (detectWhilePaused[2 * event.key.keysym.sym] == 1)){
+						if(pressed[event.key.keysym.sym] == 0){
+							keyFunctions[2 * event.key.keysym.sym]();
+							pressed[event.key.keysym.sym] = 1;
+						}
 					}
 				}// for mods, test with SDLK_---
 				if(event.key.keysym.mod & KMOD_NUM){
@@ -118,9 +122,11 @@ void handleEvents
 				break;
 			case SDL_KEYUP:
 				if (event.key.keysym.sym < 274){
-					if(pressed[event.key.keysym.sym] == 1){
-						keyFunctions[2 * event.key.keysym.sym + 1]();
-						pressed[event.key.keysym.sym] = 0;
+					if((!allActorsPaused) || (detectWhilePaused[2 * event.key.keysym.sym] == 1)){
+						if(pressed[event.key.keysym.sym] == 1){
+							keyFunctions[2 * event.key.keysym.sym + 1]();
+							pressed[event.key.keysym.sym] = 0;
+						}
 					}
 				} else if(event.key.keysym.mod & KMOD_NUM){
 					
@@ -143,7 +149,6 @@ void handleEvents
 			case SDL_MOUSEBUTTONDOWN:
 				switch(event.button.button){
 					case SDL_BUTTON_LEFT:
-						BLINK = 1;
 						break;
 					case SDL_BUTTON_RIGHT:
 						break;
@@ -156,7 +161,6 @@ void handleEvents
 			case SDL_MOUSEBUTTONUP:
 				switch(event.button.button){
 					case SDL_BUTTON_LEFT:
-						BLINK = 0;
 						break;
 					case SDL_BUTTON_RIGHT:
 						break;
@@ -193,12 +197,12 @@ void LoadKeyBindings
 			DefaultKeyboard();
 		}
 	} else {
-		U16 keys = 0;
+		unsigned short keys = 0;
 		while (keys < 274 * 2){
 			keyFunctions[keys] = UselessFunction;
 			keys++;
 		}
-		U8 line = 0;
+		unsigned char line = 0;
 		void (*Press)(void), (*Release)(void);
 		while(line < 6/* number of keyfunctions */){
 			switch(line){
@@ -230,7 +234,7 @@ void LoadKeyBindings
 					printf("NO::CASE::STATEMENT::FOR::-->%i<--::IN::LoadKeyBindings\n", line);
 				break;
 			}
-			I8 key[6];
+			char key[6];
 			fscanf(loadFile, "%*s %s ", key);
 			switch (strlen(key)){
 			case 1:

@@ -1,12 +1,11 @@
 
-#include "../dataTypes.h"
 #include "angles.h"
 
-F64 DegreesToRadians(F64 degrees)
+double DegreesToRadians(double degrees)
 {
 	return degrees * PI / 180;
 }
-F64 RadiansToDegrees(F64 radians)
+double RadiansToDegrees(double radians)
 {
 	return radians * 180 / PI;
 }

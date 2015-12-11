@@ -12,7 +12,7 @@ GLuint shaderVertex;
 GLuint shaderFragment;
 #define SHADER_FRAG_PATH "../src/shaders/fragment.frag"
 
-GLuint loadShaderFromFile( const U8 *, GLenum);
+GLuint loadShaderFromFile( const unsigned char *, GLenum);
 void genShaders(void);
 
 #endif /* _SHADERS */

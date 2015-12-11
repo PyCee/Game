@@ -1,11 +1,11 @@
-update website:
+update:
 	clear
 	echo Updating Website
 	sudo rm -r /var/www/game.com/public_html/*
 	sudo cp -r . /var/www/game.com/public_html
 	echo Website Updated.
 
-set-up website:
+set-up:
 	clear
 	echo Setting-up Website
 	sudo apt-get purge apache2
@@ -19,7 +19,7 @@ set-up website:
 	sudo cp -r . /var/www/game.com/public_html
 	echo Website Setup Done
 
-take-down website:
+take-down:
 	clear
 	echo Taking Down Website
 	sudo rm /var/www/game.com

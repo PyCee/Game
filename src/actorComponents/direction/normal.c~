@@ -1,5 +1,4 @@
 
-#include "../../dataTypes.h"
 #include "normal.h"
 
 #include <stdio.h>
@@ -14,7 +13,7 @@ Normal_t NormalizeNormal
 (Normal_t normal)
 {
 	Normal_t normalized;
-	F32 change = PythagoreanTheorum( normal.vec[0],  normal.vec[1],  normal.vec[2] );
+	float change = PythagoreanTheorum( normal.vec[0],  normal.vec[1],  normal.vec[2] );
 	if (change == 0){
 		return normal;
 	}
@@ -26,5 +25,5 @@ Normal_t NormalizeNormal
 void PrintNormal
 (Normal_t normal)
 {
-	PrintVec3(normal);
+	printVec3(normal);
 }

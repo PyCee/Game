@@ -1,5 +1,4 @@
 
-#include "../../dataTypes.h"
 #include "reflection.h"
 
 #include "../lightingComponent.h"

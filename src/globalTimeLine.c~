@@ -1,5 +1,4 @@
 
-#include "dataTypes.h"
 #include "globalTimeLine.h"
 
 #include <stdio.h>
@@ -18,21 +17,21 @@ void genGlobalTimeLine
 void freeGlobalTimeLine
 (globalTimeLine_t **timeLine)
 {
-	printf("Elapsed Time: %llu milliseconds\n", (*timeLine)->currTime - (*timeLine)->startTime);
+	printf("Elapsed Time: %lu milliseconds\n", (*timeLine)->currTime - (*timeLine)->startTime);
 	free(*timeLine);
 	*timeLine = 0;
 }
-U16 getPrevFrameDuration
+unsigned short getPrevFrameDuration
 (globalTimeLine_t *timeLine)
 {
 	return timeLine->prevFrameDuration;
 }
-U64 getCurrentTime
+unsigned long getCurrentTime
 (globalTimeLine_t *timeLine)
 {
 	return timeLine->currTime;;
 }
-U64 getElapsedTime
+unsigned long getElapsedTime
 (globalTimeLine_t *timeLine)
 {
 	return timeLine->elapsedTime;

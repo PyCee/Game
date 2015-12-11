@@ -1,12 +1,10 @@
 #ifndef _IDENTIFIER_COMPONENT_
 #define _IDENTIFIER_COMPONENT_
 
-#define UNDEFINED_NAME "UNDEFINED_NAME"
-
-typedef struct _IdentifierComponent_t {
+typedef struct _IdentifierComponent {
 	unsigned char * name;
 	unsigned char *type;
-} IdentifierComponent_t;
+} IdentifierComponent;
 
 void genIdentifierComponent();
 void freeIdentifierComponent();

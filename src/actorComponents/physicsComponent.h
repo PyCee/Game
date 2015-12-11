@@ -8,20 +8,20 @@ typedef struct _vec3 vec3;
 #define ACC_GRAVITY 0.000006
 #define BOUNCY_DMG_REDUCTION 0.75
 
-typedef struct _PhysicsComponent_t {
+typedef struct _PhysicsComponent {
 	vec3 Pos;
 	vec3 Vel;
 	vec3 Acc;
 	vec3 Jrk;
-	U16 Mass; // Measured in Grams
-	U8 Speed;
-} PhysicsComponent_t;
+	unsigned short mass; // Measured in Grams
+	unsigned char speed;
+} PhysicsComponent;
 
 void genPhysicsComponent();
 void freePhysicsComponent();
-void updatePhysicsComponent(U16);
+void updatePhysicsComponent(unsigned short);
 
-void setSpeed(U8);
+void setSpeed(unsigned char);
 void setPos(vec3);
 void setVel(vec3);
 void setAcc(vec3);

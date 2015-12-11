@@ -1,11 +1,10 @@
 
-#include "../dataTypes.h"
 #include "Q_rsqrt.h"
 
-U32 Q_rsqrt( U32 number )
+unsigned int Q_rsqrt( unsigned int number )
 {
 	long i;
-	U32 x2, y;
+	unsigned int x2, y;
 	const float threehalfs = 1.5F;
 
 	x2 = number * 0.5F;

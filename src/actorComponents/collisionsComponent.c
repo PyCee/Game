@@ -1,4 +1,4 @@
-#include "../dataTypes.h"
+
 #include "collisionsComponent.h"
 
 #include "../actors.h"
@@ -7,17 +7,17 @@
 #include <string.h>
 
 void genCollisionsComponent() {
-	Actors.collisions[getActor()].Height = 1;
-	Actors.collisions[getActor()].Width = 1;
+	Actors.collisions[getActor()].height = 1;
+	Actors.collisions[getActor()].width = 1;
 	Actors.collisions[getActor()].drawBounds = 1;
 }
 void freeCollisionsComponent() {
 }
-void updateCollisionsComponent(U16 deltaMS) {
+void updateCollisionsComponent(unsigned short deltaMS) {
 }
-void setBounds(F32 width, F32 height) {
-	Actors.collisions[getActor()].Width = width;
-	Actors.collisions[getActor()].Height = height;
+void setBounds(float width, float height) {
+	Actors.collisions[getActor()].width = width;
+	Actors.collisions[getActor()].height = height;
 
 	Actors.render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
 	Actors.render[getActor()].BoundingBoxVerticies[1] = 0.0;
@@ -58,16 +58,16 @@ void setBounds(F32 width, F32 height) {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-U8 CheckBoundingBoxCollision(U8 actorID) {
-	//F32 Xsq = pow( getPosX(getActor()) - getPosX(actorID), 2);
-	//F32 Zsq = pow( getPosZ(getActor()) - getPosZ(actorID), 2);
-	//F32 distanceSq = Xsq + Zsq;
-	U8 prevID = getActor();
+unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
+	//float Xsq = pow( getPosX(getActor()) - getPosX(actorID), 2);
+	//float Zsq = pow( getPosZ(getActor()) - getPosZ(actorID), 2);
+	//float distanceSq = Xsq + Zsq;
+	unsigned char prevID = getActor();
 	vec3 actOnePos = getPos();
-	F32 actOneWidth = getWidth();
-	F32 actOneHeight = getHeight();
+	float actOneWidth = getWidth();
+	float actOneHeight = getHeight();
 
-	U8 collide;
+	unsigned char collide;
 
 	bindActor(actorID);
 	if (actOnePos.vec[0] - 0.5 * actOneWidth
@@ -84,9 +84,9 @@ U8 CheckBoundingBoxCollision(U8 actorID) {
 	bindActor(prevID);
 	return collide;
 }
-F32 getHeight() {
-	return Actors.collisions[getActor()].Height;
+float getHeight() {
+	return Actors.collisions[getActor()].height;
 }
-F32 getWidth() {
-	return Actors.collisions[getActor()].Width;
+float getWidth() {
+	return Actors.collisions[getActor()].width;
 }

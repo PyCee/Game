@@ -4,18 +4,18 @@
 
 /* SINGLETON */
 typedef struct _globalTimeLine_t {
-	U64 startTime;
-	U64 currTime;
-	U64 elapsedTime;
-	U16 prevFrameDuration;
+	unsigned long startTime;
+	unsigned long currTime;
+	unsigned long elapsedTime;
+	unsigned short prevFrameDuration;
 } globalTimeLine_t;
 
 void genGlobalTimeLine(globalTimeLine_t **);
 void freeGlobalTimeLine(globalTimeLine_t **);
 
-U16 getPrevFrameDuration(globalTimeLine_t *);
-U64 getCurrentTime(globalTimeLine_t *);
-U64 getElapsedTime(globalTimeLine_t *);
+unsigned short getPrevFrameDuration(globalTimeLine_t *);
+unsigned long getCurrentTime(globalTimeLine_t *);
+unsigned long getElapsedTime(globalTimeLine_t *);
 
 void updateGlobalTimeLine(globalTimeLine_t *);
 

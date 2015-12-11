@@ -9,27 +9,27 @@
 #include "globalTimeLine.h"
 
 void BindCameraView
-(U8 camera)
+(unsigned char camera)
 {	cameraView = camera;	}
-U8 getCameraView
+unsigned char getCameraView
 (void)
 {	return cameraView;	}
 void UnbindCameraView
 (void)
 {	cameraView = MAX_ACTOR_COUNT;	}
 void BindControlledActor
-(U8 protag)
+(unsigned char protag)
 {	controlledActor = protag;	}
-U8 getControlledActor
+unsigned char getControlledActor
 (void)
 {	return controlledActor;	}
 void UnbindControlledActor
 (void)
 {	controlledActor = MAX_ACTOR_COUNT;	}
 void BindMapTerrain
-(U8 terrain)
+(unsigned char terrain)
 {	mapTerrain = terrain;	}
-U8 getMapTerrain
+unsigned char getMapTerrain
 (void)
 {	return mapTerrain;	}
 void UnbindMapTerrain

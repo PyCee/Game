@@ -33,22 +33,22 @@ void DefaultAllOptions(void);
 void DefaultAllSoundOptions(void);
 
 void DefaultSoundLevel(void);
-static U8 SoundLevel = 0;
-static U8 MuteSound = 0;
+static unsigned char SoundLevel = 0;
+static unsigned char MuteSound = 0;
 #define DEFAULT_SOUND_LEVEL 1
 #define MAX_SOUND_LEVEL 255
 #define MIN_SOUND_LEVEL 0
 
 void DefaultMusicLevel(void);
-static U8 MusicLevel = 0;
-static U8 MuteMusic = 0;
+static unsigned char MusicLevel = 0;
+static unsigned char MuteMusic = 0;
 #define DEFAULT_MUSIC_LEVEL 2
 #define MAX_MUSIC_LEVEL 255
 #define MIN_MUSIC_LEVEL 0
 
 void DefaultEffectsLevel(void);
-static U8 SoundEffectsLevel = 0;
-static U8 MuteSoundEffects = 0;
+static unsigned char SoundEffectsLevel = 0;
+static unsigned char MuteSoundEffects = 0;
 #define DEFAULT_SOUND_EFFECTS_LEVEL 3
 #define MAX_SOUND_EFFECTS_LEVEL 255
 #define MIN_SOUND_EFFECTS_LEVEL 0
@@ -56,13 +56,13 @@ static U8 MuteSoundEffects = 0;
 void DefaultAllVideoOptions(void);
 
 void DefaultFieldOfView(void);
-static U8 FieldOfView = 0;
+static unsigned char FieldOfView = 0;
 #define DEFAULT_FIELD_OF_VIEW 120
 #define MAX_FIELD_OF_VIEW 150
 #define MIN_FIELD_OF_VIEW 70
 
 void DefaultBrightness(void);
-static U8 Brightness = 0;
+static unsigned char Brightness = 0;
 #define DEFAULT_BRIGHTNESS 5
 #define MAX_BRIGHTNESS 255
 #define MIN_BRIGHTNESS 0
@@ -73,10 +73,10 @@ void DefaultMouseSensitivity(void);
 #define DEFAULT_MOUSE_SENSITIVITY 128
 #define MAX_MOUSE_SENSITIVITY 255
 #define MIN_MOUSE_SENSITIVITY 0
-static U8 MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
+static unsigned char MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
 
 void DefaultMouseLock(void);
-static U8 MouseLock = 1;
+static unsigned char MouseLock = 1;
 #define DEFAULT_MOUSE_LOCK 1
 #define MAX_MOUSE_LOCK 1
 #define MIN_MOUSE_LOCK 0
