@@ -26,17 +26,17 @@ static void bindFirstInactiveActor(void) {
 			actorID, MAX_ACTOR_COUNT);
 	// TODO: What Should I Return Here? For An Invalid actorID.
 }
-static void AddActor(void) {
+void addActor(void) {
 	bindFirstInactiveActor();
 	Actors.ActiveActor[getActor()] = 1;
 	printf("Adding ActorID: %d\n", getActor());
 }
 void addDyn_Actor(void) {
-	AddActor();
+	addActor();
 	Actors.identifier[getActor()].type = "dynamic";
 }
 void addSta_Actor(void) {
-	AddActor();
+	addActor();
 	Actors.identifier[getActor()].type = "static";
 }
 static void genActor(void) {

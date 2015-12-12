@@ -20,6 +20,9 @@ unsigned char genProtag
 void UpdateProtag
 (unsigned short deltaMS)
 {
+	printVec3(getPos());
+	printf("h: %f\n", getHeight());
+	printf("w: %f\n", getWidth());
 }
 void Jump
 (void)

@@ -2,7 +2,7 @@
 <actor>
 	<identifier>
 		<name>Cruelty</name>
-		<type>static</type>
+		<type>dynamic</type>
 	</identifier>
 	<audio>
 		
@@ -12,13 +12,13 @@
 		<speed>7</speed>
 	</physics>
 	<collisions>
-		<height>11</height>
-		<width>12</width>
+		<height>0.2</height>
+		<width>0.2</width>
 		<radius>13</radius><!--To replace height and width once there is a working collision detection system-->
 		<drawBounds>1</drawBounds>
 	</collisions>
 	<AI>
-		<update>UselessUpdate</update>
+		<update>UpdateProtag</update>
 	</AI>
 	<lighting>
 		

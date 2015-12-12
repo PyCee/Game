@@ -55,7 +55,10 @@ int main(int argc, char *argv[])
 	genAllActors();
 	
 	unsigned char ter = genTerrain();
-	unsigned char pro = genProtag();
+	addActor();
+	unsigned char pro = getActor();
+	loadActorData("actors/actor.xml");
+	setPos(genVec3(0.0, 0.3, 1.0));
 	unsigned char cam = genCamera();
 	bindCameraView(cam);
 	bindMapTerrain(ter);

@@ -20,6 +20,8 @@ static void (*lookupUpdateFunctions[]) (unsigned short) = {
 };
 void loadActorData(unsigned char *loc)
 {
+	//somevariables must be converted to floats/doubles instead of ints
+	
 	unsigned char *fileSource = readFile(loc);
 	char *afterPtr;
 	unsigned char *content;
@@ -44,17 +46,19 @@ void loadActorData(unsigned char *loc)
 	printf("data.children speed: %s\n", data.children);
 	freeXMLElement(data);
 	
-	setPos(genVec3(0.0, 0.0, 0.0));
+	//get spawnpoint from world.xml file
 	
 	data = readXMLElements(fileSource, "<width>");
-	float dataWidth = strtol(data.children, &afterPtr, 10);
+	float dataWidth = strtod(data.children, &afterPtr);
 	printf("data.children width: %s\n", data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<height>");
-	float dataHeight = strtol(data.children, &afterPtr, 10);
+	float dataHeight = strtod(data.children, &afterPtr);
 	printf("data.children height: %s\n", data.children);
 	freeXMLElement(data);
+	printf("h: %f\n", dataHeight);
+	printf("w: %f\n", dataWidth);
 	
 	setBounds(dataWidth, dataHeight);
 	

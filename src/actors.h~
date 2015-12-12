@@ -31,6 +31,7 @@ Actors_t Actors;
 unsigned char allActorsPaused;
 
 void initActorComponents(void);
+void addActor(void);
 void addDyn_Actor(void);
 void addSta_Actor(void);
 void genAllActors(void);
