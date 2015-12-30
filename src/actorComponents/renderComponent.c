@@ -78,45 +78,45 @@ void initRender(void) {
 	printf("Render Initialized.\n");
 }
 void genRenderComponent() {
-	Actors.render[getActor()].render = 1;
+	render[getActor()].render = 1;
 
-	Actors.render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[1] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[2] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[1] = 0.0;
+	render[getActor()].BoundingBoxVerticies[2] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[3] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[4] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[5] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[3] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[4] = 0.0;
+	render[getActor()].BoundingBoxVerticies[5] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[6] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[7] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[8] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[6] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[7] = getHeight();
+	render[getActor()].BoundingBoxVerticies[8] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[9] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[10] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[11] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[9] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[10] = getHeight();
+	render[getActor()].BoundingBoxVerticies[11] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[12] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[13] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[14] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[12] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[13] = 0.0;
+	render[getActor()].BoundingBoxVerticies[14] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[15] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[16] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[17] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[15] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[16] = 0.0;
+	render[getActor()].BoundingBoxVerticies[17] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[18] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[19] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[20] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[18] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[19] = getHeight();
+	render[getActor()].BoundingBoxVerticies[20] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[21] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[22] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[23] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[21] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[22] = getHeight();
+	render[getActor()].BoundingBoxVerticies[23] = getWidth() * 1 * 0.5;
 
-	glGenBuffers(1, &(Actors.render[getActor()].BoundingBoxVBO));
-	glBindBuffer(GL_ARRAY_BUFFER, Actors.render[getActor()].BoundingBoxVBO);
+	glGenBuffers(1, &(render[getActor()].BoundingBoxVBO));
+	glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 	glBufferData(GL_ARRAY_BUFFER,
-			sizeof(Actors.render[getActor()].BoundingBoxVerticies),
-			Actors.render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
+			sizeof(render[getActor()].BoundingBoxVerticies),
+			render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -124,27 +124,27 @@ void freeRenderComponent() {
 }
 void updateRenderComponent(unsigned short deltaMS) {
 	// TODO: more culling
-	/*if ( Actors.render[getActor()].render == 0 ) // we have chosen not to render this actor
+	/*if ( render[getActor()].render == 0 ) // we have chosen not to render this actor
 	 return;
 
 	 if (ActorRotateVectorLoc != -1) {
-	 vec3 cameraOrient = cross( k, Actors.direction[getActor()].forward );
+	 vec3 cameraOrient = cross( k, direction[getActor()].forward );
 	 glUniform3f( ActorRotateVectorLoc, cameraOrient.vec[0], cameraOrient.vec[1], cameraOrient.vec[2] );
 	 }
 	 if (ActorRotateAngleLoc != -1) {
-	 glUniform1f( ActorRotateAngleLoc, acos( dot( Actors.direction[getActor()].forward, k ) ) );
+	 glUniform1f( ActorRotateAngleLoc, acos( dot( direction[getActor()].forward, k ) ) );
 	 }
 	 */
 	// culling done, something is to be rendered
 	if (WorldPlacementLoc != -1) {
 		mat4 worldPlacement = genIdentityMat4();
 		worldPlacement = translateMat4(worldPlacement,
-				Actors.physics[getActor()].Pos);
+				physics[getActor()].Pos);
 		if (getActor() == getControlledActor()) {
 
 			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(j, 0));
 			worldPlacement = translateMat4(worldPlacement,
-					Actors.physics[getActor()].Pos);
+					physics[getActor()].Pos);
 			//printMat4(worldPlacement);
 		}
 		//printf("now printing worldplacement mat4\n");
@@ -153,10 +153,10 @@ void updateRenderComponent(unsigned short deltaMS) {
 				&worldPlacement.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
-	if (Actors.collisions[getActor()].drawBounds) {	//&& getActor() == getControlledActor()) {
-		//printVec3(Actors.physics[getActor()].Pos);
+	if (collisions[getActor()].drawBounds) {	//&& getActor() == getControlledActor()) {
+		//printVec3(physics[getActor()].Pos);
 
-		glBindBuffer(GL_ARRAY_BUFFER, Actors.render[getActor()].BoundingBoxVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);

@@ -16,7 +16,7 @@ static void bindFirstInactiveActor(void) {
 	unsigned char actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (!Actors.ActiveActor[getActor()])
+		if (!ActiveActor[getActor()])
 			return;
 		actorID++;
 	}
@@ -28,19 +28,19 @@ static void bindFirstInactiveActor(void) {
 }
 void addActor(void) {
 	bindFirstInactiveActor();
-	Actors.ActiveActor[getActor()] = 1;
+	ActiveActor[getActor()] = 1;
 	printf("Adding ActorID: %d\n", getActor());
 }
 void addDyn_Actor(void) {
 	addActor();
-	Actors.identifier[getActor()].type = "dynamic";
+	identifier[getActor()].type = "dynamic";
 }
 void addSta_Actor(void) {
 	addActor();
-	Actors.identifier[getActor()].type = "static";
+	identifier[getActor()].type = "static";
 }
 static void genActor(void) {
-	if (Actors.ActiveActor[getActor()])
+	if (ActiveActor[getActor()])
 		return;
 	printf("Gening Actor %d\n", getActor());
 	genIdentifierComponent();
@@ -54,7 +54,7 @@ static void genActor(void) {
 	genRenderComponent();
 }
 void freeActor(void) {
-	if (!Actors.ActiveActor[getActor()])
+	if (!ActiveActor[getActor()])
 		return;
 	printf("Freeing Actor %d\n", getActor());
 	freeRenderComponent();
@@ -66,13 +66,13 @@ void freeActor(void) {
 	freeAudioComponent();
 	freeTimeLineComponent();
 	freeIdentifierComponent();
-	Actors.ActiveActor[getActor()] = 0;
+	ActiveActor[getActor()] = 0;
 }
 void genAllActors(void) {
 	unsigned char actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		Actors.ActiveActor[getActor()] = 0;
+		ActiveActor[getActor()] = 0;
 		genActor();
 		actorID++;
 	}
@@ -82,70 +82,70 @@ void freeAllActors(void) {
 	unsigned char actorCount = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			actorCount++;
 		freeActor();
 		actorID++;
 	}
-	printf("Freed %i Actors.\n", actorCount);
+	printf("Freed %i \n", actorCount);
 }
 void updateActors(void) {
 	unsigned char actorID = 0;
 	unsigned short localTime[MAX_ACTOR_COUNT];
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			localTime[getActor()] = updateTimeLineComponent();
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			updateAudioComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			updateDirectionComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
-			if (strcmp(Actors.identifier[getActor()].type, "static"))
+		if (ActiveActor[getActor()])
+			if (strcmp(identifier[getActor()].type, "static"))
 				updatePhysicsComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			updateCollisionsComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
-			//if (Actors.ActorType[actorID] != STA)
+		if (ActiveActor[getActor()])
+			//if (ActorType[actorID] != STA)
 			updateAIComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			updateLightingComponent(localTime[actorID]);
 		actorID++;
 	}
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (Actors.ActiveActor[getActor()])
+		if (ActiveActor[getActor()])
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
 	}

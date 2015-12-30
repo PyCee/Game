@@ -4,8 +4,8 @@
 #include "../actors.h"
 
 void genIdentifierComponent() {
-	Actors.identifier[getActor()].name = "default";
+	identifier[getActor()].name = "default";
 }
 void freeIdentifierComponent() {
-	Actors.identifier[getActor()].name = 0;
+	identifier[getActor()].name = 0;
 }

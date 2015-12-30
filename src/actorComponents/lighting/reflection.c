@@ -18,15 +18,15 @@ void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, unsigned char li
 {
 	/*unsigned char actorID = 0;
 	unsigned char lightID = 0;
-	Normal_t *vertexToCamera = subtractVectors( Actors.direction[getCameraView()].forward, vertex.surfaceNormal );
+	Normal_t *vertexToCamera = subtractVectors( direction[getCameraView()].forward, vertex.surfaceNormal );
 	Normal_t vertexToLight[MAX_ACTOR_COUNT][MAX_LIGHT_COUNT];
 	while ( actorID < MAX_ACTOR_COUNT ) {
 		while ( lightID < MAX_LIGHT_COUNT ) {
 			if ( !light[actorID][lightID] )
 				continue;
-			vertexToLight[actorID][lightID].point[0] = vertex.Pos[0] - Actors.lighting[actorID].originatingPoint[lightID]->Pos[0];
-			vertexToLight[actorID][lightID].point[1] = vertex.Pos[1] - Actors.lighting[actorID].originatingPoint[lightID]->Pos[1];
-			vertexToLight[actorID][lightID].point[2] = vertex.Pos[2] - Actors.lighting[actorID].originatingPoint[lightID]->Pos[2];
+			vertexToLight[actorID][lightID].point[0] = vertex.Pos[0] - lighting[actorID].originatingPoint[lightID]->Pos[0];
+			vertexToLight[actorID][lightID].point[1] = vertex.Pos[1] - lighting[actorID].originatingPoint[lightID]->Pos[1];
+			vertexToLight[actorID][lightID].point[2] = vertex.Pos[2] - lighting[actorID].originatingPoint[lightID]->Pos[2];
 			NormalizeNormal( &vertexToLight[actorID][lightID] );
 			lightID++;
 		}
@@ -51,9 +51,9 @@ void PhongReflection(Color_t * reflectedLight, Vertex_t vertex, unsigned char li
 			F32 specularIntensity = vertex.specularReflectivity * 
 			pow(DotProduct(reflectedVertexToLight, *vertexToCamera), specularGlossiness);
 			
-	  		reflectedLight->Red += (diffuseIntensity + specularIntensity) * Actors.lighting[actorID].intensity[lightID].Red;
-	  		reflectedLight->Green += (diffuseIntensity + specularIntensity) * Actors.lighting[actorID].intensity[lightID].Green;
-	  		reflectedLight->Blue += (diffuseIntensity + specularIntensity) * Actors.lighting[actorID].intensity[lightID].Blue;
+	  		reflectedLight->Red += (diffuseIntensity + specularIntensity) * lighting[actorID].intensity[lightID].Red;
+	  		reflectedLight->Green += (diffuseIntensity + specularIntensity) * lighting[actorID].intensity[lightID].Green;
+	  		reflectedLight->Blue += (diffuseIntensity + specularIntensity) * lighting[actorID].intensity[lightID].Blue;
      			
 			lightID++;	
      		}

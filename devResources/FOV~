@@ -9,5 +9,5 @@ I. FOV
 			i. FOV of 135
 				ii. equation: x = x / 1.5 * Z
 			i. FOV of 45
-				ii. equation: x = x / 0.5 * Z
+				ii. equation: x = x / .5 * Z
 			

@@ -4,7 +4,7 @@ compile:
 	echo Compiled
 run:
 	echo Running
-	cd bin;./Morte
+	cd bin;./Morte;cd ..
 	echo Ran
 install:
 	sudo apt-get install libsdl2-dev # library that handels window creation and input

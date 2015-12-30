@@ -27,22 +27,22 @@ void loadActorData(unsigned char *loc)
 	unsigned char *content;
 	
 	XMLElement data = readXMLElements(fileSource, "<name>");
-	Actors.identifier[getActor()].name = data.children;
+	identifier[getActor()].name = data.children;
 	printf("data.children: %s\n", data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<type>");
-	Actors.identifier[getActor()].type = data.children;
+	identifier[getActor()].type = data.children;
 	printf("data.children: %s\n", data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<mass>");
-	Actors.physics[getActor()].mass = strtol(data.children, &afterPtr, 10);
+	physics[getActor()].mass = strtol(data.children, &afterPtr, 10);
 	printf("data.children mass: %s\n", data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<speed>");
-	Actors.physics[getActor()].speed = strtol(data.children, &afterPtr, 10);
+	physics[getActor()].speed = strtol(data.children, &afterPtr, 10);
 	printf("data.children speed: %s\n", data.children);
 	freeXMLElement(data);
 	
@@ -63,7 +63,7 @@ void loadActorData(unsigned char *loc)
 	setBounds(dataWidth, dataHeight);
 	
 	data = readXMLElements(fileSource, "<drawBounds>");
-	Actors.collisions[getActor()].drawBounds = strtol(data.children, &afterPtr, 10);
+	collisions[getActor()].drawBounds = strtol(data.children, &afterPtr, 10);
 	printf("data.children drawBounds: %s\n", data.children);
 	freeXMLElement(data);
 	printf("size: %zu\n", sizeof(lookupUpdateFunctionsStr));

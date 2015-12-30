@@ -93,15 +93,15 @@ int main(int argc, char *argv[])
 		//<CL "physics upgrade: collisions">
 		bindActor(pro);
 		unsigned char collision = CheckBoundingBoxCollision(ter);
-		vec3 proPos = Actors.physics[getActor()].Pos;
+		vec3 proPos = physics[getActor()].Pos;
 		bindActor(ter);
-		vec3 terPos = Actors.physics[getActor()].Pos;
+		vec3 terPos = physics[getActor()].Pos;
 		if( collision == 1){
 			if(proPos.vec[1] < terPos.vec[1] + getHeight()){
 				float terHeight = getHeight();
 				bindActor(pro);
 				setPos(genVec3(proPos.vec[0], terPos.vec[1] + terHeight, proPos.vec[2]));
-				vec3 proVel = Actors.physics[getActor()].Vel;
+				vec3 proVel = physics[getActor()].Vel;
 				setVel(genVec3(proVel.vec[0], 0.0, proVel.vec[2]));
 			}
 		}

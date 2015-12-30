@@ -2,6 +2,11 @@
 #ifndef _VECTOR_
 #define _VECTOR_
 
+#define .x vec[0]
+#define .y vec[1]
+#define .z vec[2]
+#define .w vec[3]
+
 typedef struct _vec2 {
 	float vec[2];
 } vec2;

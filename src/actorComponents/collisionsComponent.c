@@ -7,54 +7,54 @@
 #include <string.h>
 
 void genCollisionsComponent() {
-	Actors.collisions[getActor()].height = 1;
-	Actors.collisions[getActor()].width = 1;
-	Actors.collisions[getActor()].drawBounds = 1;
+	collisions[getActor()].height = 1;
+	collisions[getActor()].width = 1;
+	collisions[getActor()].drawBounds = 1;
 }
 void freeCollisionsComponent() {
 }
 void updateCollisionsComponent(unsigned short deltaMS) {
 }
 void setBounds(float width, float height) {
-	Actors.collisions[getActor()].width = width;
-	Actors.collisions[getActor()].height = height;
+	collisions[getActor()].width = width;
+	collisions[getActor()].height = height;
 
-	Actors.render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[1] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[2] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[1] = 0.0;
+	render[getActor()].BoundingBoxVerticies[2] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[3] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[4] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[5] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[3] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[4] = 0.0;
+	render[getActor()].BoundingBoxVerticies[5] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[6] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[7] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[8] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[6] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[7] = getHeight();
+	render[getActor()].BoundingBoxVerticies[8] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[9] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[10] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[11] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[9] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[10] = getHeight();
+	render[getActor()].BoundingBoxVerticies[11] = getWidth() * -1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[12] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[13] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[14] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[12] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[13] = 0.0;
+	render[getActor()].BoundingBoxVerticies[14] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[15] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[16] = 0.0;
-	Actors.render[getActor()].BoundingBoxVerticies[17] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[15] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[16] = 0.0;
+	render[getActor()].BoundingBoxVerticies[17] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[18] = getWidth() * 1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[19] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[20] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[18] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[19] = getHeight();
+	render[getActor()].BoundingBoxVerticies[20] = getWidth() * 1 * 0.5;
 
-	Actors.render[getActor()].BoundingBoxVerticies[21] = getWidth() * -1 * 0.5;
-	Actors.render[getActor()].BoundingBoxVerticies[22] = getHeight();
-	Actors.render[getActor()].BoundingBoxVerticies[23] = getWidth() * 1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[21] = getWidth() * -1 * 0.5;
+	render[getActor()].BoundingBoxVerticies[22] = getHeight();
+	render[getActor()].BoundingBoxVerticies[23] = getWidth() * 1 * 0.5;
 
-	glBindBuffer(GL_ARRAY_BUFFER, Actors.render[getActor()].BoundingBoxVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 	glBufferData(GL_ARRAY_BUFFER,
-			sizeof(Actors.render[getActor()].BoundingBoxVerticies),
-			Actors.render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
+			sizeof(render[getActor()].BoundingBoxVerticies),
+			render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -85,8 +85,8 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	return collide;
 }
 float getHeight() {
-	return Actors.collisions[getActor()].height;
+	return collisions[getActor()].height;
 }
 float getWidth() {
-	return Actors.collisions[getActor()].width;
+	return collisions[getActor()].width;
 }

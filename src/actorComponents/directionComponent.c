@@ -9,7 +9,7 @@
 #include "../math/quaternion.h"
 
 void genDirectionComponent() {
-	Actors.direction[getActor()].forward = genNormal();
+	direction[getActor()].forward = genNormal();
 
 	i = genVec3(1.0, 0.0, 0.0);
 	j = genVec3(0.0, 1.0, 0.0);
@@ -19,19 +19,19 @@ void freeDirectionComponent() {
 	// Don't free forward since it was not dynamically allocated
 }
 void updateDirectionComponent(unsigned short deltaMS) {
-	Actors.direction[getActor()].forward = NormalizeNormal(
-			Actors.direction[getActor()].forward);
-	//printVec3(Actors.direction[getActor()].forward);
+	direction[getActor()].forward = NormalizeNormal(
+			direction[getActor()].forward);
+	//printVec3(direction[getActor()].forward);
 }
 void DirectionPitch(float angle) {
-	Actors.direction[getActor()].forward = rotateVec3(
-			Actors.direction[getActor()].forward, i, angle);
+	direction[getActor()].forward = rotateVec3(
+			direction[getActor()].forward, i, angle);
 }
 void DirectionYaw(float angle) {
-	Actors.direction[getActor()].forward = rotateVec3(
-			Actors.direction[getActor()].forward, j, angle);
+	direction[getActor()].forward = rotateVec3(
+			direction[getActor()].forward, j, angle);
 }
 void DirectionRoll(float angle) {
-	Actors.direction[getActor()].forward = rotateVec3(
-			Actors.direction[getActor()].forward, k, angle);
+	direction[getActor()].forward = rotateVec3(
+			direction[getActor()].forward, k, angle);
 }

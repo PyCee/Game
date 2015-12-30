@@ -1,0 +1,8 @@
+#ifndef _MODEL_COMPONENT_
+#define _MODEL_COMPONENT_
+
+typedef struct _ModelComponent {
+
+} ModelComponent;
+
+#endif /* _MODEL_COMPONENT_ */

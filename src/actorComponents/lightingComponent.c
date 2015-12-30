@@ -13,9 +13,9 @@ void genLightingComponent() {
 	unsigned char lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT) {
 		bindLight(lightID);
-		Actors.lighting[getActor()].originatingPoint[getLight()] = 0;
-		genColor(&(Actors.lighting[getActor()].intensity[getLight()]));
-		Actors.lighting[getActor()].ActiveLights[getLight()] = 0;
+		lighting[getActor()].originatingPoint[getLight()] = 0;
+		genColor(&(lighting[getActor()].intensity[getLight()]));
+		lighting[getActor()].ActiveLights[getLight()] = 0;
 		lightID++;
 	}
 }
@@ -27,7 +27,7 @@ void bindFirstInactiveLight() {
 	unsigned char lightID = 0;
 	while (lightID < MAX_LIGHT_COUNT) {
 		bindLight(lightID);
-		if (Actors.lighting[getActor()].ActiveLights[getLight()] == 0)
+		if (lighting[getActor()].ActiveLights[getLight()] == 0)
 			return;
 		lightID++;
 	}
@@ -39,6 +39,6 @@ void bindFirstInactiveLight() {
 }
 void addLight(Vertex_t * origin) {
 	bindFirstInactiveLight();
-	Actors.lighting[getActor()].originatingPoint[getLight()] = origin;
-	Actors.lighting[getActor()].ActiveLights[getLight()] = 1;
+	lighting[getActor()].originatingPoint[getLight()] = origin;
+	lighting[getActor()].ActiveLights[getLight()] = 1;
 }
