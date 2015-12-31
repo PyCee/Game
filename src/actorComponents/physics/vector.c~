@@ -4,7 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
+vec2 genVec2(float X, float Y)
+{
+	vec2 result;
+	result.vec[0] = X;
+	result.vec[1] = Y;
+	return result;
+}
 vec3 genVec3(float X, float Y, float Z)
 {
 	vec3 result;
@@ -20,6 +26,17 @@ vec4 genVec4(float X, float Y, float Z, float W)
 	result.vec[1] = Y;
 	result.vec[2] = Z;
 	result.vec[3] = W;
+	return result;
+}
+vec3 normalizeVec3(vec3 vec)
+{
+	vec3 result;
+	change = PythagoreanTheorum(getVec3X(vec), getVec3Y(vec), getVec3Z(vec));
+	if(change == 0)
+		return genVec3(0, 0, 1);
+	setVec3X(&result, getVec3X(vec) / change);
+	setVec3Y(&result, getVec3Y(vec) / change);
+	setVec3Z(&result, getVec3Z(vec) / change);
 	return result;
 }
 vec3 addVec3

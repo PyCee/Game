@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "actorComponents/physics/vector.h"
-#include "actorComponents/direction/normal.h"
+#include "actorComponents/physics/vector.h"
 #include "actorSelection.h"
 #include <strings.h>
 

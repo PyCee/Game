@@ -30,11 +30,11 @@ void initRender(void) {
 	BoundingBoxIndices[10] = 7;
 	BoundingBoxIndices[11] = 4;
 	BoundingBoxIndices[12] = 0; // Down
-	BoundingBoxIndices[13] = 1;
-	BoundingBoxIndices[14] = 5;
+	BoundingBoxIndices[13] = 5;
+	BoundingBoxIndices[14] = 1;
 	BoundingBoxIndices[15] = 0;
-	BoundingBoxIndices[16] = 5;
-	BoundingBoxIndices[17] = 4;
+	BoundingBoxIndices[16] = 4;
+	BoundingBoxIndices[17] = 5;
 	BoundingBoxIndices[18] = 6; // Top
 	BoundingBoxIndices[19] = 7;
 	BoundingBoxIndices[20] = 3;
@@ -48,11 +48,11 @@ void initRender(void) {
 	BoundingBoxIndices[28] = 1;
 	BoundingBoxIndices[29] = 5;
 	BoundingBoxIndices[30] = 6; // Back
-	BoundingBoxIndices[31] = 7;
-	BoundingBoxIndices[32] = 4;
+	BoundingBoxIndices[31] = 4;
+	BoundingBoxIndices[32] = 7;
 	BoundingBoxIndices[33] = 6;
-	BoundingBoxIndices[34] = 4;
-	BoundingBoxIndices[35] = 5;
+	BoundingBoxIndices[34] = 5;
+	BoundingBoxIndices[35] = 4;
 	glGenBuffers(1, &BoundingBoxIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(BoundingBoxIndices),
@@ -117,7 +117,6 @@ void genRenderComponent() {
 	glBufferData(GL_ARRAY_BUFFER,
 			sizeof(render[getActor()].BoundingBoxVerticies),
 			render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 void freeRenderComponent() {
@@ -126,26 +125,22 @@ void updateRenderComponent(unsigned short deltaMS) {
 	// TODO: more culling
 	/*if ( render[getActor()].render == 0 ) // we have chosen not to render this actor
 	 return;
-
-	 if (ActorRotateVectorLoc != -1) {
-	 vec3 cameraOrient = cross( k, direction[getActor()].forward );
-	 glUniform3f( ActorRotateVectorLoc, cameraOrient.vec[0], cameraOrient.vec[1], cameraOrient.vec[2] );
-	 }
-	 if (ActorRotateAngleLoc != -1) {
-	 glUniform1f( ActorRotateAngleLoc, acos( dot( direction[getActor()].forward, k ) ) );
-	 }
 	 */
 	// culling done, something is to be rendered
+	static unsigned short tlm = 0;
+	tlm += deltaMS/10;
+	while (tlm > 360)
+		tlm -= 360;
 	if (WorldPlacementLoc != -1) {
 		mat4 worldPlacement = genIdentityMat4();
 		worldPlacement = translateMat4(worldPlacement,
 				physics[getActor()].Pos);
 		if (getActor() == getControlledActor()) {
 
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(j, 0));
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(j, tlm));
 			worldPlacement = translateMat4(worldPlacement,
 					physics[getActor()].Pos);
-			//printMat4(worldPlacement);
+			printMat4(worldPlacement);
 		}
 		//printf("now printing worldplacement mat4\n");
 		//printMat4(worldPlacement);
@@ -153,20 +148,20 @@ void updateRenderComponent(unsigned short deltaMS) {
 				&worldPlacement.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
-	if (collisions[getActor()].drawBounds) {	//&& getActor() == getControlledActor()) {
-		//printVec3(physics[getActor()].Pos);
+	if (collisions[getActor()].drawBounds && getActor() != getControlledActor()) {
 
 		glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 		return;
 	}
 	// Draw model
-
+	
+	drawModel();
+	
 }

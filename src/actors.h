@@ -11,6 +11,7 @@
 #include "actorComponents/collisionsComponent.h"
 #include "actorComponents/AIComponent.h"
 #include "actorComponents/lightingComponent.h"
+#include "actorComponents/modelComponent.h"
 #include "actorComponents/renderComponent.h"
 
 // Various Components used by every Dynamic Actor
@@ -22,6 +23,7 @@ PhysicsComponent physics[MAX_ACTOR_COUNT];
 CollisionsComponent collisions[MAX_ACTOR_COUNT];
 AIComponent AI[MAX_ACTOR_COUNT];
 LightingComponent lighting[MAX_ACTOR_COUNT];
+ModelComponent model[MAX_ACTOR_COUNT];
 RenderComponent render[MAX_ACTOR_COUNT];
 
 unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not

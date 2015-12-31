@@ -1,6 +1,6 @@
 
 #include "shaders.h"
-#include "../loadFiles.h"
+#include "../fileSupport/loadFiles.h"
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -21,6 +21,7 @@ void genShaders(void)
 	glAttachShader(shaderProgram, shaderFragment);
 	
 	glEnableVertexAttribArray(0);
+	
 	glBindAttribLocation(shaderProgram, 0, "localPosition");
 
 	printf("shaderProgram Shaders Attached.\nLinking shaderProgram.\n");

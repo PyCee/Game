@@ -7,7 +7,7 @@
 #include "../actors.h"
 #include "../protag.h"
 #include "../actorComponents/physics/vector.h"
-#include "../actorComponents/direction/normal.h"
+#include "../actorComponents/physics/vector.h"
 
 extern unsigned char IAMALIVE;
 

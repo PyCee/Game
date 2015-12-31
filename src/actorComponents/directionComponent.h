@@ -2,12 +2,10 @@
 #define _DIRECTION_COMPONENT_
 
 #include "physics/vector.h"
-#include "direction/normal.h"
 
 typedef struct _DirectionComponent {
-	Normal_t forward;
+	vec3 forward;
 } DirectionComponent;
-
 vec3 i;
 vec3 j;
 vec3 k;

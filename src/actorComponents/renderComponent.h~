@@ -15,7 +15,6 @@
 #define RANGE_Z MAX_Z - MIN_Z
 
 typedef struct _RenderComponent {
-
 	GLuint BoundingBoxVBO;
 	float BoundingBoxVerticies[24];
 	unsigned char render;

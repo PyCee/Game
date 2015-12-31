@@ -23,7 +23,9 @@
 	<lighting>
 		
 	</lighting>
+	<model>
+		<mesh>models/untitled.dae</mesh>
+	</model>
 	<rendering>
-		<model>models/asdlkjasdlkjy.model</model>
 	</rendering>
 </actor>

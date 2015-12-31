@@ -2,11 +2,6 @@
 #ifndef _VECTOR_
 #define _VECTOR_
 
-typedef vec[0] .x;
-typedef vec[1] .y;
-typedef vec[2] .z;
-typedef vec[3] .w;
-
 typedef struct _vec2 {
 	float vec[2];
 } vec2;
@@ -21,6 +16,7 @@ vec2 genVec2(float, float);
 vec3 genVec3(float, float, float);
 vec4 genVec4(float, float, float, float);
 
+vec3 normalizeVec3(vec3);
 vec3 addVec3(vec3, vec3);
 vec3 subtractVec3(vec3, vec3);
 vec3 scaleVec3(vec3, float);

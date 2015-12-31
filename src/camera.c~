@@ -34,13 +34,13 @@ void updateCamera(unsigned short deltaMS)
 	
 	// creates rotation matrix
 	//printf("creating camera rotation matrix\n");
-	//printVec3(Actors.direction[getActor()].forward);
-	float angle = (float) (-120 * acos(dotVec3(k, Actors.direction[getActor()].forward)));
+	//printVec3(direction[getActor()].forward);
+	float angle = (float) (-120 * acos(dotVec3(k, direction[getActor()].forward)));
 	//printf("angle = %f\n", angle);
-	vec3 around = crossVec3(k, Actors.direction[getActor()].forward);
+	vec3 around = crossVec3(k, direction[getActor()].forward);
 	around = NormalizeNormal(around);
 	mat4 cameraPlacement = QuaternionToRotationMatrix(UnitQuaternion(around, angle));
-	cameraPlacement = translateMat4(cameraPlacement, scaleVec3(Actors.physics[getActor()].Pos, -1));
+	cameraPlacement = translateMat4(cameraPlacement, scaleVec3(physics[getActor()].Pos, -1));
 	//printMat4(cameraPlacement);
 	
 	glUniformMatrix4fv(CameraPlacementLoc, 1, GL_TRUE, &cameraPlacement.mat[0][0]);

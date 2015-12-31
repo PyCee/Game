@@ -22,6 +22,7 @@
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
 #define WINDOW_HEIGHT 480
+#define MAX_LIFE_TIME 30000
 
 char IAMALIVE;
 
@@ -74,11 +75,9 @@ int main(int argc, char *argv[])
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
 	
-	//drawInit();
-	
-	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
+	//IAMALIVE = 0;
 	printf("IAMALIVE: %d\n", IAMALIVE);
 	while( IAMALIVE == 1 ) {
 		SDL_GL_SwapWindow(gameWindow);
@@ -109,12 +108,10 @@ int main(int argc, char *argv[])
 		//</CL>
 		handleEvents();
 		updateActors();
-		if(getElapsedTime(globalTimeLine) > 5000)
+		if(getElapsedTime(globalTimeLine) > MAX_LIFE_TIME)
 			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	bindActor(1);
-	loadActorData("actors/actor.xml");
 	bindCameraView(0);
 	bindMapTerrain(0);
 	bindControlledActor(0);

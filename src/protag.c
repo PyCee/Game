@@ -14,7 +14,7 @@ unsigned char genProtag
 	addDyn_Actor();
 	assignAIUpdate(UpdateProtag);
 	setBounds(0.2, 0.2);
-	setPos(genVec3(0.0, 0.3, 1.0));
+	setPos(genVec3(0.0, 0.3, 0.4));
 	return getActor();
 }
 void UpdateProtag

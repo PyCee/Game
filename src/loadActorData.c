@@ -79,4 +79,12 @@ void loadActorData(unsigned char *loc)
 	}
 	printf("data.children update: %s\n", data.children);
 	freeXMLElement(data);
+	
+	data = readXMLElements(fileSource, "<mesh>");
+	loadModelFromFile(data.children);
+	printf("data.children mesh: %s\n %i\n", data.children, model[getActor()].numMeshes);
+	for(index = 0; index < model[getActor()].numMeshes; index++)
+		setupMesh(&(model[getActor()].meshes[index]));
+	
+	freeXMLElement(data);
 }

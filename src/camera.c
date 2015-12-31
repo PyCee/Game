@@ -38,7 +38,7 @@ void updateCamera(unsigned short deltaMS)
 	float angle = (float) (-120 * acos(dotVec3(k, direction[getActor()].forward)));
 	//printf("angle = %f\n", angle);
 	vec3 around = crossVec3(k, direction[getActor()].forward);
-	around = NormalizeNormal(around);
+	around = normalizeVec3(around);
 	mat4 cameraPlacement = QuaternionToRotationMatrix(UnitQuaternion(around, angle));
 	cameraPlacement = translateMat4(cameraPlacement, scaleVec3(physics[getActor()].Pos, -1));
 	//printMat4(cameraPlacement);

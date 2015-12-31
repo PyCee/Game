@@ -1,12 +1,5 @@
 #version 130
 
-uniform vec3 actorWorldPosition;
-uniform vec3 actorRotateVector;
-uniform vec3 actorRotateAngle;
-uniform vec3 cameraWorldPosition;
-uniform vec3 cameraRotateVector;
-uniform vec3 cameraRotateAngle;
-uniform float ScreenScale;
 uniform int FOV;
 
 in vec3 localPosition;
