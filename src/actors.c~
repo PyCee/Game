@@ -98,6 +98,7 @@ void updateActors(void) {
 			localTime[getActor()] = updateTimeLineComponent();
 		actorID++;
 	}
+	printf("Updating Batch: \"Audio\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
@@ -105,21 +106,28 @@ void updateActors(void) {
 			updateAudioComponent(localTime[actorID]);
 		actorID++;
 	}
+	printf("Bach: \"Audio\" Updated\nUpdating Batch: \"Direction\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (ActiveActor[getActor()])
+		if (ActiveActor[getActor()]){
 			updateDirectionComponent(localTime[actorID]);
+			}
 		actorID++;
 	}
+	printf("Bach: \"Direction\" Updated\nUpdating Batch: \"Physics\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
-		if (ActiveActor[getActor()])
-			if (strcmp(identifier[getActor()].type, "static"))
+		if (ActiveActor[getActor()]){
+			//printf("actor num: %hhu\n", getActor());
+			if (strcmp(identifier[getActor()].type, "static")){
 				updatePhysicsComponent(localTime[actorID]);
+			}
+		}
 		actorID++;
 	}
+	printf("Bach: \"Physics\" Updated\nUpdating Batch: \"Collisions\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
@@ -127,6 +135,7 @@ void updateActors(void) {
 			updateCollisionsComponent(localTime[actorID]);
 		actorID++;
 	}
+	printf("Bach: \"Collisions\" Updated\nUpdating Batch: \"AI\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
@@ -135,6 +144,7 @@ void updateActors(void) {
 			updateAIComponent(localTime[actorID]);
 		actorID++;
 	}
+	printf("Bach: \"AI\" Updated\nUpdating Batch: \"Lighting\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
@@ -142,6 +152,7 @@ void updateActors(void) {
 			updateLightingComponent(localTime[actorID]);
 		actorID++;
 	}
+	printf("Bach: \"Lighting\" Updated\nUpdating Batch: \"Rendering\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
@@ -149,6 +160,7 @@ void updateActors(void) {
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
 	}
+	printf("All Batches Updated\n");
 }
 void UselessFunction
 (void)

@@ -27,10 +27,6 @@ GLint ActorWorldPositionLoc;
 GLint ActorRotateVectorLoc;
 GLint ActorRotateAngleLoc;
 
-GLint ActorPlacementLoc;
-GLint WorldPlacementLoc;
-GLint CameraPlacementLoc;
-
 void initRender(void);
 void genRenderComponent();
 void freeRenderComponent();

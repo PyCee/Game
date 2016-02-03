@@ -59,25 +59,11 @@ void initRender(void) {
 			BoundingBoxIndices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	ActorPlacementLoc = glGetUniformLocation(shaderProgram, "actorPlacement");
-	if (ActorWorldPositionLoc == -1) {
-		printf("ERROR::actorPlacementLoc Not Found\n");
-	}
-	WorldPlacementLoc = glGetUniformLocation(shaderProgram, "worldPlacement");
-	if (ActorWorldPositionLoc == -1) {
-		printf("ERROR::worldPlacementLoc Not Found\n");
-	}
-	CameraPlacementLoc = glGetUniformLocation(shaderProgram, "cameraPlacement");
-	if (ActorWorldPositionLoc == -1) {
-		printf("ERROR::cameraPlacementLoc Not Found\n");
-	}
-
-	glEnable(GL_CULL_FACE); // enables face culling    
-	glCullFace(GL_BACK); // tells OpenGL to cull back faces (the sane default setting)
-	glFrontFace(GL_CCW); // tells OpenGL which faces are considered 'front' (use GL_CW or GL_CCW)
+	
 	printf("Render Initialized.\n");
 }
 void genRenderComponent() {
+
 	render[getActor()].render = 1;
 
 	render[getActor()].BoundingBoxVerticies[0] = getWidth() * -1 * 0.5;
@@ -111,7 +97,7 @@ void genRenderComponent() {
 	render[getActor()].BoundingBoxVerticies[21] = getWidth() * -1 * 0.5;
 	render[getActor()].BoundingBoxVerticies[22] = getHeight();
 	render[getActor()].BoundingBoxVerticies[23] = getWidth() * 1 * 0.5;
-
+	
 	glGenBuffers(1, &(render[getActor()].BoundingBoxVBO));
 	glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 	glBufferData(GL_ARRAY_BUFFER,
@@ -137,31 +123,45 @@ void updateRenderComponent(unsigned short deltaMS) {
 				physics[getActor()].Pos);
 		if (getActor() == getControlledActor()) {
 
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(j, tlm));
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(i, 0));
 			worldPlacement = translateMat4(worldPlacement,
 					physics[getActor()].Pos);
-			printMat4(worldPlacement);
+			//printMat4(worldPlacement);
 		}
-		//printf("now printing worldplacement mat4\n");
-		//printMat4(worldPlacement);
 		glUniformMatrix4fv(WorldPlacementLoc, 1, GL_TRUE,
 				&worldPlacement.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
-	if (collisions[getActor()].drawBounds && getActor() != getControlledActor()) {
-
+	if (collisions[getActor()].drawBounds){// && getActor() != getControlledActor()) {
+		printf("Drawing Bounds for Actor %hhu\n", getActor());
+		
 		glBindBuffer(GL_ARRAY_BUFFER, render[getActor()].BoundingBoxVBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BoundingBoxIBO);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		
+		printf("Bounds Drawn for Actor %hhu\n", getActor());
 		return;
 	}
 	// Draw model
+	printf("Drawing Model for Actor %hhu\n", getActor());
+	GLuint index;
+	for(index = 0; index < model[getActor()].numMeshes; index++){
+		//TODO: use textures
+		
+		glActiveTexture(GL_TEXTURE0);
+		glUniform1i(TextureLoc, 0);
+		glBindTexture(GL_TEXTURE_2D, model[getActor()].meshes[index].textures[0].id);
+		
+		glBindVertexArray(model[getActor()].meshes[index].VAO);
+		glDrawElements(GL_TRIANGLES, model[getActor()].meshes[index].numIndices, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
+	printf("Model Drawn for Actor %hhu\n", getActor());
 	
-	drawModel();
 	
 }

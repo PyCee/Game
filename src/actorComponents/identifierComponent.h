@@ -2,7 +2,7 @@
 #define _IDENTIFIER_COMPONENT_
 
 typedef struct _IdentifierComponent {
-	unsigned char * name;
+	unsigned char *name;
 	unsigned char *type;
 } IdentifierComponent;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actor>
 	<identifier>
-		<name>Cruelty</name>
-		<type>dynamic</type>
+		<name>arrow</name>
+		<type>static</type>
 	</identifier>
 	<audio>
 		
@@ -18,13 +18,13 @@
 		<drawBounds>0</drawBounds>
 	</collisions>
 	<AI>
-		<update>UpdateProtag</update>
+		<update>UselessUpdate</update>
 	</AI>
 	<lighting>
 		
 	</lighting>
 	<model>
-		<mesh>models/untitled.dae</mesh>
+		<mesh>models/arrow.dae</mesh>
 	</model>
 	<rendering>
 	</rendering>

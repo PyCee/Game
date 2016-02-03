@@ -169,8 +169,9 @@ void handleEvents
 			case SDL_MOUSEMOTION:
 				// Rotate Global Camera
 				bindActor(getCameraView());
-				DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
+				//DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
 				//DirectionPitch(event.motion.yrel * MouseSensitivity / 256);
+				bindActor(0);
       				break;
 			default:
 				break;

@@ -20,8 +20,6 @@ static void (*lookupUpdateFunctions[]) (unsigned short) = {
 };
 void loadActorData(unsigned char *loc)
 {
-	//somevariables must be converted to floats/doubles instead of ints
-	
 	unsigned char *fileSource = readFile(loc);
 	char *afterPtr;
 	unsigned char *content;

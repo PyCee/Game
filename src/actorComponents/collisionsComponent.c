@@ -55,7 +55,6 @@ void setBounds(float width, float height) {
 	glBufferData(GL_ARRAY_BUFFER,
 			sizeof(render[getActor()].BoundingBoxVerticies),
 			render[getActor()].BoundingBoxVerticies, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {

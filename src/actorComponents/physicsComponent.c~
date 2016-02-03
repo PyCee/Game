@@ -9,10 +9,10 @@
 #include "physics/vector.h"
 
 void genPhysicsComponent() {
-	Actors.physics[getActor()].Pos = genVec3(0, 0, 0);
-	Actors.physics[getActor()].Vel = genVec3(0, 0, 0);
-	Actors.physics[getActor()].Acc = genVec3(0, 0, 0);
-	Actors.physics[getActor()].Jrk = genVec3(0, 0, 0);
+	physics[getActor()].Pos = genVec3(0, 0, 0);
+	physics[getActor()].Vel = genVec3(0, 0, 0);
+	physics[getActor()].Acc = genVec3(0, 0, 0);
+	physics[getActor()].Jrk = genVec3(0, 0, 0);
 }
 void freePhysicsComponent() {
 	// Don't free vectors since they were not dynamically allocated
@@ -34,30 +34,30 @@ void updatePhysicsComponent(unsigned short deltaMS) {
 					getPos().vec[2] + deltaMS * getVel().vec[2] * 1));
 }
 void setSpeed(unsigned char speed) {
-	Actors.physics[getActor()].speed = speed;
+	physics[getActor()].speed = speed;
 }
 void setPos(vec3 pos) {
-	Actors.physics[getActor()].Pos = pos;
+	physics[getActor()].Pos = pos;
 }
 void setVel(vec3 vel) {
-	Actors.physics[getActor()].Vel = vel;
+	physics[getActor()].Vel = vel;
 }
 void setAcc(vec3 acc) {
-	Actors.physics[getActor()].Acc = acc;
+	physics[getActor()].Acc = acc;
 }
 void setJrk(vec3 jrk) {
-	Actors.physics[getActor()].Jrk = jrk;
+	physics[getActor()].Jrk = jrk;
 }
 
 vec3 getPos(void) {
-	return Actors.physics[getActor()].Pos;
+	return physics[getActor()].Pos;
 }
 vec3 getVel(void) {
-	return Actors.physics[getActor()].Vel;
+	return physics[getActor()].Vel;
 }
 vec3 getAcc(void) {
-	return Actors.physics[getActor()].Acc;
+	return physics[getActor()].Acc;
 }
 vec3 getJrk(void) {
-	return Actors.physics[getActor()].Jrk;
+	return physics[getActor()].Jrk;
 }

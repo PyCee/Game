@@ -4,7 +4,11 @@
 
 #include <SDL2/SDL_opengl.h>
 
-//GLuint VAO;
+GLint TextureLoc;
+
+GLint ActorPlacementLoc;
+GLint WorldPlacementLoc;
+GLint CameraPlacementLoc;
 
 GLuint shaderProgram;
 GLuint shaderVertex;

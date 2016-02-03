@@ -5,9 +5,11 @@
 #include "../physics/vector.h"
 
 typedef struct _Vertex{
-	vec3 pos;
+	/*vec3 pos;
 	vec3 normal;
 	vec2 texCoords;
+	*/
+	float attribute[3/*position*/ + 3/*normal*/ + 2/*texture coordinates*/];
 	
 } Vertex;
 

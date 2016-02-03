@@ -7,7 +7,7 @@
 #include "../actors.h"
 #include "../protag.h"
 #include "../actorComponents/physics/vector.h"
-#include "../actorComponents/direction/normal.h"
+#include "../actorComponents/physics/vector.h"
 
 extern unsigned char IAMALIVE;
 
@@ -66,10 +66,6 @@ void DefaultKeyboard
 	keyFunctions[2 * SDLK_l + 1] = UselessFunction;
 	functionKeys[5] = 'l';
 	SaveKeyBindings();
-}
-void UselessFunction
-(void)
-{
 }
 void EndGame
 (void)
@@ -173,8 +169,9 @@ void handleEvents
 			case SDL_MOUSEMOTION:
 				// Rotate Global Camera
 				bindActor(getCameraView());
-				DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
+				//DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
 				//DirectionPitch(event.motion.yrel * MouseSensitivity / 256);
+				bindctor(0);
       				break;
 			default:
 				break;

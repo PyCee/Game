@@ -8,7 +8,6 @@
 extern unsigned char IAMALIVE;
 void genShaders(void)
 {
-	
 	printf("Loading Vertex Shader.\n");
 	shaderVertex = loadShaderFromFile(SHADER_VERT_PATH, GL_VERTEX_SHADER);
 	printf("Vertex Shader Loaded.\nLoading Fragment Shader.\n");
@@ -21,7 +20,11 @@ void genShaders(void)
 	glAttachShader(shaderProgram, shaderFragment);
 	
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 	glBindAttribLocation(shaderProgram, 0, "localPosition");
+	glBindAttribLocation(shaderProgram, 1, "normal");
+	glBindAttribLocation(shaderProgram, 2, "texCoords");
 
 	printf("shaderProgram Shaders Attached.\nLinking shaderProgram.\n");
 	glLinkProgram(shaderProgram);
@@ -34,12 +37,33 @@ void genShaders(void)
 		glGetProgramInfoLog(shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
 		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
 		
-		IAMALIVE = 0; // Ends game so error may be fixed.
+		IAMALIVE = 0;
 	}
 	
 	glValidateProgram(shaderProgram);
 	glUseProgram(shaderProgram);
 	
+	TextureLoc = glGetUniformLocation(shaderProgram, "Texture");
+	if (TextureLoc == -1) {
+		printf("ERROR::TextureLoc Not Found\n");
+	}
+	
+	ActorPlacementLoc = glGetUniformLocation(shaderProgram, "actorPlacement");
+	if (ActorPlacementLoc == -1) {
+		printf("ERROR::actorPlacementLoc Not Found\n");
+	}
+	WorldPlacementLoc = glGetUniformLocation(shaderProgram, "worldPlacement");
+	if (WorldPlacementLoc == -1) {
+		printf("ERROR::worldPlacementLoc Not Found\n");
+	}
+	CameraPlacementLoc = glGetUniformLocation(shaderProgram, "cameraPlacement");
+	if (CameraPlacementLoc == -1) {
+		printf("ERROR::cameraPlacementLoc Not Found\n");
+	}
+
+	glEnable(GL_CULL_FACE); // enables face culling    
+	glCullFace(GL_BACK); // tells OpenGL to cull back faces (the sane default setting)
+	glFrontFace(GL_CCW); // tells OpenGL which faces are considered 'front' (use GL_CW or GL_CCW)
 	
 }
 GLuint loadShaderFromFile( const unsigned char * path, GLenum shaderType )

@@ -10,9 +10,9 @@
 typedef struct _ModelComponent {
 	Mesh *meshes;
 	unsigned int numMeshes;
+	unsigned char *dir;
 } ModelComponent;
 
 Mesh *loadModelFromFile(const unsigned char *);
-void drawModel(void);
 
 #endif /* _MODEL_COMPONENT_ */

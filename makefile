@@ -16,6 +16,7 @@ install:
 #	./configure
 #	make
 #	sudo make install
+	sudo apt-get install libsoil-dev
 push:
 	clear
 	echo GitHub...

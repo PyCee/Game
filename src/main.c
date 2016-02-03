@@ -18,6 +18,7 @@
 #include "fileSupport/loadFiles.h"
 #include "fileSupport/XML.h"
 #include "loadActorData.h"
+#include "SOIL/SOIL.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 520
@@ -48,9 +49,6 @@ int main(int argc, char *argv[])
 	InitKeyboard();
 	DefaultKeyboard();
 	
-	globalTimeLine_t *globalTimeLine;
-	genGlobalTimeLine(&globalTimeLine);
-	bindGlobalTimeLine(globalTimeLine);
 	
 	initActorComponents();
 	genAllActors();
@@ -60,6 +58,10 @@ int main(int argc, char *argv[])
 	unsigned char pro = getActor();
 	loadActorData("actors/actor.xml");
 	setPos(genVec3(0.0, 0.3, 1.0));
+	//addActor();
+	//unsigned char aro = getActor();
+	//loadActorData("actors/arrow.xml");
+	//setPos(genVec3(0.0, 0.0, 0.5));
 	unsigned char cam = genCamera();
 	bindCameraView(cam);
 	bindMapTerrain(ter);
@@ -77,6 +79,9 @@ int main(int argc, char *argv[])
 	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
+	globalTimeLine_t *globalTimeLine;
+	genGlobalTimeLine(&globalTimeLine);
+	bindGlobalTimeLine(globalTimeLine);
 	//IAMALIVE = 0;
 	printf("IAMALIVE: %d\n", IAMALIVE);
 	while( IAMALIVE == 1 ) {
@@ -84,7 +89,7 @@ int main(int argc, char *argv[])
 		
 		SDL_Delay(16);
 		
-		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClearColor(0.0, 0.3, 0.0, 1.0);//TODO test where in main loop segfault happens
 		glClear(GL_COLOR_BUFFER_BIT);
 		
 		updateGlobalTimeLine(getGlobalTimeLine());
