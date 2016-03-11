@@ -7,6 +7,7 @@
 
 #include "userControl/save.h"
 #include "userControl/keyboard.h"
+#include "userControl/options.h"
 #include "actors.h"
 #include "protag.h"
 #include "globalTimeLine.h"
@@ -21,9 +22,9 @@
 #include "SOIL/SOIL.h"
 
 #define PROGRAM_NAME "LDM"
-#define WINDOW_WIDTH 520
-#define WINDOW_HEIGHT 480
-#define MAX_LIFE_TIME 30000
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 450
+#define MAX_LIFE_TIME 1000 * 30
 
 char IAMALIVE;
 
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 	
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
-	InitOptions();
+	loadOptions(DEFAULT_CONFIG_PATH);
 	InitKeyboard();
 	DefaultKeyboard();
 	
@@ -72,7 +73,6 @@ int main(int argc, char *argv[])
 	//Mix_PlayChannel(-1, BGMusic, 4);
 	
 	char list[] = {pro, ter};
-	
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);

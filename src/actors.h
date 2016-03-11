@@ -15,7 +15,7 @@
 #include "actorComponents/renderComponent.h"
 
 // Various Components used by every Dynamic Actor
-IdentifierComponent identifier[MAX_ACTOR_COUNT];
+IdentifierComponent identifier[MAX_ACTOR_COUNT]; //TODO: do I need to extern the defined MAX_ACTOR_COUNT?
 TimeLineComponent timeLine[MAX_ACTOR_COUNT];
 AudioComponent audio[MAX_ACTOR_COUNT];
 DirectionComponent direction[MAX_ACTOR_COUNT];
@@ -26,9 +26,8 @@ LightingComponent lighting[MAX_ACTOR_COUNT];
 ModelComponent model[MAX_ACTOR_COUNT];
 RenderComponent render[MAX_ACTOR_COUNT];
 
-unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
-
-unsigned char allActorsPaused;
+extern unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
+extern unsigned char allActorsPaused;
 
 void initActorComponents(void);
 void addActor(void);

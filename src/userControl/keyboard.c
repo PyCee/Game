@@ -39,16 +39,14 @@ void DefaultKeyboard
 	unsigned short keys = 0;
 	while (keys < 274 * 2){
 		keyFunctions[keys] = UselessFunction;
-		detectWhilePaused[keys] = 0;
+		detectWhilePaused[keys] = 1;
 		keys++;
 	}
 	keyFunctions[2 * SDLK_p] = toggleAllPause;
 	keyFunctions[2 * SDLK_p + 1] = UselessFunction;
-	detectWhilePaused[2 * SDLK_p] = 1;
 	functionKeys[0] = 'p';
 	keyFunctions[2 * SDLK_t] = EndGame;
 	keyFunctions[2 * SDLK_t + 1] = UselessFunction;
-	detectWhilePaused[2 * SDLK_t] = 1;
 	functionKeys[0] = 't';
 	keyFunctions[2 * SDLK_w] = ControlledActorForward;
 	keyFunctions[2 * SDLK_w + 1] = ControlledActorBackward;
@@ -64,6 +62,7 @@ void DefaultKeyboard
 	functionKeys[4] = 'd';
 	keyFunctions[2 * SDLK_l] = Jump;
 	keyFunctions[2 * SDLK_l + 1] = UselessFunction;
+	detectWhilePaused[2 * SDLK_l] = 0;
 	functionKeys[5] = 'l';
 	SaveKeyBindings();
 }
@@ -84,7 +83,7 @@ void handleEvents
 				break;
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym < 274){
-					if((!allActorsPaused) || (detectWhilePaused[2 * event.key.keysym.sym] == 1)){
+					if(!allActorsPaused || (detectWhilePaused[2 * event.key.keysym.sym] == 1)){
 						if(pressed[event.key.keysym.sym] == 0){
 							keyFunctions[2 * event.key.keysym.sym]();
 							pressed[event.key.keysym.sym] = 1;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<options>
+	<sound>
+		<master_level>7</master_level>
+		<music_level>8</music_level>
+		<sound_effects_level>9</sound_effects_level>
+	</sound>
+	<video>
+		<field_of_view>120</field_of_view>
+		<brightness>5</brightness>
+	</video>
+	<control>
+		<mouse_sensitivity>201</mouse_sensitivity>
+		<lock_mouse_to_window>0</lock_mouse_to_window>
+	</control>
+</options>

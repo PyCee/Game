@@ -1,4 +1,3 @@
-
 #ifndef _SAVE_
 #define _SAVE_
 
@@ -8,6 +7,6 @@
 
 void LoadSave(char *);
 void SaveGame(char *);
-void NewSave(char *);
+void EmNewSave();
 
-#endif
+#endif /* _SAVE_ */

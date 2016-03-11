@@ -1,9 +1,0 @@
-
-#ifndef _TERMINAL_
-#define _TERMINAL_
-
-extern _DEBUG_;
-
-void terminalWrite(char *);
-
-#endif

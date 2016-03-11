@@ -4,6 +4,7 @@
 typedef struct _IdentifierComponent {
 	unsigned char *name;
 	unsigned char *type;
+	unsigned char *file;
 } IdentifierComponent;
 
 void genIdentifierComponent();

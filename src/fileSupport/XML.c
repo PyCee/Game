@@ -21,6 +21,7 @@ XMLElement readXMLElements(const unsigned char *source, const unsigned char *ele
 		printf("\'%s\' is not a valid xml element", elementOpen);
 		return;
 	}
+	printf("source:\n{%s\n }\n", source);
 	if(!strstr(source, elementOpen)){
 		printf("\'%s\' is not an XML opening element present in the file.\n", elementOpen);
 		return;

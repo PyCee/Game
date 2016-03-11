@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "actors.h"
+#include <string.h>
 #include "actorSelection.h"
 
 #include "actorComponents/AIComponent.h"
@@ -22,7 +23,9 @@ void loadActorData(unsigned char *loc)
 {
 	unsigned char *fileSource = readFile(loc);
 	char *afterPtr;
-	unsigned char *content;
+	
+	identifier[getActor()].file = malloc(sizeof(loc));
+	strcpy(identifier[getActor()].file, loc);
 	
 	XMLElement data = readXMLElements(fileSource, "<name>");
 	identifier[getActor()].name = data.children;

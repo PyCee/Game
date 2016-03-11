@@ -1,7 +1,37 @@
 compile:
-	echo Compiling.
 	sh compile.sh
+comp2:
+	#! /bin/bash
+	SRC=$(find . src -name "*.c" -print)
+	echo Compiling
+	for fie in $SRC
+	do
+		gcc -c $fie
+		echo "Compiling $fie"
+	done
 	echo Compiled
+build:
+	LINK="-lSDL2 -lSDL2_mixer -lGL -lm -lassimp -lSOIL"
+	BUI=$(find -name "*.o" -print)
+	
+	echo Building and Linking
+	gcc -o bin/Morte $BUI $LINK
+	echo Built and Linked
+clean:
+	BUI=$(find -name "*.o" -print)
+	TMP=$(find -name "*~" -print)
+	echo Cleaning
+	for fie in $BUI
+	do
+		echo "Removing Compiled $fie"
+		rm $fie
+	done
+	for fie in $TMP
+	do
+		echo "Removing Temp $fie"
+		rm $fie
+	done
+	echo Cleaned
 run:
 	echo Running
 	cd bin;./Morte;cd ..

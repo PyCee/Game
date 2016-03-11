@@ -18,6 +18,8 @@ Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 		aiProcess_FlipWindingOrder	 |
 		aiProcess_Triangulate            |
 		aiProcess_JoinIdenticalVertices  |
+		aiProcess_GenNormals		 |
+		//aiProcess_FlipUVs 		 |
 		aiProcess_SortByPType);
 	
 	countMeshes(scene->mRootNode);

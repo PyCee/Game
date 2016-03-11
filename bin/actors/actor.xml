@@ -24,7 +24,7 @@
 		
 	</lighting>
 	<model>
-		<mesh>models/untitled.dae</mesh>
+		<mesh>models/butterfly.dae</mesh>
 	</model>
 	<rendering>
 	</rendering>

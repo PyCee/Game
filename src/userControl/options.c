@@ -1,9 +1,11 @@
 
 #include "options.h"
 #include <stdio.h>
+#include "../fileSupport/loadFiles.h"
+#include "../fileSupport/XML.h"
+#include <stdlib.h>
 
-void InitOptions
-(void)
+void loadOptions(unsigned char *configLoc)
 {
 	// load options from file
 	printf("Initing Options.\n");
@@ -13,18 +15,47 @@ void InitOptions
 			printf("ERROR::CONFIG::LOCATION::FILE_NOT_CREATED\n");
 		else {
 			fclose(configFile);
-			DefaultAllOptions();
+			DefaultOptions();
 			SaveOptions();
 		}
 	} else {
-		fscanf(configFile, " %*s %hhu", &SoundLevel);
-		fscanf(configFile, " %*s %hhu", &MusicLevel);
-		fscanf(configFile, " %*s %hhu", &SoundEffectsLevel);
-		fscanf(configFile, " %*s %hhu", &FieldOfView);
-		fscanf(configFile, " %*s %hhu", &Brightness);
-		fscanf(configFile, " %*s %hhu", &MouseSensitivity);
-		fscanf(configFile, " %*s %hhu", &MouseLock);
-		fclose(configFile);
+		unsigned char *fileSource = readFile(configLoc);
+		
+		char *afterPtr;
+		XMLElement data = readXMLElements(fileSource, "<master_level>");
+		MasterLevel = strtol(data.children, &afterPtr, 10);
+		printf("MasterSoundLevel: %hhu\n", MasterLevel);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<music_level>");
+		MusicLevel = strtol(data.children, &afterPtr, 10);
+		printf("MusicLevel: %hhu\n", MusicLevel);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<sound_effects_level>");
+		SoundEffectsLevel = strtol(data.children, &afterPtr, 10);
+		printf("SoundEffectsLevel: %hhu\n", SoundEffectsLevel);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<field_of_view>");
+		FieldOfView = strtol(data.children, &afterPtr, 10);
+		printf("FieldOfView: %hhu\n", FieldOfView);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<brightness>");
+		Brightness = strtol(data.children, &afterPtr, 10);
+		printf("Brightness: %hhu\n", Brightness);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<mouse_sensitivity>");
+		MouseSensitivity = strtol(data.children, &afterPtr, 10);
+		printf("MouseSensitivity: %hhu\n", MouseSensitivity);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<lock_mouse_to_window>");
+		MouseLock = strtol(data.children, &afterPtr, 10);
+		printf("MouseLock: %hhu\n", MouseLock);
+		freeXMLElement(data);
 		
 		SDL_SetRelativeMouseMode(MouseLock);
 	}
@@ -38,77 +69,11 @@ void SaveOptions
 	if ((configFile = fopen(CONFIG_PATH, "w")) == NULL)
 	{
 		printf("ERROR::CONFIG::LOCATION::FILE_NOT_FOUND\n");
-	} else
-	{
-		fprintf(configFile, "%25s %u\n", STR_SOUND_LEVEL, SoundLevel);
-		fprintf(configFile, "%25s %u\n", STR_MUSIC_LEVEL, MusicLevel);
-		fprintf(configFile, "%25s %u\n", STR_SOUND_EFFECTS_LEVEL, SoundEffectsLevel);
-		fprintf(configFile, "%25s %u\n", STR_FIELD_OF_VIEW, FieldOfView);
-		fprintf(configFile, "%25s %u\n", STR_BRIGHTNESS, Brightness);
-		fprintf(configFile, "%25s %u\n", STR_MOUSE_SENSITIVITY, MouseSensitivity);
-		fprintf(configFile, "%25s %u\n", STR_MOUSE_LOCK, MouseLock);
-		fclose(configFile);
+		return;
 	}
+	unsigned char *configSource = readFile(DEFAULT_CONFIG_PATH);
 }
-void DefaultAllOptions
-(void)
+void DefaultOptions(void)
 {
-	DefaultAllSoundOptions();
-	DefaultAllVideoOptions();
-	DefaultAllControlOptions();
-}
-void DefaultAllSoundOptions
-(void)
-{
-	DefaultSoundLevel();
-	DefaultMusicLevel();
-	DefaultEffectsLevel();
-}
-void DefaultSoundLevel
-(void)
-{
-	SoundLevel = DEFAULT_SOUND_LEVEL;
-}
-void DefaultMusicLevel
-(void)
-{
-	MusicLevel = DEFAULT_MUSIC_LEVEL;
-}
-void DefaultEffectsLevel
-(void)
-{
-	SoundEffectsLevel = DEFAULT_SOUND_EFFECTS_LEVEL;
-}
-void DefaultAllVideoOptions
-(void)
-{
-	DefaultBrightness();
-	DefaultFieldOfView();
-}
-void DefaultBrightness
-(void)
-{
-	Brightness = DEFAULT_BRIGHTNESS;
-}
-void DefaultFieldOfView
-(void)
-{
-	FieldOfView = DEFAULT_FIELD_OF_VIEW;
-}
-void DefaultAllControlOptions
-(void)
-{
-	DefaultMouseSensitivity();
-	DefaultMouseLock();
-}
-void DefaultMouseSensitivity
-(void)
-{
-	MouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
-}
-
-void DefaultMouseLock
-(void)
-{
-	MouseLock = DEFAULT_MOUSE_LOCK;
+	loadOptions(DEFAULT_CONFIG_PATH);
 }

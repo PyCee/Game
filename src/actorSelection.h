@@ -16,15 +16,15 @@ unsigned char currentLight;
 void bindLight(unsigned char);
 unsigned char getLight(void);
 
-static	unsigned char cameraView;
+static unsigned char cameraView;
 void bindCameraView (unsigned char);
 unsigned char getCameraView (void);
 
-static	unsigned char controlledActor;
+static unsigned char controlledActor;
 void bindControlledActor (unsigned char);
 unsigned char getControlledActor (void);
 
-static	unsigned char mapTerrain;
+static unsigned char mapTerrain;
 void bindMapTerrain (unsigned char);
 unsigned char getMapTerrain (void);
 
