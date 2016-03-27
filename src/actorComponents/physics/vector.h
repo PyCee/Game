@@ -21,14 +21,9 @@ vec3 addVec3(vec3, vec3);
 vec3 subtractVec3(vec3, vec3);
 vec3 scaleVec3(vec3, float);
 float dotVec3(vec3, vec3);
-vec3 crossVec3(vec3, vec3);
+vec3 crossProduct(vec3, vec3);
 
 void printVec3(vec3);
-void setVec3X(vec3 *, float);
-void setVec3Y(vec3 *, float);
-void setVec3Z(vec3 *, float);
-float getVec3X(vec3);
-float getVec3Y(vec3);
-float getVec3Z(vec3);
+void printVec4(vec4);
 
 #endif /* _VECTOR_ */

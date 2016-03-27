@@ -137,7 +137,6 @@ void updateActors(void) {
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (ActiveActor[getActor()]){
-			//printf("actor num: %hhu\n", getActor());
 			if (strcmp(identifier[getActor()].type, "static")){
 				updatePhysicsComponent(localTime[actorID]);
 			}
@@ -157,7 +156,6 @@ void updateActors(void) {
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (ActiveActor[getActor()])
-			//if (ActorType[actorID] != STA)
 			updateAIComponent(localTime[actorID]);
 		actorID++;
 	}
@@ -203,4 +201,16 @@ void toggleAllPause(void)
 		}
 		allActorsPaused = 1;
 	}
+}
+void printActor(void)
+{
+	printf("\nPrinting Actor Number: %hhu\n", getActor());
+	printf("Name: %s\n", identifier[getActor()].name);
+	printf("Type: %s\n", identifier[getActor()].type);
+	printf("Data File: %s\n", identifier[getActor()].file);
+	printf("Position:");
+	printVec3(physics[getActor()].Pos);
+	printf("Forward:");
+	printVec3(direction[getActor()].forward);
+	printf("Actor %hhu Finished Printing\n\n", getActor());
 }

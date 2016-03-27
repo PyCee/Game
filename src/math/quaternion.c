@@ -57,6 +57,15 @@ vec3 rotateVec3(vec3 rotate, vec3 around, float angle)
 	
 	return genVec3(result.vec[1], result.vec[2], result.vec[3]);
 }
+vec4 QuatMultiply(vec4 qua1, vec4 qua2)
+{
+	vec4 result;
+	result.vec[0] = qua1.vec[0]*qua2.vec[0] - qua1.vec[1]*qua2.vec[1] - qua1.vec[2]*qua2.vec[2] - qua1.vec[3]*qua2.vec[3];
+	result.vec[1] = qua1.vec[0]*qua2.vec[1] + qua1.vec[1]*qua2.vec[0] + qua1.vec[2]*qua2.vec[3] - qua1.vec[3]*qua2.vec[2];
+	result.vec[2] = qua1.vec[0]*qua2.vec[2] + qua1.vec[2]*qua2.vec[0] + qua1.vec[1]*qua2.vec[3] - qua1.vec[3]*qua2.vec[1];
+	result.vec[3] = qua1.vec[0]*qua2.vec[3] + qua1.vec[3]*qua2.vec[0] + qua1.vec[1]*qua2.vec[2] - qua1.vec[2]*qua2.vec[1];
+	return result;
+}
 mat4 QuaternionToRotationMatrix(vec4 qua)
 {
 	mat4 rotation;

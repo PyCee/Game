@@ -23,38 +23,48 @@ void loadOptions(unsigned char *configLoc)
 		
 		char *afterPtr;
 		XMLElement data = readXMLElements(fileSource, "<master_level>");
-		MasterLevel = strtol(data.children, &afterPtr, 10);
-		printf("MasterSoundLevel: %hhu\n", MasterLevel);
+		Option[MASTER_SOUND_LEVEL] = strtol(data.children, &afterPtr, 10);
+		printf("MasterSoundLevel: %hhu\n", Option[MASTER_SOUND_LEVEL]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<music_level>");
-		MusicLevel = strtol(data.children, &afterPtr, 10);
-		printf("MusicLevel: %hhu\n", MusicLevel);
+		Option[MUSIC_LEVEL] = strtol(data.children, &afterPtr, 10);
+		printf("MusicLevel: %hhu\n", Option[MUSIC_LEVEL]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<sound_effects_level>");
-		SoundEffectsLevel = strtol(data.children, &afterPtr, 10);
-		printf("SoundEffectsLevel: %hhu\n", SoundEffectsLevel);
+		Option[SOUND_EFFECTS_LEVEL] = strtol(data.children, &afterPtr, 10);
+		printf("SoundEffectsLevel: %hhu\n", Option[SOUND_EFFECTS_LEVEL]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<field_of_view>");
-		FieldOfView = strtol(data.children, &afterPtr, 10);
-		printf("FieldOfView: %hhu\n", FieldOfView);
+		Option[FIELD_OF_VIEW] = strtol(data.children, &afterPtr, 10);
+		printf("FieldOfView: %hhu\n", Option[FIELD_OF_VIEW]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<brightness>");
-		Brightness = strtol(data.children, &afterPtr, 10);
-		printf("Brightness: %hhu\n", Brightness);
+		Option[BRIGHTNESS] = strtol(data.children, &afterPtr, 10);
+		printf("Brightness: %hhu\n", Option[BRIGHTNESS]);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<aspect_ratio_y>");
+		Option[ASPECT_RATIO_Y] = strtol(data.children, &afterPtr, 10);
+		printf("aspect ratio: %hhu\n", Option[ASPECT_RATIO_Y]);
+		freeXMLElement(data);
+		
+		data = readXMLElements(fileSource, "<aspect_ratio_x>");
+		Option[ASPECT_RATIO_X] = strtol(data.children, &afterPtr, 10);
+		printf("aspect ratio: %hhu\n", Option[ASPECT_RATIO_X]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<mouse_sensitivity>");
-		MouseSensitivity = strtol(data.children, &afterPtr, 10);
-		printf("MouseSensitivity: %hhu\n", MouseSensitivity);
+		Option[MOUSE_SENSITIVITY] = strtol(data.children, &afterPtr, 10);
+		printf("MouseSensitivity: %hhu\n", Option[MOUSE_SENSITIVITY]);
 		freeXMLElement(data);
 		
 		data = readXMLElements(fileSource, "<lock_mouse_to_window>");
-		MouseLock = strtol(data.children, &afterPtr, 10);
-		printf("MouseLock: %hhu\n", MouseLock);
+		Option[MOUSE_LOCK] = strtol(data.children, &afterPtr, 10);
+		printf("MouseLock: %hhu\n", Option[MOUSE_LOCK]);
 		freeXMLElement(data);
 		
 		SDL_SetRelativeMouseMode(MouseLock);

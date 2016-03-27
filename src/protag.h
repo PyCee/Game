@@ -9,13 +9,16 @@
 #define SPEED_BACKWARD 0.0008
 #define SPEED_RIGHT 0.0008
 
-unsigned char			genProtag									(void);
-void		UpdateProtag							(unsigned short);
-void		Jump											(void);
+void UpdateProtag(unsigned short);
+void Jump(void);
 
-void		ControlledActorForward		(void);
-void		ControlledActorLeft				(void);
-void		ControlledActorBackward		(void);
-void		ControlledActorRight			(void);
+void ControlledActorForward(void);
+void UnControlledActorForward(void);
+void ControlledActorLeft(void);
+void UnControlledActorLeft(void);
+void ControlledActorBackward(void);
+void UnControlledActorBackward(void);
+void ControlledActorRight(void);
+void UnControlledActorRight(void);
 
 #endif

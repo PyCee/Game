@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor>
+	<identifier>
+		<name>Thing</name>
+		<type>static</type>
+	</identifier>
+	<audio>
+		
+	</audio>
+	<physics>
+		<mass>14</mass>
+		<speed>7</speed>
+	</physics>
+	<collisions>
+		<height>0.7</height>
+		<width>0.8</width>
+		<radius>20</radius><!--To replace height and width once there is a working collision detection system-->
+		<drawBounds>0</drawBounds>
+	</collisions>
+	<AI>
+		<update>UselessUpdate</update>
+	</AI>
+	<lighting>
+		
+	</lighting>
+	<model>
+		<mesh>models/thing.dae</mesh>
+	</model>
+	<rendering>
+	</rendering>
+</actor>

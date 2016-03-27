@@ -6,15 +6,13 @@ in vec2 TexCoord;
 
 uniform sampler2D Texture;
 
-
 in float col;
 
+vec4 ambiantLight;
 void main()
 {
-	fragColor = brightness * texture(Texture, TexCoord);
+	ambiantLight = vec4(0.2, 0.1, 0.0, 1.0);
+	fragColor = ambiantLight + ((brightness*brightness) * texture(Texture, TexCoord));
 }
-
-
-
 
 

@@ -8,57 +8,63 @@
 #include <stdio.h>
 #include "actorSelection.h"
 
-unsigned char genProtag
-(void)
+void UpdateProtag(unsigned short deltaMS)
 {
-	addDyn_Actor();
-	assignAIUpdate(UpdateProtag);
-	setBounds(0.2, 0.2);
-	setPos(genVec3(0.0, 0.3, 0.4));
-	return getActor();
+	printVec3(POS);
 }
-void UpdateProtag
-(unsigned short deltaMS)
+void Jump(void)
 {
-	printVec3(getPos());
-	printf("h: %f\n", getHeight());
-	printf("w: %f\n", getWidth());
+	printf("Jump Called\n\n\n\n\n\n");
+	bindActor(getControlledActor());
+	//setVel(genVec3(getVel().vec[0], getVel().vec[1] + 1 * 0.002, getVel().vec[2]));
+	VEL[0]->vec[1] += 0.002;
+	
 }
-void Jump
-(void)
+static unsigned char forwardVecIndex;
+static unsigned char backwardVecIndex;
+static unsigned char leftVecIndex;
+static unsigned char rightVecIndex;
+void ControlledActorForward(void)
 {
 	bindActor(getControlledActor());
-	setVel(genVec3(getVel().vec[0], getVel().vec[1] + 1 * 0.002, getVel().vec[2]));
+	forwardVecIndex = bindVel(&FORWARD, SPEED_FORWARD, 180.0);
 }
-void ControlledActorForward
-(void)
+void UnControlledActorForward(void)
 {
 	bindActor(getControlledActor());
-	setVel(genVec3(getVel().vec[0], getVel().vec[1], getVel().vec[2] + 1 * SPEED_FORWARD));
-	bindActor(getCameraView());
-	setVel(genVec3(getVel().vec[0], getVel().vec[1], getVel().vec[2] + 1 * SPEED_FORWARD));
+	unBindVel(forwardVecIndex);
+	bindActor(0);
 }
-void ControlledActorLeft
-(void)
+void ControlledActorBackward(void)
 {
 	bindActor(getControlledActor());
-	setVel(genVec3(getVel().vec[0] - 1 * SPEED_FORWARD, getVel().vec[1], getVel().vec[2]));
-	bindActor(getCameraView());
-	setVel(genVec3(getVel().vec[0] - 1 * SPEED_FORWARD, getVel().vec[1], getVel().vec[2]));
+	backwardVecIndex = bindVel(&FORWARD, SPEED_FORWARD, 0.0);
 }
-void ControlledActorBackward
-(void)
+void UnControlledActorBackward(void)
 {
 	bindActor(getControlledActor());
-	setVel(genVec3(getVel().vec[0], getVel().vec[1], getVel().vec[2] - 1 * SPEED_FORWARD));
-	bindActor(getCameraView());
-	setVel(genVec3(getVel().vec[0], getVel().vec[1], getVel().vec[2] - 1 * SPEED_FORWARD));
+	unBindVel(backwardVecIndex);
+	bindActor(0);
 }
-void ControlledActorRight
-(void)
+void ControlledActorLeft(void)
 {
 	bindActor(getControlledActor());
-	setVel(genVec3(getVel().vec[0] + 1 * SPEED_FORWARD, getVel().vec[1], getVel().vec[2]));
-	bindActor(getCameraView());
-	setVel(genVec3(getVel().vec[0] + 1 * SPEED_FORWARD, getVel().vec[1], getVel().vec[2]));
+	leftVecIndex = bindVel(&FORWARD, SPEED_FORWARD, 270.0);
+}
+void UnControlledActorLeft(void)
+{
+	bindActor(getControlledActor());
+	unBindVel(leftVecIndex);
+	bindActor(0);
+}
+void ControlledActorRight(void)
+{
+	bindActor(getControlledActor());
+	rightVecIndex = bindVel(&FORWARD, SPEED_FORWARD, 90.0);
+}
+void UnControlledActorRight(void)
+{
+	bindActor(getControlledActor());
+	unBindVel(rightVecIndex);
+	bindActor(0);
 }

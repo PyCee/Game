@@ -3,6 +3,8 @@
 
 #include "physics/vector.h"
 
+#define FORWARD direction[getActor()].forward
+
 typedef struct _DirectionComponent {
 	vec3 forward;
 } DirectionComponent;

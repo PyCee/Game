@@ -7,6 +7,7 @@ Sound
 Video
 	-FOV
 	-Brightness
+	-Aspect Ratio
 Controls
 	-Mouse Sensitivity
 	-Lock Mouse
@@ -21,6 +22,20 @@ Controls
 void loadOptions(unsigned char *);
 void DefaultOptions(void);
 void SaveOptions(void);
+
+#define MASTER_SOUND_LEVEL 0
+#define SOUND_LEVEL MASTER_SOUND_LEVEL + 1
+#define MUSIC_LEVEL SOUND_LEVEL + 1
+#define SOUND_EFFECTS_LEVEL MUSIC_LEVEL + 1
+#define FIELD_OF_VIEW SOUND_EFFECTS_LEVEL + 1
+#define BRIGHTNESS FIELD_OF_VIEW + 1
+#define ASPECT_RATIO_Y BRIGHTNESS + 1
+#define ASPECT_RATIO_X ASPECT_RATIO_Y + 1
+#define MOUSE_SENSITIVITY ASPECT_RATIO_X + 1
+#define MOUSE_LOCK MOUSE_SENSITIVITY + 1
+unsigned char Option[MOUSE_LOCK]; // Set array size equal to the largest valued option defined
+//						(directly above array declaration)
+
 
 static unsigned char MasterLevel = 0;
 static unsigned char MuteMaster = 0;

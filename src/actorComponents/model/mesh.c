@@ -70,14 +70,11 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 	Texture *texture = &(model[getActor()].meshes[activeMesh].textures[0]);
 	struct aiString textureString;
 	aiGetMaterialString(scene->mMaterials[mesh->mMaterialIndex], AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), &textureString);
-	char *texturePath = textureString.data;
-	texture->path = malloc(sizeof(textureString.data));
+	
+	texture->path = malloc(sizeof("pink.png"));//textureString.data));
 	int ii = 0;
-	while(textureString.data[ii]){
-		ii++;
-	}
-	printf("%s\n", texturePath);
 	strcpy(texture->path, "pink.png");
+	printf("%s\n", texture->path);
 	
 	
 	int width, height;
@@ -95,7 +92,6 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 	
 	//printf("image: %s\n", image);
 	
-	printf("height:%d\n width:%d\n", height, width);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	

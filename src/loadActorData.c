@@ -28,12 +28,16 @@ void loadActorData(unsigned char *loc)
 	strcpy(identifier[getActor()].file, loc);
 	
 	XMLElement data = readXMLElements(fileSource, "<name>");
-	identifier[getActor()].name = data.children;
+	identifier[getActor()].name = malloc(sizeof(data.children));
+	strcpy(identifier[getActor()].name, data.children);
+	//identifier[getActor()].name = data.children;
 	printf("data.children: %s\n", data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<type>");
-	identifier[getActor()].type = data.children;
+	identifier[getActor()].type = malloc(sizeof(data.children));
+	strcpy(identifier[getActor()].type, data.children);
+	//identifier[getActor()].type = data.children;
 	printf("data.children: %s\n", data.children);
 	freeXMLElement(data);
 	

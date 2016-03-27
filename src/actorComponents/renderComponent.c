@@ -59,7 +59,6 @@ void initRender(void) {
 			BoundingBoxIndices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	
 	printf("Render Initialized.\n");
 }
 void genRenderComponent() {
@@ -109,26 +108,24 @@ void freeRenderComponent() {
 }
 void updateRenderComponent(unsigned short deltaMS) {
 	// TODO: more culling
-	/*if ( render[getActor()].render == 0 ) // we have chosen not to render this actor
-	 return;
-	 */
-	// culling done, something is to be rendered
+	if( render[getActor()].render == 0 ){ // we have chosen not to render this actor
+		return;
+	}// culling done, something is to be rendered
+	
 	static unsigned short tlm = 0;
 	tlm += deltaMS/10;
 	while (tlm > 360)
 		tlm -= 360;
-	if (WorldPlacementLoc != -1) {
+	if (WorldSpaceLoc != -1) {
 		mat4 worldPlacement = genIdentityMat4();
-		worldPlacement = translateMat4(worldPlacement,
-				physics[getActor()].Pos);
 		if (getActor() == getControlledActor()) {
 
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(i, 0));
-			worldPlacement = translateMat4(worldPlacement,
-					physics[getActor()].Pos);
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(direction[getActor()].forward, 0));
 			//printMat4(worldPlacement);
 		}
-		glUniformMatrix4fv(WorldPlacementLoc, 1, GL_TRUE,
+		worldPlacement = translateMat4(worldPlacement,
+					physics[getActor()].Pos);
+		glUniformMatrix4fv(WorldSpaceLoc, 1, GL_TRUE,
 				&worldPlacement.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");

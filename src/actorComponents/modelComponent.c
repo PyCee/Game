@@ -15,7 +15,7 @@ Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 	model[getActor()].dir = malloc(sizeof(modelFileLoc));
 	strcpy(model[getActor()].dir, modelFileLoc);
 	const struct aiScene* scene = aiImportFile(modelFileLoc, aiProcess_CalcTangentSpace       | 
-		aiProcess_FlipWindingOrder	 |
+		//aiProcess_FlipWindingOrder	 |
 		aiProcess_Triangulate            |
 		aiProcess_JoinIdenticalVertices  |
 		aiProcess_GenNormals		 |

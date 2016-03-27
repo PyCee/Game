@@ -8,6 +8,7 @@
 #include "../protag.h"
 #include "../actorComponents/physics/vector.h"
 #include "../actorComponents/physics/vector.h"
+#include "../math/quaternion.h"
 
 extern unsigned char IAMALIVE;
 
@@ -49,16 +50,16 @@ void DefaultKeyboard
 	keyFunctions[2 * SDLK_t + 1] = UselessFunction;
 	functionKeys[0] = 't';
 	keyFunctions[2 * SDLK_w] = ControlledActorForward;
-	keyFunctions[2 * SDLK_w + 1] = ControlledActorBackward;
+	keyFunctions[2 * SDLK_w + 1] = UnControlledActorForward;
 	functionKeys[1] = 'w';
 	keyFunctions[2 * SDLK_a] = ControlledActorLeft;
-	keyFunctions[2 * SDLK_a + 1] = ControlledActorRight;
+	keyFunctions[2 * SDLK_a + 1] = UnControlledActorLeft;
 	functionKeys[2] = 'a';
 	keyFunctions[2 * SDLK_s] = ControlledActorBackward;
-	keyFunctions[2 * SDLK_s + 1] = ControlledActorForward;
+	keyFunctions[2 * SDLK_s + 1] = UnControlledActorBackward;
 	functionKeys[3] = 's';
 	keyFunctions[2 * SDLK_d] = ControlledActorRight;
-	keyFunctions[2 * SDLK_d + 1] = ControlledActorLeft;
+	keyFunctions[2 * SDLK_d + 1] = UnControlledActorRight;
 	functionKeys[4] = 'd';
 	keyFunctions[2 * SDLK_l] = Jump;
 	keyFunctions[2 * SDLK_l + 1] = UselessFunction;
@@ -167,9 +168,20 @@ void handleEvents
 				break;
 			case SDL_MOUSEMOTION:
 				// Rotate Global Camera
+				printf("Mouse Movement\n Side Movement: %f\n Up Movement: %f\n", (float)event.motion.xrel, (float)event.motion.yrel);
+				
+				float yaw = -1 * event.motion.xrel * 10 * MouseSensitivity / 256;
+				float pitch = -1 * event.motion.yrel * 10 * MouseSensitivity / 256;
 				bindActor(getCameraView());
-				//DirectionYaw(event.motion.xrel * MouseSensitivity / 256);
-				//DirectionPitch(event.motion.yrel * MouseSensitivity / 256);
+				cameraYaw += yaw;
+				cameraPitch += pitch;
+				
+				//TO_FORWARD = QuatMultiply(UnitQuaternion(j, -1 * yaw), TO_FORWARD);
+				//TO_FORWARD = QuatMultiply(UnitQuaternion(i, -1 * pitch), TO_FORWARD);
+				
+				bindActor(getControlledActor());
+				DirectionYaw(yaw);
+				DirectionPitch(pitch);
 				bindActor(0);
       				break;
 			default:

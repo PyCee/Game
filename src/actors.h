@@ -39,5 +39,6 @@ void freeActor(void);
 void updateActors(void);
 void UselessFunction(void);
 void toggleAllPause(void);
+void printActor(void);
 
 #endif /* _ACTOR_ */

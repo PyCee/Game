@@ -9,7 +9,7 @@
 #include "../math/quaternion.h"
 
 void genDirectionComponent() {
-	direction[getActor()].forward = genVec3(0, 0, 1);
+	FORWARD = genVec3(0, 0, 1);
 
 	i = genVec3(1.0, 0.0, 0.0);
 	j = genVec3(0.0, 1.0, 0.0);
@@ -19,8 +19,7 @@ void freeDirectionComponent() {
 	// Don't free forward since it was not dynamically allocated
 }
 void updateDirectionComponent(unsigned short deltaMS) {
-	direction[getActor()].forward = normalizeVec3(
-			direction[getActor()].forward);
+	//direction[getActor()].forward = normalizeVec3(direction[getActor()].forward);
 	//printVec3(direction[getActor()].forward);
 }
 void DirectionPitch(float angle) {

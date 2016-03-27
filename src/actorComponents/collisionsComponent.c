@@ -58,11 +58,11 @@ void setBounds(float width, float height) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
-	//float Xsq = pow( getPosX(getActor()) - getPosX(actorID), 2);
-	//float Zsq = pow( getPosZ(getActor()) - getPosZ(actorID), 2);
+	//float Xsq = pow( POSX(getActor()) - POSX(actorID), 2);
+	//float Zsq = pow( POSZ(getActor()) - POSZ(actorID), 2);
 	//float distanceSq = Xsq + Zsq;
 	unsigned char prevID = getActor();
-	vec3 actOnePos = getPos();
+	vec3 actOnePos = POS;
 	float actOneWidth = getWidth();
 	float actOneHeight = getHeight();
 
@@ -70,11 +70,11 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 
 	bindActor(actorID);
 	if (actOnePos.vec[0] - 0.5 * actOneWidth
-			< getPos().vec[0] + 0.5 * getWidth()
+			< POS.vec[0] + 0.5 * getWidth()
 			&& actOnePos.vec[0] + 0.5 * actOneWidth
-					> getPos().vec[0] - 0.5 * getWidth()
-			&& actOnePos.vec[1] < getPos().vec[1] + getHeight()
-			&& actOnePos.vec[1] + actOneHeight > getPos().vec[1])
+					> POS.vec[0] - 0.5 * getWidth()
+			&& actOnePos.vec[1] < POS.vec[1] + getHeight()
+			&& actOnePos.vec[1] + actOneHeight > POS.vec[1])
 		// Bounding Boxes Overlapping!
 		collide = 1;
 	// Bounding Boxes Not Overlapping...
