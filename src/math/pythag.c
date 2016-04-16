@@ -8,3 +8,7 @@ double PythagoreanTheorum(float X, float Y, float Z)
 	// for faster, but less acurate answer
 	// return Q_rsqrt(pow(X, 2) + pow(X, 2) + pow(Z, 2));
 }
+double Pythag2d(float X, float Y)
+{
+	return sqrt(pow(X, 2) + pow(Y, 2));
+}

@@ -36,6 +36,10 @@ run:
 	echo Running
 	cd bin;./Morte;cd ..
 	echo Ran
+val:
+	echo Running
+	cd bin;valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./Morte;cd ..
+	echo Ran
 install:
 	sudo apt-get install libsdl2-dev # library that handels window creation and input
 	sudo apt-get install libsdl2-mixer-dev

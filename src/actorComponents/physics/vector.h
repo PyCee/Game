@@ -5,10 +5,10 @@
 typedef struct _vec2 {
 	float vec[2];
 } vec2;
-typedef struct _vec3 {
+typedef struct vec3 {
 	float vec[3];
 } vec3;
-typedef struct _vec4 {
+typedef struct vec4 {
 	float vec[4];
 } vec4;
 

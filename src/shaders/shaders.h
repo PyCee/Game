@@ -9,6 +9,7 @@ GLint TextureLoc;
 GLint WorldSpaceLoc;
 GLint ViewSpaceLoc;
 GLint ClipSpaceLoc;
+GLint CameraPositionLoc;
 
 GLuint shaderProgram;
 GLuint shaderVertex;

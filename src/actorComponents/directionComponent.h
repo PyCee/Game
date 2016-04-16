@@ -4,10 +4,13 @@
 #include "physics/vector.h"
 
 #define FORWARD direction[getActor()].forward
+#define QUA direction[getActor()].qua
 
-typedef struct _DirectionComponent {
+typedef struct DirectionComponent {
 	vec3 forward;
+	vec4 qua;
 } DirectionComponent;
+
 vec3 i;
 vec3 j;
 vec3 k;

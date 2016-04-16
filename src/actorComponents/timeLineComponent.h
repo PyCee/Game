@@ -1,7 +1,7 @@
 #ifndef _TIME_LINE_COMPONENT_
 #define _TIME_LINE_COMPONENT_
 
-typedef struct _TimeLineComponent {
+typedef struct TimeLineComponent {
 	unsigned long startTime;
 	unsigned int currTime;
 	float playBackRate;

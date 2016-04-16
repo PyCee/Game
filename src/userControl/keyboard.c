@@ -61,9 +61,9 @@ void DefaultKeyboard
 	keyFunctions[2 * SDLK_d] = ControlledActorRight;
 	keyFunctions[2 * SDLK_d + 1] = UnControlledActorRight;
 	functionKeys[4] = 'd';
-	keyFunctions[2 * SDLK_l] = Jump;
-	keyFunctions[2 * SDLK_l + 1] = UselessFunction;
-	detectWhilePaused[2 * SDLK_l] = 0;
+	keyFunctions[2 * SDLK_SPACE] = Jump;
+	keyFunctions[2 * SDLK_SPACE + 1] = UselessFunction;
+	detectWhilePaused[2 * SDLK_SPACE] = 0;
 	functionKeys[5] = 'l';
 	SaveKeyBindings();
 }

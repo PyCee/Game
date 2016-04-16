@@ -61,6 +61,10 @@ void genShaders(void)
 	if (ClipSpaceLoc == -1) {
 		printf("ERROR::ClipSpaceLoc Not Found\n");
 	}
+	CameraPositionLoc = glGetUniformLocation(shaderProgram, "cameraPosition");
+	if (TextureLoc == -1) {
+		printf("ERROR::CameraPositionLoc Not Found\n");
+	}
 	
 	
 	glEnable(GL_CULL_FACE); // enables face culling    
@@ -70,7 +74,7 @@ void genShaders(void)
 GLuint loadShaderFromFile( const unsigned char * path, GLenum shaderType )
 {
 	const GLchar * shaderSource[1];
-	unsigned char *fileSource = readFile( path );
+	unsigned char *fileSource = readFile(path);
 	shaderSource[0] = fileSource;
 	GLuint length[1];
 	GLuint result;

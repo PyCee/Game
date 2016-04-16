@@ -93,3 +93,7 @@ mat4 QuaternionToRotationMatrix(vec4 qua)
 	
 	return rotation;
 }
+vec3 applyRotationQuaternion(vec3 vec, vec4 qua)
+{
+	return multMat4Vec3(QuaternionToRotationMatrix(qua), vec);
+}

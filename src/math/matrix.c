@@ -102,14 +102,14 @@ mat4 mat4Product(mat4 mat1, mat4 mat2)
 	}
 	return result;
 }
-vec3 multMat4Vec3(mat4 mat, vec3 vec)
+vec3 multMat4Vec3(mat4 mat, vec3 vec)// adding 1 to y value
 {
-	vec3 result;
+	vec3 result = genVec3(0.0, 0.0, 0.0);
 	char index;
-	vec4 vec2 = genVec4(vec.vec[0], vec.vec[1], vec.vec[2], 1.0);
-	for(index = 0; index < 4; index++){
-		char index2;
-		for(index2 = 0; index2 < 4; index2++){
+	char index2;
+	vec4 vec2 = genVec4(vec.vec[0], vec.vec[1], vec.vec[2], 0.0);
+	for(index = 0; index < 3; index++){
+		for(index2 = 0; index2 < 3; index2++){
 			result.vec[index] += mat.mat[index][index2] * vec2.vec[index2];
 		}
 	}

@@ -1,7 +1,7 @@
 #ifndef _AUDIO_COMPONENT_
 #define _AUDIO_COMPONENT_
 
-typedef struct _AudioComponent {
+typedef struct AudioComponent {
 
 } AudioComponent;
 

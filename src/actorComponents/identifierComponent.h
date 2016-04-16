@@ -1,7 +1,7 @@
 #ifndef _IDENTIFIER_COMPONENT_
 #define _IDENTIFIER_COMPONENT_
 
-typedef struct _IdentifierComponent {
+typedef struct IdentifierComponent {
 	unsigned char *name;
 	unsigned char *type;
 	unsigned char *file;

@@ -7,129 +7,66 @@
 #include <stdio.h>
 #include <math.h>
 #include "physics/vector.h"
+#include "physics/physicsAttributeController.h"
 #include "../math/quaternion.h"
+#include "../math/matrix.h"
 
-void genPhysicsComponent() {
-	POS = genVec3(0.0, 0.0, 0.0);
+void genPhysicsComponent()
+{
+	POS = malloc(sizeof(physicsAttributeController));
+	*POS = genPhysicsAttributeController();
+	VEL = malloc(sizeof(physicsAttributeController));
+	*VEL = genPhysicsAttributeController();
+	ACC = malloc(sizeof(physicsAttributeController));
+	*ACC = genPhysicsAttributeController();
+	JRK = malloc(sizeof(physicsAttributeController));
+	*JRK = genPhysicsAttributeController();
 	
-	vec3 *vel = malloc(sizeof(vec3));
-	vec3 *acc = malloc(sizeof(vec3));
-	vec3 *jrk = malloc(sizeof(vec3));
-	*vel = genVec3(0.0, 0.0, 0.0);
-	*acc = genVec3(0.0, 0.0, 0.0);
-	*jrk = genVec3(0.0, 0.0, 0.0);
-	bindVel(vel, 1, 0.0);
-	bindAcc(acc, 1, 0.0);
-	bindJrk(jrk, 1, 0.0);
+	GRAVITY = malloc(sizeof(vec3));
+	*GRAVITY = genVec3(0.0, 1 * ACC_GRAVITY, 0.0);
 	
-	unsigned char index;
-	for(index = 1; index < VEL_QTY; index++){
-		VEL[index] = 0;
-		VEL_MULT[index] = 0;
-		VEL_YAW[index] = 0;
-	}
-	for(index = 1; index < ACC_QTY; index++){
-		ACC[index] = 0;
-		ACC_MULT[index] = 0;
-		ACC_YAW[index] = 0;
-	}
-	for(index = 1; index < JRK_QTY; index++){
-		JRK[index] = 0;
-		JRK_MULT[index] = 0;
-		JRK_YAW[index] = 0;
-	}
+	vec4 *noRotation = malloc(sizeof(vec4));
+	*noRotation = UnitQuaternion(genVec3(0, 0, 1), 0);
 	
-	vec3 *grav = malloc(sizeof(vec3));
-	*grav = genVec3(0.0, ACC_GRAVITY, 0.0);
-	bindAcc(grav, -1.0, 0.0);
+	bindPhysicsAttribute(ACC, GRAVITY, 1,  noRotation);
+	
 }
 void freePhysicsComponent() {
-	// Don't free vectors since they were not dynamically allocated
+	freePhysicsAttributeController(POS);
+	freePhysicsAttributeController(VEL);
+	freePhysicsAttributeController(ACC);
+	freePhysicsAttributeController(JRK);
+	free(POS);
+	free(VEL);
+	free(ACC);
+	free(JRK);
+	free(GRAVITY);
 }
 
-void updatePhysicsComponent(unsigned short deltaMS)// TODO: make this function more organized. Data structure for ______(JRK, ACC, VEL...)
+void updatePhysicsComponent(unsigned short deltaMS)
+{
+	updatePosition(deltaMS);
+}
+void updatePosition(unsigned short deltaMS)
 {
 	unsigned char index;
-	for(index = 0; index < JRK_QTY; index++){
-		if(JRK[index])
-			*ACC[0] = addVec3(*ACC[0], scaleVec3(rotateVec3(*JRK[index], j, JRK_YAW[index]), JRK_MULT[index] * deltaMS));
+	for(index = 0; index < ATTRIBUTE_QTY; index++){
+		if(JRK->active[index])
+			*(ACC->attribute[0]) = addVec3(*(ACC->attribute[0]), scaleVec3(applyRotationQuaternion(*(JRK->attribute[index]), *(JRK->adjustment[index])), JRK->multiplier[index] * deltaMS));
 	}
-	
-	for(index = 0; index < ACC_QTY; index++){
-		if(ACC[index])
-			*VEL[0] = addVec3(*VEL[0], scaleVec3(rotateVec3(*ACC[index], j, ACC_YAW[index]), ACC_MULT[index] * deltaMS));
+	for(index = 0; index < ATTRIBUTE_QTY; index++){
+		if(ACC->active[index]){
+			*VEL->attribute[0] = addVec3(*(VEL->attribute[0]), scaleVec3(applyRotationQuaternion(*(ACC->attribute[index]), *(ACC->adjustment[index])), ACC->multiplier[index] * deltaMS));
+		}
 	}
-	for(index = 0; index < VEL_QTY; index++){
-		if(VEL[index])
-			POS = addVec3(POS, scaleVec3(rotateVec3(*VEL[index], j, VEL_YAW[index]), VEL_MULT[index] * deltaMS));
+	for(index = 0; index < ATTRIBUTE_QTY; index++){
+		if(VEL->active[index])
+			*POS->attribute[0] = addVec3(*(POS->attribute[0]), scaleVec3(applyRotationQuaternion(*(VEL->attribute[index]), *(VEL->adjustment[index])), VEL->multiplier[index] * deltaMS));
 	}
 }
-unsigned char getOpenVel(void)
-{
-	unsigned char index;
-	for(index = 0; index < VEL_QTY; index++)
-		if(VEL[index] == 0)
-			return index;
-	printf("ERROR::Attempting to getOpenVel when Vel is full.\n");
-	return VEL_QTY;
-}
-unsigned char getOpenAcc(void)
-{
-	unsigned char index;
-	for(index = 0; index < ACC_QTY; index++)
-		if(ACC[index] == 0)
-			return index;
-	printf("ERROR::Attempting to getOpenAcc when Acc is full.\n");
-	return ACC_QTY;
-}
-unsigned char getOpenJrk(void)
-{
-	unsigned char index;
-	for(index = 0; index < JRK_QTY; index++)
-		if(JRK[index] == 0)
-			return index;
-	printf("ERROR::Attempting to getOpenJrk when Jrk is full.\n");
-	return JRK_QTY;
-}
-unsigned char bindVel(vec3 *vel, float mult, float yaw)
-{
-	unsigned char index = getOpenVel();
-	VEL[index] = vel;
-	VEL_MULT[index] = mult;
-	VEL_YAW[index] = yaw;
-	return index;
-}
-unsigned char bindAcc(vec3 *acc, float mult, float yaw)
-{
-	unsigned char index = getOpenAcc();
-	ACC[index] = acc;
-	ACC_MULT[index] = mult;
-	ACC_YAW[index] = yaw;
-	return index;
-}
-unsigned char bindJrk(vec3 *jrk, float mult, float yaw)
-{
-	unsigned char index = getOpenJrk();
-	JRK[index] = jrk;
-	JRK_MULT[index] = mult;
-	JRK_YAW[index] = yaw;
-	return index;
-}
-void unBindVel(unsigned char index)
-{
-	VEL[index] = 0;
-	VEL_MULT[index] = 0;
-	VEL_YAW[index] = 0;
-}
-void unBindAcc(unsigned char index)
-{
-	ACC[index] = 0;
-	ACC_MULT[index] = 0;
-	ACC_YAW[index] = 0;
-}
-void unBindJrk(unsigned char index)
-{
-	JRK[index] = 0;
-	JRK_MULT[index] = 0;
-	JRK_YAW[index] = 0;
-}
+
+
+
+
+
+

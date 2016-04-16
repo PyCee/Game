@@ -6,7 +6,7 @@ typedef struct _Vertex_t Vertex_t;
 
 #include "../actorSelection.h"
 
-typedef struct _LightingComponent {
+typedef struct LightingComponent {
 	Color_t intensity[MAX_LIGHT_COUNT];
 	Vertex_t * originatingPoint[MAX_LIGHT_COUNT];
 	unsigned char ActiveLights[MAX_LIGHT_COUNT];

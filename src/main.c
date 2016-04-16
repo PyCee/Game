@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
@@ -13,6 +14,9 @@
 #include "globalTimeLine.h"
 #include "actorSelection.h"
 #include "actorComponents/physics/vector.h"
+#include "actorComponents/physics/physicsAttributeController.h"
+#include "actorComponents/physicsComponent.h"
+#include "actorComponents/renderComponent.h"
 #include "math/angles.h"
 #include "math/quaternion.h"
 #include "shaders/shaders.h"
@@ -64,24 +68,23 @@ int main(int argc, char *argv[])
 	addActor();
 	unsigned char ter = getActor();
 	loadActorData("actors/arena.xml");
-	POS = genVec3(0.0, -1.0, -8);
-	printActor();
+	*POSITION = genVec3(0.0, -1.0, -8);
 	
 	addActor();
 	unsigned char pro = getActor();
 	loadActorData("actors/actor.xml");
-	POS = genVec3(0.0, 0.3, -1 * 1.0);
-	printActor();
+	*POSITION = genVec3(0.0, 0.9, -1 * 1.0);
 	
-	unsigned char cam = genCamera();
+	addActor();
+	unsigned char cam = getActor();
+	loadActorData("actors/camera.xml");
 	render[cam].render = 0;
-	
 	
 	addActor();
 	unsigned char thin = getActor();
 	loadActorData("actors/thing.xml");
-	POS = genVec3(1.5, 0.0, -1 * 7.0);
-	printActor();
+	*POSITION = genVec3(1.5, 0.0, -1 * 7.0);
+	//printActor();
 	bindCameraView(cam);
 	bindMapTerrain(ter);
 	bindControlledActor(pro);
@@ -102,6 +105,7 @@ int main(int argc, char *argv[])
 	globalTimeLine_t *globalTimeLine;
 	genGlobalTimeLine(&globalTimeLine);
 	bindGlobalTimeLine(globalTimeLine);
+	char ing = 0;
 	
 	unsigned char gameState = ACT;
 	while( IAMALIVE == 1 ) {
@@ -119,16 +123,21 @@ int main(int argc, char *argv[])
 		case ACT:
 			bindActor(pro);
 			unsigned char collision = CheckBoundingBoxCollision(ter);
-			vec3 proPos = POS;
+			vec3 proPos = *POSITION;
 			bindActor(ter);
-			vec3 terPos = POS;
+			vec3 terPos = *POSITION;
 			if( collision == 1){
+				bindActor(getControlledActor());
+				printVec3(*POSITION);
+				printVec3(*VELOCITY);
+				bindActor(getMapTerrain());
+				printf("COLISION!!!!!\n\n\n\n\n\n\n\n\n\n\n\n");
+				ing = 1;
 				if(proPos.vec[1] < terPos.vec[1] + getHeight()){
 					float terHeight = getHeight();
 					bindActor(pro);
-					POS = genVec3(proPos.vec[0], terPos.vec[1] + terHeight, proPos.vec[2]);
-					//vec3 proVel = VEL;
-					VEL[0]->vec[1] = 0.0;
+					POSITION->vec[1] = terPos.vec[1] + terHeight;
+					VELOCITY->vec[1] = 0.0;
 				}
 			}
 			///printf("%i\n", collision);
@@ -146,6 +155,9 @@ int main(int argc, char *argv[])
 			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
+	bindActor(getControlledActor());
+	printVec3(*(POS->attribute[0]));
+	printVec3(*(VEL->attribute[0]));
 	
 	bindCameraView(0);
 	bindMapTerrain(0);
@@ -160,6 +172,7 @@ int main(int argc, char *argv[])
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
-	
+	if(ing == 1)
+		printf("hghtjfutjfkridkr\n");
 	printf("%s Ended.\n", PROGRAM_NAME);
 }

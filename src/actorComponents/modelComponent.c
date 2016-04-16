@@ -12,19 +12,32 @@ static void countIndices(struct aiMesh *);
 static void processNode(struct aiNode *, const struct aiScene *);
 Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 {
-	model[getActor()].dir = malloc(sizeof(modelFileLoc));
-	strcpy(model[getActor()].dir, modelFileLoc);
-	const struct aiScene* scene = aiImportFile(modelFileLoc, aiProcess_CalcTangentSpace       | 
-		//aiProcess_FlipWindingOrder	 |
-		aiProcess_Triangulate            |
-		aiProcess_JoinIdenticalVertices  |
-		aiProcess_GenNormals		 |
+	model[getActor()].directory = malloc(sizeof(modelFileLoc));
+	strcpy(model[getActor()].directory, modelFileLoc);
+	// TODO: replace all of the assimp stuff with own library
+	//	2 parts:
+		// 1. convert file into custom file type.
+		// 2. import vertex info (positions, textures, normals)
+		
+		// later~
+		// import animations
+	const struct aiScene* scene = aiImportFile(modelFileLoc, //aiProcess_CalcTangentSpace       |
+		aiProcess_Triangulate            | // Needed
+		aiProcess_JoinIdenticalVertices  | // Needed
+		aiProcess_GenNormals		 | // Needed
 		//aiProcess_FlipUVs 		 |
+		aiProcess_GenUVCoords		 | // Needed
 		aiProcess_SortByPType);
 	
 	countMeshes(scene->mRootNode);
 	model[getActor()].meshes = malloc(sizeof(Mesh) * model[getActor()].numMeshes);
 	processNode(scene->mRootNode, scene);
+}
+void freeModelComponent(void)
+{
+	unsigned char index;
+	for(index = 0; index < model[getActor()].numMeshes; index++)
+		freeMesh(model[getActor()].meshes);
 }
 static void countMeshes(struct aiNode *node)
 {

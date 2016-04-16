@@ -11,8 +11,8 @@ in float col;
 vec4 ambiantLight;
 void main()
 {
-	ambiantLight = vec4(0.2, 0.1, 0.0, 1.0);
-	fragColor = ambiantLight + ((brightness*brightness) * texture(Texture, TexCoord));
+	ambiantLight = vec4(0.0, 0.0, 0.0, 0.0);//vec4(0.2, 0.1, 0.0, 1.0);
+	fragColor = ambiantLight + ((brightness) * texture(Texture, TexCoord));
 }
 
 

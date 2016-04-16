@@ -1,7 +1,7 @@
 #ifndef _AI_COMPONENT_
 #define _AI_COMPONENT_
 
-typedef struct _AIComponent {
+typedef struct AIComponent {
 	void (*update)(unsigned short);
 } AIComponent;
 

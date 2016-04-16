@@ -7,12 +7,13 @@
 #include <assimp/scene.h>          // Output data structure
 #include <assimp/postprocess.h>    // Post processing flags
 
-typedef struct _ModelComponent {
+typedef struct ModelComponent {
 	Mesh *meshes;
 	unsigned int numMeshes;
-	unsigned char *dir;
+	unsigned char *directory;
 } ModelComponent;
 
 Mesh *loadModelFromFile(const unsigned char *);
+void freeModelComponent(void);
 
 #endif /* _MODEL_COMPONENT_ */

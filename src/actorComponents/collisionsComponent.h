@@ -4,7 +4,7 @@
 #include "../actorSelection.h"
 
 // when collisions are based off of actual character (not bounding box), change to circular bounds.
-typedef struct _CollisionsComponent {
+typedef struct CollisionsComponent {
 	float height;		// Measured in Meters
 	float width;		// Measured in Meters
 	unsigned char drawBounds;

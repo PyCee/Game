@@ -4,10 +4,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "actorComponents/physics/vector.h"
-#include "actorComponents/physics/vector.h"
+#include "actorComponents/physics/physicsAttributeController.h"
 #include "actorSelection.h"
 #include <strings.h>
 
+#include "actorComponents/identifierComponent.h"
+#include "actorComponents/timeLineComponent.h"
+#include "actorComponents/audioComponent.h"
+#include "actorComponents/directionComponent.h"
+#include "actorComponents/physicsComponent.h"
+#include "actorComponents/collisionsComponent.h"
+#include "actorComponents/AIComponent.h"
+#include "actorComponents/lightingComponent.h"
+#include "actorComponents/modelComponent.h"
+#include "actorComponents/renderComponent.h"
 // Various Components used by every Dynamic Actor
 /*
 IdentifierComponent identifier[MAX_ACTOR_COUNT];
@@ -26,6 +36,19 @@ unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active 
 unsigned char allActorsPaused;
 
 void initActorComponents(void){
+	identifier = malloc(MAX_ACTOR_COUNT * sizeof(IdentifierComponent));
+	timeLine = malloc(MAX_ACTOR_COUNT * sizeof(TimeLineComponent));
+	audio = malloc(MAX_ACTOR_COUNT * sizeof(AudioComponent));
+	direction = malloc(MAX_ACTOR_COUNT * sizeof(DirectionComponent));
+	physics = malloc(MAX_ACTOR_COUNT * sizeof(PhysicsComponent));
+	collisions = malloc(MAX_ACTOR_COUNT * sizeof(CollisionsComponent));
+	AI = malloc(MAX_ACTOR_COUNT * sizeof(AIComponent));
+	lighting = malloc(MAX_ACTOR_COUNT * sizeof(LightingComponent));
+	model = malloc(MAX_ACTOR_COUNT * sizeof(ModelComponent));
+	render = malloc(MAX_ACTOR_COUNT * sizeof(RenderComponent));
+	
+	
+	
 	initRender();
 	allActorsPaused = 0;
 }
@@ -75,6 +98,7 @@ void freeActor(void) {
 		return;
 	printf("Freeing Actor %d\n", getActor());
 	freeRenderComponent();
+	freeModelComponent();
 	freeLightingComponent();
 	freeAIComponent();
 	freeCollisionsComponent();
@@ -209,7 +233,7 @@ void printActor(void)
 	printf("Type: %s\n", identifier[getActor()].type);
 	printf("Data File: %s\n", identifier[getActor()].file);
 	printf("Position:");
-	printVec3(physics[getActor()].Pos);
+	printVec3(*(POS->attribute[0]));
 	printf("Forward:");
 	printVec3(direction[getActor()].forward);
 	printf("Actor %hhu Finished Printing\n\n", getActor());

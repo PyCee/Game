@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "SOIL/SOIL.h"
+#include "../modelComponent.h"
 
 void setupMesh(Mesh *mesh)
 {
@@ -16,7 +17,6 @@ void setupMesh(Mesh *mesh)
 	
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->VBO);
 	
-	//TODO: test identifier.type (static or dynamic) for final parameter to glBufferData
 	glBufferData(GL_ARRAY_BUFFER, mesh->numVertices * sizeof(Vertex), mesh->vertices, GL_DYNAMIC_DRAW); 
 	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->EBO);
@@ -33,6 +33,15 @@ void setupMesh(Mesh *mesh)
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 6);
 	
 	glBindVertexArray(0);
+}
+void freeMesh(Mesh *mesh)
+{
+	if(mesh->vertices)
+		free(mesh->vertices);
+	if(mesh->indices)
+		free(mesh->indices);
+	if(mesh->textures)
+		free(mesh->textures);
 }
 void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int activeMesh)
 {
@@ -54,12 +63,15 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 		vert.attribute[3] = mesh->mNormals[index].x;
 		vert.attribute[4] = mesh->mNormals[index].y;
 		vert.attribute[5] = mesh->mNormals[index].z;
+		//if(PythagoreanTheorum(vert.attribute[3], vert.attribute[4], vert.attribute[5]) == 0)
+		//	printf("normal has zero length\n");
 		if(mesh->mTextureCoords[0]){
 			vert.attribute[6] = mesh->mTextureCoords[0][index].x;
 			vert.attribute[7] = mesh->mTextureCoords[0][index].y;
 		}
 		model[getActor()].meshes[activeMesh].vertices[index] = vert;
 	}
+	
 	for(index = 0; index < mesh->mNumFaces; index++){
 			struct aiFace face = mesh->mFaces[index];
 			GLuint indiceIndex = 0;
@@ -70,11 +82,10 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 	Texture *texture = &(model[getActor()].meshes[activeMesh].textures[0]);
 	struct aiString textureString;
 	aiGetMaterialString(scene->mMaterials[mesh->mMaterialIndex], AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), &textureString);
-	
-	texture->path = malloc(sizeof("pink.png"));//textureString.data));
+	texture->path = malloc(sizeof("pink.png"));
 	int ii = 0;
 	strcpy(texture->path, "pink.png");
-	printf("%s\n", texture->path);
+	//printf("%s\n", texture->path);
 	
 	
 	int width, height;

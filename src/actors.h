@@ -3,6 +3,7 @@
 
 #include "actorSelection.h"
 
+/*
 #include "actorComponents/identifierComponent.h"
 #include "actorComponents/timeLineComponent.h"
 #include "actorComponents/audioComponent.h"
@@ -13,18 +14,19 @@
 #include "actorComponents/lightingComponent.h"
 #include "actorComponents/modelComponent.h"
 #include "actorComponents/renderComponent.h"
+*/
 
 // Various Components used by every Dynamic Actor
-IdentifierComponent identifier[MAX_ACTOR_COUNT]; //TODO: do I need to extern the defined MAX_ACTOR_COUNT?
-TimeLineComponent timeLine[MAX_ACTOR_COUNT];
-AudioComponent audio[MAX_ACTOR_COUNT];
-DirectionComponent direction[MAX_ACTOR_COUNT];
-PhysicsComponent physics[MAX_ACTOR_COUNT];
-CollisionsComponent collisions[MAX_ACTOR_COUNT];
-AIComponent AI[MAX_ACTOR_COUNT];
-LightingComponent lighting[MAX_ACTOR_COUNT];
-ModelComponent model[MAX_ACTOR_COUNT];
-RenderComponent render[MAX_ACTOR_COUNT];
+struct IdentifierComponent *identifier;
+struct TimeLineComponent *timeLine;
+struct AudioComponent *audio;
+struct DirectionComponent *direction;
+struct PhysicsComponent *physics;
+struct CollisionsComponent *collisions;
+struct AIComponent *AI;
+struct LightingComponent *lighting;
+struct ModelComponent *model;
+struct RenderComponent *render;
 
 extern unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
 extern unsigned char allActorsPaused;

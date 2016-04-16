@@ -20,6 +20,7 @@ typedef struct _Mesh {
 } Mesh;
 
 void setupMesh(Mesh *);
+void freeMesh(Mesh *);
 void processMesh(struct aiMesh *, const struct aiScene *, unsigned int);
 
 #endif /* _MESH_ */
