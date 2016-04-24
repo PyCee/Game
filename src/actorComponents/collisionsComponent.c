@@ -28,25 +28,22 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	//float Zsq = pow( POSZ(getActor()) - POSZ(actorID), 2);
 	//float distanceSq = Xsq + Zsq;
 	unsigned char prevID = getActor();
-	vec3 actOnePos = *(POS->attribute[0]);
+	vec3 actOnePos = *POSITION;
 	float actOneWidth = getWidth();
 	float actOneHeight = getHeight();
-
-	unsigned char collide;
-
 	bindActor(actorID);
+	unsigned char collide;
 	if (actOnePos.vec[0] - 0.5 * actOneWidth
-			< (*(POS->attribute[0])).vec[0] + 0.5 * getWidth()
+			< POSITION->vec[0] + 0.5 * getWidth()
 			&& actOnePos.vec[0] + 0.5 * actOneWidth
-					> (*(POS->attribute[0])).vec[0] - 0.5 * getWidth()
-			&& actOnePos.vec[1] < (*(POS->attribute[0])).vec[1] + getHeight()
-			&& actOnePos.vec[1] + actOneHeight > (*(POS->attribute[0])).vec[1])
-		// Bounding Boxes Overlapping!
-		collide = 1;
-	// Bounding Boxes Not Overlapping...
+					> POSITION->vec[0] - 0.5 * getWidth()
+			&& actOnePos.vec[1] < POSITION->vec[1] + getHeight()
+			&& actOnePos.vec[1] + actOneHeight > POSITION->vec[1])
+		collide = 1;// Bounding Boxes Overlapping
 	else
-		collide = 0;
+		collide = 0;// Bounding Boxes Not Overlapping
 	bindActor(prevID);
+	printf("collide = %hhu\n", collide);
 	return collide;
 }
 float getHeight() {

@@ -39,9 +39,15 @@ unsigned char genCamera(void)
 }
 void UpdateCamera(unsigned short deltaMS)
 {
-	FORWARD = genVec3(0.0, 0.0, 1.0);
+	unsigned char id = getActor();
+	bindActor(getControlledActor());
+	vec3 protagPos = *POSITION;
+	bindActor(id);
+	*POSITION = protagPos;
+	printVec3(*POSITION);
+	//*FORWARD = genVec3(0.0, 0.0, 1.0);
 	
-	if(cameraPitch > 360)
+	/*if(cameraPitch > 360)
 		cameraPitch -=360;
 	if(cameraYaw > 360)
 		cameraYaw -=360;
@@ -53,7 +59,7 @@ void UpdateCamera(unsigned short deltaMS)
 	if(cameraYaw < 0)
 		cameraYaw += 360;
 	if(cameraRoll < 0)
-		cameraRoll += 360;
+		cameraRoll += 360;*/
 	
 	/*if(cameraPitch > 270 && cameraPitch < 315 )
 		cameraPitch = 315;
@@ -61,26 +67,12 @@ void UpdateCamera(unsigned short deltaMS)
 		cameraPitch = 75;
 	*/
 	
-	vec4 cameraQua = UnitQuaternion(genVec3(0, 0, 1), 0);
-	cameraQua = QuatMultiply(UnitQuaternion(j, -1 * cameraYaw), cameraQua);
-	cameraQua = QuatMultiply(UnitQuaternion(i, -1 * cameraPitch), cameraQua);
-	
 	mat4 Translate = genIdentityMat4();
-	unsigned char id = getActor();
-	bindActor(getControlledActor());
 	Translate = translateMat4(Translate, scaleVec3(*POSITION, -2));
-	bindActor(id);
-	mat4 Rotate = QuaternionToRotationMatrix(cameraQua);
+	mat4 Rotate = QuaternionToRotationMatrix(*FORWARDROTATION);
 	
 	mat4 transformation = mat4Product(Rotate, Translate);
 	
 	glUniformMatrix4fv(ViewSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
-	glUniform3fv(CameraPositionLoc, 3, &physics[getControlledActor()].Pos);
-}
-void LookAt(vec3 *lookAt)
-{
-}
-void Follow(vec3 *follow)
-{
-	
+	glUniform3fv(CameraPositionLoc, 3, POSITION);
 }

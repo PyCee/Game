@@ -5,9 +5,9 @@
 #include "../camera.h"
 #include "options.h"
 #include "../actors.h"
-#include "../protag.h"
+#include "controls.h"
 #include "../actorComponents/physics/vector.h"
-#include "../actorComponents/physics/vector.h"
+#include "../actorComponents/directionComponent.h"
 #include "../math/quaternion.h"
 
 extern unsigned char IAMALIVE;
@@ -61,20 +61,21 @@ void DefaultKeyboard
 	keyFunctions[2 * SDLK_d] = ControlledActorRight;
 	keyFunctions[2 * SDLK_d + 1] = UnControlledActorRight;
 	functionKeys[4] = 'd';
-	keyFunctions[2 * SDLK_SPACE] = Jump;
+	keyFunctions[2 * SDLK_SPACE] = ControlledActorJump;
 	keyFunctions[2 * SDLK_SPACE + 1] = UselessFunction;
 	detectWhilePaused[2 * SDLK_SPACE] = 0;
+	keyFunctions[2 * SDLK_r] = ToggleLockOn;
+	keyFunctions[2 * SDLK_r + 1] = UselessFunction;
+	detectWhilePaused[2 * SDLK_r] = 0;
 	functionKeys[5] = 'l';
 	SaveKeyBindings();
 }
-void EndGame
-(void)
+void EndGame(void)
 {
 	printf("Endgamecalled \n");
 	IAMALIVE = 0;
 }
-void handleEvents
-(void)
+void handleEvents(void)
 {
   SDL_Event event;
 	while (SDL_PollEvent(&event)) {
@@ -168,20 +169,17 @@ void handleEvents
 				break;
 			case SDL_MOUSEMOTION:
 				// Rotate Global Camera
-				printf("Mouse Movement\n Side Movement: %f\n Up Movement: %f\n", (float)event.motion.xrel, (float)event.motion.yrel);
+				//printf("Mouse Movement\n Side Movement: %f\n Up Movement: %f\n", (float)event.motion.xrel, (float)event.motion.yrel);
 				
-				float yaw = -1 * event.motion.xrel * 10 * MouseSensitivity / 256;
-				float pitch = -1 * event.motion.yrel * 10 * MouseSensitivity / 256;
+				//float yaw = -1 * event.motion.xrel * 10 * MouseSensitivity / 256;
+				//float pitch = -1 * event.motion.yrel * 10 * MouseSensitivity / 256;
+				
 				bindActor(getCameraView());
-				cameraYaw += yaw;
-				cameraPitch += pitch;
-				
-				//TO_FORWARD = QuatMultiply(UnitQuaternion(j, -1 * yaw), TO_FORWARD);
-				//TO_FORWARD = QuatMultiply(UnitQuaternion(i, -1 * pitch), TO_FORWARD);
-				
+				DirectionYaw(1 * event.motion.xrel * 10 * MouseSensitivity / 256);
+				DirectionPitch(1 * event.motion.yrel * 10 * MouseSensitivity / 256);
 				bindActor(getControlledActor());
-				DirectionYaw(yaw);
-				DirectionPitch(pitch);
+				DirectionYaw(1 * event.motion.xrel * 10 * MouseSensitivity / 256);
+				DirectionPitch(1 * event.motion.yrel * 10 * MouseSensitivity / 256);
 				bindActor(0);
       				break;
 			default:
@@ -235,7 +233,7 @@ void LoadKeyBindings
 					Release = ControlledActorLeft;
 					break;
 				case 5:
-					Press = Jump;
+					Press = ControlledActorJump;
 					Release = UselessFunction;
 					break;
 				default:

@@ -33,19 +33,19 @@ void loadActorData(unsigned char *loc)
 	unsigned char *fileSource = readFile(loc);
 	char *afterPtr;
 	
-	identifier[getActor()].file = malloc(sizeof(loc));
-	strcpy(identifier[getActor()].file, loc);
+	ORIGIN_FILE = malloc(sizeof(loc));
+	strcpy(ORIGIN_FILE, loc);
+	
+	printf("Loading from file: %s\n", ORIGIN_FILE);
 	
 	XMLElement data = readXMLElements(fileSource, "<name>");
-	identifier[getActor()].name = malloc(sizeof(data.children));
-	strcpy(identifier[getActor()].name, data.children);
-	identifier[getActor()].name = data.children;
+	NAME = malloc(sizeof(data.children));
+	strcpy(NAME, data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<type>");
-	identifier[getActor()].type = malloc(sizeof(data.children));
-	strcpy(identifier[getActor()].type, data.children);
-	identifier[getActor()].type = data.children;
+	TYPE = malloc(sizeof(data.children));
+	strcpy(TYPE, data.children);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<mass>");
@@ -53,7 +53,15 @@ void loadActorData(unsigned char *loc)
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<speed>");
-	physics[getActor()].speed = strtol(data.children, &afterPtr, 10);
+	SPEED = strtod(data.children, &afterPtr);
+	freeXMLElement(data);
+	
+	data = readXMLElements(fileSource, "<speed_side>");
+	SPEED_SIDE = strtod(data.children, &afterPtr);
+	freeXMLElement(data);
+	
+	data = readXMLElements(fileSource, "<speed_back>");
+	SPEED_BACK = strtod(data.children, &afterPtr);
 	freeXMLElement(data);
 	
 	//get spawnpoint from world.xml file

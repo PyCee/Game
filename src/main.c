@@ -17,6 +17,8 @@
 #include "actorComponents/physics/physicsAttributeController.h"
 #include "actorComponents/physicsComponent.h"
 #include "actorComponents/renderComponent.h"
+#include "actorComponents/directionComponent.h"
+#include "actorComponents/collisionsComponent.h"
 #include "math/angles.h"
 #include "math/quaternion.h"
 #include "shaders/shaders.h"
@@ -65,22 +67,22 @@ int main(int argc, char *argv[])
 	
 	printf("IAMALIVE: %d\n", IAMALIVE);
 	
-	addActor();
+	addVec3Vec3Actor();
 	unsigned char ter = getActor();
 	loadActorData("actors/arena.xml");
 	*POSITION = genVec3(0.0, -1.0, -8);
 	
-	addActor();
+	addVec3Vec3Actor();
 	unsigned char pro = getActor();
 	loadActorData("actors/actor.xml");
-	*POSITION = genVec3(0.0, 0.9, -1 * 1.0);
+	*POSITION = genVec3(0.0, 0.9, -1 * 2.0);
 	
-	addActor();
+	addVec3Vec3Actor();
 	unsigned char cam = getActor();
 	loadActorData("actors/camera.xml");
 	render[cam].render = 0;
 	
-	addActor();
+	addVec3Vec3Actor();
 	unsigned char thin = getActor();
 	loadActorData("actors/thing.xml");
 	*POSITION = genVec3(1.5, 0.0, -1 * 7.0);
@@ -95,7 +97,6 @@ int main(int argc, char *argv[])
 	//Mix_PlayChannel(-1, BGMusic, 4);
 	
 	printf("IAMALIVE: %d\n", IAMALIVE);
-	char list[] = {pro, ter};
 	
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear (GL_COLOR_BUFFER_BIT);
@@ -105,7 +106,6 @@ int main(int argc, char *argv[])
 	globalTimeLine_t *globalTimeLine;
 	genGlobalTimeLine(&globalTimeLine);
 	bindGlobalTimeLine(globalTimeLine);
-	char ing = 0;
 	
 	unsigned char gameState = ACT;
 	while( IAMALIVE == 1 ) {
@@ -127,12 +127,7 @@ int main(int argc, char *argv[])
 			bindActor(ter);
 			vec3 terPos = *POSITION;
 			if( collision == 1){
-				bindActor(getControlledActor());
-				printVec3(*POSITION);
-				printVec3(*VELOCITY);
 				bindActor(getMapTerrain());
-				printf("COLISION!!!!!\n\n\n\n\n\n\n\n\n\n\n\n");
-				ing = 1;
 				if(proPos.vec[1] < terPos.vec[1] + getHeight()){
 					float terHeight = getHeight();
 					bindActor(pro);
@@ -140,11 +135,8 @@ int main(int argc, char *argv[])
 					VELOCITY->vec[1] = 0.0;
 				}
 			}
-			///printf("%i\n", collision);
 			//</CL>
-			printf("Handling Events\n");
 			handleEvents();
-			printf("Events Handled\n");
 			updateActors();
 			updateQuests();
 			break;
@@ -155,9 +147,7 @@ int main(int argc, char *argv[])
 			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	bindActor(getControlledActor());
-	printVec3(*(POS->attribute[0]));
-	printVec3(*(VEL->attribute[0]));
+	
 	
 	bindCameraView(0);
 	bindMapTerrain(0);
@@ -172,7 +162,5 @@ int main(int argc, char *argv[])
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
-	if(ing == 1)
-		printf("hghtjfutjfkridkr\n");
 	printf("%s Ended.\n", PROGRAM_NAME);
 }

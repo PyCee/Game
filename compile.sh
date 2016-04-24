@@ -17,7 +17,6 @@ TMP=$(find -name "*~" -print)
 
 echo Building
 gcc -o bin/Morte $BUI $LINK $FLAG
-#gcc -Iheader/ -o bin/Morte $BUI $LINK $FLAG
 echo Built
 
 echo Cleaning

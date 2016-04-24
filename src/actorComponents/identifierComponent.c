@@ -3,11 +3,10 @@
 
 #include "../actors.h"
 
-void genIdentifierComponent() {
-	identifier[getActor()].name = "default";
-	identifier[getActor()].type = "notAssigned";
-	identifier[getActor()].file = "actors.xml";
+void genIdentifierComponent()
+{
 }
-void freeIdentifierComponent() {
-	identifier[getActor()].name = 0;
+void freeIdentifierComponent()
+{
+	NAME = 0;
 }

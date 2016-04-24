@@ -32,9 +32,9 @@ extern unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is 
 extern unsigned char allActorsPaused;
 
 void initActorComponents(void);
-void addActor(void);
-void addDyn_Actor(void);
-void addSta_Actor(void);
+void addVec3Vec3Actor(void);
+void addVec3Vec3Dyn_Actor(void);
+void addVec3Vec3Sta_Actor(void);
 void genAllActors(void);
 void freeAllActors(void);
 void freeActor(void);

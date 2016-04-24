@@ -11,7 +11,7 @@ mat4 genZeroMat4(void);
 mat4 genIdentityMat4(void);
 mat4 transposeMat4(mat4);
 void printMat4(mat4);
-mat4 addMat4(mat4, mat4);
+mat4 addVec3Vec3Mat4(mat4, mat4);
 mat4 mat4Product(mat4, mat4);
 vec3 multMat4Vec3(mat4, vec3);
 mat4 translateMat4(mat4, vec3);

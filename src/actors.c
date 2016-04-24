@@ -48,7 +48,7 @@ void initActorComponents(void){
 	render = malloc(MAX_ACTOR_COUNT * sizeof(RenderComponent));
 	
 	
-	
+	initDirectionComponent();
 	initRender();
 	allActorsPaused = 0;
 }
@@ -66,17 +66,17 @@ static void bindFirstInactiveActor(void) {
 			actorID, MAX_ACTOR_COUNT);
 	// TODO: What Should I Return Here? For An Invalid actorID.
 }
-void addActor(void) {
+void addVec3Vec3Actor(void) {
 	bindFirstInactiveActor();
 	ActiveActor[getActor()] = 1;
 	printf("Adding ActorID: %d\n", getActor());
 }
-void addDyn_Actor(void) {
-	addActor();
+void addVec3Vec3Dyn_Actor(void) {
+	addVec3Vec3Actor();
 	identifier[getActor()].type = "dynamic";
 }
-void addSta_Actor(void) {
-	addActor();
+void addVec3Vec3Sta_Actor(void) {
+	addVec3Vec3Actor();
 	identifier[getActor()].type = "static";
 }
 static void genActor(void) {
@@ -153,7 +153,7 @@ void updateActors(void) {
 		bindActor(actorID);
 		if (ActiveActor[getActor()]){
 			updateDirectionComponent(localTime[actorID]);
-			}
+		}
 		actorID++;
 	}
 	printf("Batch: \"Direction\" Updated\nUpdating Batch: \"Physics\"\n");
@@ -161,7 +161,7 @@ void updateActors(void) {
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
 		if (ActiveActor[getActor()]){
-			if (strcmp(identifier[getActor()].type, "static")){
+			if (strcmp(TYPE, "dynamic") == 0){
 				updatePhysicsComponent(localTime[actorID]);
 			}
 		}
@@ -229,12 +229,12 @@ void toggleAllPause(void)
 void printActor(void)
 {
 	printf("\nPrinting Actor Number: %hhu\n", getActor());
-	printf("Name: %s\n", identifier[getActor()].name);
-	printf("Type: %s\n", identifier[getActor()].type);
-	printf("Data File: %s\n", identifier[getActor()].file);
+	printf("Name: %s\n", NAME);
+	printf("Type: %s\n", TYPE);
+	printf("Data File: %s\n", identifier[getActor()].originFile);
 	printf("Position:");
-	printVec3(*(POS->attribute[0]));
+	printVec3(*POSITION);
 	printf("Forward:");
-	printVec3(direction[getActor()].forward);
+	printVec3(*FORWARD);
 	printf("Actor %hhu Finished Printing\n\n", getActor());
 }

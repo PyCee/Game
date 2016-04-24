@@ -44,11 +44,10 @@ void updateRenderComponent(unsigned short deltaMS) {
 		mat4 worldPlacement = genIdentityMat4();
 		if (getActor() == getControlledActor()) {
 
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(direction[getActor()].forward, 0));
+			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(*FORWARD, 0));
 			//printMat4(worldPlacement);
 		}
-		worldPlacement = translateMat4(worldPlacement,
-					*(POS->attribute[0]));
+		worldPlacement = translateMat4(worldPlacement, *POSITION);
 		glUniformMatrix4fv(WorldSpaceLoc, 1, GL_TRUE,
 				&worldPlacement.mat[0][0]);
 	} else

@@ -18,6 +18,6 @@ void genLightingComponent(void);
 void freeLightingComponent(void);
 void updateLightingComponent(unsigned short);
 void getFirstInactiveLight();
-void addLight(Vertex_t *);
+void addVec3Vec3Light(Vertex_t *);
 
 #endif /* _LIGHTING_ */

@@ -39,7 +39,7 @@ vec3 normalizeVec3(vec3 vec)
 	}
 	return scaleVec3(vec, 1 / change);
 }
-vec3 addVec3(vec3 vecOne, vec3 vecTwo)
+vec3 addVec3Vec3(vec3 vecOne, vec3 vecTwo)
 {
 	vec3 result;
 	result.vec[0] = vecOne.vec[0] + vecTwo.vec[0];
@@ -49,7 +49,7 @@ vec3 addVec3(vec3 vecOne, vec3 vecTwo)
 }
 vec3 subtractVec3(vec3 vecOne, vec3 vecTwo)
 {
-	return addVec3(vecOne, scaleVec3(vecTwo, -1));
+	return addVec3Vec3(vecOne, scaleVec3(vecTwo, -1));
 }
 vec3 scaleVec3(vec3 vector, float scale)
 {

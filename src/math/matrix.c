@@ -72,7 +72,7 @@ void printMat4(mat4 mat)
 		row++;
 	}
 }
-mat4 addMatrices(mat4 mat1, mat4 mat2)
+mat4 addVec3Vec3Matrices(mat4 mat1, mat4 mat2)
 {
 	mat4 result;
 	unsigned char row = 0;
@@ -102,7 +102,7 @@ mat4 mat4Product(mat4 mat1, mat4 mat2)
 	}
 	return result;
 }
-vec3 multMat4Vec3(mat4 mat, vec3 vec)// adding 1 to y value
+vec3 multMat4Vec3(mat4 mat, vec3 vec)// addVec3Vec3ing 1 to y value
 {
 	vec3 result = genVec3(0.0, 0.0, 0.0);
 	char index;

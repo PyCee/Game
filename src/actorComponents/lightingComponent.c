@@ -37,7 +37,7 @@ void bindFirstInactiveLight() {
 			getLight(), MAX_LIGHT_COUNT);
 	bindLight(lightID);
 }
-void addLight(Vertex_t * origin) {
+void addVec3Vec3Light(Vertex_t * origin) {
 	bindFirstInactiveLight();
 	lighting[getActor()].originatingPoint[getLight()] = origin;
 	lighting[getActor()].ActiveLights[getLight()] = 1;

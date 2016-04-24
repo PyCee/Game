@@ -17,7 +17,7 @@ vec3 genVec3(float, float, float);
 vec4 genVec4(float, float, float, float);
 
 vec3 normalizeVec3(vec3);
-vec3 addVec3(vec3, vec3);
+vec3 addVec3Vec3(vec3, vec3);
 vec3 subtractVec3(vec3, vec3);
 vec3 scaleVec3(vec3, float);
 float dotVec3(vec3, vec3);

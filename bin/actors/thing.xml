@@ -9,7 +9,9 @@
 	</audio>
 	<physics>
 		<mass>14</mass>
-		<speed>7</speed>
+		<speed>0.0012</speed>
+		<speed_side>0.8</speed_side>
+		<speed_back>0.6</speed_back>
 	</physics>
 	<collisions>
 		<height>0.7</height>
