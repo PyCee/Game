@@ -125,7 +125,7 @@ mat4 translateMat4(mat4 mat, vec3 vec)
 
 mat4 genTransformationMat4(vec3 forward, vec3 position)
 {
-	float angle = (float) (acos(dotVec3(k, forward)));
+	float angle = (float) (acos(dotProduct(k, forward)));
 	angle *= 180 / M_PI;
 	vec3 around = crossProduct(forward, k);
 	if( forward.vec[2] == 1.0)

@@ -26,11 +26,13 @@
 #include "fileSupport/XML.h"
 #include "loadActorData.h"
 #include "SOIL/SOIL.h"
+#include "actorComponents/physics/capsule.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 450
-#define MAX_LIFE_TIME 1000 * 60
+#define MAX_LIFE_TIME 60
+#define MAX_LIFE_TIME_MS 1000 * MAX_LIFE_TIME
 
 #define ACT 0
 
@@ -143,7 +145,7 @@ int main(int argc, char *argv[])
 		default:
 			break;
 		}
-		if(getElapsedTime(globalTimeLine) > MAX_LIFE_TIME)
+		if(getElapsedTime(globalTimeLine) > MAX_LIFE_TIME_MS)
 			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
@@ -163,4 +165,19 @@ int main(int argc, char *argv[])
 	Mix_Quit();
 	SDL_Quit();
 	printf("%s Ended.\n", PROGRAM_NAME);
+	
+	vec3 *poi1 = malloc(sizeof(vec3));
+	vec3 *poi2 = malloc(sizeof(vec3));
+	*poi1 = genVec3(-3.0, 0.0, 4.0);
+	*poi2 = genVec3(3.0, 0.0, 4.0);
+	capsule cap1 = genCapsule(poi1, poi2, 1.5);
+	
+	vec3 *poi3 = malloc(sizeof(vec3));
+	vec3 *poi4 = malloc(sizeof(vec3));
+	*poi3 = genVec3(0.0,3.0, 2.0);
+	*poi4 = genVec3(0.0,3.0, 6.0);
+	capsule cap2 = genCapsule(poi3, poi4, 1.4);
+	
+	unsigned char colis = collisionCapsuleCapsule(cap1, cap2);
+	printf("collided = %hhu\n", colis);
 }

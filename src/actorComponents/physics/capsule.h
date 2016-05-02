@@ -3,13 +3,13 @@
 #define CAPSULE
 
 typedef struct capsule{
-	struct vec3 *pointOne, *pointTwo;
+	struct vec3 *point[2];
 	float radius;
 } capsule;
 
 capsule genCapsule(struct vec3 *, struct vec3 *, float);
 void freeCap(capsule *);
 
-unsigned char collisionCapsuleCapsule(capsule *, capsule *);
+unsigned char collisionCapsuleCapsule(capsule, capsule); // TODO test at end of main
 
 #endif /* CAPSULE */

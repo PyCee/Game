@@ -34,7 +34,7 @@ typedef struct DirectionComponent {
 	struct vec4 *forwardRotation;
 	struct vec3 *forward;
 	struct vec3 *target;
-	struct rotation *rotate, *prevRotate, *deltaRotate;
+	struct rotationController *rotate, *deltaRotate;
 	float panTime, panProgress, deltaPanProgress;
 	
 	char viewState;

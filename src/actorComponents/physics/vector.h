@@ -16,11 +16,12 @@ vec2 genVec2(float, float);
 vec3 genVec3(float, float, float);
 vec4 genVec4(float, float, float, float);
 
+float magnitudeVec3Sq(vec3);
 vec3 normalizeVec3(vec3);
 vec3 addVec3Vec3(vec3, vec3);
-vec3 subtractVec3(vec3, vec3);
+vec3 subtractVec3Vec3(vec3, vec3);
 vec3 scaleVec3(vec3, float);
-float dotVec3(vec3, vec3);
+float dotProduct(vec3, vec3);
 vec3 crossProduct(vec3, vec3);
 
 void printVec3(vec3);

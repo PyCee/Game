@@ -29,6 +29,10 @@ vec4 genVec4(float X, float Y, float Z, float W)
 	result.vec[3] = W;
 	return result;
 }
+float magnitudeVec3Sq(vec3 vec)
+{
+	return vec.vec[0] * vec.vec[0] + vec.vec[1] * vec.vec[1] + vec.vec[2] * vec.vec[2];
+}
 vec3 normalizeVec3(vec3 vec)
 {
 	vec3 result;
@@ -47,7 +51,7 @@ vec3 addVec3Vec3(vec3 vecOne, vec3 vecTwo)
 	result.vec[2] = vecOne.vec[2] + vecTwo.vec[2];
 	return result;
 }
-vec3 subtractVec3(vec3 vecOne, vec3 vecTwo)
+vec3 subtractVec3Vec3(vec3 vecOne, vec3 vecTwo)
 {
 	return addVec3Vec3(vecOne, scaleVec3(vecTwo, -1));
 }
@@ -55,7 +59,7 @@ vec3 scaleVec3(vec3 vector, float scale)
 {
 	return genVec3(vector.vec[0] * scale, vector.vec[1] * scale, vector.vec[2] * scale);
 }
-float dotVec3(vec3 vecOne, vec3 vecTwo)
+float dotProduct(vec3 vecOne, vec3 vecTwo)
 {
 	return vecOne.vec[0] * vecTwo.vec[0] + vecOne.vec[1] * vecTwo.vec[1] + vecOne.vec[2] * vecTwo.vec[2];
 }
