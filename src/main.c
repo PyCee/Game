@@ -27,11 +27,15 @@
 #include "loadActorData.h"
 #include "SOIL/SOIL.h"
 #include "actorComponents/physics/capsule.h"
+#include "actorComponents/physics/sphere.h"
+#include "callback/callback.h"
+#include "callback/timeout.h"
+#include "callback/endGame.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 450
-#define MAX_LIFE_TIME 60
+#define MAX_LIFE_TIME 3
 #define MAX_LIFE_TIME_MS 1000 * MAX_LIFE_TIME
 
 #define ACT 0
@@ -109,6 +113,12 @@ int main(int argc, char *argv[])
 	genGlobalTimeLine(&globalTimeLine);
 	bindGlobalTimeLine(globalTimeLine);
 	
+	printf("max ms: %d\n", MAX_LIFE_TIME_MS);
+	int tim = MAX_LIFE_TIME_MS;
+	printf("max ms: %d\n", tim);
+	callback timeoutGame = genTimeout(tim, endGame);
+	enableCallback(&timeoutGame);
+	
 	unsigned char gameState = ACT;
 	while( IAMALIVE == 1 ) {
 		SDL_GL_SwapWindow(gameWindow);
@@ -141,21 +151,20 @@ int main(int argc, char *argv[])
 			handleEvents();
 			updateActors();
 			updateQuests();
+			updateCallbacks();
 			break;
 		default:
 			break;
 		}
-		if(getElapsedTime(globalTimeLine) > MAX_LIFE_TIME_MS)
-			IAMALIVE = 0;
 	}
 	printf("MainLoop Ending.\n%s Ending.\n", PROGRAM_NAME);
-	
 	
 	bindCameraView(0);
 	bindMapTerrain(0);
 	bindControlledActor(0);
 	bindGlobalTimeLine(0);
 	freeAllActors();
+	freeCallbacks();
 	freeGlobalTimeLine(&globalTimeLine);
 	SaveOptions();
 	DefaultKeyboard();
@@ -167,17 +176,13 @@ int main(int argc, char *argv[])
 	printf("%s Ended.\n", PROGRAM_NAME);
 	
 	vec3 *poi1 = malloc(sizeof(vec3));
-	vec3 *poi2 = malloc(sizeof(vec3));
-	*poi1 = genVec3(-3.0, 0.0, 4.0);
-	*poi2 = genVec3(3.0, 0.0, 4.0);
-	capsule cap1 = genCapsule(poi1, poi2, 1.5);
+	*poi1 = genVec3(0.0, 0.0, 0.0);
+	sphere sph1 = genSphere(poi1, 1.3000);
 	
 	vec3 *poi3 = malloc(sizeof(vec3));
-	vec3 *poi4 = malloc(sizeof(vec3));
-	*poi3 = genVec3(0.0,3.0, 2.0);
-	*poi4 = genVec3(0.0,3.0, 6.0);
-	capsule cap2 = genCapsule(poi3, poi4, 1.4);
+	*poi3 = genVec3(2.0, 0.0, 0.0);
+	sphere sph2 = genSphere(poi3, 0.7);
 	
-	unsigned char colis = collisionCapsuleCapsule(cap1, cap2);
+	unsigned char colis = collisionSphereSphere(sph1, sph2);
 	printf("collided = %hhu\n", colis);
 }

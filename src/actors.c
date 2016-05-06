@@ -18,19 +18,6 @@
 #include "actorComponents/lightingComponent.h"
 #include "actorComponents/modelComponent.h"
 #include "actorComponents/renderComponent.h"
-// Various Components used by every Dynamic Actor
-/*
-IdentifierComponent identifier[MAX_ACTOR_COUNT];
-TimeLineComponent timeLine[MAX_ACTOR_COUNT];
-AudioComponent audio[MAX_ACTOR_COUNT];
-DirectionComponent direction[MAX_ACTOR_COUNT];
-PhysicsComponent physics[MAX_ACTOR_COUNT];
-CollisionsComponent collisions[MAX_ACTOR_COUNT];
-AIComponent AI[MAX_ACTOR_COUNT];
-LightingComponent lighting[MAX_ACTOR_COUNT];
-ModelComponent model[MAX_ACTOR_COUNT];
-RenderComponent render[MAX_ACTOR_COUNT];
-*/
 
 unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is active or not
 unsigned char allActorsPaused;
@@ -46,7 +33,6 @@ void initActorComponents(void){
 	lighting = malloc(MAX_ACTOR_COUNT * sizeof(LightingComponent));
 	model = malloc(MAX_ACTOR_COUNT * sizeof(ModelComponent));
 	render = malloc(MAX_ACTOR_COUNT * sizeof(RenderComponent));
-	
 	
 	initDirectionComponent();
 	initRender();

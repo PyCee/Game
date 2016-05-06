@@ -30,7 +30,7 @@ unsigned char getMapTerrain (void);
 
 typedef struct _globalTimeLine_t globalTimeLine_t;
 
-static	globalTimeLine_t * globalTimeLine;
+static globalTimeLine_t * globalTimeLine;
 void bindGlobalTimeLine	(globalTimeLine_t *);
 globalTimeLine_t* getGlobalTimeLine (void);
 

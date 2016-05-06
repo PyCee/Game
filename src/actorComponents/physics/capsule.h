@@ -10,6 +10,6 @@ typedef struct capsule{
 capsule genCapsule(struct vec3 *, struct vec3 *, float);
 void freeCap(capsule *);
 
-unsigned char collisionCapsuleCapsule(capsule, capsule); // TODO test at end of main
+unsigned char collisionCapsuleCapsule(capsule, capsule);
 
 #endif /* CAPSULE */

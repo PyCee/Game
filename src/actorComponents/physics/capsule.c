@@ -1,4 +1,3 @@
-
 #include "capsule.h"
 
 #include <stdlib.h>
