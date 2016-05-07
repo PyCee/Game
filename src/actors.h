@@ -3,22 +3,10 @@
 
 #include "actorSelection.h"
 
-/*
-#include "actorComponents/identifierComponent.h"
-#include "actorComponents/timeLineComponent.h"
-#include "actorComponents/audioComponent.h"
-#include "actorComponents/directionComponent.h"
-#include "actorComponents/physicsComponent.h"
-#include "actorComponents/collisionsComponent.h"
-#include "actorComponents/AIComponent.h"
-#include "actorComponents/lightingComponent.h"
-#include "actorComponents/modelComponent.h"
-#include "actorComponents/renderComponent.h"
-*/
-
-// Various Components used by every Dynamic Actor
+// Various Components used by every Actor
 struct IdentifierComponent *identifier;
 struct TimeLineComponent *timeLine;
+struct CallbackComponent *callback;
 struct AudioComponent *audio;
 struct DirectionComponent *direction;
 struct PhysicsComponent *physics;
@@ -32,9 +20,7 @@ extern unsigned char ActiveActor[MAX_ACTOR_COUNT]; // Tells whether an Actor is 
 extern unsigned char allActorsPaused;
 
 void initActorComponents(void);
-void addVec3Vec3Actor(void);
-void addVec3Vec3Dyn_Actor(void);
-void addVec3Vec3Sta_Actor(void);
+unsigned char addActor(void);
 void genAllActors(void);
 void freeAllActors(void);
 void freeActor(void);

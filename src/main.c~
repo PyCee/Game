@@ -37,7 +37,7 @@
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 450
-#define MAX_LIFE_TIME 60
+#define MAX_LIFE_TIME 3
 #define MAX_LIFE_TIME_MS 1000 * MAX_LIFE_TIME
 
 #define ACT 0

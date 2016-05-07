@@ -1,5 +1,5 @@
-#ifndef _IDENTIFIER_COMPONENT_
-#define _IDENTIFIER_COMPONENT
+#ifndef IDENTIFIER_COMPONENT
+#define IDENTIFIER_COMPONENT
 
 #define NAME identifier[getActor()].name
 #define TYPE identifier[getActor()].type
@@ -14,4 +14,4 @@ typedef struct IdentifierComponent {
 void genIdentifierComponent();
 void freeIdentifierComponent();
 
-#endif /* _IDENTIFIER_COMPONENT_ */
+#endif /* IDENTIFIER_COMPONENT */

@@ -1,11 +1,11 @@
 #include "endGame.h"
-#include "callback.h"
+#include "callbackController.h"
 
 #include <stdio.h>
 
 extern unsigned char IAMALIVE;
 
-void endGame(struct callback call)
+void endGame(callbackController call)
 {
 	printf("ending because of callback\n");
 	IAMALIVE = 0;

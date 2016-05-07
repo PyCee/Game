@@ -9,6 +9,7 @@
 #include <strings.h>
 
 #include "actorComponents/identifierComponent.h"
+#include "actorComponents/callbackComponent.h"
 #include "actorComponents/timeLineComponent.h"
 #include "actorComponents/audioComponent.h"
 #include "actorComponents/directionComponent.h"
@@ -24,6 +25,7 @@ unsigned char allActorsPaused;
 
 void initActorComponents(void){
 	identifier = malloc(MAX_ACTOR_COUNT * sizeof(IdentifierComponent));
+	callback = malloc(MAX_ACTOR_COUNT * sizeof(CallbackComponent));
 	timeLine = malloc(MAX_ACTOR_COUNT * sizeof(TimeLineComponent));
 	audio = malloc(MAX_ACTOR_COUNT * sizeof(AudioComponent));
 	direction = malloc(MAX_ACTOR_COUNT * sizeof(DirectionComponent));
@@ -52,24 +54,18 @@ static void bindFirstInactiveActor(void) {
 			actorID, MAX_ACTOR_COUNT);
 	// TODO: What Should I Return Here? For An Invalid actorID.
 }
-void addVec3Vec3Actor(void) {
+unsigned char addActor(void) {
 	bindFirstInactiveActor();
 	ActiveActor[getActor()] = 1;
 	printf("Adding ActorID: %d\n", getActor());
-}
-void addVec3Vec3Dyn_Actor(void) {
-	addVec3Vec3Actor();
-	identifier[getActor()].type = "dynamic";
-}
-void addVec3Vec3Sta_Actor(void) {
-	addVec3Vec3Actor();
-	identifier[getActor()].type = "static";
+	return getActor();
 }
 static void genActor(void) {
 	if (ActiveActor[getActor()])
 		return;
 	printf("Gening Actor %d\n", getActor());
 	genIdentifierComponent();
+	genCallbackComponent();
 	genTimeLineComponent();
 	genAudioComponent();
 	genDirectionComponent();
@@ -92,6 +88,7 @@ void freeActor(void) {
 	freeDirectionComponent();
 	freeAudioComponent();
 	freeTimeLineComponent();
+	freeCallbackComponent();
 	freeIdentifierComponent();
 	ActiveActor[getActor()] = 0;
 }
@@ -125,7 +122,15 @@ void updateActors(void) {
 			localTime[getActor()] = updateTimeLineComponent();
 		actorID++;
 	}
-	printf("Updating Batch: \"Audio\"\n");
+	printf("Updating Batch: \"Callback\"\n");
+	actorID = 0;
+	while (actorID < MAX_ACTOR_COUNT) {
+		bindActor(actorID);
+		if (ActiveActor[getActor()])
+			updateCallbackComponent(localTime[actorID]);
+		actorID++;
+	}
+	printf("Batch: \"Callback\" Updated\nUpdating Batch: \"Audio\"\n");
 	actorID = 0;
 	while (actorID < MAX_ACTOR_COUNT) {
 		bindActor(actorID);
