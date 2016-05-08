@@ -1,15 +1,15 @@
 
-#ifndef _COLOR_
-#define _COLOR_
+#ifndef COLOR
+#define COLOR
 
-typedef struct _Color_t{
-	unsigned char		Red;
-	unsigned char		Green;
-	unsigned char		Blue;
-	unsigned char		Alpha;
-} Color_t;
+typedef struct color{
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
+	unsigned char alpha;
+} color;
 
-void genColor(Color_t *);
-void freeColor(Color_t *);
+color genColor(unsigned char, unsigned char, unsigned char, unsigned char);
+void freeColor(color *);
 
-#endif /* _COLOR_ */
+#endif /* COLOR */

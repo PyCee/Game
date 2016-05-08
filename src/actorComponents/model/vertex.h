@@ -4,7 +4,7 @@
 
 #include "../physics/vector.h"
 
-typedef struct _Vertex{
+typedef struct Vertex{
 	/*vec3 pos;
 	vec3 normal;
 	vec2 texCoords;

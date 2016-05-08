@@ -1,8 +1,8 @@
 #ifndef CALLBACK_COMPONENT
 #define CALLBACK_COMPONENT
 
-#define CALLBACKS callback[getActor()].callbacks
-#define NUM_CALLBACKS callback[getActor()].numCallbacks
+#define CALLBACKS callback[getActor()]->callbacks
+#define NUM_CALLBACKS callback[getActor()]->numCallbacks
 
 typedef struct CallbackComponent {
 	struct callbackController **callbacks;

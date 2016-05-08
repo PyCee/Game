@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include "camera.h"
 #include "actors.h"
-#include "globalTimeLine.h"
+#include "globalTimeline.h"
+#include "actorComponents/lightingComponent.h"
 
 
 void bindActor(unsigned char actor)
 {
-	if(actor >= MAX_ACTOR_COUNT || actor < 0)
+	if(actor >= numActors || actor < 0)
 		printf("Invalid ActorID bound.\n ActorID = %i.\n", actor);
 	currentActor = actor;
 }
@@ -19,7 +20,7 @@ unsigned char getActor(void)
 }
 void bindLight(unsigned char light)
 {
-	if(light >= MAX_LIGHT_COUNT || light < 0)
+	if(light >= NUM_LIGHTS || light < 0)
 		printf("Invalid LightID bound.\n LightID = %i.\n", light);
 	currentLight = light;
 }
@@ -51,11 +52,11 @@ unsigned char getMapTerrain(void)
 {
 	return mapTerrain;
 }
-void bindGlobalTimeLine(globalTimeLine_t *timeLine)
+void bindGlobalTimeline(globalTimeline *timeLine)
 {
-	globalTimeLine = timeLine;
+	globalTime = timeLine;
 }
-globalTimeLine_t *getGlobalTimeLine(void)
+globalTimeline *getGlobalTimeline(void)
 {
-	return globalTimeLine;
+	return globalTime;
 }

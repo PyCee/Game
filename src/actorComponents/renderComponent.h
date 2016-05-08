@@ -4,6 +4,9 @@
 #include "../actorSelection.h"
 #include <SDL2/SDL_opengl.h>
 
+#define RENDER render[getActor()]
+#define SHOULD_RENDER RENDER->shouldRender
+
 #define MAX_X 10
 #define MIN_X 1
 #define RANGE_X MAX_X - MIN_X
@@ -17,7 +20,7 @@
 typedef struct RenderComponent {
 	GLuint BoundingBoxVBO;
 	float BoundingBoxVerticies[24];
-	unsigned char render;
+	unsigned char shouldRender;
 } RenderComponent;
 
 unsigned short BoundingBoxIndices[36];

@@ -10,10 +10,10 @@ void freeAIComponent() {
 	assignAIUpdate(UselessUpdate);
 }
 void updateAIComponent(unsigned short deltaMS) {
-	AI[getActor()].update(deltaMS);
+	AI_UPDATE(deltaMS);
 }
 void assignAIUpdate(void (*updateFunction)(unsigned short)) {
-	AI[getActor()].update = updateFunction;
+	AI_UPDATE = updateFunction;
 }
 
 void UselessUpdate(unsigned short deltaMS) {

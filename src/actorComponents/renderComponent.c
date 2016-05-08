@@ -26,13 +26,13 @@ void initRender(void) {
 }
 void genRenderComponent() {
 
-	render[getActor()].render = 1;
+	SHOULD_RENDER = 1;
 }
 void freeRenderComponent() {
 }
 void updateRenderComponent(unsigned short deltaMS) {
 	// TODO: more culling
-	if( render[getActor()].render == 0 ){ // we have chosen not to render this actor
+	if( SHOULD_RENDER == 0 ){ // I have chosen not to render this actor
 		return;
 	}// culling done, something is to be rendered
 	
@@ -52,7 +52,7 @@ void updateRenderComponent(unsigned short deltaMS) {
 				&worldPlacement.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
-	if (collisions[getActor()].drawBounds){// && getActor() != getControlledActor()) {
+	if (DRAW_BOUNDS){// && getActor() != getControlledActor()) {
 		printf("Drawing Bounds for Actor %hhu\n", getActor());
 		
 		
@@ -62,15 +62,15 @@ void updateRenderComponent(unsigned short deltaMS) {
 	// Draw model
 	printf("Drawing Model for Actor %hhu\n", getActor());
 	GLuint index;
-	for(index = 0; index < model[getActor()].numMeshes; index++){
+	for(index = 0; index < NUM_MESHES; index++){
 		//TODO: use textures
 		
 		glActiveTexture(GL_TEXTURE0);
 		glUniform1i(TextureLoc, 0);
-		glBindTexture(GL_TEXTURE_2D, model[getActor()].meshes[index].textures[0].id);
+		glBindTexture(GL_TEXTURE_2D, MESHES[index].textures[0].id);
 		
-		glBindVertexArray(model[getActor()].meshes[index].VAO);
-		glDrawElements(GL_TRIANGLES, model[getActor()].meshes[index].numIndices, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(MESHES[index].VAO);
+		glDrawElements(GL_TRIANGLES, MESHES[index].numIndices, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 	printf("Model Drawn for Actor %hhu\n", getActor());

@@ -45,13 +45,13 @@ void freeMesh(Mesh *mesh)
 }
 void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int activeMesh)
 {
-	model[getActor()].meshes[activeMesh].numVertices = mesh->mNumVertices;
-	model[getActor()].meshes[activeMesh].numIndices = mesh->mNumFaces * 3;
-	model[getActor()].meshes[activeMesh].numTextures = 1;//mesh->mNumTextures;//TODO
+	MESHES[activeMesh].numVertices = mesh->mNumVertices;
+	MESHES[activeMesh].numIndices = mesh->mNumFaces * 3;
+	MESHES[activeMesh].numTextures = 1;//mesh->mNumTextures;//TODO
 		
-	model[getActor()].meshes[activeMesh].vertices = malloc(sizeof(Vertex) * model[getActor()].meshes[activeMesh].numVertices);
-	model[getActor()].meshes[activeMesh].indices = malloc(sizeof(GLuint) * model[getActor()].meshes[activeMesh].numIndices);
-	model[getActor()].meshes[activeMesh].textures = malloc(sizeof(Texture) * model[getActor()].meshes[activeMesh].numTextures);
+	MESHES[activeMesh].vertices = malloc(sizeof(Vertex) * MESHES[activeMesh].numVertices);
+	MESHES[activeMesh].indices = malloc(sizeof(GLuint) * MESHES[activeMesh].numIndices);
+	MESHES[activeMesh].textures = malloc(sizeof(Texture) * MESHES[activeMesh].numTextures);
 	
 	GLuint index;
 	
@@ -69,17 +69,17 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 			vert.attribute[6] = mesh->mTextureCoords[0][index].x;
 			vert.attribute[7] = mesh->mTextureCoords[0][index].y;
 		}
-		model[getActor()].meshes[activeMesh].vertices[index] = vert;
+		MESHES[activeMesh].vertices[index] = vert;
 	}
 	
 	for(index = 0; index < mesh->mNumFaces; index++){
 			struct aiFace face = mesh->mFaces[index];
 			GLuint indiceIndex = 0;
 			for(indiceIndex = 0; indiceIndex < face.mNumIndices; indiceIndex++){
-				model[getActor()].meshes[activeMesh].indices[(3 * index) + indiceIndex] = face.mIndices[indiceIndex];
+				MESHES[activeMesh].indices[(3 * index) + indiceIndex] = face.mIndices[indiceIndex];
 			}	
 	}
-	Texture *texture = &(model[getActor()].meshes[activeMesh].textures[0]);
+	Texture *texture = &(MESHES[activeMesh].textures[0]);
 	struct aiString textureString;
 	aiGetMaterialString(scene->mMaterials[mesh->mMaterialIndex], AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), &textureString);
 	texture->path = malloc(sizeof("pink.png"));

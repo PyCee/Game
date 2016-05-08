@@ -1,5 +1,8 @@
-#ifndef _AI_COMPONENT_
-#define _AI_COMPONENT_
+#ifndef AI_COMPONENT
+#define AI_COMPONENT
+
+#define AI ai[getActor()]
+#define AI_UPDATE AI->update
 
 typedef struct AIComponent {
 	void (*update)(unsigned short);

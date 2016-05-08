@@ -1,12 +1,12 @@
 #ifndef _DIRECTION_COMPONENT_
 #define _DIRECTION_COMPONENT_
 
-#define FORWARDROTATION direction[getActor()].forwardRotation
-#define FORWARD direction[getActor()].forward
-#define VIEW_TARGET direction[getActor()].target
-#define DIR_ROTATE direction[getActor()].rotate
-#define DIR_PREV_ROTATE direction[getActor()].prevRotate
-#define DIR_DELTA_ROTATE direction[getActor()].deltaRotate
+#define FORWARDROTATION direction[getActor()]->forwardRotation
+#define FORWARD direction[getActor()]->forward
+#define VIEW_TARGET direction[getActor()]->target
+#define DIR_ROTATE direction[getActor()]->rotate
+#define DIR_PREV_ROTATE direction[getActor()]->prevRotate
+#define DIR_DELTA_ROTATE direction[getActor()]->deltaRotate
 #define YAW DIR_ROTATE->yaw
 #define PITCH DIR_ROTATE->pitch
 #define ROLL DIR_ROTATE->roll
@@ -16,10 +16,10 @@
 #define DELTA_YAW DIR_DELTA_ROTATE->yaw
 #define DELTA_PITCH DIR_DELTA_ROTATE->pitch
 #define DELTA_ROLL DIR_DELTA_ROTATE->roll
-#define PAN_TIME direction[getActor()].panTime
-#define PAN_PROGRESS direction[getActor()].panProgress
-#define DELTA_PAN_PROGRESS direction[getActor()].deltaPanProgress
-#define VIEWSTATE direction[getActor()].viewState
+#define PAN_TIME direction[getActor()]->panTime
+#define PAN_PROGRESS direction[getActor()]->panProgress
+#define DELTA_PAN_PROGRESS direction[getActor()]->deltaPanProgress
+#define VIEWSTATE direction[getActor()]->viewState
 #define i *(XAxis)
 #define j *(YAxis)
 #define k *(ZAxis)

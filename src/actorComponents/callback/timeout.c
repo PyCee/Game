@@ -1,5 +1,7 @@
 #include "timeout.h"
 #include "callbackController.h"
+#include "../../globalTimeline.h"
+#include "../../actorSelection.h"
 
 #include <stdio.h>
 
@@ -15,7 +17,7 @@ callbackController genTimeout(void (*complete)(callbackController), int time)
 char shouldTimeout(callbackController call)
 {
 	printf("timeout test\n");
-	call._int[TIMEOUT_REMAINING] -= getPrevFrameDuration(getGlobalTimeLine());
+	call._int[TIMEOUT_REMAINING] -= getPrevFrameDuration(*getGlobalTimeline());
 	if(call._int[TIMEOUT_REMAINING] <= 0)
 		return 1;
 	return 0;

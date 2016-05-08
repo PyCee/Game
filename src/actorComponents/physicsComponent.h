@@ -8,24 +8,24 @@
 #define ACC_ATTRIBUTES 4
 #define JRK_ATTRIBUTES 3
 
-#define POS physics[getActor()].pos
-#define VEL physics[getActor()].vel
-#define ACC physics[getActor()].acc
-#define JRK physics[getActor()].jrk
-#define GRAVITY physics[getActor()].Gravity
+#define PHYSICS physics[getActor()]
+#define POS PHYSICS->pos
+#define VEL PHYSICS->vel
+#define ACC PHYSICS->acc
+#define JRK PHYSICS->jrk
+#define GRAVITY PHYSICS->Gravity
 #define POSITION POS->attribute[0]
 #define VELOCITY VEL->attribute[0]
 #define ACCELERATION ACC->attribute[0]
 #define JERK JRK->attribute[0]
-#define PREVIOUSPOSITION physics[getActor()].prevPos
-#define SPEED physics[getActor()].speed
-#define SPEED_SIDE physics[getActor()].sideSpeed
-#define SPEED_BACK physics[getActor()].backSpeed
+#define PREVIOUSPOSITION PHYSICS->prevPos
+#define SPEED PHYSICS->speed
+#define SPEED_SIDE PHYSICS->sideSpeed
+#define SPEED_BACK PHYSICS->backSpeed
+#define MASS PHYSICS->mass
 
 typedef struct PhysicsComponent {
-	
 	struct physicsAttributeController *pos, *vel, *acc, *jrk;
-	
 	struct vec3 *prevPos;
 	struct vec3 *Gravity;
 	float speed, sideSpeed, backSpeed;

@@ -1,15 +1,17 @@
 
 #include "color.h"
 
-void genColor
-(Color_t * color)
+
+color genColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
-	color->Red = 0;
-	color->Green = 0;
-	color->Blue = 0;
-	color->Alpha = 0;
+	color col;
+	col.red = r;
+	col.green = g;
+	col.blue = b;
+	col.alpha = a;
+	return col;
 }
-void freeColor
-(Color_t * color)
+void freeColor(color *col)
 {
+
 }

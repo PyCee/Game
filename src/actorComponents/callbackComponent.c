@@ -38,15 +38,15 @@ unsigned char nextFreeCallbackController(void)
 }
 void enableCallbackController(callbackController *call)
 {
+	unsigned char next;
 	if(NUM_CALLBACKS == 0){
 		NUM_CALLBACKS = 1;
+		next = 0;
 		CALLBACKS = malloc(sizeof(callbackController *) * NUM_CALLBACKS);
-		CALLBACKS[0] = 0;
 	} else if(nextFreeCallbackController() == NUM_CALLBACKS){
 		NUM_CALLBACKS += 1;
-		CALLBACKS = realloc(CALLBACKS, sizeof(callbackController *) * NUM_CALLBACKS);	
-		CALLBACKS[NUM_CALLBACKS - 1] = 0;
+		next = NUM_CALLBACKS - 1;
+		CALLBACKS = realloc(CALLBACKS, sizeof(callbackController *) * NUM_CALLBACKS);
 	}
-	printf("freeing1\n");
-	CALLBACKS[nextFreeCallbackController()] = call;
+	CALLBACKS[next] = call;
 }

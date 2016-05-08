@@ -3,10 +3,14 @@
 
 #include "../actorSelection.h"
 
-// when collisions are based off of actual character (not bounding box), change to circular bounds.
+#define COLLISIONS collisions[getActor()]
+#define HEIGHT COLLISIONS->height
+#define WIDTH COLLISIONS->width
+#define DRAW_BOUNDS COLLISIONS->drawBounds
+
 typedef struct CollisionsComponent {
-	float height;		// Measured in Meters
-	float width;		// Measured in Meters
+	float height;
+	float width;
 	unsigned char drawBounds;
 } CollisionsComponent;
 

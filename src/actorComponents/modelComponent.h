@@ -7,10 +7,14 @@
 #include <assimp/scene.h>          // Output data structure
 #include <assimp/postprocess.h>    // Post processing flags
 
+#define MESHES model[getActor()]->meshes
+#define NUM_MESHES model[getActor()]->numMeshes
+#define MODEL_PATH model[getActor()]->modelPath
+
 typedef struct ModelComponent {
 	Mesh *meshes;
 	unsigned int numMeshes;
-	unsigned char *directory;
+	unsigned char *modelPath;
 } ModelComponent;
 
 Mesh *loadModelFromFile(const unsigned char *);

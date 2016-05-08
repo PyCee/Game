@@ -49,7 +49,7 @@ void loadActorData(unsigned char *loc)
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<mass>");
-	physics[getActor()].mass = strtol(data.children, &afterPtr, 10);
+	MASS = strtol(data.children, &afterPtr, 10);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<speed>");
@@ -76,7 +76,7 @@ void loadActorData(unsigned char *loc)
 	setBounds(dataWidth, dataHeight);
 	
 	data = readXMLElements(fileSource, "<drawBounds>");
-	collisions[getActor()].drawBounds = strtol(data.children, &afterPtr, 10);
+	DRAW_BOUNDS = strtol(data.children, &afterPtr, 10);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<update>");
@@ -92,7 +92,7 @@ void loadActorData(unsigned char *loc)
 	
 	data = readXMLElements(fileSource, "<mesh>");
 	loadModelFromFile(data.children);
-	for(index = 0; index < model[getActor()].numMeshes; index++)
-		setupMesh(&(model[getActor()].meshes[index]));
+	for(index = 0; index < NUM_MESHES; index++)
+		setupMesh(&(MESHES[index]));
 	freeXMLElement(data);
 }

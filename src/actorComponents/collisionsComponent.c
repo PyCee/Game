@@ -11,17 +11,17 @@
 #include "physics/vector.h"
 
 void genCollisionsComponent() {
-	collisions[getActor()].height = 1;
-	collisions[getActor()].width = 1;
-	collisions[getActor()].drawBounds = 1;
+	HEIGHT = 1;
+	WIDTH = 1;
+	DRAW_BOUNDS = 1;
 }
 void freeCollisionsComponent() {
 }
 void updateCollisionsComponent(unsigned short deltaMS) {
 }
 void setBounds(float width, float height) {
-	collisions[getActor()].width = width;
-	collisions[getActor()].height = height;
+	WIDTH = width;
+	HEIGHT = height;
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	//float Xsq = pow( POSX(getActor()) - POSX(actorID), 2);
@@ -29,8 +29,8 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	//float distanceSq = Xsq + Zsq;
 	unsigned char prevID = getActor();
 	vec3 actOnePos = *POSITION;
-	float actOneWidth = getWidth();
-	float actOneHeight = getHeight();
+	float actOneWidth = WIDTH;
+	float actOneHeight = HEIGHT;
 	bindActor(actorID);
 	unsigned char collide;
 	if (actOnePos.vec[0] - 0.5 * actOneWidth
@@ -43,12 +43,11 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	else
 		collide = 0;// Bounding Boxes Not Overlapping
 	bindActor(prevID);
-	printf("collide = %hhu\n", collide);
 	return collide;
 }
 float getHeight() {
-	return collisions[getActor()].height;
+	return HEIGHT;
 }
 float getWidth() {
-	return collisions[getActor()].width;
+	return WIDTH;
 }

@@ -11,7 +11,7 @@
 #include "userControl/options.h"
 #include "actors.h"
 #include "protag.h"
-#include "globalTimeLine.h"
+#include "globalTimeline.h"
 #include "actorSelection.h"
 #include "actorComponents/physics/vector.h"
 #include "actorComponents/physics/physicsAttributeController.h"
@@ -70,12 +70,11 @@ int main(int argc, char *argv[])
 	InitKeyboard();
 	DefaultKeyboard();
 	initActorComponents();
-	genAllActors();
 	genFrustum();
 	
-	globalTimeLine_t *globalTimeLine;
-	genGlobalTimeLine(&globalTimeLine);
-	bindGlobalTimeLine(globalTimeLine);
+	globalTimeline gTime;
+	gTime = genGlobalTimeline();
+	bindGlobalTimeline(&gTime);
 	
 	printf("IAMALIVE: %d\n", IAMALIVE);
 	
@@ -91,10 +90,9 @@ int main(int argc, char *argv[])
 	*timeoutGame = genTimeout(endGame, MAX_LIFE_TIME_MS);
 	enableCallbackController(timeoutGame);
 	
-	
 	unsigned char cam = addActor();
 	loadActorData("actors/camera.xml");
-	render[cam].render = 0;
+	SHOULD_RENDER = 0;
 	
 	unsigned char thin = addActor();
 	loadActorData("actors/thing.xml");
@@ -105,7 +103,6 @@ int main(int argc, char *argv[])
 	bindControlledActor(pro);
 	
 	vec3 *pos = POSITION;
-	
 	bindActor(getControlledActor());
 	callbackController *test = malloc(sizeof(callbackController));
 	*test = genNearTest(endGame, 1.5, pos);
@@ -132,7 +129,7 @@ int main(int argc, char *argv[])
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		updateGlobalTimeLine(getGlobalTimeLine());
+		updateGlobalTimeline(getGlobalTimeline());
 		switch(gameState){
 		case ACT:
 			//<CL "physics upgrade: collisions">
@@ -164,9 +161,9 @@ int main(int argc, char *argv[])
 	bindCameraView(0);
 	bindMapTerrain(0);
 	bindControlledActor(0);
-	bindGlobalTimeLine(0);
+	bindGlobalTimeline(0);
 	freeAllActors();
-	freeGlobalTimeLine(&globalTimeLine);
+	freeGlobalTimeline(&gTime);
 	SaveOptions();
 	DefaultKeyboard();
 	

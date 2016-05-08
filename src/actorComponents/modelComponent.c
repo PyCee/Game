@@ -7,13 +7,13 @@
 #include <assimp/scene.h>          // Output data structure
 #include <assimp/postprocess.h>    // Post processing flags
 
-static void countMeshes(struct aiNode *);
+static unsigned int countMeshes(struct aiNode *);
 static void countIndices(struct aiMesh *);
 static void processNode(struct aiNode *, const struct aiScene *);
 Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 {
-	model[getActor()].directory = malloc(sizeof(modelFileLoc));
-	strcpy(model[getActor()].directory, modelFileLoc);
+	MODEL_PATH = malloc(sizeof(modelFileLoc));
+	strcpy(MODEL_PATH, modelFileLoc);
 	// TODO: replace all of the assimp stuff with own library
 	//	2 parts:
 		// 1. convert file into custom file type.
@@ -28,24 +28,24 @@ Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 		//aiProcess_FlipUVs 		 |
 		aiProcess_GenUVCoords		 | // Needed
 		aiProcess_SortByPType);
-	
-	countMeshes(scene->mRootNode);
-	model[getActor()].meshes = malloc(sizeof(Mesh) * model[getActor()].numMeshes);
+	NUM_MESHES = countMeshes(scene->mRootNode);
+	MESHES = malloc(sizeof(Mesh) * NUM_MESHES);
 	processNode(scene->mRootNode, scene);
 }
 void freeModelComponent(void)
 {
 	unsigned char index;
-	for(index = 0; index < model[getActor()].numMeshes; index++)
-		freeMesh(model[getActor()].meshes);
+	for(index = 0; index < NUM_MESHES; index++)
+		freeMesh(MESHES);
 }
-static void countMeshes(struct aiNode *node)
+static unsigned int countMeshes(struct aiNode *node)
 {
-	model[getActor()].numMeshes += node->mNumMeshes;
+	unsigned int numMeshes = node->mNumMeshes;
 	GLuint index = 0;
 	for(index = 0; index < node->mNumChildren; index++){
-		countMeshes(node->mChildren[index]);
+		numMeshes += countMeshes(node->mChildren[index]);
 	}
+	return numMeshes;
 }
 static void processNode(struct aiNode *node, const struct aiScene *scene)
 {

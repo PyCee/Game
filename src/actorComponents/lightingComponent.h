@@ -1,23 +1,26 @@
 #ifndef _LIGHTING_
 #define _LIGHTING_
 
-typedef struct _Vertex_t Vertex_t;
 #include "lighting/color.h"
-
 #include "../actorSelection.h"
 
+#define LIGHTING lighting[getActor()]
+#define LIGHT_ORIGIN LIGHTING->originatingPoint
+#define LIGHT_INTENSITY LIGHTING->intensity
+#define NUM_LIGHTS LIGHTING->num_lights
+
 typedef struct LightingComponent {
-	Color_t intensity[MAX_LIGHT_COUNT];
-	Vertex_t * originatingPoint[MAX_LIGHT_COUNT];
-	unsigned char ActiveLights[MAX_LIGHT_COUNT];
+	struct Vertex **originatingPoint;
+	color *intensity;
+	unsigned char num_lights;
 } LightingComponent;
 
-Color_t AmbiantLight;
+color AmbiantLight;
 
 void genLightingComponent(void);
 void freeLightingComponent(void);
 void updateLightingComponent(unsigned short);
-void getFirstInactiveLight();
-void addVec3Vec3Light(Vertex_t *);
+unsigned char nextFreeLight(void);
+unsigned char addLight(struct Vertex *, color);
 
 #endif /* _LIGHTING_ */

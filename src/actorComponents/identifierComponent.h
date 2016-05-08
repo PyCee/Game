@@ -1,9 +1,9 @@
 #ifndef IDENTIFIER_COMPONENT
 #define IDENTIFIER_COMPONENT
 
-#define NAME identifier[getActor()].name
-#define TYPE identifier[getActor()].type
-#define ORIGIN_FILE identifier[getActor()].originFile
+#define NAME identifier[getActor()]->name
+#define TYPE identifier[getActor()]->type
+#define ORIGIN_FILE identifier[getActor()]->originFile
 
 typedef struct IdentifierComponent {
 	unsigned char *name;
