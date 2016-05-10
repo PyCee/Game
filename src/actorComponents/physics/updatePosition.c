@@ -5,23 +5,30 @@
 #include "physicsAttributeController.h"
 #include "vector.h"
 #include "../../math/quaternion.h"
+#include <stdio.h>
 
 void updatePosition(unsigned short deltaMS)
 {
+	double deltaS = (double)deltaMS / 1000;
 	unsigned char index;
+	vec3 change;
 	for(index = 0; index < JRK_ATTRIBUTES; index++){
-		if(JRK->active[index])
-			*ACCELERATION = addVec3Vec3(*ACCELERATION, scaleVec3(applyRotationQuaternion(*(JRK->attribute[index]), *(JRK->adjustment[index])), JRK->multiplier[index] * deltaMS));
+		if(JRK->active[index]){
+			change = applyRotationQuaternion(*(JRK->attribute[index]), *(JRK->adjustment[index]));
+			*ACCELERATION = addVec3Vec3(*ACCELERATION, scaleVec3(change, JRK->multiplier[index] * deltaS));
+		}
 	}
 	for(index = 0; index < ACC_ATTRIBUTES; index++){
 		if(ACC->active[index]){
-			*VELOCITY = addVec3Vec3(*VELOCITY, scaleVec3(applyRotationQuaternion(*(ACC->attribute[index]), *(ACC->adjustment[index])), ACC->multiplier[index] * deltaMS));
+			change = applyRotationQuaternion(*(ACC->attribute[index]), *(ACC->adjustment[index]));
+			*VELOCITY = addVec3Vec3(*VELOCITY, scaleVec3(change, ACC->multiplier[index] * deltaS));
 		}
 	}
 	*PREVIOUSPOSITION = *POSITION;
 	for(index = 0; index < VEL_ATTRIBUTES; index++){
 		if(VEL->active[index]){
-			*POSITION = addVec3Vec3(*POSITION, scaleVec3(applyRotationQuaternion(*(VEL->attribute[index]), *(VEL->adjustment[index])), VEL->multiplier[index] * deltaMS));
+			change = applyRotationQuaternion(*(VEL->attribute[index]), *(VEL->adjustment[index]));
+			*POSITION = addVec3Vec3(*POSITION, scaleVec3(change, VEL->multiplier[index] * deltaS));
 		}
 	}
 }

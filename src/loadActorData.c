@@ -10,11 +10,9 @@
 
 #include "actorComponents/AIComponent.h"
 #include "actorComponents/directionComponent.h"
-#include "actorComponents/collisionsComponent.h"
 #include "actorComponents/modelComponent.h"
 #include "actorComponents/physicsComponent.h"
 #include "actorComponents/identifierComponent.h"
-
 #include "protag.h"
 #include "camera.h"
 
@@ -67,13 +65,12 @@ void loadActorData(unsigned char *loc)
 	//get spawnpoint from world.xml file
 	
 	data = readXMLElements(fileSource, "<width>");
-	float dataWidth = strtod(data.children, &afterPtr);
+	WIDTH = strtod(data.children, &afterPtr);
 	freeXMLElement(data);
 	
 	data = readXMLElements(fileSource, "<height>");
-	float dataHeight = strtod(data.children, &afterPtr);
+	HEIGHT = strtod(data.children, &afterPtr);
 	freeXMLElement(data);
-	setBounds(dataWidth, dataHeight);
 	
 	data = readXMLElements(fileSource, "<drawBounds>");
 	DRAW_BOUNDS = strtol(data.children, &afterPtr, 10);

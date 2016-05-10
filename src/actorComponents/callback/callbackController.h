@@ -17,7 +17,7 @@ typedef struct callbackController{
 	int *_int;
 	unsigned char numInt;
 	unsigned char *_uchar;
-	unsigned char numChar;
+	unsigned char numUChar;
 } callbackController;
 
 

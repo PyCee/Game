@@ -8,7 +8,7 @@
 callbackController genTimeout(void (*complete)(callbackController), int time)
 {
 	callbackController call;
-	int times[] = {time};
+	int times[1] = {time};
 	call = genCallbackController(shouldTimeout, complete);
 	callbackControllerElement(&call, &times, 1, CALLBACK_INT);
 	return call;

@@ -18,7 +18,7 @@ void ControlledActorJump(void)
 	printf("Jump Called\n\n\n\n\n\n");
 	bindActor(getControlledActor());
 	vec3 *jump = malloc(sizeof(vec3));
-	*jump = genVec3(0.0, 0.003, 0.0);
+	*jump = genVec3(0.0, 2.5, 0.0);
 	impulse(VEL, jump);
 	free(jump);
 	

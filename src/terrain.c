@@ -8,8 +8,6 @@
 unsigned char genTerrain(void)
 {
 	assignAIUpdate(UpdateTerrain);
-	setBounds(10.0, 0.2);
-	//setPos(genVec3(0.0, -1.0, -5.5));
 	return getActor();
 }
 void UpdateTerrain

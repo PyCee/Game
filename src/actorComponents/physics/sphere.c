@@ -2,27 +2,23 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "collisionController.h"
 
 #include "vector.h"
 
-sphere genSphere(struct vec3 *vec, float rad)
+collisionController genSphere(vec3 *vec, float rad)
 {
-	sphere sph;
-	sph.point = malloc(sizeof(vec3));
-	*sph.point = *vec;
-	sph.radius = rad;
-	return sph;
+	collisionController con;
+	vec3 *points[1] = {vec};
+	float radius[1] = {rad};
+	collisionControllerElement(&con, &points, 1, COLLISION_VEC3);
+	collisionControllerElement(&con, &radius, 1, COLLISION_FLOAT);
+	return con;
 }
-void freeSphere(sphere *sph)
+unsigned char collisionSphereSphere(collisionController sphOne, collisionController sphTwo)
 {
-	free(sph->point);
-	sph->point = 0;
-}
-
-unsigned char collisionSphereSphere(sphere sphOne, sphere sphTwo)
-{
-	float radDist = sphOne.radius + sphTwo.radius;
-	vec3 diff = subtractVec3Vec3(*sphOne.point, *sphTwo.point);
+	float radDist = sphOne._float[0] + sphTwo._float[0];
+	vec3 diff = subtractVec3Vec3(*sphOne._vec3[0], *sphTwo._vec3[0]);
 	float distSq = diff.vec[0] * diff.vec[0] + diff.vec[1] * diff.vec[1] + diff.vec[2] * diff.vec[2];
 	unsigned char collide = 0;
 	printf("if %f <= %f\n", distSq, radDist * radDist);

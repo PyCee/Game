@@ -2,7 +2,6 @@
 #include "renderComponent.h"
 
 #include "../actors.h"
-#include "collisionsComponent.h"
 #include <stdio.h>
 #include "../shaders/shaders.h"
 #include <math.h>

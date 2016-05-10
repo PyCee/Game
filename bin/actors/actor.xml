@@ -8,14 +8,14 @@
 		
 	</audio>
 	<physics>
-		<mass>14</mass>
-		<speed>0.0012</speed>
+		<mass>1</mass>
+		<speed>2.24</speed>
 		<speed_side>0.8</speed_side>
 		<speed_back>0.6</speed_back>
 	</physics>
 	<collisions>
-		<height>0.2</height>
-		<width>0.2</width>
+		<height>0.5</height>
+		<width>0.025</width>
 		<radius>13</radius><!--To replace height and width once there is a working collision detection system-->
 		<drawBounds>0</drawBounds>
 	</collisions>

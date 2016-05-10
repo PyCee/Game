@@ -48,7 +48,7 @@ void callbackControllerElement(callbackController *call, void *poi, unsigned cha
 				call->_int[index] = *(int *)(poi + sizeof(int) * index);
 			break;
 		case CALLBACK_CHAR:
-			call->numChar = num;
+			call->numUChar = num;
 			call->_uchar = malloc(sizeof(unsigned char) * num);
 			for(index = 0; index < num; index++)
 				call->_uchar[index] = *(unsigned char *)(poi + sizeof(unsigned char) * index);

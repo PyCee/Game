@@ -20,7 +20,7 @@ float magnitudeVec3Sq(vec3);
 vec3 normalizeVec3(vec3);
 vec3 addVec3Vec3(vec3, vec3);
 vec3 subtractVec3Vec3(vec3, vec3);
-vec3 scaleVec3(vec3, float);
+vec3 scaleVec3(vec3, double);
 float dotProduct(vec3, vec3);
 vec3 crossProduct(vec3, vec3);
 

@@ -10,7 +10,6 @@ struct CallbackComponent **callback;
 struct AudioComponent **audio;
 struct DirectionComponent **direction;
 struct PhysicsComponent **physics;
-struct CollisionsComponent **collisions;
 struct AIComponent **ai;
 struct LightingComponent **lighting;
 struct ModelComponent **model;

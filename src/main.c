@@ -18,7 +18,6 @@
 #include "actorComponents/physicsComponent.h"
 #include "actorComponents/renderComponent.h"
 #include "actorComponents/directionComponent.h"
-#include "actorComponents/collisionsComponent.h"
 #include "actorComponents/callbackComponent.h"
 #include "math/angles.h"
 #include "math/quaternion.h"
@@ -29,6 +28,7 @@
 #include "SOIL/SOIL.h"
 #include "actorComponents/physics/capsule.h"
 #include "actorComponents/physics/sphere.h"
+#include "actorComponents/physics/collisionController.h"
 #include "actorComponents/callback/callbackController.h"
 #include "actorComponents/callback/timeout.h"
 #include "actorComponents/callback/nearTest.h"
@@ -119,8 +119,12 @@ int main(int argc, char *argv[])
 	
 	printf("Main Initialized.\nMain Loop Starting.\n");
 	
+	float averageFrameMS = 1/60;
+	float runningAverageMod = 0.6;
+	
 	unsigned char gameState = ACT;
-	while( IAMALIVE == 1 ) {
+	while(IAMALIVE == 1){
+		averageFrameMS = averageFrameMS * runningAverageMod + getPrevFrameDuration(*getGlobalTimeline()) * (1.0 - runningAverageMod);
 		SDL_GL_SwapWindow(gameWindow);
 		
 		SDL_Delay(16);
@@ -140,8 +144,8 @@ int main(int argc, char *argv[])
 			vec3 terPos = *POSITION;
 			if( collision == 1){
 				bindActor(getMapTerrain());
-				if(proPos.vec[1] < terPos.vec[1] + getHeight()){
-					float terHeight = getHeight();
+				if(proPos.vec[1] < terPos.vec[1] + HEIGHT){
+					float terHeight = HEIGHT;
 					bindActor(pro);
 					POSITION->vec[1] = terPos.vec[1] + terHeight;
 					VELOCITY->vec[1] = 0.0;
@@ -171,5 +175,8 @@ int main(int argc, char *argv[])
 	BGMusic = NULL;
 	Mix_Quit();
 	SDL_Quit();
+	printf("Average frame duration = %fms\nAverage FPS = %f frames/second\n", averageFrameMS, 1000 / averageFrameMS);
 	printf("%s Ended.\n", PROGRAM_NAME);
+	
+	
 }

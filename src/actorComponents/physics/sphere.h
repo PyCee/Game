@@ -2,14 +2,11 @@
 #ifndef SPHERE
 #define SPHERE
 
-typedef struct sphere{
-	struct vec3 *point;
-	float radius;
-} sphere;
+struct vec3;
+struct  collisionController;
 
-sphere genSphere(struct vec3 *, float);
-void freeSphere(sphere *);
+struct collisionController genSphere(struct vec3 *, float);
 
-unsigned char collisionSphereSphere(sphere, sphere);
+unsigned char collisionSphereSphere(struct collisionController, struct collisionController);
 
 #endif /* SPHERE */

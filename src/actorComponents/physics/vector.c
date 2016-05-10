@@ -55,7 +55,7 @@ vec3 subtractVec3Vec3(vec3 vecOne, vec3 vecTwo)
 {
 	return addVec3Vec3(vecOne, scaleVec3(vecTwo, -1));
 }
-vec3 scaleVec3(vec3 vector, float scale)
+vec3 scaleVec3(vec3 vector, double scale)
 {
 	return genVec3(vector.vec[0] * scale, vector.vec[1] * scale, vector.vec[2] * scale);
 }

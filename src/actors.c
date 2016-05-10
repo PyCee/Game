@@ -14,7 +14,6 @@
 #include "actorComponents/audioComponent.h"
 #include "actorComponents/directionComponent.h"
 #include "actorComponents/physicsComponent.h"
-#include "actorComponents/collisionsComponent.h"
 #include "actorComponents/AIComponent.h"
 #include "actorComponents/lightingComponent.h"
 #include "actorComponents/modelComponent.h"
@@ -53,7 +52,6 @@ unsigned char addActor(void)
 		audio = malloc(sizeof(AudioComponent *));
 		direction = malloc(sizeof(DirectionComponent *));
 		physics = malloc(sizeof(PhysicsComponent *));
-		collisions = malloc(sizeof(CollisionsComponent *));
 		ai = malloc(sizeof(AIComponent *));
 		lighting = malloc(sizeof(LightingComponent *));
 		model = malloc(sizeof(ModelComponent *));
@@ -67,7 +65,6 @@ unsigned char addActor(void)
 		audio = realloc(audio, sizeof(AudioComponent *) * numActors);
 		direction = realloc(direction, sizeof(DirectionComponent *) * numActors);
 		physics = realloc(physics, sizeof(PhysicsComponent *) * numActors);
-		collisions = realloc(collisions, sizeof(CollisionsComponent *) * numActors);
 		ai = realloc(ai, sizeof(AIComponent *));
 		lighting = realloc(lighting, sizeof(LightingComponent *) * numActors);
 		model = realloc(model, sizeof(ModelComponent *) * numActors);
@@ -80,7 +77,6 @@ unsigned char addActor(void)
 	audio[next] = malloc(sizeof(AudioComponent));
 	direction[next] = malloc(sizeof(DirectionComponent));
 	physics[next] = malloc(sizeof(PhysicsComponent));
-	collisions[next] = malloc(sizeof(CollisionsComponent));
 	ai[next] = malloc(sizeof(AIComponent));
 	lighting[next] = malloc(sizeof(LightingComponent));
 	model[next] = malloc(sizeof(ModelComponent));
@@ -99,7 +95,6 @@ static void genActor(void)
 	genAudioComponent();
 	genDirectionComponent();
 	genPhysicsComponent();
-	genCollisionsComponent();
 	genAIComponent();
 	genLightingComponent();
 	genRenderComponent();
@@ -113,7 +108,6 @@ void freeActor(void)
 	freeModelComponent();
 	freeLightingComponent();
 	freeAIComponent();
-	freeCollisionsComponent();
 	freePhysicsComponent();
 	freeDirectionComponent();
 	freeAudioComponent();
@@ -123,7 +117,8 @@ void freeActor(void)
 	identifier[getActor()] = 0;
 	printf("Freed Actor %d\n", getActor());
 }
-void freeAllActors(void) {
+void freeAllActors(void)
+{
 	unsigned char actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -131,9 +126,10 @@ void freeAllActors(void) {
 			freeActor();
 		actorID++;
 	}
-	printf("Freed %i \n", numActors);
+	printf("Freed %i Actors\n", numActors);
 }
-void updateActors(void) {
+void updateActors(void)
+{
 	unsigned char actorID = 0;
 	unsigned short localTime[numActors];
 	while (actorID < numActors) {
@@ -178,15 +174,7 @@ void updateActors(void) {
 		}
 		actorID++;
 	}
-	printf("Batch: \"Physics\" Updated\nUpdating Batch: \"Collisions\"\n");
-	actorID = 0;
-	while (actorID < numActors) {
-		bindActor(actorID);
-		if (identifier[getActor()])
-			updateCollisionsComponent(localTime[actorID]);
-		actorID++;
-	}
-	printf("Batch: \"Collisions\" Updated\nUpdating Batch: \"AI\"\n");
+	printf("Batch: \"Physics\" Updated\nUpdating Batch: \"AI\"\n");
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -212,10 +200,7 @@ void updateActors(void) {
 	}
 	printf("All Batches Updated\n");
 }
-void UselessFunction
-(void)
-{
-}
+void UselessFunction(void){}
 void toggleAllPause(void)
 {
 	printf("Toggle pause called.\n");

@@ -2,14 +2,10 @@
 #ifndef CAPSULE
 #define CAPSULE
 
-typedef struct capsule{
-	struct vec3 *point[2];
-	float radius;
-} capsule;
+struct vec3;
+struct collisionController;
 
-capsule genCapsule(struct vec3 *, struct vec3 *, float);
-void freeCap(capsule *);
-
-unsigned char collisionCapsuleCapsule(capsule, capsule);
+struct collisionController genCapsule(struct vec3 *, struct vec3 *, float);
+unsigned char collisionCapsuleCapsule(struct collisionController, struct collisionController);
 
 #endif /* CAPSULE */
