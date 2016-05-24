@@ -175,11 +175,11 @@ void handleEvents(void)
 				//float pitch = -1 * event.motion.yrel * 10 * MouseSensitivity / 256;
 				
 				bindActor(getCameraView());
-				DirectionYaw(1 * event.motion.xrel * 10 * MouseSensitivity / 256);
-				DirectionPitch(1 * event.motion.yrel * 10 * MouseSensitivity / 256);
+				DirectionYaw(-1.0 * event.motion.xrel * 10 * MouseSensitivity / 256);
+				DirectionPitch(-1.0 * event.motion.yrel * 10 * MouseSensitivity / 256);
 				bindActor(getControlledActor());
-				DirectionYaw(1 * event.motion.xrel * 10 * MouseSensitivity / 256);
-				DirectionPitch(1 * event.motion.yrel * 10 * MouseSensitivity / 256);
+				DirectionYaw(-1.0 * event.motion.xrel * 10 * MouseSensitivity / 256);
+				DirectionPitch(-1.0 * event.motion.yrel * 10 * MouseSensitivity / 256);
 				bindActor(0);
       				break;
 			default:

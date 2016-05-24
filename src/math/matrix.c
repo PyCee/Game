@@ -133,7 +133,7 @@ mat4 genTransformationMat4(vec3 forward, vec3 position)
 	around = normalizeVec3(around);
 	
 	mat4 Translate = genIdentityMat4();
-	Translate = translateMat4(Translate, scaleVec3(position, -2));
+	Translate = translateMat4(Translate, position);
 	mat4 Rotate = QuaternionToRotationMatrix(UnitQuaternion(around, angle));
 	
 	return mat4Product(Rotate, Translate);

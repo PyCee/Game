@@ -1,7 +1,7 @@
 #include "callbackComponent.h"
 #include "callback/callbackController.h"
 #include "callback/timeout.h"
-#include "callback/nearTest.h"
+#include "callback/distanceCheck.h"
 #include "../actors.h"
 #include <stdlib.h>
 #include <stdio.h>

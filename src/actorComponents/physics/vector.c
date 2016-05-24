@@ -55,6 +55,12 @@ vec3 subtractVec3Vec3(vec3 vecOne, vec3 vecTwo)
 {
 	return addVec3Vec3(vecOne, scaleVec3(vecTwo, -1));
 }
+unsigned char cmpVec3Vec3(vec3 vecOne, vec3 vecTwo)
+{
+	return vecOne.vec[0] == vecTwo.vec[0] &&
+		vecOne.vec[1] == vecTwo.vec[1] &&
+		vecOne.vec[2] == vecTwo.vec[2];
+}
 vec3 scaleVec3(vec3 vector, double scale)
 {
 	return genVec3(vector.vec[0] * scale, vector.vec[1] * scale, vector.vec[2] * scale);
@@ -77,4 +83,82 @@ void printVec3(vec3 vec)
 void printVec4(vec4 vec)
 {
 	printf("[ %f, %f, %f, %f]\n", vec.vec[0], vec.vec[1], vec.vec[2], vec.vec[3]);
+}
+float leastDistPointLineSq(vec3 point, vec3 p1, vec3 p2)
+{
+	vec3 v = subtractVec3Vec3(p2, p1);
+	vec3 w = subtractVec3Vec3(point, p1);
+	
+	float c1 = dotProduct(w, v);
+	float c2 = dotProduct(v, v);
+	
+	float b = c1 / c2;
+	b = (b > 1) ? 1 : b;
+	b = (b < 0) ? 0 : b;
+	vec3 closePoint = addVec3Vec3(p1, scaleVec3(v, b));
+	return magnitudeVec3Sq(subtractVec3Vec3(point, closePoint));
+}
+float leastDistLineLineSq(vec3 p1, vec3 p2, vec3 l1, vec3 l2)
+{
+	vec3 u = subtractVec3Vec3(p2, p1);
+	vec3 v = subtractVec3Vec3(l2, l1);
+	vec3 w = subtractVec3Vec3(l1, p1);
+	float a = dotProduct(u, u);
+	float b = dotProduct(u, v);
+	float c = dotProduct(v, v);
+	float d = dotProduct(u, w);
+	float e = dotProduct(v, w);
+	float s, t;
+	float den = a * c - (b * b);
+	if(den == 0){
+		s = 0;
+		t = d / b;// or = e / c;
+	} else{
+		s = (b * e - c * d) / den;
+		s *= (s < 0) ? -1: 1;
+		t = (a * e - b * d) / den;
+	}
+	t *= (t < 0) ? -1: 1;
+	vec3 base = subtractVec3Vec3(p1, l1);
+	vec3 change = subtractVec3Vec3(scaleVec3(u, s), scaleVec3(v, t));
+	
+	vec3 difference = addVec3Vec3(base, change);
+	return magnitudeVec3Sq(difference);
+}
+float closestPointLinePoint(vec3 p1, vec3 p2, vec3 point)
+{
+	vec3 v = subtractVec3Vec3(p2, p1);
+	vec3 w = subtractVec3Vec3(point, p1);
+	
+	float c1 = dotProduct(w, v);
+	float c2 = dotProduct(v, v);
+	
+	float b = c1 / c2;
+	b = (b > 1) ? 1 : b;
+	b = (b < 0) ? 0 : b;
+	return b;
+}
+float *closestPointsLineLine(vec3 p1, vec3 p2, vec3 l1, vec3 l2)
+{
+	vec3 u = subtractVec3Vec3(p2, p1);
+	vec3 v = subtractVec3Vec3(l2, l1);
+	vec3 w = subtractVec3Vec3(l1, p1);
+	float a = dotProduct(u, u);
+	float b = dotProduct(u, v);
+	float c = dotProduct(v, v);
+	float d = dotProduct(u, w);
+	float e = dotProduct(v, w);
+	static float points[2];
+	float den = a * c - (b * b);
+	if(den == 0){
+		points[0] = 0;
+		points[1] = d / b;// or = e / c;
+	} else{
+		points[0] = (b * e - c * d) / den;
+		points[0] *= (points[0] < 0) ? -1: 1;
+		points[1] = (a * e - b * d) / den;
+	}
+	points[1] *= (points[1] < 0) ? -1: 1;
+	
+	return points;
 }

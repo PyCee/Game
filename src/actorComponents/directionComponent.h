@@ -2,6 +2,7 @@
 #define _DIRECTION_COMPONENT_
 
 #define FORWARDROTATION direction[getActor()]->forwardRotation
+#define INVERSEFORWARDROTATION direction[getActor()]->inverseForwardRotation
 #define FORWARD direction[getActor()]->forward
 #define VIEW_TARGET direction[getActor()]->target
 #define DIR_ROTATE direction[getActor()]->rotate
@@ -31,7 +32,7 @@
 
 
 typedef struct DirectionComponent {
-	struct vec4 *forwardRotation;
+	struct vec4 *forwardRotation, *inverseForwardRotation;
 	struct vec3 *forward;
 	struct vec3 *target;
 	struct rotationController *rotate, *deltaRotate;
@@ -44,6 +45,7 @@ struct vec3 *XAxis;
 struct vec3 *YAxis;
 struct vec3 *ZAxis;
 struct vec3 *negZAxis;
+struct vec4 *noRotationVec4;
 
 void initDirections(void);
 void genDirectionComponent();

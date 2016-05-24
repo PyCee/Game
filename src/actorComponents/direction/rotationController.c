@@ -30,7 +30,7 @@ rotationController getRotationToVec3(vec3 *pos)
 		rot.yaw = RadiansToDegrees(rot.yaw);
 		while(rot.yaw > 180)
 			rot.yaw -= 360;
-		if(POSITION->vec[0] > pos->vec[0])
+		if(POSITION->vec[0] < pos->vec[0])
 			rot.yaw *= -1.0;
 	}
 	if(difference.vec[1] == 0){
@@ -46,7 +46,7 @@ rotationController getRotationToVec3(vec3 *pos)
 			rot.pitch -= 90;
 		while(rot.pitch < -1.0 * 90)
 			rot.pitch += 90;
-		if(POSITION->vec[1] < pos->vec[1])
+		if(POSITION->vec[1] > pos->vec[1])
 			rot.pitch *= -1.0;
 	}
 	rot.roll = 0;

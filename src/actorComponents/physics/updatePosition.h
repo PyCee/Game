@@ -1,7 +1,6 @@
-
-#ifndef _UPDATE_POSITION_
-#define _UPDATE_POSITION_
+#ifndef UPDATE_POSITION
+#define UPDATE_POSITION
 
 void updatePosition(unsigned short);
 
-#endif /* _UPDATE_POSITION_ */
+#endif /* UPDATE_POSITION */

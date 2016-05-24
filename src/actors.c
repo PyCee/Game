@@ -27,7 +27,9 @@ void initActorComponents(void)
 {
 	initDirectionComponent();
 	initRender();
+	initPhysics();
 	allActorsPaused = 0;
+	numActors = 0;
 }
 static unsigned char nextFreeActor(void)
 {
@@ -42,6 +44,7 @@ static unsigned char nextFreeActor(void)
 }
 unsigned char addActor(void)
 {
+	printf("addActor: %d\n", numActors);
 	unsigned char next;
 	if(numActors == 0){
 		numActors = 1;
@@ -138,6 +141,7 @@ void updateActors(void)
 			localTime[getActor()] = updateTimelineComponent();
 		actorID++;
 	}
+	unsigned short deltaTime = SDL_GetTicks();
 	printf("Updating Batch: \"Callback\"\n");
 	actorID = 0;
 	while (actorID < numActors) {
@@ -146,7 +150,8 @@ void updateActors(void)
 			updateCallbackComponent(localTime[actorID]);
 		actorID++;
 	}
-	printf("Batch: \"Callback\" Updated\nUpdating Batch: \"Audio\"\n");
+	printf("Batch: \"Callback\" Updated. Took %hu milliseconds\nUpdating Batch: \"Audio\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -154,7 +159,8 @@ void updateActors(void)
 			updateAudioComponent(localTime[actorID]);
 		actorID++;
 	}
-	printf("Batch: \"Audio\" Updated\nUpdating Batch: \"Direction\"\n");
+	printf("Batch: \"Audio\" Updated. Took %hu milliseconds\nUpdating Batch: \"Direction\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -163,7 +169,8 @@ void updateActors(void)
 		}
 		actorID++;
 	}
-	printf("Batch: \"Direction\" Updated\nUpdating Batch: \"Physics\"\n");
+	printf("Batch: \"Direction\" Updated. Took %hu milliseconds\nUpdating Batch: \"Physics\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -174,7 +181,8 @@ void updateActors(void)
 		}
 		actorID++;
 	}
-	printf("Batch: \"Physics\" Updated\nUpdating Batch: \"AI\"\n");
+	printf("Batch: \"Physics\" Updated. Took %hu milliseconds\nUpdating Batch: \"AI\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -182,7 +190,8 @@ void updateActors(void)
 			updateAIComponent(localTime[actorID]);
 		actorID++;
 	}
-	printf("Batch: \"AI\" Updated\nUpdating Batch: \"Lighting\"\n");
+	printf("Batch: \"AI\" Updated. Took %hu milliseconds\nUpdating Batch: \"Lighting\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -190,7 +199,8 @@ void updateActors(void)
 			updateLightingComponent(localTime[actorID]);
 		actorID++;
 	}
-	printf("Batch: \"Lighting\" Updated\nUpdating Batch: \"Rendering\"\n");
+	printf("Batch: \"Lighting\" Updated. Took %hu milliseconds\nUpdating Batch: \"Rendering\"\n", SDL_GetTicks() - deltaTime);
+	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	while (actorID < numActors) {
 		bindActor(actorID);
@@ -198,7 +208,7 @@ void updateActors(void)
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
 	}
-	printf("All Batches Updated\n");
+	printf("Batch: \"Rendering\" Updated. Took %hu milliseconds\nAll Batches Updated\n", SDL_GetTicks() - deltaTime);
 }
 void UselessFunction(void){}
 void toggleAllPause(void)

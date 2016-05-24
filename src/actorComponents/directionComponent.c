@@ -22,29 +22,33 @@ void initDirectionComponent(void)
 	YAxis = malloc(sizeof(vec3));
 	ZAxis = malloc(sizeof(vec3));
 	negZAxis = malloc(sizeof(vec3));
+	noRotationVec4 = malloc(sizeof(vec4));
 	
 	i = genVec3(1.0, 0.0, 0.0);
 	j = genVec3(0.0, 1.0, 0.0);
 	k = genVec3(0.0, 0.0, 1.0);
 	nk = genVec3(0.0, 0.0, -1.0);
+	*noRotationVec4 = UnitQuaternion(genVec3(0.0, 0.0, -1.0), 0.0);
 }
 void genDirectionComponent(void)
 {
 	FORWARD = malloc(sizeof(vec3));
 	FORWARDROTATION = malloc(sizeof(vec4));
+	INVERSEFORWARDROTATION = malloc(sizeof(vec4));
 	*FORWARD = genVec3(0, 0, -1);
 	*FORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
+	*INVERSEFORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
 	
 	DIR_ROTATE = malloc(sizeof(rotationController));
 	DIR_DELTA_ROTATE = malloc(sizeof(rotationController));
 	
-	YAW = 0;
-	PITCH = 20;
-	ROLL = 0;
-	DELTA_YAW = 0;
-	DELTA_PITCH = 0;
-	DELTA_ROLL = 0;
-	PAN_TIME = 0;
+	YAW = 0.0;
+	PITCH = 0.0;
+	ROLL = 0.0;
+	DELTA_YAW = 0.0;
+	DELTA_PITCH = 0.0;
+	DELTA_ROLL = 0.0;
+	PAN_TIME = 0.0;
 	setViewState(VIEWSTATE_FREE_ROAM);
 }
 void freeDirectionComponent(void)
@@ -81,22 +85,23 @@ void updateDirectionComponent(unsigned short deltaMS)
 	}
 	while(DELTA_YAW > 180)
 		DELTA_YAW = 360 - DELTA_YAW;
-		
 	YAW += DELTA_YAW * deltaMS;
 	PITCH += DELTA_PITCH * deltaMS;
 	ROLL += DELTA_ROLL * deltaMS;
-	
-	*FORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
-	*FORWARDROTATION = QuatMultiply(UnitQuaternion(j, -1 * YAW), *FORWARDROTATION);
-	*FORWARDROTATION = QuatMultiply(UnitQuaternion(i, -1 * PITCH), *FORWARDROTATION);
-	*FORWARDROTATION = QuatMultiply(UnitQuaternion(k, -1 * ROLL), *FORWARDROTATION);
-	
-	*FORWARD = applyRotationQuaternion(genVec3(0.0, 0.0, -1.0), *FORWARDROTATION);
+	ROLL = 0;
 	
 	*FORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
 	*FORWARDROTATION = QuatMultiply(UnitQuaternion(j, 1 * YAW), *FORWARDROTATION);
 	*FORWARDROTATION = QuatMultiply(UnitQuaternion(i, 1 * PITCH), *FORWARDROTATION);
 	*FORWARDROTATION = QuatMultiply(UnitQuaternion(k, 1 * ROLL), *FORWARDROTATION);
+	
+	*FORWARD = applyRotationQuaternion(genVec3(0.0, 0.0, -1.0), *FORWARDROTATION);
+	
+	*INVERSEFORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
+	*INVERSEFORWARDROTATION = QuatMultiply(UnitQuaternion(j, -1 * YAW), *INVERSEFORWARDROTATION);
+	*INVERSEFORWARDROTATION = QuatMultiply(UnitQuaternion(i, -1 * PITCH), *INVERSEFORWARDROTATION);
+	*INVERSEFORWARDROTATION = QuatMultiply(UnitQuaternion(k, -1 * ROLL), *INVERSEFORWARDROTATION);
+	
 }
 void DirectionYaw(float degrees)
 {
@@ -127,9 +132,7 @@ void setViewState(unsigned char state)
 			DELTA_PAN_PROGRESS = 0;
 			break;
 	}
-	
 	VIEWSTATE = state;
-	
 	switch(VIEWSTATE){
 		case VIEWSTATE_FREE_ROAM:
 			break;
@@ -157,4 +160,5 @@ void panView(void)
 	DELTA_YAW = deltaYaw / (panTimeRemaining * 1000);
 	DELTA_PITCH = (rot.pitch - PITCH) / (panTimeRemaining * 1000);
 	DELTA_ROLL = (rot.roll - ROLL) / (panTimeRemaining * 1000);
+	ROLL = 0;
 }

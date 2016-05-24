@@ -10,8 +10,8 @@
 	<physics>
 		<mass>1</mass>
 		<speed>2.24</speed>
-		<speed_side>0.8</speed_side>
-		<speed_back>0.6</speed_back>
+		<speed_side>0.9</speed_side>
+		<speed_back>0.8</speed_back>
 	</physics>
 	<collisions>
 		<height>0.5</height>

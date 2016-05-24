@@ -26,17 +26,21 @@
 #include "fileSupport/XML.h"
 #include "loadActorData.h"
 #include "SOIL/SOIL.h"
-#include "actorComponents/physics/capsule.h"
-#include "actorComponents/physics/sphere.h"
 #include "actorComponents/physics/collisionController.h"
+#include "actorComponents/physics/collisionTypes/collisionCapsule.h"
+#include "actorComponents/physics/collisionTypes/collisionSphere.h"
+#include "actorComponents/physics/collisionTypes/collisionOBox.h"
+#include "actorComponents/physics/collisionTypes/collisionAABox.h"
+#include "actorComponents/physics/collisionTypes/collisionCylinder.h"
+#include "actorComponents/physics/collisionTypes/collisionPoint.h"
 #include "actorComponents/callback/callbackController.h"
 #include "actorComponents/callback/timeout.h"
-#include "actorComponents/callback/nearTest.h"
+#include "actorComponents/callback/distanceCheck.h"
 #include "actorComponents/callback/endGame.h"
 
 #define PROGRAM_NAME "LDM"
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 450
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 650
 #define MAX_LIFE_TIME 60
 #define MAX_LIFE_TIME_MS 1000 * MAX_LIFE_TIME
 
@@ -71,12 +75,11 @@ int main(int argc, char *argv[])
 	DefaultKeyboard();
 	initActorComponents();
 	genFrustum();
+	loadQuests("asd");//TODO replace with actual save-file selecting.
 	
 	globalTimeline gTime;
 	gTime = genGlobalTimeline();
 	bindGlobalTimeline(&gTime);
-	
-	printf("IAMALIVE: %d\n", IAMALIVE);
 	
 	unsigned char ter = addActor();
 	loadActorData("actors/arena.xml");
@@ -84,7 +87,7 @@ int main(int argc, char *argv[])
 	
 	unsigned char pro = addActor();
 	loadActorData("actors/actor.xml");
-	*POSITION = genVec3(0.0, 0.9, -1 * 2.0);
+	*POSITION = genVec3(0.0, 2.0, -1 * 2.0);
 	
 	callbackController *timeoutGame = malloc(sizeof(callbackController));
 	*timeoutGame = genTimeout(endGame, MAX_LIFE_TIME_MS);
@@ -105,7 +108,7 @@ int main(int argc, char *argv[])
 	vec3 *pos = POSITION;
 	bindActor(getControlledActor());
 	callbackController *test = malloc(sizeof(callbackController));
-	*test = genNearTest(endGame, 1.5, pos);
+	*test = genDistanceCheck(endGame, 1.5, pos);
 	enableCallbackController(test);
 	
 	Mix_Music *BGMusic = NULL;
@@ -178,5 +181,18 @@ int main(int argc, char *argv[])
 	printf("Average frame duration = %fms\nAverage FPS = %f frames/second\n", averageFrameMS, 1000 / averageFrameMS);
 	printf("%s Ended.\n", PROGRAM_NAME);
 	
+	
+	vec3 *p1 = malloc(sizeof(vec3));
+	vec3 *p2 = malloc(sizeof(vec3));
+	vec3 *p3 = malloc(sizeof(vec3));
+	*p1 = genVec3(0.0, 0.0, 0.0);
+	*p2 = genVec3(0.0, 5.0, 0.0);
+	*p3 = genVec3(0.1, 4.01, 0.01);
+	
+	
+	collisionController cyl = genCollisionCylinder(p1, p2, 1);
+	collisionController poi = genCollisionPoint(p3);
+	
+	printf("collide = %hhu\n", collisionCylinderPoint(cyl, poi));
 	
 }

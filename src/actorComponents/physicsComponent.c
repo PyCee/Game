@@ -9,11 +9,48 @@
 #include "physics/applyImpulses.h"
 #include "physics/updatePosition.h"
 #include "physics/physicsAttributeController.h"
+#include "physics/collisionTypes/collisionSphere.h"
+#include "physics/collisionTypes/collisionCapsule.h"
+#include "physics/collisionTypes/collisionOBox.h"
+#include "physics/collisionTypes/collisionAABox.h"
+#include "physics/collisionTypes/collisionPoint.h"
+#include "physics/collisionTypes/collisionCylinder.h"
+#include "physics/collisionController.h"
 #include "physics/vector.h"
 #include "../math/quaternion.h"
 #include "../math/matrix.h"
 #include "directionComponent.h"
 
+unsigned char (*collisionTable[COLLISION_TABLE_SIZE][COLLISION_TABLE_SIZE])(struct collisionController, struct collisionController);
+
+void initPhysics(void)
+{
+	collisionTable[COLLISION_TYPE_CAPSULE][COLLISION_TYPE_CAPSULE] = collisionCapsuleCapsule;
+	collisionTable[COLLISION_TYPE_CAPSULE][COLLISION_TYPE_SPHERE] = collisionCapsuleSphere;
+	collisionTable[COLLISION_TYPE_CAPSULE][COLLISION_TYPE_AABOX] = collisionCapsuleAABox;
+	collisionTable[COLLISION_TYPE_CAPSULE][COLLISION_TYPE_POINT] = collisionCapsulePoint;
+	collisionTable[COLLISION_TYPE_CAPSULE][COLLISION_TYPE_CYLINDER] = collisionCapsuleCylinder;
+	collisionTable[COLLISION_TYPE_SPHERE][COLLISION_TYPE_SPHERE] = collisionSphereSphere;
+	collisionTable[COLLISION_TYPE_SPHERE][COLLISION_TYPE_CAPSULE] = collisionSphereCapsule;
+	collisionTable[COLLISION_TYPE_SPHERE][COLLISION_TYPE_AABOX] = collisionSphereAABox;
+	collisionTable[COLLISION_TYPE_SPHERE][COLLISION_TYPE_POINT] = collisionSpherePoint;
+	collisionTable[COLLISION_TYPE_SPHERE][COLLISION_TYPE_CYLINDER] = collisionSphereCylinder;
+	collisionTable[COLLISION_TYPE_AABOX][COLLISION_TYPE_AABOX] = collisionAABoxAABox;
+	collisionTable[COLLISION_TYPE_AABOX][COLLISION_TYPE_SPHERE] = collisionAABoxSphere;
+	collisionTable[COLLISION_TYPE_AABOX][COLLISION_TYPE_CAPSULE] = collisionAABoxCapsule;
+	collisionTable[COLLISION_TYPE_AABOX][COLLISION_TYPE_POINT] = collisionAABoxPoint;
+	collisionTable[COLLISION_TYPE_AABOX][COLLISION_TYPE_CYLINDER] = collisionAABoxCylinder;
+	collisionTable[COLLISION_TYPE_POINT][COLLISION_TYPE_AABOX] = collisionPointAABox;
+	collisionTable[COLLISION_TYPE_POINT][COLLISION_TYPE_SPHERE] = collisionPointSphere;
+	collisionTable[COLLISION_TYPE_POINT][COLLISION_TYPE_CAPSULE] = collisionPointCapsule;
+	collisionTable[COLLISION_TYPE_POINT][COLLISION_TYPE_POINT] = collisionPointPoint;
+	collisionTable[COLLISION_TYPE_POINT][COLLISION_TYPE_CYLINDER] = collisionPointCylinder;
+	collisionTable[COLLISION_TYPE_CYLINDER][COLLISION_TYPE_AABOX] = collisionCylinderAABox;
+	collisionTable[COLLISION_TYPE_CYLINDER][COLLISION_TYPE_SPHERE] = collisionCylinderSphere;
+	collisionTable[COLLISION_TYPE_CYLINDER][COLLISION_TYPE_CAPSULE] = collisionCylinderCapsule;
+	collisionTable[COLLISION_TYPE_CYLINDER][COLLISION_TYPE_POINT] = collisionCylinderPoint;
+	collisionTable[COLLISION_TYPE_CYLINDER][COLLISION_TYPE_CYLINDER] = collisionCylinderCylinder;
+}
 void genPhysicsComponent()
 {
 	POS = malloc(sizeof(physicsAttributeController));
@@ -25,14 +62,14 @@ void genPhysicsComponent()
 	JRK = malloc(sizeof(physicsAttributeController));
 	*JRK = genPhysicsAttributeController(JRK_ATTRIBUTES);
 	
+	MOVEMENT = malloc(sizeof(vec3));
+	*MOVEMENT = genVec3(0.0, 0.0, 0.0);
 	PREVIOUSPOSITION = malloc(sizeof(vec3));
 	*PREVIOUSPOSITION = *POSITION;
 	
 	GRAVITY = malloc(sizeof(vec3));
 	*GRAVITY = genVec3(0.0, -1 * ACC_GRAVITY, 0.0);
-	vec4 *noRotation = malloc(sizeof(vec4));
-	*noRotation = UnitQuaternion(genVec3(0, 0, -1.0), 0);
-	bindPhysicsAttribute(ACC, GRAVITY, 1,  noRotation);
+	bindPhysicsAttribute(ACC, GRAVITY, 1,  noRotationVec4);
 	SPEED = 0.0;
 	SPEED_SIDE = 0.9;
 	SPEED_BACK = 0.5;
@@ -56,11 +93,10 @@ void updatePhysicsComponent(unsigned short deltaMS)
 {
 	applyPhysicsImpulses();
 	updatePosition(deltaMS);
+	//TODO: collision detection.
+	//TODO: collision response.
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
-	//float Xsq = pow( POSX(getActor()) - POSX(actorID), 2);
-	//float Zsq = pow( POSZ(getActor()) - POSZ(actorID), 2);
-	//float distanceSq = Xsq + Zsq;
 	unsigned char prevID = getActor();
 	vec3 actOnePos = *POSITION;
 	float actOneWidth = WIDTH;
@@ -78,4 +114,8 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 		collide = 0;// Bounding Boxes Not Overlapping
 	bindActor(prevID);
 	return collide;
+}
+unsigned char testCollision(collisionController col1, collisionController col2)
+{
+	return collisionTable[col1.collisionObjectType][col2.collisionObjectType](col1, col2);
 }

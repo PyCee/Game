@@ -9,7 +9,7 @@
 
 void updatePosition(unsigned short deltaMS)
 {
-	double deltaS = (double)deltaMS / 1000;
+	double deltaS = (double)deltaMS / 1000.0;
 	unsigned char index;
 	vec3 change;
 	for(index = 0; index < JRK_ATTRIBUTES; index++){
@@ -24,6 +24,7 @@ void updatePosition(unsigned short deltaMS)
 			*VELOCITY = addVec3Vec3(*VELOCITY, scaleVec3(change, ACC->multiplier[index] * deltaS));
 		}
 	}
+	*MOVEMENT = subtractVec3Vec3(*POSITION, *PREVIOUSPOSITION);
 	*PREVIOUSPOSITION = *POSITION;
 	for(index = 0; index < VEL_ATTRIBUTES; index++){
 		if(VEL->active[index]){

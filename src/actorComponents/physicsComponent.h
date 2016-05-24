@@ -18,6 +18,7 @@
 #define VELOCITY VEL->attribute[0]
 #define ACCELERATION ACC->attribute[0]
 #define JERK JRK->attribute[0]
+#define MOVEMENT PHYSICS.movement
 #define PREVIOUSPOSITION PHYSICS.prevPos
 #define SPEED PHYSICS.speed
 #define SPEED_SIDE PHYSICS.sideSpeed
@@ -28,10 +29,13 @@
 #define WIDTH PHYSICS.width
 #define DRAW_BOUNDS PHYSICS.drawBounds
 
+#define COLLISION_TABLE_SIZE 5
+
+struct collisionController;
+
 typedef struct PhysicsComponent {
 	struct physicsAttributeController *pos, *vel, *acc, *jrk;
-	struct vec3 *prevPos;
-	struct vec3 *Gravity; // Allows for altered gravity
+	struct vec3 *movement, *prevPos, *Gravity; // Allows for altered gravity
 	float speed, sideSpeed, backSpeed;
 	
 	
@@ -39,13 +43,16 @@ typedef struct PhysicsComponent {
 	float width;
 	unsigned char drawBounds;
 	
-	
 	unsigned short mass; // Measured in Grams
 } PhysicsComponent;
 
+extern unsigned char (*collisionTable[COLLISION_TABLE_SIZE][COLLISION_TABLE_SIZE])(struct collisionController, struct collisionController);
+
+void initPhysics(void);
 void genPhysicsComponent();
 void freePhysicsComponent();
 void updatePhysicsComponent(unsigned short);
 unsigned char CheckBoundingBoxCollision(unsigned char);
+unsigned char testCollision(struct collisionController, struct collisionController);
 
 #endif /* PHYSICS_COMPONENT */

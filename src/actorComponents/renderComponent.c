@@ -11,58 +11,53 @@
 #include "../math/matrix.h"
 #include "../math/quaternion.h"
 #include "physics/physicsAttributeController.h"
+#include "physics/vector.h"
 #include "directionComponent.h"
 #include "modelComponent.h"
 #include "physicsComponent.h"
 
 #include "../shaders/shaders.h"
 #define PImm 3.1415926535897932384
-void initRender(void) {
+void initRender(void)
+{
 	printf("Initializing Render.\n");
 	genShaders();
 
 	printf("Render Initialized.\n");
 }
-void genRenderComponent() {
-
+void genRenderComponent()
+{
 	SHOULD_RENDER = 1;
 }
-void freeRenderComponent() {
+void freeRenderComponent()
+{
 }
-void updateRenderComponent(unsigned short deltaMS) {
+void updateRenderComponent(unsigned short deltaMS)
+{
 	// TODO: more culling
-	if( SHOULD_RENDER == 0 ){ // I have chosen not to render this actor
+	if(SHOULD_RENDER == 0){
 		return;
 	}// culling done, something is to be rendered
 	
-	static unsigned short tlm = 0;
-	tlm += deltaMS/10;
-	while (tlm > 360)
-		tlm -= 360;
 	if (WorldSpaceLoc != -1) {
-		mat4 worldPlacement = genIdentityMat4();
-		if (getActor() == getControlledActor()) {
-
-			worldPlacement = QuaternionToRotationMatrix(UnitQuaternion(*FORWARD, 0));
-			//printMat4(worldPlacement);
-		}
-		worldPlacement = translateMat4(worldPlacement, *POSITION);
-		glUniformMatrix4fv(WorldSpaceLoc, 1, GL_TRUE,
-				&worldPlacement.mat[0][0]);
+		mat4 Translate = genIdentityMat4();
+		Translate = translateMat4(Translate, *POSITION);
+		mat4 Rotate = QuaternionToRotationMatrix(*FORWARDROTATION);
+		mat4 transformation = mat4Product(Translate, Rotate);
+		glUniformMatrix4fv(WorldSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
 	} else
 		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
 	if (DRAW_BOUNDS){// && getActor() != getControlledActor()) {
-		printf("Drawing Bounds for Actor %hhu\n", getActor());
+//		printf("Drawing Bounds for Actor %hhu\n", getActor());
 		
 		
-		printf("Bounds Drawn for Actor %hhu\n", getActor());
+//		printf("Bounds Drawn for Actor %hhu\n", getActor());
 		return;
 	}
-	// Draw model
-	printf("Drawing Model for Actor %hhu\n", getActor());
+//	printf("Drawing Model for Actor %hhu\n", getActor());
 	GLuint index;
 	for(index = 0; index < NUM_MESHES; index++){
-		//TODO: use textures
+		//TODO: use textures (correctly)
 		
 		glActiveTexture(GL_TEXTURE0);
 		glUniform1i(TextureLoc, 0);
@@ -72,7 +67,5 @@ void updateRenderComponent(unsigned short deltaMS) {
 		glDrawElements(GL_TRIANGLES, MESHES[index].numIndices, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
-	printf("Model Drawn for Actor %hhu\n", getActor());
-	
-	
+//	printf("Model Drawn for Actor %hhu\n", getActor());
 }

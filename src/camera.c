@@ -44,22 +44,6 @@ void UpdateCamera(unsigned short deltaMS)
 	vec3 protagPos = *POSITION;
 	bindActor(id);
 	*POSITION = protagPos;
-	printVec3(*POSITION);
-	//*FORWARD = genVec3(0.0, 0.0, 1.0);
-	
-	/*if(cameraPitch > 360)
-		cameraPitch -=360;
-	if(cameraYaw > 360)
-		cameraYaw -=360;
-	if(cameraRoll > 360)
-		cameraRoll -=360;
-	
-	if(cameraPitch < 0)
-		cameraPitch += 360;
-	if(cameraYaw < 0)
-		cameraYaw += 360;
-	if(cameraRoll < 0)
-		cameraRoll += 360;*/
 	
 	/*if(cameraPitch > 270 && cameraPitch < 315 )
 		cameraPitch = 315;
@@ -68,8 +52,8 @@ void UpdateCamera(unsigned short deltaMS)
 	*/
 	
 	mat4 Translate = genIdentityMat4();
-	Translate = translateMat4(Translate, scaleVec3(*POSITION, -2));
-	mat4 Rotate = QuaternionToRotationMatrix(*FORWARDROTATION);
+	Translate = translateMat4(Translate, scaleVec3(*POSITION, -1));
+	mat4 Rotate = QuaternionToRotationMatrix(*INVERSEFORWARDROTATION);
 	
 	mat4 transformation = mat4Product(Rotate, Translate);
 	

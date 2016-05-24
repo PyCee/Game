@@ -1,18 +1,19 @@
-#include "sphere.h"
+#include "collisionSphere.h"
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "collisionController.h"
+#include "../collisionController.h"
 
-#include "vector.h"
+#include "../vector.h"
 
-collisionController genSphere(vec3 *vec, float rad)
+collisionController genCollisionSphere(vec3 *vec, float rad)
 {
 	collisionController con;
 	vec3 *points[1] = {vec};
 	float radius[1] = {rad};
 	collisionControllerElement(&con, &points, 1, COLLISION_VEC3);
 	collisionControllerElement(&con, &radius, 1, COLLISION_FLOAT);
+	con.collisionObjectType = COLLISION_TYPE_SPHERE;
 	return con;
 }
 unsigned char collisionSphereSphere(collisionController sphOne, collisionController sphTwo)

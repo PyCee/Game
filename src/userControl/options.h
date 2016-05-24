@@ -13,8 +13,8 @@ Controls
 	-Lock Mouse
 **/
 
-#ifndef _OPTIONS_
-#define _OPTIONS_
+#ifndef OPTIONS
+#define OPTIONS
 
 #define CONFIG_PATH "../usrData/config.xml"
 #define DEFAULT_CONFIG_PATH "../usrData/defaultConfig.xml"
@@ -73,4 +73,4 @@ static unsigned char MouseLock = 1;
 #define MAX_MOUSE_LOCK 1
 #define MIN_MOUSE_LOCK 0
 
-#endif
+#endif /* OPTIONS */
