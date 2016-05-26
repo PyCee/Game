@@ -4,16 +4,16 @@
 #include "actorSelection.h"
 
 // Various Components used by every Actor
-struct IdentifierComponent **identifier;
-struct TimelineComponent **localTimeline;
-struct CallbackComponent **callback;
-struct AudioComponent **audio;
-struct DirectionComponent **direction;
-struct PhysicsComponent **physics;
-struct AIComponent **ai;
-struct LightingComponent **lighting;
-struct ModelComponent **model;
-struct RenderComponent **render;
+extern struct IdentifierComponent **identifier;
+extern struct TimelineComponent **localTimeline;
+extern struct CallbackComponent **callback;
+extern struct AudioComponent **audio;
+extern struct DirectionComponent **direction;
+extern struct PhysicsComponent **physics;
+extern struct AIComponent **ai;
+extern struct LightingComponent **lighting;
+extern struct ModelComponent **model;
+extern struct RenderComponent **render;
 
 extern unsigned char numActors;
 extern unsigned char allActorsPaused;

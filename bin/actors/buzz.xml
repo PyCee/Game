@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor>
+	<identifier>
+		<name>Buzz</name>
+		<type>dynamic</type>
+	</identifier>
+	<audio>
+		
+	</audio>
+	<physics>
+		<mass>1</mass>
+		<speed>1.75</speed>
+		<speed_side>0.9</speed_side>
+		<speed_back>0.8</speed_back>
+	</physics>
+	<collisions>
+		<height>0.5</height>
+		<width>0.025</width>
+		<radius>13</radius><!--To replace height and width once there is a working collision detection system-->
+		<drawBounds>0</drawBounds>
+	</collisions>
+	<AI>
+		<update>UpdateBuzz</update>
+	</AI>
+	<lighting>
+		
+	</lighting>
+	<model>
+		<mesh>models/buzz.dae</mesh>
+	</model>
+	<rendering>
+	</rendering>
+</actor>

@@ -97,7 +97,7 @@ void UnControlledActorRight(void)
 }
 void ToggleLockOn(void)
 {
-	bindActor(3);// TODO cl
+	bindActor(4);// TODO cl
 	vec3 *pos = POSITION;
 	bindActor(getControlledActor());
 	VIEW_TARGET = pos;

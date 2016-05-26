@@ -15,16 +15,19 @@
 #include "actorComponents/identifierComponent.h"
 #include "protag.h"
 #include "camera.h"
+#include "buzz.h"
 
 static const unsigned char *lookupUpdateFunctionsStr[] = {
 	"UselessUpdate",
 	"UpdateProtag",
-	"UpdateCamera"
+	"UpdateCamera",
+	"UpdateBuzz"
 };
 static void (*lookupUpdateFunctions[]) (unsigned short) = {
 	UselessUpdate,
 	UpdateProtag,
-	UpdateCamera
+	UpdateCamera,
+	UpdateBuzz
 };
 void loadActorData(unsigned char *loc)
 {

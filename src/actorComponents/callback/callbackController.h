@@ -23,7 +23,7 @@ typedef struct callbackController{
 
 callbackController genCallbackController(char (*)(callbackController), void (*)(callbackController));
 void freeCallbackController(callbackController *);
-void checkCallbackController(callbackController *);
+unsigned char checkCallbackController(callbackController *);
 void callbackControllerElement(callbackController *, void *, unsigned char, unsigned char);
 
 #endif /* CALLBACK */

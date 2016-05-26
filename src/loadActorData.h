@@ -1,6 +1,6 @@
-#ifndef _LOAD_ACTOR_DATA_
-#define _LOAD_ACTOR_DATA_
+#ifndef LOAD_ACTOR_DATA
+#define LOAD_ACTOR_DATA
 
 void loadActorData(unsigned char *);
 
-#endif /* _LOAD_ACTOR_DATA_ */
+#endif /* LOAD_ACTOR_DATA */

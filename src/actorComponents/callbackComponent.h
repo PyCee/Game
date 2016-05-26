@@ -14,5 +14,6 @@ void freeCallbackComponent(void);
 void updateCallbackComponent(unsigned short);
 unsigned char nextFreeCallbackController(void);
 void enableCallbackController(struct callbackController *);
+void disableCallbackController(unsigned char);
 
 #endif /* CALLBACK_COMPONENT */

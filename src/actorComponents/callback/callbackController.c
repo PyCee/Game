@@ -20,10 +20,13 @@ void freeCallbackController(callbackController *call)
 	call->shouldCallback = 0;
 	call->completeCallback = 0;
 }
-void checkCallbackController(callbackController *call)
+unsigned char checkCallbackController(callbackController *call)
 {
-	if(call->shouldCallback(*call))
+	if(call->shouldCallback(*call)){
 		call->completeCallback(*call);
+		return 1;
+	}
+	return 0;
 }
 void callbackControllerElement(callbackController *call, void *poi, unsigned char num, unsigned char type)
 {

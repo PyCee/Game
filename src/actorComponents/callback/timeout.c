@@ -7,6 +7,7 @@
 
 callbackController genTimeout(void (*complete)(callbackController), int time)
 {
+	printf("timeout gened\n\n\n\n");
 	callbackController call;
 	int times[1] = {time};
 	call = genCallbackController(shouldTimeout, complete);
@@ -20,5 +21,6 @@ char shouldTimeout(callbackController call)
 	call._int[TIMEOUT_REMAINING] -= getPrevFrameDuration(*getGlobalTimeline());
 	if(call._int[TIMEOUT_REMAINING] <= 0)
 		return 1;
+	printf("timeout: %d\n", call._int[TIMEOUT_REMAINING]);
 	return 0;
 }

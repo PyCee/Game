@@ -37,8 +37,8 @@ void genShaders(void)
 	if (Success == 0) {
 		GLchar ErrorLog[1024];
 		glGetProgramInfoLog(shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
-		
+		fprintf(stderr, "ERROR::linking shader program: '%s'\n", ErrorLog);
+		printf("Setting\n");
 		IAMALIVE = 0;
 	}
 	

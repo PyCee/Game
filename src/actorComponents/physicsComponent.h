@@ -18,7 +18,6 @@
 #define VELOCITY VEL->attribute[0]
 #define ACCELERATION ACC->attribute[0]
 #define JERK JRK->attribute[0]
-#define MOVEMENT PHYSICS.movement
 #define PREVIOUSPOSITION PHYSICS.prevPos
 #define SPEED PHYSICS.speed
 #define SPEED_SIDE PHYSICS.sideSpeed
@@ -35,9 +34,8 @@ struct collisionController;
 
 typedef struct PhysicsComponent {
 	struct physicsAttributeController *pos, *vel, *acc, *jrk;
-	struct vec3 *movement, *prevPos, *Gravity; // Allows for altered gravity
+	struct vec3 *prevPos, *Gravity; // Allows for altered gravity
 	float speed, sideSpeed, backSpeed;
-	
 	
 	float height;
 	float width;

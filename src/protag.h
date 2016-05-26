@@ -1,10 +1,7 @@
 
-#ifndef _PROTAG_
-#define _PROTAG_
-
-#include <stdint.h>
-
+#ifndef PROTAG
+#define PROTAG
 
 void UpdateProtag(unsigned short);
 
-#endif
+#endif /* PROTAG */

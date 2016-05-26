@@ -21,6 +21,19 @@
 
 unsigned char numActors;
 unsigned char allActorsPaused;
+
+
+IdentifierComponent **identifier;
+TimelineComponent **localTimeline;
+CallbackComponent **callback;
+AudioComponent **audio;
+DirectionComponent **direction;
+PhysicsComponent **physics;
+AIComponent **ai;
+LightingComponent **lighting;
+ModelComponent **model;
+RenderComponent **render;
+
 static void genActor(void);
 
 void initActorComponents(void)
