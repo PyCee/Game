@@ -19,6 +19,9 @@
 #include "actorComponents/modelComponent.h"
 #include "actorComponents/renderComponent.h"
 
+#include "actorComponents/physics/octree.h"
+#include "actorComponents/physics/checkOctree.h"
+
 unsigned char numActors;
 unsigned char allActorsPaused;
 
@@ -73,8 +76,8 @@ unsigned char addActor(void)
 		model = malloc(sizeof(ModelComponent *));
 		render = malloc(sizeof(RenderComponent *));
 	} else if(nextFreeActor() == numActors){
+		next = numActors;
 		numActors += 1;
-		next = numActors - 1;
 		identifier = realloc(identifier, sizeof(IdentifierComponent *) * numActors);
 		callback = realloc(callback, sizeof(CallbackComponent *) * numActors);
 		localTimeline = realloc(localTimeline, sizeof(TimelineComponent *) * numActors);
@@ -257,5 +260,6 @@ void printActor(void)
 	printVec3(*POSITION);
 	printf("Forward:");
 	printVec3(*FORWARD);
+	printf("Containing Octree ID: %hu\n", CONTAINING_OCTREE_NODE->octreeNodeID);
 	printf("Actor %hhu Finished Printing\n\n", getActor());
 }

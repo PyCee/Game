@@ -8,6 +8,8 @@
 #include <math.h>
 #include "physics/applyImpulses.h"
 #include "physics/updatePosition.h"
+#include "physics/octree.h"
+#include "physics/checkOctree.h"
 #include "physics/physicsAttributeController.h"
 #include "physics/collisionTypes/collisionSphere.h"
 #include "physics/collisionTypes/collisionCapsule.h"
@@ -77,6 +79,8 @@ void genPhysicsComponent()
 	HEIGHT = 1;
 	WIDTH = 1;
 	DRAW_BOUNDS = 1;
+	BOUNDING_BOX = 0;
+	CONTAINING_OCTREE_NODE = &globalOctree;
 }
 void freePhysicsComponent() {
 	freePhysicsAttributeController(POS);
@@ -95,6 +99,8 @@ void updatePhysicsComponent(unsigned short deltaMS)
 	updatePosition(deltaMS);
 	//TODO: collision detection.
 	//TODO: collision response.
+	if(getActor() == getControlledActor())
+		CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	unsigned char prevID = getActor();

@@ -1,9 +1,9 @@
 
 #include "terrain.h"
 
-#include "actors.h"
+#include "../actors.h"
 #include <stdio.h>
-#include "actorSelection.h"
+#include "../actorSelection.h"
 
 unsigned char genTerrain(void)
 {

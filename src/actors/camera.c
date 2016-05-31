@@ -2,21 +2,21 @@
 #include "camera.h"
 
 #include <stdlib.h>
-#include "math/gMath.h"
-#include "math/matrix.h"
-#include "math/quaternion.h"
-#include "math/pythag.h"
-#include "actors.h"
-#include "shaders/shaders.h"
+#include "../math/gMath.h"
+#include "../math/matrix.h"
+#include "../math/quaternion.h"
+#include "../math/pythag.h"
+#include "../actors.h"
+#include "../shaders/shaders.h"
 #include <SDL2/SDL_opengl.h>
 #include <math.h>
 #include <stdio.h>
-#include "userControl/options.h"
-#include "actorComponents/physics/vector.h"
-#include "actorComponents/physics/physicsAttributeController.h"
+#include "../userControl/options.h"
+#include "../actorComponents/physics/vector.h"
+#include "../actorComponents/physics/physicsAttributeController.h"
 
-#include "actorComponents/physicsComponent.h"
-#include "actorComponents/directionComponent.h"
+#include "../actorComponents/physicsComponent.h"
+#include "../actorComponents/directionComponent.h"
 
 void genFrustum(void)
 {

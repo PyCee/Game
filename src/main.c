@@ -11,7 +11,7 @@
 #include "userControl/keyboard.h"
 #include "userControl/options.h"
 #include "actors.h"
-#include "protag.h"
+#include "actors/protag.h"
 #include "globalTimeline.h"
 #include "actorSelection.h"
 #include "actorComponents/physics/vector.h"
@@ -38,11 +38,13 @@
 #include "actorComponents/callback/timeout.h"
 #include "actorComponents/callback/distanceCheck.h"
 #include "actorComponents/callback/endGame.h"
+#include "actorComponents/physics/octree.h"
+#include "actorComponents/physics/checkOctree.h"
 
 #define PROGRAM_NAME "LDM"
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 650
-#define MAX_LIFE_TIME 60
+#define MAX_LIFE_TIME 60 * 10
 #define MAX_LIFE_TIME_MS 1000 * MAX_LIFE_TIME
 
 #define ACT 0
@@ -134,6 +136,17 @@ int main(int argc, char *argv[])
 	float averageFrameMS = 1/60;
 	float runningAverageMod = 0.6;
 	
+	nextOctreeNodeID = 0;
+	globalOctree = genOctreeNode();
+	globalOctree.size = 20;
+	*globalOctree.placement = genVec3(0, 0.0, -5);
+	resetOctreeBox(&globalOctree);
+	bindActor(getControlledActor());
+	CONTAINING_OCTREE_NODE = &globalOctree;
+	CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
+	printf("in globalOctree: %hhu", containingAABoxAABox(*globalOctree.octreeBox, *BOUNDING_BOX));
+	
+	
 	unsigned char gameState = ACT;
 	while(IAMALIVE == 1){
 		averageFrameMS = averageFrameMS * runningAverageMod + getPrevFrameDuration(*getGlobalTimeline()) * (1.0 - runningAverageMod);
@@ -150,6 +163,7 @@ int main(int argc, char *argv[])
 		case ACT:
 			//<CL "physics upgrade: collisions">
 			bindActor(pro);
+			printActor();
 			unsigned char collision = CheckBoundingBoxCollision(ter);
 			vec3 proPos = *POSITION;
 			bindActor(ter);
@@ -163,15 +177,10 @@ int main(int argc, char *argv[])
 					VELOCITY->vec[1] = 0.0;
 				}
 			}
-			//bindActor(buz);
-			//POSITION->vec[1] = 2.0;
-			//VELOCITY->vec[1] = 0.0;
 			//</CL>
 			handleEvents();
 			updateActors();
 			updateQuests();
-			bindActor(buz);
-			printActor();
 			break;
 		default:
 			break;
@@ -196,7 +205,7 @@ int main(int argc, char *argv[])
 	printf("%s Ended.\n", PROGRAM_NAME);
 	
 	
-	vec3 *p1 = malloc(sizeof(vec3));
+	/*vec3 *p1 = malloc(sizeof(vec3));
 	vec3 *p2 = malloc(sizeof(vec3));
 	vec3 *p3 = malloc(sizeof(vec3));
 	*p1 = genVec3(0.0, 0.0, 0.0);
@@ -204,9 +213,11 @@ int main(int argc, char *argv[])
 	*p3 = genVec3(0.1, 4.01, 0.01);
 	
 	
-	collisionController cyl = genCollisionCylinder(p1, p2, 1);
-	collisionController poi = genCollisionPoint(p3);
+	collisionController box1 = genCollisionAABox(p1, p2, 1);
+	collisionController box2 = genCollisionAABox(p3);
 	
-	printf("collide = %hhu\n", collisionCylinderPoint(cyl, poi));
+	printf("collide = %hhu\n", containingAABoxAABox(box1, box2));
+	*/
+	
 	
 }

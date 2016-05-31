@@ -13,9 +13,13 @@
 #include "actorComponents/modelComponent.h"
 #include "actorComponents/physicsComponent.h"
 #include "actorComponents/identifierComponent.h"
-#include "protag.h"
-#include "camera.h"
-#include "buzz.h"
+#include "actorComponents/physics/collisionTypes/collisionAABox.h"
+#include "actorComponents/physics/collisionController.h"
+#include "actorComponents/physics/physicsAttributeController.h"
+#include "actors.h"
+#include "actors/protag.h"
+#include "actors/camera.h"
+#include "actors/buzz.h"
 
 static const unsigned char *lookupUpdateFunctionsStr[] = {
 	"UselessUpdate",
@@ -74,6 +78,9 @@ void loadActorData(unsigned char *loc)
 	data = readXMLElements(fileSource, "<height>");
 	HEIGHT = strtod(data.children, &afterPtr);
 	freeXMLElement(data);
+	
+	BOUNDING_BOX = malloc(sizeof(collisionController));
+	*BOUNDING_BOX = genCollisionAABox(POSITION, WIDTH, HEIGHT, WIDTH);
 	
 	data = readXMLElements(fileSource, "<drawBounds>");
 	DRAW_BOUNDS = strtol(data.children, &afterPtr, 10);

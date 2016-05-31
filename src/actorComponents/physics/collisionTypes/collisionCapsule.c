@@ -19,7 +19,6 @@ unsigned char collisionCapsuleCapsule(collisionController conOne, collisionContr
 {
 	float magSq = leastDistLineLineSq(*conOne._vec3[0], *conOne._vec3[1], *conTwo._vec3[0], *conTwo._vec3[1]);
 	float distance = conOne._float[0] + conTwo._float[0];
-	
 	if(magSq <= distance * distance)
 		return 1;
 	return 0;
@@ -28,7 +27,6 @@ unsigned char collisionCapsuleCapsule(collisionController conOne, collisionContr
 unsigned char collisionCapsuleSphere(collisionController cap, collisionController sph)
 {
 	float di = leastDistPointLineSq(*sph._vec3[0], *cap._vec3[0], *cap._vec3[1]);
-	
 	float distance = cap._float[0] + sph._float[0];
 	if(di <= distance * distance)
 		return 1;

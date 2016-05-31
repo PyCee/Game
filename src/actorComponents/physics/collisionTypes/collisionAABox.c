@@ -14,14 +14,23 @@ collisionController genCollisionAABox(vec3 *vecOne, float halfWidth, float halfH
 	cap.collisionObjectType = COLLISION_TYPE_AABOX;
 	return cap;
 }
+unsigned char containingAABoxAABox(collisionController box1, collisionController box2)
+{
+	return box1._vec3[0]->vec[0] - box1._float[0] < box2._vec3[0]->vec[0] - box2._float[0]
+		&& box1._vec3[0]->vec[0] + box1._float[0] > box2._vec3[0]->vec[0] + box2._float[0]
+		&& box1._vec3[0]->vec[1] - box1._float[1] < box2._vec3[0]->vec[1] - box2._float[1]
+		&& box1._vec3[0]->vec[1] + box1._float[1] > box2._vec3[0]->vec[1] + box2._float[1]
+		&& box1._vec3[0]->vec[2] - box1._float[2] < box2._vec3[0]->vec[2] - box2._float[2]
+		&& box1._vec3[0]->vec[2] + box1._float[2] > box2._vec3[0]->vec[2] + box2._float[2];
+}
 unsigned char collisionAABoxAABox(collisionController boxOne, collisionController boxTwo)
 {
 	return boxOne._vec3[0]->vec[0] - boxOne._float[0] < boxTwo._vec3[0]->vec[0] + boxTwo._float[0]
-			&& boxOne._vec3[0]->vec[0] + boxOne._float[0] > boxTwo._vec3[0]->vec[0] - boxTwo._float[0]
-			&& boxOne._vec3[0]->vec[1] - boxOne._float[1] < boxTwo._vec3[0]->vec[1] + boxTwo._float[1]
-			&& boxOne._vec3[0]->vec[1] + boxOne._float[1] > boxTwo._vec3[0]->vec[1] - boxTwo._float[1]
-			&& boxOne._vec3[0]->vec[2] - boxOne._float[2] < boxTwo._vec3[0]->vec[2] + boxTwo._float[2]
-			&& boxOne._vec3[0]->vec[2] + boxOne._float[2] > boxTwo._vec3[0]->vec[2] - boxTwo._float[2];
+		&& boxOne._vec3[0]->vec[0] + boxOne._float[0] > boxTwo._vec3[0]->vec[0] - boxTwo._float[0]
+		&& boxOne._vec3[0]->vec[1] - boxOne._float[1] < boxTwo._vec3[0]->vec[1] + boxTwo._float[1]
+		&& boxOne._vec3[0]->vec[1] + boxOne._float[1] > boxTwo._vec3[0]->vec[1] - boxTwo._float[1]
+		&& boxOne._vec3[0]->vec[2] - boxOne._float[2] < boxTwo._vec3[0]->vec[2] + boxTwo._float[2]
+		&& boxOne._vec3[0]->vec[2] + boxOne._float[2] > boxTwo._vec3[0]->vec[2] - boxTwo._float[2];
 }
 unsigned char collisionAABoxSphere(collisionController box, collisionController sph)
 {

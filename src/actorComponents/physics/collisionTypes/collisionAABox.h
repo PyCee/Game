@@ -6,6 +6,8 @@ struct collisionController;
 
 struct collisionController genCollisionAABox(struct vec3 *, float, float, float);
 
+unsigned char containingAABoxAABox(struct collisionController, struct collisionController);
+
 unsigned char collisionAABoxAABox(struct collisionController, struct collisionController);
 unsigned char collisionAABoxSphere(struct collisionController, struct collisionController);
 unsigned char collisionSphereAABox(struct collisionController, struct collisionController);

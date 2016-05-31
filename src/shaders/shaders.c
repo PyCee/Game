@@ -80,13 +80,12 @@ GLuint loadShaderFromFile( const unsigned char * path, GLenum shaderType )
 	GLuint result;
 
 	FILE *source;
-	if ( (source = fopen( path, "r" ) ) == NULL )
+	if ((source = fopen(path, "r")) == NULL)
 		return 0;
-	fseek( source,  0, SEEK_END );
-	length[0] = ftell( source );
-	fseek( source,  0, SEEK_SET );
-	fclose( source );
-	
+	fseek(source, 0, SEEK_END);
+	length[0] = ftell(source);
+	fseek(source, 0, SEEK_SET);
+	fclose(source);
 	
 	GLuint shader = glCreateShader(shaderType);
 	printf("shader Gened.\nshader Linking.\n");
@@ -96,7 +95,7 @@ GLuint loadShaderFromFile( const unsigned char * path, GLenum shaderType )
 	
 	GLint success;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-	if ( !success ) {
+	if (!success) {
 		GLchar InfoLog[1024];
 		glGetShaderInfoLog(shader, sizeof(InfoLog), NULL, InfoLog);
 		fprintf(stderr, "Error compiling shader type %d: '%s'\n", shaderType, InfoLog);
