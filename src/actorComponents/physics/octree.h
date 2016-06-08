@@ -24,7 +24,9 @@ extern octreeNode globalOctree;
 octreeNode genOctreeNode(void);
 void freeOctreeNode(octreeNode *);
 void genOctreeNodeChildren(octreeNode *);
+void freeOctreeNodeChildren(octreeNode *);
 void resetOctreeBox(octreeNode *);
+unsigned char isOctreeParent(octreeNode *, octreeNode *);
 
 
 #endif /* OCTREE */

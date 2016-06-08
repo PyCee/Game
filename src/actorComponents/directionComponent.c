@@ -33,9 +33,11 @@ void initDirectionComponent(void)
 void genDirectionComponent(void)
 {
 	FORWARD = malloc(sizeof(vec3));
+	DIRECTION->facing = malloc(sizeof(vec3));
 	FORWARDROTATION = malloc(sizeof(vec4));
 	INVERSEFORWARDROTATION = malloc(sizeof(vec4));
 	*FORWARD = genVec3(0, 0, -1);
+	*DIRECTION->facing = genVec3(0.0, 0.0, -1.0);
 	*FORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
 	*INVERSEFORWARDROTATION = UnitQuaternion(genVec3(0, 0, -1), 0);
 	

@@ -1,0 +1,8 @@
+<!--#include virtual="/page_header.html" -->
+<title>Ice Climber</title>
+<!--#include virtual="/content_header.html" -->
+<h2>Ice Climber</h2></br>
+Large being with .</br>
+Fought during <a href="/chapters/chapter_two.html">Chapter Two</a> in the <a href="/settings/.html">asd</a>.</br>
+
+<!--#include virtual="/footer.html" -->

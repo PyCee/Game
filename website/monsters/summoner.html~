@@ -1,8 +1,7 @@
 <!--#include virtual="/page_header.html" -->
-<title>Ice Golem</title>
+<title>Summoner</title>
 <!--#include virtual="/content_header.html" -->
-<h2>Ice Golem</h2></br>
-Golem made of ice.</br>
+<h2>Summoner</h2></br>
 Fought during <a href="/chapters/chapter_two.html">Chapter Two</a> in the <a href="/settings/blizzard.html">Blizzard</a>.</br>
 
 <!--#include virtual="/footer.html" -->

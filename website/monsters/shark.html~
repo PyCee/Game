@@ -1,0 +1,8 @@
+<!--#include virtual="/page_header.html" -->
+<title>Shark</title>
+<!--#include virtual="/content_header.html" -->
+<h2>Shark</h2></br>
+Shark.</br>
+Fought during <a href="/chapters/chapter_two.html">Chapter Two</a> in the <a href="/settings/ocean.html">Ocean</a>.</br>
+
+<!--#include virtual="/footer.html" -->

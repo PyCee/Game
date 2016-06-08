@@ -36,14 +36,10 @@ void removeActorListIndex(actorList *actList, int index)
 	actorList *removedActList = malloc(sizeof(actorList));
 	*removedActList = genActorList();
 	int ind;
-	for(ind = 0; ind < index - 1; ind++){
-		printf("ind < index - 1\n");
+	for(ind = 0; ind < index - 1; ind++)
 		addActorListID(removedActList, actList->list[removedActList->numActors]);
-	}
-	for(ind = 0; ind < actList->numActors; ind++){
-		printf("ind < actList->numActors\n");
+	for(; ind < actList->numActors; ind++)
 		addActorListID(removedActList, actList->list[removedActList->numActors + 1]);
-	}
 	freeActorList(actList);
 	*actList = *removedActList;
 	free(removedActList);

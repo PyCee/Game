@@ -18,12 +18,15 @@
 #include "physics/collisionTypes/collisionPoint.h"
 #include "physics/collisionTypes/collisionCylinder.h"
 #include "physics/collisionController.h"
+#include "physics/collisionDetection.h"
 #include "physics/vector.h"
 #include "../math/quaternion.h"
 #include "../math/matrix.h"
 #include "directionComponent.h"
+#include "identifierComponent.h"
+#include "physics/collisionData.h"
 
-unsigned char (*collisionTable[COLLISION_TABLE_SIZE][COLLISION_TABLE_SIZE])(struct collisionController, struct collisionController);
+unsigned char (*collisionTable[COLLISION_TABLE_SIZE][COLLISION_TABLE_SIZE])(collisionController, collisionController);
 
 void initPhysics(void)
 {
@@ -73,8 +76,8 @@ void genPhysicsComponent()
 	*GRAVITY = genVec3(0.0, -1 * ACC_GRAVITY, 0.0);
 	bindPhysicsAttribute(ACC, GRAVITY, 1,  noRotationVec4);
 	SPEED = 0.0;
-	SPEED_SIDE = 0.9;
-	SPEED_BACK = 0.5;
+	SPEED_SIDE = 1.0;
+	SPEED_BACK = 1.0;
 	
 	HEIGHT = 1;
 	WIDTH = 1;
@@ -95,12 +98,26 @@ void freePhysicsComponent() {
 }
 void updatePhysicsComponent(unsigned short deltaMS)
 {
-	applyPhysicsImpulses();
-	updatePosition(deltaMS);
-	//TODO: collision detection.
-	//TODO: collision response.
-	if(getActor() == getControlledActor())
-		CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
+	
+	if (strcmp(TYPE, "dynamic") == 0){
+		applyPhysicsImpulses();
+		updatePosition(deltaMS);
+	}
+	CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
+	
+	collisionData collision = collisionDetection();
+	
+	/* TODO: finish and test
+	unsigned char numResponses = 0;
+	while(collision.remainingVel->vec[0] ||
+		collision.remainingVel->vec[1] ||
+		collision.remainingVel->vec[2]){
+		if(numResponses >= MAX_COLLISION_RESPONSES) *POSITION = *PREVIOUSPOSITION;
+		collisionResponse(collision);
+		collision = collisionDetection();
+		numResponses++;
+	}
+	*/
 }
 unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 	unsigned char prevID = getActor();
@@ -120,8 +137,4 @@ unsigned char CheckBoundingBoxCollision(unsigned char actorID) {
 		collide = 0;// Bounding Boxes Not Overlapping
 	bindActor(prevID);
 	return collide;
-}
-unsigned char testCollision(collisionController col1, collisionController col2)
-{
-	return collisionTable[col1.collisionObjectType][col2.collisionObjectType](col1, col2);
 }

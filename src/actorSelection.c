@@ -2,7 +2,7 @@
 #include "actorSelection.h"
 
 #include <stdio.h>
-#include "camera.h"
+#include "actors/camera.h"
 #include "actors.h"
 #include "globalTimeline.h"
 #include "actorComponents/lightingComponent.h"

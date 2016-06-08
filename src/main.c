@@ -101,6 +101,7 @@ int main(int argc, char *argv[])
 	
 	unsigned char cam = addActor();
 	loadActorData("actors/camera.xml");
+	*POSITION = genVec3(0.0, 2.0, -1 * 2.0);
 	SHOULD_RENDER = 0;
 	
 	unsigned char thin = addActor();
@@ -119,7 +120,7 @@ int main(int argc, char *argv[])
 	vec3 *pos = POSITION;
 	bindActor(getControlledActor());
 	callbackController *test = malloc(sizeof(callbackController));
-	*test = genDistanceCheck(endGame, 1.0, pos);
+	*test = genDistanceCheck(endGame, 1.75, pos);
 	enableCallbackController(test);
 	
 	Mix_Music *BGMusic = NULL;
@@ -136,15 +137,12 @@ int main(int argc, char *argv[])
 	float averageFrameMS = 1/60;
 	float runningAverageMod = 0.6;
 	
+	
 	nextOctreeNodeID = 0;
 	globalOctree = genOctreeNode();
-	globalOctree.size = 20;
-	*globalOctree.placement = genVec3(0, 0.0, -5);
+	globalOctree.size = 100;
+	*globalOctree.placement = genVec3(0.0, 0.0, 0.0);
 	resetOctreeBox(&globalOctree);
-	bindActor(getControlledActor());
-	CONTAINING_OCTREE_NODE = &globalOctree;
-	CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
-	printf("in globalOctree: %hhu", containingAABoxAABox(*globalOctree.octreeBox, *BOUNDING_BOX));
 	
 	
 	unsigned char gameState = ACT;
@@ -163,7 +161,6 @@ int main(int argc, char *argv[])
 		case ACT:
 			//<CL "physics upgrade: collisions">
 			bindActor(pro);
-			printActor();
 			unsigned char collision = CheckBoundingBoxCollision(ter);
 			vec3 proPos = *POSITION;
 			bindActor(ter);
@@ -181,6 +178,18 @@ int main(int argc, char *argv[])
 			handleEvents();
 			updateActors();
 			updateQuests();
+			
+			/*
+			bindActor(pro);
+			octreeNode *proOct = CONTAINING_OCTREE_NODE;
+			printf("\n\nproOct id: %d\n", proOct->octreeNodeID);
+			bindActor(thin);
+			octreeNode *thinOct = CONTAINING_OCTREE_NODE;
+			printf("\n\nthinOct id: %d\n", thinOct->octreeNodeID);
+			
+			printf("pro is in oct: %hhu\n\n\n", isOctreeParent(thinOct, proOct));
+			*/
+			
 			break;
 		default:
 			break;

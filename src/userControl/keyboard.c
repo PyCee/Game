@@ -2,7 +2,7 @@
 #include "keyboard.h"
 
 #include <SDL2/SDL.h>
-#include "../camera.h"
+#include "../actors/camera.h"
 #include "options.h"
 #include "../actors.h"
 #include "controls.h"

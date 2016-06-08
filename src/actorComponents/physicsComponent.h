@@ -30,7 +30,8 @@ extern struct PhysicsComponent **physics;
 #define WIDTH PHYSICS->width
 #define DRAW_BOUNDS PHYSICS->drawBounds
 
-#define COLLISION_TABLE_SIZE 5
+#define COLLISION_TABLE_SIZE 7
+#define MAX_COLLISION_RESPONSES 4
 
 struct collisionController;
 
@@ -57,6 +58,5 @@ void genPhysicsComponent();
 void freePhysicsComponent();
 void updatePhysicsComponent(unsigned short);
 unsigned char CheckBoundingBoxCollision(unsigned char);
-unsigned char testCollision(struct collisionController, struct collisionController);
 
 #endif /* PHYSICS_COMPONENT */

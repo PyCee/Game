@@ -14,8 +14,8 @@
 		<speed_back>0.8</speed_back>
 	</physics>
 	<collisions>
-		<height>0.5</height>
-		<width>0.025</width>
+		<height>0.1</height>
+		<width>0.1</width>
 		<radius>13</radius><!--To replace height and width once there is a working collision detection system-->
 		<drawBounds>0</drawBounds>
 	</collisions>

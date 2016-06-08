@@ -191,9 +191,7 @@ void updateActors(void)
 	while (actorID < numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()]){
-			if (strcmp(TYPE, "dynamic") == 0){
-				updatePhysicsComponent(localTime[actorID]);
-			}
+			updatePhysicsComponent(localTime[actorID]);
 		}
 		actorID++;
 	}

@@ -31,25 +31,46 @@ octreeNode genOctreeNode(void)
 void freeOctreeNode(octreeNode *oct)
 {
 	unsigned char index;
-	if(oct->children){
-		for(index = 0; index < 8; index++)
-			freeOctreeNode(&oct->children[index]);
-		free(oct->children);
-	}
+	freeOctreeNodeChildren(oct);
+	if(oct->octreeBox)
+		freeCollisionController(oct->octreeBox);
+	oct->octreeBox = 0;
+	if(oct->actList)
+		freeActorList(oct->actList);
+	oct->actList = 0;
+	oct->parent = 0;
 	if(oct->placement)
 		free(oct->placement);
+	oct->placement = 0;
 }
 void genOctreeNodeChildren(octreeNode *par)
 {
 	par->children = malloc(sizeof(octreeNode) * 8);
 	unsigned char index;
-	for(index = 0; index < 8; index++){
+	for(index = 0; index < 8; index++)
 		par->children[index] = genOctreeNodeChild(par, index);
-	}
+}
+void freeOctreeNodeChildren(octreeNode *oct)
+{
+	if(oct->children == 0)
+		return;
+	unsigned char index;
+	for(index = 0; index < 8; index++)
+		freeOctreeNode(&oct->children[index]);
+	free(oct->children);
+	oct->children = 0;
 }
 void resetOctreeBox(octreeNode *oct)
 {
 	*oct->octreeBox = genCollisionAABox(oct->placement, oct->size / 2, oct->size / 2, oct->size / 2);
+}
+unsigned char isOctreeParent(octreeNode *oct1, octreeNode *oct2)
+{
+	if(oct1->size == oct2->size)
+		return oct1->octreeNodeID == oct2->octreeNodeID;
+	octreeNode *largerOct = (oct1->size > oct2->size) ? oct1 : oct2;
+	octreeNode *smallerOct = (oct1->size < oct2->size) ? oct1 : oct2;
+	return isOctreeParent(largerOct, smallerOct->parent);
 }
 static octreeNode genOctreeNodeChild(octreeNode *oct, unsigned char index)
 {
@@ -60,7 +81,7 @@ static octreeNode genOctreeNodeChild(octreeNode *oct, unsigned char index)
 	child.size = oct->size / 2;
 	unsigned char lower = index % 4;
 	*child.placement = addVec3Vec3(*oct->placement, scaleVec3(genVec3(lower >= 2, index >= 4, lower && lower != 3), child.size));
-	*child.octreeBox = genCollisionAABox(child.placement, child.size / 2, child.size / 2, child.size / 2);
+	resetOctreeBox(&child);
 	return child;
 }
 static unsigned short addOctreeNode(void)

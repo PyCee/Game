@@ -22,7 +22,6 @@ callbackController genDistanceCheck(void (*complete)(callbackController), float 
 }
 char shouldDistanceCheck(callbackController call)
 {
-	printf("should DistanceCheck\n");
 	collisionController cap = genCollisionCapsule(PREVIOUSPOSITION, POSITION, 0.001);
 	collisionController sph = genCollisionSphere(&(call._vec3[0]), call._float[0]);
 	return collisionCapsuleSphere(cap, sph);

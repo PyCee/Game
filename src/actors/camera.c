@@ -22,7 +22,7 @@ void genFrustum(void)
 {
 	float aspectRatio = (float)Option[ASPECT_RATIO_X] / (float)Option[ASPECT_RATIO_Y];
 	float fov = (M_PI / 180) * (float)Option[FIELD_OF_VIEW];
-	float near = 0.1;
+	float near = 0.101;
 	float far = 100;
 	mat4 clip = genZeroMat4();
 	clip.mat[0][0] = 1 / tan(fov / 2);
