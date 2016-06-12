@@ -1,0 +1,10 @@
+<!--#include virtual="/page_header.html" -->
+<title>Ocean</title>
+<!--#include virtual="/content_header.html" -->
+<div class="page_title">Ocean</div>
+Area located in <a href="/chapters/chapter_two.html#ocean_p">Chapter Two</a>.</br>
+<div class="area_boss">Boss: <a href="/monsters/shark.html">Shark</a></div>
+Water
+
+
+<!--#include virtual="/footer.html" -->

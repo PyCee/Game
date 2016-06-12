@@ -84,11 +84,31 @@ a:active {
 	width:100%;
 	margin-bottom:20px;
 }
+.setting {
+	display: block;
+	font-size: 1.35em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
 .area_boss {
 	display: block;
+	color: #292233;
 	font-size: 1.17em;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+.page_title {
+	display: block;
+	color: #000000;
+	font-size: 1.35em;
+	margin-top: 0.5em;
+	margin-bottom: 0.0em;
 	margin-left: 0;
 	margin-right: 0;
 	font-weight: bold;

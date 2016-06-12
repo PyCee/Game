@@ -2,7 +2,6 @@
 <title>Heat Demon</title>
 <!--#include virtual="/content_header.html" -->
 <div class="page_title">Heat Demon</div>
-Fought during <a href="/chapters/chapter_one.html#cavern_market_p">Chapter One</a> in the <a href="/settings/cavern_market.html">Cavern Market</a>.</br>
 A Cat-like monster. All torches within ___ meters of the Heat Demon will catch ablaze.</br>
 The Heat Demon has a powerful head-on attack, but is weak when fought from the side.</br>
 It does not have a wide sweeping attack.</br>
@@ -14,5 +13,6 @@ It will set torches within ___ meters ablaze.</br>
 Theprotagonist must no continue to hit the Heat Demon until it's health reaches 0.</br>
 As the Heat Demon dies, it releases a blast of fire, setting all torches in the room on fire.</br>
 To survive this, the protagonist must roll.</br>
+Fought during <a href="/chapters/chapter_one.html#cavern_market_p">Chapter One</a> in the <a href="/settings/cavern_market.html">Cavern Market</a>.</br>
 
 <!--#include virtual="/footer.html" -->

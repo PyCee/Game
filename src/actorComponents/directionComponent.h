@@ -5,7 +5,6 @@
 #define FORWARDROTATION DIRECTION->forwardRotation
 #define INVERSEFORWARDROTATION DIRECTION->inverseForwardRotation
 #define FORWARD DIRECTION->forward
-#define MOVEMENT DIRECTION->movement
 #define VIEW_TARGET DIRECTION->target
 #define DIR_ROTATE DIRECTION->rotate
 #define DIR_PREV_ROTATE DIRECTION->prevRotate
@@ -36,7 +35,7 @@
 
 typedef struct DirectionComponent {
 	struct vec4 *forwardRotation, *inverseForwardRotation;
-	struct vec3 *forward, *facing, *movement;
+	struct vec3 *forward, *facing;
 	struct vec3 *target;
 	struct rotationController *rotate, *deltaRotate;
 	float panTime, panProgress, deltaPanProgress;

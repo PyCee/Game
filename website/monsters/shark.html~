@@ -1,8 +1,29 @@
 <!--#include virtual="/page_header.html" -->
 <title>Shark</title>
 <!--#include virtual="/content_header.html" -->
-<h2>Shark</h2></br>
-Shark.</br>
-Fought during <a href="/chapters/chapter_two.html">Chapter Two</a> in the <a href="/settings/ocean.html">Ocean</a>.</br>
+<div class="page_title">Shark</div>
+Fought during <a href="/chapters/chapter_two.html#ocean_p">Chapter Two</a> in the <a href="/settings/ocean.html">Ocean</a>.</br>
+The protagonist's chain is stuck in the monster's mouth.</br>
+The shark pulls the protagonist underwater and swims.</br>
+Climb enough up the chain and attack with the sword to lodge the it in the shark's middle.</br>
+This causes mild damage to the monster.</br>
+The protagonist will hold onto the sword to stablize self while the rest of the fight ensues.</br>
+When the protagonist has a stable hold, can direct monster by pulling chain.</br></br>
+Throughout the fight the shark will shake the sword lose.</br>
+When this happens the protagonist must climb the chain again to lodge the sword.</br>
+</br><i>To pull chain use the buttons that normally cause an attack with the chain.</i></br></br>
+Simply attacking with the chain will take a very small part of the monster's health.</br>
+The protagonist must pull the shark into a variety of underwater objects to lower it's health.</br>
+</br><s>Objects include:</br>
+</t>Giant Squid</br>
+</t>Ice Structures</br>
+</t>Underwater Ship</br>
+</t>The Ocean's Floor</br>
+</t>Underwater Tunnel's Sides and Floor</br>
+</s></br>
+The monster will try to swim upward when it passes through an underwater tunnel/some ice structures.</br>
+If it succeeds in doing so the protagonist will be crushed between it and the tunnel ceiling.</br></br>
+After the it's defeat conditions are met, the shark will shake the protagonist loose once more.</br>
+The collision throws the Protagonist off to swim up to the ice's edge.</br>
 
 <!--#include virtual="/footer.html" -->

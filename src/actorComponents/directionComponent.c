@@ -60,7 +60,6 @@ void freeDirectionComponent(void)
 }
 void updateDirectionComponent(unsigned short deltaMS)
 {
-	*MOVEMENT = subtractVec3Vec3(*POSITION, *PREVIOUSPOSITION);
 	while(YAW > 180)
 		YAW -= 360;
 	while(YAW < 180)

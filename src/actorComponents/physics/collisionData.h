@@ -3,8 +3,10 @@
 
 typedef struct collisionData{
 	struct vec3 *normal, *validActorPosition, *remainingVelocity;
+	float t;
 } collisionData;
 
 collisionData genCollisionData(void);
+void freeCollisionData(collisionData *);
 
 #endif /* COLLISION_DATA */

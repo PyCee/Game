@@ -1,0 +1,12 @@
+<!--#include virtual="/page_header.html" -->
+<title>God Stairs</title>
+<!--#include virtual="/content_header.html" -->
+<div class="page_title">God Stairs</div>
+Area located in <a href="/chapters/chapter_one.html#god_stairs_p">Chapter One</a>.</br>
+<div class="area_boss">Boss: <a href="/monsters/sand_king.html">Sand King</a></div>
+There is a locked gate leading from the <a href="/settings/cavern_market.html">Cavern Market</a> to the bottem of the god stairs.</br>
+Each step slants up from one side to the other.</br>
+Each step alternating.</br>
+There is a flat area on the sides.</br>
+Repeat infinitly.</br>
+<!--#include virtual="/footer.html" -->

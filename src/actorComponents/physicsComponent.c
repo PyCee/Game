@@ -105,14 +105,15 @@ void updatePhysicsComponent(unsigned short deltaMS)
 	}
 	CONTAINING_OCTREE_NODE = checkOctree(CONTAINING_OCTREE_NODE);
 	
-	collisionData collision = collisionDetection();
+	///collisionData *collision = collisionDetection();
 	
 	/* TODO: finish and test
 	unsigned char numResponses = 0;
-	while(collision.remainingVel->vec[0] ||
-		collision.remainingVel->vec[1] ||
-		collision.remainingVel->vec[2]){
-		if(numResponses >= MAX_COLLISION_RESPONSES) *POSITION = *PREVIOUSPOSITION;
+	while(collision != 0){
+		if(numResponses >= MAX_COLLISION_RESPONSES){
+			*POSITION = *PREVIOUSPOSITION;
+			break;
+		}
 		collisionResponse(collision);
 		collision = collisionDetection();
 		numResponses++;

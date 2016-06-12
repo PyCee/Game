@@ -1,15 +1,12 @@
 <!--#include virtual="/page_header.html" -->
 <title>Game Chapter Two</title>
 <!--#include virtual="/content_header.html" -->
-
-<h2> Chapter Two</h2></br>
-
+<div class="page_title">Chapter Two</div>
 Protagonist grabs a bag of supplies from the boat.</br>
 Protagonist jumps off of the boat onto a floating piece of ice.</br>
 he jumps from each piece of ice to the next.</br>
 Once the Protagonist gets to the mainland, a shelter must be found.</br>
-(search comences)</br></br>
-<h3>Setting: <a name="ice_cavern_p" href="/settings/ice_cavern.html">Ice Cavern</a></h3>
+(search comences)</br>
 The Protagonist finds an ice cave with a large entrance.</br>
 The supply bag is set down and a large shadow is seen underneth the thin ice of the cavern floor.</br>
 Following the direction the shadow traveled,</br>
@@ -19,23 +16,13 @@ the creature partially surfaces and moves the various ice blocks.</br>
 The Protagonist is stuck on an ice block that has floaten away from the body of the rest.</br>
 The ice continues to float away and the monster does not surface again.</br></br>
 (TODO: how does the player know to do this?)</br>
+<div class="setting">Setting: <a name="ocean_p" href="/settings/ocean.html">Ocean</a></div>
 The Protagonist drops the chain into the water and it trails behind.</br>
 After 20-30 seconds the Protagonist is dragged by the chain into the water.</br>
-Climbing the chain leads to the <a name="shark_p" href="/monsters/shark.html">Giant Shark</a>.</br>
-Climb enough and get a hold on the monsters</br>
-(insert monster body part that protrudes)(fin?)(stab between ribs with sword and hold that?).</br></br>
-Can direct monster by pulling chain.</br></br>
-<i>To pull chain use the buttons that normally cause an attack with the chain.</i></br></br>
-(fight/travel ensues)</br></br>
-The monster can only be pulled to the up and (right/left), as the chain</br>
-goes around the monster only on one side.</br>
-(objects to crash the monster into?)</br>
-Pulling the monster up enought can cause it to jump out of the water into the air(how does this do damage?)</br>
-After the defeat conditions are met, the moster crashes into a wall of ice.</br>
-The collision throws the Protagonist off, and with the Protagonist automatically swiming upwards,</br>
-using the direction controls, must swim to the ice's edge.</br>
+Climbing the chain leads to the <a href="/monsters/shark.html">Giant Shark</a>.</br>
+Once the shark is defeated, the protagonist is left on the edge of ice.</br>
 Climbing onto the ice, the Protagonist searches around for the shelter.</br>
-<h3>Setting: <a name="blizzard_p" href="/settings/blizzard.html">Blizzard</a></h3>
+<div class="setting">Setting: <a name="blizzard_p" href="/settings/blizzard.html">Blizzard</a></div>
 As the protagonist enters a large open area a blizzard begins.</br>
 Visibility drops dramatically.</br>
 Traveling very far in any direction leads to large ice walls going up as far as the Protagonist can see.</br>
@@ -44,16 +31,15 @@ Monsters attack as the Protagonist searches.</br></br>
 The monsters include:</br>
 <a href="/monsters/ice_wolf.html">Ice Wolves</a> that come out of the blizzard.</br>
 <a href="/monsters/ice_golem.html">Ice Golems</a> that spawn inside of the Protagonist's view.</br>
-The Golem's spawn takes about 2-5 seconds to gather the ice mass together and form,</br>
-and if the Protagonist attacks the mass during the spawn, the Golem shatters.</br></br>
 In the center of the blizzard is a being which is spawning the monsters.</br>
 The Protagonist must run at the being, and shatter the</br>
 numerous Ice Golems that spawn in front of the Protagonist.</br>
 As the Protagonist attacks the being, the being (does something to the Protagonists dominant arm/side).</br>
 The being shatters.</br></br>
 The Protagonist must limp up a mountain while fighting monsters.</br>
+<div class="setting">Setting: <a name="stalagtite_cavern_p" href="/settings/stalagtite_cavern.html">Stalagtite Cavern</a></div>
 There is a tunnel leading to a space with many stalagtites/stalagmites.</br>
-The entrance to the area is gaurded by 3-8 monsters.</br>
+The entrance to the area is gaurded by 3-8 <a href="/monsters/goblin.html">Goblins</a>.</br>
 In the center of the cavern resides a large <a href="/monsters/ice_climber.html">Ice Climber</a>.</br>
 TODO: describe fight</br>
 Once the Protagonist gets to the mountain's top, the Protagonist</br>
@@ -64,7 +50,7 @@ Protagonist loses conscoiusness.</br>
 The Protagonist reagins consciousness and can crawl around the cavern.</br>
 The hooded figure is nowhere to be seen.</br>
 There are more supplies in the cavern than previously left by the Protagonist.</br>
-After 20-40 seconds the hooded figure enters the cavern carrying the head of the _____ monster.</br>
+After 20-40 seconds the hooded figure enters the cavern carrying the head of the Ice Climber.</br>
 The hooded figure takes off hood and nurses the Protagonist for some time.</br>
 The Protagonist's dominant arm has been frostbitten off.</br>
 The Protagonist and the savior leave on the savior's boat.</br>

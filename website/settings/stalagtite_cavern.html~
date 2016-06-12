@@ -1,0 +1,11 @@
+<!--#include virtual="/page_header.html" -->
+<title>Stalagtite Cavern</title>
+<!--#include virtual="/content_header.html" -->
+<div class="page_title">Stalagtite Cavern</div>
+Area located in <a href="/chapters/chapter_two.html#stalagtite_cavern_p">Chapter Two</a>.</br>
+<div class="area_boss">Boss: <a href="/monsters/ice_climber.html">Ice Climber</a></div>
+3 - 8 <a href="/monsters/goblin.html">Goblins</a> guard the entrance.</br>
+The cavern contains many stalagtites and stalagmites.</br>
+
+
+<!--#include virtual="/footer.html" -->

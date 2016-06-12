@@ -25,6 +25,7 @@ extern struct PhysicsComponent **physics;
 #define MASS PHYSICS->mass
 #define BOUNDING_BOX PHYSICS->AABB
 #define CONTAINING_OCTREE_NODE PHYSICS->containingOctreeNode
+#define MOVEMENT PHYSICS->movement
 
 #define HEIGHT PHYSICS->height
 #define WIDTH PHYSICS->width
@@ -37,7 +38,7 @@ struct collisionController;
 
 typedef struct PhysicsComponent {
 	struct physicsAttributeController *pos, *vel, *acc, *jrk;
-	struct vec3 *prevPos, *Gravity; // Allows for altered gravity
+	struct vec3 *prevPos, *Gravity, *movement; // Allows for altered gravity
 	float speed, sideSpeed, backSpeed;
 	
 	float height;

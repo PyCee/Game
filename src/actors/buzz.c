@@ -48,7 +48,7 @@ void UpdateBuzz(unsigned short deltaMS)
 static void startBuzzMove(callbackController call)
 {
 	float randX = (float)rand()/(float)(RAND_MAX/12) - 6;
-	float randY = (float)rand()/(float)(RAND_MAX/2);
+	float randY = (float)rand()/(float)(RAND_MAX/3 - 1);
 	float randZ = -(float)rand()/(float)(RAND_MAX/12);
 	*AI_MOVE_TARGET = genVec3(randX, randY, randZ);
 	

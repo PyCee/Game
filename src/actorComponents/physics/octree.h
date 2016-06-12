@@ -3,9 +3,6 @@
 
 struct vec3;
 struct actorList;
-//TODO: consider having some overlapping octreeNodes to allow for less calculations when an actor is inside multiple nodes.
-//	if actor is completely contained in center, ignore the outer nodes
-//	+12.5% octrees (+one per octree with children, in the center)
 typedef struct octreeNode{
 	struct octreeNode *children;
 	struct octreeNode *parent;
