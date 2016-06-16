@@ -1,18 +1,16 @@
 #version 130
 
-out vec4 fragColor;
-in float brightness;
-in vec2 TexCoord;
+#define AMBIANT_LIGHT vec3(0.0, 0.0, 0.0)
+
 
 uniform sampler2D Texture;
 
-in float col;
-
-vec4 ambiantLight;
+in float brightness;
+in vec2 UV;
+out vec3 color;
 void main()
 {
-	ambiantLight = vec4(0.0, 0.0, 0.0, 0.0);//vec4(0.2, 0.1, 0.0, 1.0);
-	fragColor = ambiantLight + ((brightness) * texture(Texture, TexCoord));
+	color = AMBIANT_LIGHT + ((brightness) * texture(Texture, UV).rgb);
 }
 
 

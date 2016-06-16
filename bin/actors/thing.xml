@@ -15,7 +15,7 @@
 	</physics>
 	<collisions>
 		<height>4.0</height>
-		<width>4.0</width>
+		<width>3.5</width>
 		<radius>20</radius><!--To replace height and width once there is a working collision detection system-->
 		<drawBounds>0</drawBounds>
 	</collisions>

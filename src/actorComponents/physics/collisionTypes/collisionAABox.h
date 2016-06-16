@@ -1,10 +1,13 @@
 #ifndef COLLISION_AABOX
 #define COLLISION_AABOX
 
+#define AABOX_SIZE _float[0]
+
 struct vec3;
 struct collisionController;
 
 struct collisionController genCollisionAABox(struct vec3 *, float, float, float);
+
 
 unsigned char containingAABoxAABox(struct collisionController, struct collisionController);
 

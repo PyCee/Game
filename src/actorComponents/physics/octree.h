@@ -25,5 +25,4 @@ void freeOctreeNodeChildren(octreeNode *);
 void resetOctreeBox(octreeNode *);
 unsigned char isOctreeParent(octreeNode *, octreeNode *);
 
-
 #endif /* OCTREE */

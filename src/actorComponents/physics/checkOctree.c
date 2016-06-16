@@ -15,9 +15,9 @@ static octreeNode *checkOctreeParentExistence(octreeNode *, char);
 octreeNode *checkOctree(octreeNode *oct)//TODO: test checkOctree
 {
 	unsigned char childTest = 1;
-	if(CONTAINING_OCTREE_NODE->size < oct->size){
+	if(PHYSICS->AABB->AABOX_SIZE < oct->size){
 		if(containingAABoxAABox(*oct->octreeBox, *PHYSICS->AABB)){
-			if(CONTAINING_OCTREE_NODE->size < oct->size / 2.0){
+			if(PHYSICS->AABB->AABOX_SIZE < oct->size / 2.0){
 				if(oct->children == 0)
 					genOctreeNodeChildren(oct);
 				unsigned char index;
@@ -40,7 +40,7 @@ octreeNode *checkOctree(octreeNode *oct)//TODO: test checkOctree
 // This function is used to have one less containingAABoxAABox per octree level, ommiting the first call in checkOctree
 static octreeNode *checkChildOctree(octreeNode *oct)
 {
-	if(CONTAINING_OCTREE_NODE->size < oct->size / 2.0){
+	if(PHYSICS->AABB->AABOX_SIZE < oct->size / 2.0){
 		if(oct->children == 0)
 			genOctreeNodeChildren(oct);
 		unsigned char index;
@@ -56,7 +56,7 @@ static octreeNode *checkChildOctree(octreeNode *oct)
 static octreeNode *checkParentOctree(octreeNode *oct, unsigned char childIndex, unsigned char testChildren)
 {
 	unsigned char childTest = 1;
-	if(CONTAINING_OCTREE_NODE->size < oct->size){
+	if(PHYSICS->AABB->AABOX_SIZE < oct->size){
 		if(containingAABoxAABox(*oct->octreeBox, *PHYSICS->AABB)){
 			if(testChildren){
 				if(oct->children == 0)

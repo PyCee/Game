@@ -9,20 +9,17 @@ a {
 	white-space:nowrap;
 }
 a:link {
-	color:#990033;
+	color:#AA2244;
 	text-decoration: none;
 }
-
 a:visited {
-	color:#990022;
+	color:#552244;
 	text-decoration: none;
 }
-
 a:hover {
 	color:#ff0000;
 	text-decoration: underline;
 }
-
 a:active {
 	color:#ff0000;
 	text-decoration: none;
@@ -35,7 +32,7 @@ a:active {
 	vertical-align:top;
 }
 #mid_column {
-	height:2000px;
+	height:2500px;
 	width:900px;
 	background-color:#888888;
 	margin-left:auto;

@@ -15,6 +15,7 @@
 #include "directionComponent.h"
 #include "modelComponent.h"
 #include "physicsComponent.h"
+#include "physics/collisionController.h"
 
 #include "../shaders/shaders.h"
 #define PImm 3.1415926535897932384
@@ -45,11 +46,9 @@ void updateRenderComponent(unsigned short deltaMS)
 		mat4 Rotate = QuaternionToRotationMatrix(*FORWARDROTATION);
 		mat4 transformation = mat4Product(Translate, Rotate);
 		glUniformMatrix4fv(WorldSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
-	} else
-		printf("ERROR::WorldPlacementLoc is Equal to -1\n");
+	} else printf("ERROR::WorldPlacementLoc is Equal to -1\n");
 	if (DRAW_BOUNDS){// && getActor() != getControlledActor()) {
 //		printf("Drawing Bounds for Actor %hhu\n", getActor());
-		
 		
 //		printf("Bounds Drawn for Actor %hhu\n", getActor());
 		return;

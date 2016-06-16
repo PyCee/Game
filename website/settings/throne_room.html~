@@ -1,8 +1,0 @@
-<!--#include virtual="/page_header.html" -->
-<title>Throne Room</title>
-<!--#include virtual="/content_header.html" -->
-<div class="page_title">Throne Room</div>
-Located in <a href="/chapters/chapter_one.html#throne_room_p">Chapter One</a>, found off of the <a href="/settings/cavern_market.html">Cavern Market.</a></br>
-<div class="area_boss">Boss: <a href="/monsters/sand_prince.html">Sand Prince</a></div>
-
-<!--#include virtual="/footer.html" -->

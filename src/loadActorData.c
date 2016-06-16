@@ -80,7 +80,7 @@ void loadActorData(unsigned char *loc)
 	freeXMLElement(data);
 	
 	BOUNDING_BOX = malloc(sizeof(collisionController));
-	*BOUNDING_BOX = genCollisionAABox(POSITION, WIDTH, HEIGHT, WIDTH);
+	*BOUNDING_BOX = genCollisionAABox(POSITION, WIDTH, WIDTH, WIDTH);
 	
 	data = readXMLElements(fileSource, "<drawBounds>");
 	DRAW_BOUNDS = strtol(data.children, &afterPtr, 10);

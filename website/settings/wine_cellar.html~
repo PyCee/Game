@@ -1,9 +1,0 @@
-<!--#include virtual="/page_header.html" -->
-<title>Wine Cellar</title>
-<!--#include virtual="/content_header.html" -->
-<div class="page_title">Wine Cellar</div></br>
-Area located in <a href="/chapters/chapter_one.html">Chapter One</a>.</br>
-Tunnels from here lead to the <a href="/settings/throne_room.html">Throne Room</a>.</br>
-
-
-<!--#include virtual="/footer.html" -->

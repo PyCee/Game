@@ -50,7 +50,6 @@
 #define ACT 0
 
 char IAMALIVE;
-
 //<CL>change later</CL> ideas to be kept, but implimented differently later
 
 int main(int argc, char *argv[])
@@ -83,10 +82,6 @@ int main(int argc, char *argv[])
 	genFrustum();
 	loadQuests("asd");//TODO replace with actual save-file selecting.
 	
-	globalTimeline gTime;
-	gTime = genGlobalTimeline();
-	bindGlobalTimeline(&gTime);
-	
 	unsigned char ter = addActor();
 	loadActorData("actors/arena.xml");
 	*POSITION = genVec3(0.0, -1.0, -8);
@@ -106,7 +101,7 @@ int main(int argc, char *argv[])
 	
 	unsigned char thin = addActor();
 	loadActorData("actors/thing.xml");
-	*POSITION = genVec3(1.5, 0.0, -1 * 7.0);
+	*POSITION = genVec3(4, 0.0, -1 * 7.0);
 	
 	unsigned char buz = addActor();
 	loadActorData("actors/buzz.xml");
@@ -144,6 +139,9 @@ int main(int argc, char *argv[])
 	*globalOctree.placement = genVec3(0.0, 0.0, 0.0);
 	resetOctreeBox(&globalOctree);
 	
+	globalTimeline gTime;
+	gTime = genGlobalTimeline();
+	bindGlobalTimeline(&gTime);
 	
 	unsigned char gameState = ACT;
 	while(IAMALIVE == 1){
@@ -179,7 +177,7 @@ int main(int argc, char *argv[])
 			updateActors();
 			updateQuests();
 			
-			/*
+			
 			bindActor(pro);
 			octreeNode *proOct = CONTAINING_OCTREE_NODE;
 			printf("\n\nproOct id: %d\n", proOct->octreeNodeID);
@@ -187,8 +185,8 @@ int main(int argc, char *argv[])
 			octreeNode *thinOct = CONTAINING_OCTREE_NODE;
 			printf("\n\nthinOct id: %d\n", thinOct->octreeNodeID);
 			
-			printf("pro is in oct: %hhu\n\n\n", isOctreeParent(thinOct, proOct));
-			*/
+			printf("proOct is in thinOct: %hhu\n\n\n", isOctreeParent(proOct, thinOct));
+			
 			
 			break;
 		default:

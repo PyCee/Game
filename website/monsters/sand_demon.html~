@@ -1,8 +1,0 @@
-<!--#include virtual="/page_header.html" -->
-<title>Sand Prince</title>
-<!--#include virtual="/content_header.html" -->
-<div  class="page_title">Sand Prince</div>
-Human Shape. Made out of sand</br>
-Fought in <a href="/chapters/chapter_one.html">Chapter One</a> in the <a href="/settings/throne_room.html">Throne Room.</a></br>
-
-<!--#include virtual="/footer.html" -->

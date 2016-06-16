@@ -11,6 +11,7 @@ octreeNode globalOctree;
 
 static octreeNode genOctreeNodeChild(octreeNode *, unsigned char);
 static unsigned short addOctreeNode(void);
+static unsigned char isOctreeParentLargeSmall(octreeNode, octreeNode);
 
 octreeNode genOctreeNode(void)
 {
@@ -70,7 +71,8 @@ unsigned char isOctreeParent(octreeNode *oct1, octreeNode *oct2)
 		return oct1->octreeNodeID == oct2->octreeNodeID;
 	octreeNode *largerOct = (oct1->size > oct2->size) ? oct1 : oct2;
 	octreeNode *smallerOct = (oct1->size < oct2->size) ? oct1 : oct2;
-	return isOctreeParent(largerOct, smallerOct->parent);
+	while(largerOct->size > smallerOct->size) smallerOct = smallerOct->parent;
+	return smallerOct->octreeNodeID == largerOct->octreeNodeID;
 }
 static octreeNode genOctreeNodeChild(octreeNode *oct, unsigned char index)
 {

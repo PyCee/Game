@@ -62,12 +62,12 @@ void genShaders(void)
 		printf("ERROR::ClipSpaceLoc Not Found\n");
 	}
 	CameraPositionLoc = glGetUniformLocation(shaderProgram, "cameraPosition");
-	if (TextureLoc == -1) {
+	if (CameraPositionLoc == -1) {
 		printf("ERROR::CameraPositionLoc Not Found\n");
 	}
 	
 	
-	glEnable(GL_CULL_FACE); // enables face culling    
+	glEnable(GL_CULL_FACE); // enables face culling
 	glCullFace(GL_BACK); // tells OpenGL to cull back faces (the sane default setting)
 	glFrontFace(GL_CCW); // tells OpenGL which faces are considered 'front' (use GL_CW or GL_CCW)
 }

@@ -9,6 +9,7 @@
 
 void setupMesh(Mesh *mesh)
 {
+	printf("error?0\n");
 	glGenVertexArrays(1, &(mesh->VAO));
 	glGenBuffers(1, &(mesh->VBO));
 	glGenBuffers(1, &(mesh->EBO));
@@ -17,22 +18,23 @@ void setupMesh(Mesh *mesh)
 	
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->VBO);
 	
-	glBufferData(GL_ARRAY_BUFFER, mesh->numVertices * sizeof(Vertex), mesh->vertices, GL_DYNAMIC_DRAW); 
+	glBufferData(GL_ARRAY_BUFFER, mesh->numVertices * sizeof(Vertex), mesh->vertices, GL_STATIC_DRAW); 
 	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->numIndices * sizeof(GLuint), mesh->indices, GL_STATIC_DRAW);
 	
 	// Vertex Positions
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0 * sizeof(float));
 	// Vertex Normals
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 3);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 3 * sizeof(float));
 	// Vertex Texture Coords
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 6);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 6 * sizeof(float));
 	
 	glBindVertexArray(0);
+	printf("error?0\n");
 }
 void freeMesh(Mesh *mesh)
 {
@@ -54,6 +56,7 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 	MESHES[activeMesh].textures = malloc(sizeof(Texture) * MESHES[activeMesh].numTextures);
 	
 	GLuint index;
+	printf("error?0\n");
 	
 	Vertex vert;
 	for(index = 0; index < mesh->mNumVertices; index++){
@@ -68,10 +71,12 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 		if(mesh->mTextureCoords[0]){
 			vert.attribute[6] = mesh->mTextureCoords[0][index].x;
 			vert.attribute[7] = mesh->mTextureCoords[0][index].y;
+//			printf("[%f, %f]\n", vert.attribute[6], vert.attribute[7]);
 		}
 		MESHES[activeMesh].vertices[index] = vert;
 	}
 	
+	printf("error?0.5\n");
 	for(index = 0; index < mesh->mNumFaces; index++){
 			struct aiFace face = mesh->mFaces[index];
 			GLuint indiceIndex = 0;
@@ -79,31 +84,26 @@ void processMesh(struct aiMesh *mesh, const struct aiScene *scene, unsigned int 
 				MESHES[activeMesh].indices[(3 * index) + indiceIndex] = face.mIndices[indiceIndex];
 			}	
 	}
+	printf("error?1\n");
 	Texture *texture = &(MESHES[activeMesh].textures[0]);
 	struct aiString textureString;
 	aiGetMaterialString(scene->mMaterials[mesh->mMaterialIndex], AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), &textureString);
-	texture->path = malloc(sizeof("pink.png"));
-	int ii = 0;
-	strcpy(texture->path, "pink.png");
-	//printf("%s\n", texture->path);
+	texture->path = malloc(sizeof(textureString.data));
+	strcpy(texture->path, textureString.data);
+	printf("texture = %s\n", texture->path);
+	printf("error?2\n");
 	
-	
-	int width, height;
-	unsigned char* image = SOIL_load_image(texture->path, &width, &height, 0, SOIL_LOAD_RGB); 
-	
-	glGenTextures(1, &(texture->id));
+	texture->id = SOIL_load_OGL_texture(texture->path, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	glBindTexture(GL_TEXTURE_2D, texture->id);
-	
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
-	//printf("image: %s\n", image);
-	
-	SOIL_free_image_data(image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	// Generate mipmaps, by the way.
+	glGenerateMipmap(GL_TEXTURE_2D);
+	printf("error?3\n");
+
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
 	/*if(mesh->mMaterialIndex >= 0){//TODO

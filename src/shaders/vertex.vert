@@ -1,7 +1,5 @@
 #version 130
 
-uniform int FOV;
-
 in vec3 localPosition;
 in vec3 normal;
 in vec2 texCoords;
@@ -13,26 +11,32 @@ uniform mat4 clipSpace;
 uniform vec3 cameraPosition;
 
 out float brightness;
-out vec2 TexCoords;
-out float col;
+out vec2 UV;
 
 void main()
 {
 	gl_Position = worldSpace * vec4(localPosition, 1.0);
-	TexCoords = texCoords;
-	//col = localPosition.z;
+	UV = texCoords;
 	
-	vec3 vertNormal = normalize((worldSpace * vec4(normal, 1.0)).xyz);
 	
-	vec3 lightPosition = vec3(1.0, 2.5, 0.0); // in view space
-	vec3 pointCamera = normalize(cameraPosition - gl_Position.xyz);
+	vec3 lightPosition = vec3(0.0, 0.0, 0.0); // in world space
 	
-	vec3 lightPoint = normalize(gl_Position.xyz - lightPosition);
-	vec3 pointLight = normalize(lightPosition - gl_Position.xyz);
-	vec3 reflectedLight = lightPoint - 2 * normal * dot(lightPoint, normal);
-	//brightness = 1 - clamp(dot(pointCamera, reflectedLight), 0, 1);
-	brightness = 1 - clamp(dot(vec3(0.0, 1.0, 0.0), pointLight), 0, 1);
-	brightness = 1 - brightness;
-	//brightness = 1;// remove effects of lighting
+	
+	
+	vec3 vertNormal = normalize((worldSpace * vec4(normal, 0.0)).xyz);
+	vec3 pointLight = lightPosition - gl_Position.xyz;
+	
+	
+	
+	float diffuse = clamp(dot(vertNormal, pointLight), 0, 1);
+	brightness = diffuse;
+	
+	float distSq = pointLight.x * pointLight.x + pointLight.y * pointLight.y + pointLight.z * pointLight.z;
+	brightness = brightness*30 / distSq;
+	//brightness = clamp(dot(pointCamera, reflectedLight), 0, 1);
+	//brightness = clamp(dot(vec3(0.0, 1.0, 0.0), pointLight), 0, 1);
+	
+//	brightness = 1 - brightness;// Reverse Brightness
+//	brightness = 1;// remove effects of lighting
 	gl_Position = clipSpace * viewSpace * gl_Position;
 }
