@@ -52,7 +52,7 @@ static actorList possibleActorCollisions(void)
 	octreeNode *activeOctree = CONTAINING_OCTREE_NODE;
 	unsigned int id = getActor();
 	unsigned int index;
-	for(index = 0; index < numActors; index++){
+	for(index = 0; index < actors.numActors; index++){
 		if(index == id)
 			continue;
 		bindActor(index);

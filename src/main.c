@@ -20,7 +20,10 @@
 #include "actorComponents/renderComponent.h"
 #include "actorComponents/directionComponent.h"
 #include "actorComponents/callbackComponent.h"
+#include "actorComponents/AIComponent.h"
 #include "math/angles.h"
+#include "shaders/backBuffer.h"
+#include "shaders/shaderProgram.h"
 #include "math/quaternion.h"
 #include "shaders/shaders.h"
 #include "fileSupport/loadFiles.h"
@@ -64,14 +67,12 @@ int main(int argc, char *argv[])
 	SDL_Window* gameWindow = SDL_CreateWindow(PROGRAM_NAME, 500, 100, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GLContext gameContext = SDL_GL_CreateContext(gameWindow);
 	
-	//Initialize SDL_mixer
 	if(  Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
 		printf("ERROR::SDL_mixer::NOT::INITIALIZED::SDL_mixer Error: %s\n", Mix_GetError());
 	}
 	
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
-	glEnable(GL_DEPTH_TEST);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	
@@ -82,34 +83,36 @@ int main(int argc, char *argv[])
 	genFrustum();
 	loadQuests("asd");//TODO replace with actual save-file selecting.
 	
-	unsigned char ter = addActor();
-	loadActorData("actors/arena.xml");
+	unsigned int ter = addActor("actors/arena.xml");
 	*POSITION = genVec3(0.0, -1.0, -8);
 	
-	unsigned char pro = addActor();
-	loadActorData("actors/actor.xml");
+	unsigned int pro = addActor("actors/actor.xml");
 	*POSITION = genVec3(0.0, 2.0, -1 * 2.0);
 	
-	callbackController *timeoutGame = malloc(sizeof(callbackController));
-	*timeoutGame = genTimeout(endGame, MAX_LIFE_TIME_MS);
-	enableCallbackController(timeoutGame);
-	
-	unsigned char cam = addActor();
-	loadActorData("actors/camera.xml");
+	unsigned int cam = addActor("actors/camera.xml");
 	*POSITION = genVec3(0.0, 2.0, -1 * 2.0);
 	SHOULD_RENDER = 0;
 	
-	unsigned char thin = addActor();
-	loadActorData("actors/thing.xml");
+	unsigned int thin = addActor("actors/thing.xml");
 	*POSITION = genVec3(4, 0.0, -1 * 7.0);
 	
-	unsigned char buz = addActor();
-	loadActorData("actors/buzz.xml");
-	*POSITION = genVec3(0.0, 2.0, 0.0);
+	
+	int numBees = 5;
+	int index = 0;
+	for(index = 0; index < numBees; index++){
+		addActor("actors/buzz.xml");
+		*POSITION = genVec3(0.0, 0.0, 0.0);
+	}
+	
 	
 	bindCameraView(cam);
 	bindMapTerrain(ter);
 	bindControlledActor(pro);
+	
+	bindActor(ter);
+	callbackController *timeoutGame = malloc(sizeof(callbackController));
+	*timeoutGame = genTimeout(endGame, MAX_LIFE_TIME_MS);
+	enableCallbackController(timeoutGame);
 	
 	bindActor(thin);
 	vec3 *pos = POSITION;
@@ -143,21 +146,25 @@ int main(int argc, char *argv[])
 	gTime = genGlobalTimeline();
 	bindGlobalTimeline(&gTime);
 	
+	
 	unsigned char gameState = ACT;
 	while(IAMALIVE == 1){
+		printf("Start Of Main Loop\n");
 		averageFrameMS = averageFrameMS * runningAverageMod + getPrevFrameDuration(*getGlobalTimeline()) * (1.0 - runningAverageMod);
 		SDL_GL_SwapWindow(gameWindow);
 		
 		SDL_Delay(16);
 		
-		glClearColor(0.0, 0.3, 0.0, 1.0);
-		
+		glClearColor(0.0, 0.0, 0.2, 1.0);
+		glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		updateGlobalTimeline(getGlobalTimeline());
 		switch(gameState){
 		case ACT:
-			//<CL "physics upgrade: collisions">
+			//TODO impliment a real collision system.
 			bindActor(pro);
 			unsigned char collision = CheckBoundingBoxCollision(ter);
 			vec3 proPos = *POSITION;
@@ -172,12 +179,12 @@ int main(int argc, char *argv[])
 					VELOCITY->vec[1] = 0.0;
 				}
 			}
-			//</CL>
 			handleEvents();
 			updateActors();
 			updateQuests();
+			bringForthBackBuffer();
 			
-			
+			/*
 			bindActor(pro);
 			octreeNode *proOct = CONTAINING_OCTREE_NODE;
 			printf("\n\nproOct id: %d\n", proOct->octreeNodeID);
@@ -186,7 +193,7 @@ int main(int argc, char *argv[])
 			printf("\n\nthinOct id: %d\n", thinOct->octreeNodeID);
 			
 			printf("proOct is in thinOct: %hhu\n\n\n", isOctreeParent(proOct, thinOct));
-			
+			*/
 			
 			break;
 		default:
@@ -222,8 +229,8 @@ int main(int argc, char *argv[])
 	
 	collisionController box1 = genCollisionAABox(p1, p2, 1);
 	collisionController box2 = genCollisionAABox(p3);
-	
-	printf("collide = %hhu\n", containingAABoxAABox(box1, box2));
+		printf("collide = %hhu\n", containingAABoxAABox(box1, box2));
+
 	*/
 	
 	

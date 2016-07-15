@@ -20,7 +20,6 @@ void freeCallbackComponent(void)
 }
 void updateCallbackComponent(unsigned short deltaMS)
 {
-	
 	unsigned char index;
 	for(index = 0; index < NUM_CALLBACKS; index++)
 		if(CALLBACKS[index])
@@ -50,7 +49,6 @@ void enableCallbackController(callbackController *call)
 		CALLBACKS = realloc(CALLBACKS, sizeof(callbackController *) * NUM_CALLBACKS);
 	}
 	CALLBACKS[next] = call;
-	printf("callback enabled\n\n\n");
 }
 void disableCallbackController(unsigned char index)
 {

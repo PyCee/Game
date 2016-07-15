@@ -8,6 +8,8 @@
 #include "../math/pythag.h"
 #include "../actors.h"
 #include "../shaders/shaders.h"
+#include "../shaders/shaderProgram.h"
+#include "../shaders/backBuffer.h"
 #include <SDL2/SDL_opengl.h>
 #include <math.h>
 #include <stdio.h>
@@ -30,7 +32,7 @@ void genFrustum(void)
 	clip.mat[2][2] = -1 * far / (far - near);
 	clip.mat[2][3] = -1 * 2 * (far * near) / (far - near);
 	clip.mat[3][2] = -1;
-	glUniformMatrix4fv(ClipSpaceLoc, 1, GL_TRUE,
+	glUniformMatrix4fv(SMS_ClipSpaceLoc, 1, GL_TRUE,
 				&clip.mat[0][0]);
 }
 unsigned char genCamera(void)
@@ -44,19 +46,14 @@ void UpdateCamera(unsigned short deltaMS)
 	vec3 protagPos = *POSITION;
 	bindActor(id);
 	*POSITION = protagPos;
-	
-	/*if(cameraPitch > 270 && cameraPitch < 315 )
-		cameraPitch = 315;
-	if(cameraPitch < 90 && cameraPitch > 75)
-		cameraPitch = 75;
-	*/
-	
 	mat4 Translate = genIdentityMat4();
 	Translate = translateMat4(Translate, scaleVec3(*POSITION, -1));
 	mat4 Rotate = QuaternionToRotationMatrix(*INVERSEFORWARDROTATION);
 	
 	mat4 transformation = mat4Product(Rotate, Translate);
 	
-	glUniformMatrix4fv(ViewSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
-	glUniform3fv(CameraPositionLoc, 3, POSITION);
+	glUseProgram(*standardModelShader->program);
+	glUniformMatrix4fv(SMS_ViewSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
+	glUniform3fv(SMS_CameraPositionLoc, 1, POSITION);
+	glUseProgram(0);
 }

@@ -26,7 +26,7 @@
 		
 	</lighting>
 	<model>
-		<mesh>models/buzz.dae</mesh>
+		<mesh>models/bee.dae</mesh>
 	</model>
 	<rendering>
 	</rendering>

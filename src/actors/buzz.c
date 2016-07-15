@@ -29,8 +29,6 @@ static void endBuzzMove(callbackController);
 void UpdateBuzz(unsigned short deltaMS)
 {
 	callbackController temp;
-	printVec3(*AI_MOVE_TARGET);
-	printVec3(*AI_CONTROLLED_MOVEMENT);
 	switch(AI_STATE){
 	case BUZZ_AI_STATE_INIT:
 		*VELOCITY = genVec3(0.0, 0.0, 0.0);

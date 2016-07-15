@@ -11,5 +11,6 @@ void freeActorList(actorList *);
 void addActorListID(actorList *, int);
 void removeActorListIndex(actorList *, int);
 void removeActorListID(actorList *, int);
+int nextUnusedListID(actorList);
 
 #endif /* ACTOR_LIST */

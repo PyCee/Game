@@ -7,7 +7,6 @@
 
 unsigned char genTerrain(void)
 {
-	assignAIUpdate(UpdateTerrain);
 	return getActor();
 }
 void UpdateTerrain

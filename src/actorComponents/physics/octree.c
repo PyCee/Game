@@ -11,7 +11,6 @@ octreeNode globalOctree;
 
 static octreeNode genOctreeNodeChild(octreeNode *, unsigned char);
 static unsigned short addOctreeNode(void);
-static unsigned char isOctreeParentLargeSmall(octreeNode, octreeNode);
 
 octreeNode genOctreeNode(void)
 {

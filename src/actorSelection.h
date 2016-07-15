@@ -5,25 +5,25 @@
 #define DYN 0
 #define STA 1
 
-unsigned char currentActor;
-void bindActor(unsigned char);
-unsigned char getActor(void);
+unsigned int currentActor;
+void bindActor(unsigned int);
+unsigned int getActor(void);
 
 unsigned char currentLight;
 void bindLight(unsigned char);
 unsigned char getLight(void);
 
-static unsigned char cameraView;
-void bindCameraView (unsigned char);
-unsigned char getCameraView (void);
+static unsigned int cameraView;
+void bindCameraView (unsigned int);
+unsigned int getCameraView (void);
 
-static unsigned char controlledActor;
-void bindControlledActor (unsigned char);
-unsigned char getControlledActor (void);
+static unsigned int controlledActor;
+void bindControlledActor (unsigned int);
+unsigned int getControlledActor (void);
 
-static unsigned char mapTerrain;
-void bindMapTerrain (unsigned char);
-unsigned char getMapTerrain (void);
+static unsigned int mapTerrain;
+void bindMapTerrain (unsigned int);
+unsigned int getMapTerrain (void);
 
 static struct globalTimeline *globalTime;
 void bindGlobalTimeline	(struct globalTimeline *);

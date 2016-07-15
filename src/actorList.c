@@ -51,7 +51,19 @@ void removeActorListID(actorList *actList, int id)
 		return;
 	removeActorListIndex(actList, index);
 }
-int actorListContainsID(actorList *actList, int id)
+int nextUnusedActorListID(actorList actList)
+{
+	int largestID = -1;
+	int index = 0;
+	while(index < actList.numActors){
+		if(largestID + 1 == actList.list[index]){
+			largestID++;
+			index = 0;
+		} else index++;
+	}
+	return largestID + 1;
+}
+static int actorListContainsID(actorList *actList, int id)
 {
 	int index;
 	for(index = 0; index < actList->numActors; index++)

@@ -12,7 +12,6 @@ static void countIndices(struct aiMesh *);
 static void processNode(struct aiNode *, const struct aiScene *);
 Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 {
-	printf("error?0321\n");
 	MODEL_PATH = malloc(sizeof(modelFileLoc));
 	strcpy(MODEL_PATH, modelFileLoc);
 	// TODO: replace all of the assimp stuff with own library
@@ -22,7 +21,6 @@ Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 		
 		// later~
 		// import animations
-	printf("error?0123\n");
 	const struct aiScene* scene = aiImportFile(modelFileLoc, //aiProcess_CalcTangentSpace       |
 		//aiProcess_Triangulate            | // Needed
 		//aiProcess_JoinIdenticalVertices  | // Needed
@@ -30,12 +28,9 @@ Mesh *loadModelFromFile(const unsigned char *modelFileLoc)
 		//aiProcess_FlipUVs 		 |
 		aiProcess_GenUVCoords		 | // Needed
 		aiProcess_SortByPType);
-	printf("error?0987\n");
 	NUM_MESHES = countMeshes(scene->mRootNode);
 	MESHES = malloc(sizeof(Mesh) * NUM_MESHES);
-	printf("error?0789\n");
 	processNode(scene->mRootNode, scene);
-	printf("error?0.1\n");
 }
 void freeModelComponent(void)
 {

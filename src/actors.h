@@ -1,5 +1,5 @@
-#ifndef _ACTORS_
-#define _ACTORS_
+#ifndef ACTORS
+#define ACTORS
 
 #include "actorSelection.h"
 
@@ -15,11 +15,11 @@ extern struct LightingComponent **lighting;
 extern struct ModelComponent **model;
 extern struct RenderComponent **render;
 
-extern unsigned char numActors;
+extern struct actorList actors;
 extern unsigned char allActorsPaused;
 
 void initActorComponents(void);
-unsigned char addActor(void);
+unsigned int addActor(const unsigned char *);
 void freeAllActors(void);
 void freeActor(void);
 void updateActors(void);
@@ -27,4 +27,4 @@ void UselessFunction(void);
 void toggleAllPause(void);
 void printActor(void);
 
-#endif /* _ACTOR_ */
+#endif /* ACTOR */

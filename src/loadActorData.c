@@ -22,18 +22,18 @@
 #include "actors/buzz.h"
 
 static const unsigned char *lookupUpdateFunctionsStr[] = {
-	"UselessUpdate",
+	"UpdateUseless",
 	"UpdateProtag",
 	"UpdateCamera",
 	"UpdateBuzz"
 };
 static void (*lookupUpdateFunctions[]) (unsigned short) = {
-	UselessUpdate,
+	UpdateUseless,
 	UpdateProtag,
 	UpdateCamera,
 	UpdateBuzz
 };
-void loadActorData(unsigned char *loc)
+void loadActorData(const unsigned char *loc)
 {
 	unsigned char *fileSource = readFile(loc);
 	char *afterPtr;

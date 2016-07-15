@@ -51,8 +51,6 @@ install:
 	sudo apt-get install libsdl2-dev # library that handels window creation and input
 	sudo apt-get install libsdl2-mixer-dev
 	sudo apt-get install libassimp-dev # library for importing 3d models
-	git config --global user.email "Kpampusch@yahoo.com"
-	git config --global user.name "NotSarcastic"
 #	cd SDL
 #	./configure
 #	make

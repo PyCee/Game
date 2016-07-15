@@ -19,7 +19,7 @@
 		<drawBounds>0</drawBounds>
 	</collisions>
 	<AI>
-		<update>UselessUpdate</update>
+		<update>UpdateUseless</update>
 	</AI>
 	<lighting>
 		

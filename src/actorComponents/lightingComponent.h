@@ -10,7 +10,7 @@
 #define NUM_LIGHTS LIGHTING->num_lights
 
 typedef struct LightingComponent {
-	struct Vertex **originatingPoint;
+	struct vertex **originatingPoint;
 	color *intensity;
 	unsigned char num_lights;
 } LightingComponent;
@@ -21,6 +21,6 @@ void genLightingComponent(void);
 void freeLightingComponent(void);
 void updateLightingComponent(unsigned short);
 unsigned char nextFreeLight(void);
-unsigned char addLight(struct Vertex *, color);
+unsigned char addLight(struct vertex *, color);
 
 #endif /* _LIGHTING_ */

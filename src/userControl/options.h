@@ -37,6 +37,7 @@ unsigned char Option[MOUSE_LOCK]; // Set array size equal to the largest valued 
 //						(directly above array declaration)
 
 
+
 static unsigned char MasterLevel = 0;
 static unsigned char MuteMaster = 0;
 #define MAX_MASTER_SOUND_LEVEL 255

@@ -35,18 +35,18 @@ unsigned char nextFreeLight(void)
 	}
 	return NUM_LIGHTS;
 }
-unsigned char addLight(Vertex *origin, color col)
+unsigned char addLight(vertex *origin, color col)
 {
 	unsigned char next;
 	if(NUM_LIGHTS == 0){
 		NUM_LIGHTS = 1;
 		next = 0;
-		LIGHT_ORIGIN = malloc(sizeof(Vertex *));
+		LIGHT_ORIGIN = malloc(sizeof(vertex *));
 		LIGHT_INTENSITY = malloc(sizeof(color));
 	} else if(nextFreeLight() == NUM_LIGHTS){
 		NUM_LIGHTS += 1;
 		next = NUM_LIGHTS - 1;
-		LIGHT_ORIGIN = realloc(LIGHT_ORIGIN, sizeof(Vertex *) * NUM_LIGHTS);
+		LIGHT_ORIGIN = realloc(LIGHT_ORIGIN, sizeof(vertex *) * NUM_LIGHTS);
 		LIGHT_INTENSITY = realloc(LIGHT_INTENSITY, sizeof(color) * NUM_LIGHTS);
 	}
 	LIGHT_ORIGIN[next] = origin;

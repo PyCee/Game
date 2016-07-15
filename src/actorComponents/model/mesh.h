@@ -10,13 +10,13 @@
 #include <assimp/postprocess.h>
 
 typedef struct _Mesh {
-	Vertex *vertices;
+	vertex *vertices;
 	unsigned int numVertices;
 	Texture *textures;
 	unsigned int numTextures;
 	GLuint *indices;
 	unsigned int numIndices;
-	GLuint VBO, VAO, EBO;
+	GLuint VAO, VBO, EBO;
 } Mesh;
 
 void setupMesh(Mesh *);

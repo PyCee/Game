@@ -2,9 +2,9 @@
 #include "vertex.h"
 #include "../physics/vector.h"
 
-Vertex genVertex(vec3 pos, vec3 norm, vec2 tex)
+vertex genVertex(vec3 pos, vec3 norm, vec2 tex)
 {
-	Vertex vert;
+	vertex vert;
 	vert.attribute[0] = pos.vec[0];
 	vert.attribute[1] = pos.vec[1];
 	vert.attribute[2] = pos.vec[2];

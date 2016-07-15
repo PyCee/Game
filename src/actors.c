@@ -6,7 +6,12 @@
 #include "actorComponents/physics/vector.h"
 #include "actorComponents/physics/physicsAttributeController.h"
 #include "actorSelection.h"
+#include "loadActorData.h"
+#include "actorList.h"
 #include <strings.h>
+#include "shaders/shaders.h"
+#include "shaders/backBuffer.h"
+#include "shaders/shaderProgram.h"
 
 #include "actorComponents/identifierComponent.h"
 #include "actorComponents/callbackComponent.h"
@@ -22,9 +27,8 @@
 #include "actorComponents/physics/octree.h"
 #include "actorComponents/physics/checkOctree.h"
 
-unsigned char numActors;
+actorList actors;
 unsigned char allActorsPaused;
-
 
 IdentifierComponent **identifier;
 TimelineComponent **localTimeline;
@@ -45,25 +49,14 @@ void initActorComponents(void)
 	initRender();
 	initPhysics();
 	allActorsPaused = 0;
-	numActors = 0;
+	actors = genActorList();
 }
-static unsigned char nextFreeActor(void)
+unsigned int addActor(const unsigned char *loadFile)
 {
-	unsigned char actorID = 0;
-	
-	while (actorID < numActors) {
-		if(!identifier[actorID])
-			return actorID;
-		actorID++;
-	}
-	return numActors;
-}
-unsigned char addActor(void)
-{
-	printf("addActor: %d\n", numActors);
-	unsigned char next;
-	if(numActors == 0){
-		numActors = 1;
+	printf("Adding Actor: %d\n", actors.numActors);
+	unsigned int next;
+	if(actors.numActors == 0){
+		addActorListID(&actors, 0);
 		next = 0;
 		identifier = malloc(sizeof(IdentifierComponent *));
 		callback = malloc(sizeof(CallbackComponent *));
@@ -75,19 +68,22 @@ unsigned char addActor(void)
 		lighting = malloc(sizeof(LightingComponent *));
 		model = malloc(sizeof(ModelComponent *));
 		render = malloc(sizeof(RenderComponent *));
-	} else if(nextFreeActor() == numActors){
-		next = numActors;
-		numActors += 1;
-		identifier = realloc(identifier, sizeof(IdentifierComponent *) * numActors);
-		callback = realloc(callback, sizeof(CallbackComponent *) * numActors);
-		localTimeline = realloc(localTimeline, sizeof(TimelineComponent *) * numActors);
-		audio = realloc(audio, sizeof(AudioComponent *) * numActors);
-		direction = realloc(direction, sizeof(DirectionComponent *) * numActors);
-		physics = realloc(physics, sizeof(PhysicsComponent *) * numActors);
-		ai = realloc(ai, sizeof(AIComponent *));
-		lighting = realloc(lighting, sizeof(LightingComponent *) * numActors);
-		model = realloc(model, sizeof(ModelComponent *) * numActors);
-		render = realloc(render, sizeof(RenderComponent *) * numActors);
+	} else if(nextUnusedActorListID(actors) == actors.numActors){
+		next = actors.numActors;
+		addActorListID(&actors, actors.numActors);
+		identifier = realloc(identifier, sizeof(IdentifierComponent *) * actors.numActors);
+		callback = realloc(callback, sizeof(CallbackComponent *) * actors.numActors);
+		localTimeline = realloc(localTimeline, sizeof(TimelineComponent *) * actors.numActors);
+		audio = realloc(audio, sizeof(AudioComponent *) * actors.numActors);
+		direction = realloc(direction, sizeof(DirectionComponent *) * actors.numActors);
+		physics = realloc(physics, sizeof(PhysicsComponent *) * actors.numActors);
+		ai = realloc(ai, sizeof(AIComponent *) * actors.numActors);
+		lighting = realloc(lighting, sizeof(LightingComponent *) * actors.numActors);
+		model = realloc(model, sizeof(ModelComponent *) * actors.numActors);
+		render = realloc(render, sizeof(RenderComponent *) * actors.numActors);
+	} else{
+		next = nextUnusedActorListID(actors);
+		addActorListID(&actors, next);
 	}
 	bindActor(next);
 	identifier[next] = malloc(sizeof(IdentifierComponent));
@@ -101,7 +97,7 @@ unsigned char addActor(void)
 	model[next] = malloc(sizeof(ModelComponent));
 	render[next] = malloc(sizeof(RenderComponent));
 	genActor();
-	
+	loadActorData(loadFile);
 	printf("Added ActorID: %d\n", next);
 	return next;
 }
@@ -138,30 +134,29 @@ void freeActor(void)
 }
 void freeAllActors(void)
 {
-	unsigned char actorID = 0;
-	while (actorID < numActors) {
+	unsigned int actorID = 0;
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()])
 			freeActor();
 		actorID++;
 	}
-	printf("Freed %i Actors\n", numActors);
+	printf("Freed %i Actors\n", actors.numActors);
 }
 void updateActors(void)
 {
-	unsigned char actorID = 0;
-	unsigned short localTime[numActors];
-	while (actorID < numActors) {
+	unsigned int actorID = 0;
+	unsigned short localTime[actors.numActors];
+	for(actorID = 0; actorID < actors.numActors; actorID++){
 		bindActor(actorID);
 		if(identifier[getActor()])
 			localTime[getActor()] = updateTimelineComponent();
-		actorID++;
 	}
 	unsigned short deltaTime = SDL_GetTicks();
 	printf("Updating Batch: \"Callback\"\n");
 	actorID = 0;
-	while (actorID < numActors) {
-		bindActor(actorID);
+	while (actorID < actors.numActors) {
+		bindActor(actorID);// bindActor(actors.list[actorID) (and all repeats below)
 		if(identifier[getActor()])
 			updateCallbackComponent(localTime[actorID]);
 		actorID++;
@@ -169,7 +164,7 @@ void updateActors(void)
 	printf("Batch: \"Callback\" Updated. Took %hu milliseconds\nUpdating Batch: \"Audio\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if(identifier[getActor()])
 			updateAudioComponent(localTime[actorID]);
@@ -178,7 +173,7 @@ void updateActors(void)
 	printf("Batch: \"Audio\" Updated. Took %hu milliseconds\nUpdating Batch: \"Direction\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()]){
 			updateDirectionComponent(localTime[actorID]);
@@ -188,7 +183,7 @@ void updateActors(void)
 	printf("Batch: \"Direction\" Updated. Took %hu milliseconds\nUpdating Batch: \"Physics\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()]){
 			updatePhysicsComponent(localTime[actorID]);
@@ -198,7 +193,7 @@ void updateActors(void)
 	printf("Batch: \"Physics\" Updated. Took %hu milliseconds\nUpdating Batch: \"AI\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()])
 			updateAIComponent(localTime[actorID]);
@@ -207,7 +202,7 @@ void updateActors(void)
 	printf("Batch: \"AI\" Updated. Took %hu milliseconds\nUpdating Batch: \"Lighting\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()])
 			updateLightingComponent(localTime[actorID]);
@@ -216,12 +211,17 @@ void updateActors(void)
 	printf("Batch: \"Lighting\" Updated. Took %hu milliseconds\nUpdating Batch: \"Rendering\"\n", SDL_GetTicks() - deltaTime);
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
-	while (actorID < numActors) {
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
+	glUseProgram(*standardModelShader->program);
+	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()])
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
 	}
+	
+	glUseProgram(0);
 	printf("Batch: \"Rendering\" Updated. Took %hu milliseconds\nAll Batches Updated\n", SDL_GetTicks() - deltaTime);
 }
 void UselessFunction(void){}
@@ -230,7 +230,7 @@ void toggleAllPause(void)
 	printf("Toggle pause called.\n");
 	unsigned char actorID = 0;
 	if(allActorsPaused){
-		while (actorID < numActors) {
+		while (actorID < actors.numActors) {
 			bindActor(actorID);
 			if(identifier[getActor()])
 				unpauseTimeline();
@@ -239,7 +239,7 @@ void toggleAllPause(void)
 		allActorsPaused = 0;
 	}
 	else{
-		while (actorID < numActors) {
+		while (actorID < actors.numActors) {
 			bindActor(actorID);
 			if(identifier[getActor()])
 				pauseTimeline();

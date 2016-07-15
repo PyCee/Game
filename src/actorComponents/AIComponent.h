@@ -17,6 +17,6 @@ void genAIComponent();
 void freeAIComponent();
 void updateAIComponent(unsigned short);
 void assignAIUpdate(void (*)(unsigned short));
-void UselessUpdate(unsigned short);
+void UpdateUseless(unsigned short);
 
 #endif /* AI_COMPONENT */

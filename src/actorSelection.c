@@ -4,17 +4,18 @@
 #include <stdio.h>
 #include "actors/camera.h"
 #include "actors.h"
+#include "actorList.h"
 #include "globalTimeline.h"
 #include "actorComponents/lightingComponent.h"
 
 
-void bindActor(unsigned char actor)
+void bindActor(unsigned int actor)
 {
-	if(actor >= numActors || actor < 0)
+	if(actor >= actors.numActors || actor < 0)
 		printf("Invalid ActorID bound.\n ActorID = %i.\n", actor);
 	currentActor = actor;
 }
-unsigned char getActor(void)
+unsigned int getActor(void)
 {
 	return currentActor;
 }
@@ -28,27 +29,27 @@ unsigned char getLight(void)
 {
 	return currentLight;
 }
-void bindCameraView(unsigned char camera)
+void bindCameraView(unsigned int camera)
 {
 	cameraView = camera;
 }
-unsigned char getCameraView(void)
+unsigned int getCameraView(void)
 {
 	return cameraView;
 }
-void bindControlledActor(unsigned char protag)
+void bindControlledActor(unsigned int protag)
 {
 	controlledActor = protag;
 }
-unsigned char getControlledActor(void)
+unsigned int getControlledActor(void)
 {
 	return controlledActor;
 }
-void bindMapTerrain(unsigned char terrain)
+void bindMapTerrain(unsigned int terrain)
 {
 	mapTerrain = terrain;
 }
-unsigned char getMapTerrain(void)
+unsigned int getMapTerrain(void)
 {
 	return mapTerrain;
 }

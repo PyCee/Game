@@ -1,23 +1,23 @@
 
-#ifndef _SHADERS_
-#define _SHADERS_
+#ifndef SHADERS
+#define SHADERS
 
 #include <SDL2/SDL_opengl.h>
 
-GLint TextureLoc;
+#define SHADER_BACKBUFFER_VERT_PATH "../src/shaders/backBuffer/backBufferVertex.vert"
+#define SHADER_BACKBUFFER_FRAG_PATH "../src/shaders/backBuffer/backBufferFragment.frag"
+extern struct shaderProgram *frameBufferShader;
+extern GLuint FBS_TextureLoc;
 
-GLint WorldSpaceLoc;
-GLint ViewSpaceLoc;
-GLint ClipSpaceLoc;
-GLint CameraPositionLoc;
+#define SHADER_STANDARD_VERT_PATH "../src/shaders/vertex.vert"
+#define SHADER_STANDARD_FRAG_PATH "../src/shaders/fragment.frag"
+extern struct shaderProgram *standardModelShader;
+extern GLuint SMS_WorldSpaceLoc;
+extern GLuint SMS_ViewSpaceLoc;
+extern GLuint SMS_ClipSpaceLoc;
+extern GLuint SMS_CameraPositionLoc;
+extern GLuint SMS_TextureLoc;
 
-GLuint shaderProgram;
-GLuint shaderVertex;
-#define SHADER_VERT_PATH "../src/shaders/vertex.vert"
-GLuint shaderFragment;
-#define SHADER_FRAG_PATH "../src/shaders/fragment.frag"
-
-GLuint loadShaderFromFile( const unsigned char *, GLenum);
 void genShaders(void);
 
-#endif /* _SHADERS */
+#endif /* SHADERS */
