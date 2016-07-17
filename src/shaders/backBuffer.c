@@ -1,18 +1,17 @@
 #include "backBuffer.h"
 #include <SDL2/SDL_opengl.h>
-#include "shaders.h"
-#include "shaderProgram.h"
+#include "shader_program.h"
 #include "../actorComponents/model/vertex.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "buffer_plane.h"
+#include "deferred_lighting.h"
 
 GLuint backBuffer, backBufferTexture, backBufferDepthStencil;
 
-GLuint backBufferVAO, backBufferVBO, backBufferEBO;
+GLuint buffer_plane_vao, buffer_plane_vbo, buffer_plane_ebo;
 
-GLfloat bufferPlane[4][4];
-GLuint bufferPlaneIndicies[6];
 
 void genBackBuffer(void)
 {
@@ -21,7 +20,7 @@ void genBackBuffer(void)
 	
 	glGenTextures(1, &backBufferTexture);
 	glBindTexture(GL_TEXTURE_2D, backBufferTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1000, 650, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1000, 650, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);//TODO get screen size from options
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -30,7 +29,7 @@ void genBackBuffer(void)
 	
 	glGenRenderbuffers(1, &backBufferDepthStencil);
 	glBindRenderbuffer(GL_RENDERBUFFER, backBufferDepthStencil); 
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1000, 650);  
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1000, 650);//TODO get screen size from options
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, backBufferDepthStencil);
@@ -38,65 +37,19 @@ void genBackBuffer(void)
 	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) printf("ERROR::backBuffer not complete.\n");
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	
-	char index;
-	for(index = 0; index < 4; index++){
-		int x = index / 2;
-		int y = index % 2;
-		bufferPlane[index][0] = x * 2 - 1;
-		bufferPlane[index][1] = y * 2 - 1;
-		bufferPlane[index][2] = x;
-		bufferPlane[index][3] = y;
-	}
-	
-	bufferPlaneIndicies[0] = 0;
-	bufferPlaneIndicies[1] = 2;
-	bufferPlaneIndicies[2] = 1;
-	bufferPlaneIndicies[3] = 2;
-	bufferPlaneIndicies[4] = 3;
-	bufferPlaneIndicies[5] = 1;
-	
-	glGenVertexArrays(1, &backBufferVAO);
-	glGenBuffers(1, &backBufferVBO);
-	glGenBuffers(1, &backBufferEBO);
-	
-	glBindVertexArray(backBufferVAO);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, backBufferVBO);
-	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(GLfloat), bufferPlane, GL_STATIC_DRAW); 
-	
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backBufferEBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), bufferPlaneIndicies, GL_STATIC_DRAW);
-	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0 * sizeof(GLfloat));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 2 * sizeof(GLfloat));
-	
-	glBindVertexArray(0);
-	 
 }
-void bringForthBackBuffer(void){//TODO: make this work
+void bringForthBackBuffer(void)
+{
 	printf("Working on the back buffer.\n");
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glUseProgram(*frameBufferShader->program);
-	
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
+	glUseProgram(*buffer_plane_shader->program);
 	
 	glActiveTexture(GL_TEXTURE0);
-	glUniform1i(FBS_TextureLoc, 0);
+	glUniform1i(BPS_texture_loc, 0);
 	glBindTexture(GL_TEXTURE_2D, backBufferTexture);
 	
-	glBindVertexArray(backBufferVAO);
-	
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	
-	glBindVertexArray(0);
-	
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
+	draw_buffer_plane();
 	
 	glUseProgram(0);
 	glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);

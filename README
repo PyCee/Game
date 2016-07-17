@@ -10,3 +10,21 @@ and to learn/impliment various game engine features.
 Code quality varies.
 While I often work on code I wrote long ago, some of this code was written in the months after I learned how to program.
 None of the code in this project is representative of current programming experience.
+
+Makes use of a variety of 3D game engine techniques:
+	Loading a model from an external file
+	Load game options and controls from an external file
+	Player input via a keyboard and mouse to move/turn player character
+	First person view
+	Opengl v2.1 and the programmable pipeline
+	After effects to alter the final image:
+		black & white
+		invert colors
+	A back buffer
+	Spacial sub-division in the form of octrees
+
+Work in progress:
+	Deferred shading
+	after effects:
+		blur
+		color-blind mode

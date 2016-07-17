@@ -9,9 +9,11 @@
 #include "loadActorData.h"
 #include "actorList.h"
 #include <strings.h>
-#include "shaders/shaders.h"
 #include "shaders/backBuffer.h"
-#include "shaders/shaderProgram.h"
+#include "shaders/geometry.h"
+#include "shaders/shader_program.h"
+#include "shaders/buffer_plane.h"
+#include "shaders/deferred_lighting.h"
 
 #include "actorComponents/identifierComponent.h"
 #include "actorComponents/callbackComponent.h"
@@ -212,16 +214,52 @@ void updateActors(void)
 	deltaTime = SDL_GetTicks();
 	actorID = 0;
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
-	glUseProgram(*standardModelShader->program);
+	//TODO clean up the rendering below
+	glBindFramebuffer(GL_FRAMEBUFFER, geometry_buffer);
+	
+	GLenum windowBuffClear[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
+	glDrawBuffers(3, windowBuffClear);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glUseProgram(*geometry_shader->program);
+	
 	while (actorID < actors.numActors) {
 		bindActor(actorID);
 		if (identifier[getActor()])
 			updateRenderComponent(localTime[actorID]);
 		actorID++;
 	}
+	glBindFramebuffer(GL_FRAMEBUFFER, deferred_lighting_buffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(*deferred_lighting_shader->program);
 	
-	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glUniform1i(DLS_deferred_lighting_position_map_loc, 0);
+	glBindTexture(GL_TEXTURE_2D, geometry_buffer_position_map);
+	
+	glActiveTexture(GL_TEXTURE0 + 1);
+	glUniform1i(DLS_deferred_lighting_normal_map_loc, 1);
+	glBindTexture(GL_TEXTURE_2D, geometry_buffer_normal_map);
+	
+	glActiveTexture(GL_TEXTURE0 + 2);
+	glUniform1i(DLS_deferred_lighting_color_specularity_map_loc, 2);
+	glBindTexture(GL_TEXTURE_2D, geometry_buffer_color_specularity_map);
+	
+	draw_buffer_plane();
+	
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(*buffer_plane_shader->program);
+	
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(BPS_texture_loc, 0);
+	glBindTexture(GL_TEXTURE_2D, deferred_lighting_texture);
+	draw_buffer_plane();
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	
+	//TODO
 	printf("Batch: \"Rendering\" Updated. Took %hu milliseconds\nAll Batches Updated\n", SDL_GetTicks() - deltaTime);
 }
 void UselessFunction(void){}

@@ -7,8 +7,9 @@
 #include "../math/quaternion.h"
 #include "../math/pythag.h"
 #include "../actors.h"
-#include "../shaders/shaders.h"
-#include "../shaders/shaderProgram.h"
+#include "../shaders/shader_program.h"
+#include "../shaders/deferred_lighting.h"
+#include "../shaders/geometry.h"
 #include "../shaders/backBuffer.h"
 #include <SDL2/SDL_opengl.h>
 #include <math.h>
@@ -32,7 +33,9 @@ void genFrustum(void)
 	clip.mat[2][2] = -1 * far / (far - near);
 	clip.mat[2][3] = -1 * 2 * (far * near) / (far - near);
 	clip.mat[3][2] = -1;
-	glUniformMatrix4fv(SMS_ClipSpaceLoc, 1, GL_TRUE,
+	
+	glUseProgram(*geometry_shader->program);
+	glUniformMatrix4fv(GS_clip_space_loc, 1, GL_TRUE,
 				&clip.mat[0][0]);
 }
 unsigned char genCamera(void)
@@ -52,8 +55,9 @@ void UpdateCamera(unsigned short deltaMS)
 	
 	mat4 transformation = mat4Product(Rotate, Translate);
 	
-	glUseProgram(*standardModelShader->program);
-	glUniformMatrix4fv(SMS_ViewSpaceLoc, 1, GL_TRUE, &transformation.mat[0][0]);
-	glUniform3fv(SMS_CameraPositionLoc, 1, POSITION);
+	glUseProgram(*geometry_shader->program);
+	glUniformMatrix4fv(GS_view_space_loc, 1, GL_TRUE, &transformation.mat[0][0]);
+	glUseProgram(*deferred_lighting_shader->program);
+	glUniform3fv(DLS_camera_position_loc, 1, POSITION);
 	glUseProgram(0);
 }

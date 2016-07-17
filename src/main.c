@@ -23,9 +23,9 @@
 #include "actorComponents/AIComponent.h"
 #include "math/angles.h"
 #include "shaders/backBuffer.h"
-#include "shaders/shaderProgram.h"
+#include "shaders/shader_program.h"
+#include "shaders/deferred_lighting.h"
 #include "math/quaternion.h"
-#include "shaders/shaders.h"
 #include "fileSupport/loadFiles.h"
 #include "fileSupport/XML.h"
 #include "loadActorData.h"
@@ -155,11 +155,7 @@ int main(int argc, char *argv[])
 		
 		SDL_Delay(16);
 		
-		glClearColor(0.0, 0.0, 0.2, 1.0);
-		glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0, 0.0, 0.0, 1.0);
 		
 		updateGlobalTimeline(getGlobalTimeline());
 		switch(gameState){

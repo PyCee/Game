@@ -1,4 +1,4 @@
-#include "shaderProgram.h"
+#include "shader_program.h"
 #include "../fileSupport/loadFiles.h"
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
@@ -8,10 +8,10 @@
 
 extern char IAMALIVE;
 
-static GLuint loadShaderFromFile(const unsigned char *, GLenum);
-static void testShaderProgram(GLuint, GLenum);
+static GLuint load_shader_from_file(const unsigned char *, GLenum);
+static void test_shader_program(GLuint, GLenum);
 
-void freeShaderProgram(shaderProgram *shader)
+void free_shader_program(shader_program *shader)
 {
 	if(shader->program){
 		//freeProgram
@@ -22,30 +22,30 @@ void freeShaderProgram(shaderProgram *shader)
 	if(shader->fragment){
 		//freeShader
 	}
-	if(shader->vertexSourcePath){
-		free(shader->vertexSourcePath);
-		shader->vertexSourcePath = 0;
+	if(shader->vertex_src_path){
+		free(shader->vertex_src_path);
+		shader->vertex_src_path = 0;
 	}
-	if(shader->fragmentSourcePath){
-		free(shader->fragmentSourcePath);
-		shader->fragmentSourcePath = 0;
+	if(shader->fragment_src_path){
+		free(shader->fragment_src_path);
+		shader->fragment_src_path = 0;
 	}
 }
-shaderProgram genShaderProgramVertFrag(const unsigned char *vertPath, const unsigned char *fragPath)
+shader_program gen_shader_program_vert_frag(const unsigned char *vert_path, const unsigned char *frag_path)
 {
-	shaderProgram shader;
+	shader_program shader;
 	shader.program = malloc(sizeof(GLuint));
 	shader.vertex = malloc(sizeof(GLuint));
 	shader.fragment = malloc(sizeof(GLuint));
-	shader.vertexSourcePath = malloc(sizeof(unsigned char) * strlen(vertPath));
-	shader.fragmentSourcePath = malloc(sizeof(unsigned char) * strlen(fragPath));
-	strcpy(shader.vertexSourcePath, vertPath);
-	strcpy(shader.fragmentSourcePath, fragPath);
+	shader.vertex_src_path = malloc(sizeof(unsigned char) * strlen(vert_path));
+	shader.fragment_src_path = malloc(sizeof(unsigned char) * strlen(frag_path));
+	strcpy(shader.vertex_src_path, vert_path);
+	strcpy(shader.fragment_src_path, frag_path);
 	
-	printf("Loading Vertex Shader %s\n", vertPath);
-	*shader.vertex = loadShaderFromFile(vertPath, GL_VERTEX_SHADER);
-	printf("Vertex Shader Loaded.\nLoading Fragment Shader %s\n", fragPath);
-	*shader.fragment = loadShaderFromFile(fragPath, GL_FRAGMENT_SHADER);
+	printf("Loading Vertex Shader %s\n", vert_path);
+	*shader.vertex = load_shader_from_file(vert_path, GL_VERTEX_SHADER);
+	printf("Vertex Shader Loaded.\nLoading Fragment Shader %s\n", frag_path);
+	*shader.fragment = load_shader_from_file(frag_path, GL_FRAGMENT_SHADER);
 	printf("Vertex Shader Loaded.\nCreating Shader Program.\n");
 	*shader.program = glCreateProgram();
 	printf("Shader Program Created.\nshaderProgram Attaching Shaders.\n");
@@ -54,7 +54,7 @@ shaderProgram genShaderProgramVertFrag(const unsigned char *vertPath, const unsi
 	printf("Shader Program Shaders Attached.\n");
 	return shader;
 }
-static GLuint loadShaderFromFile(const unsigned char *path, const GLenum shaderType)
+static GLuint load_shader_from_file(const unsigned char *path, const GLenum shaderType)
 {
 	const GLchar * shaderSource[1];
 	unsigned char *fileSource = readFile(path);
@@ -88,7 +88,7 @@ static GLuint loadShaderFromFile(const unsigned char *path, const GLenum shaderT
 	free(fileSource);
 	return shader;
 }
-static void testShaderProgram(GLuint program, GLenum test)
+static void test_shader_program(GLuint program, GLenum test)
 {
 	GLint Success;
 	glGetProgramiv(program, test, &Success);
