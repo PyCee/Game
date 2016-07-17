@@ -42,17 +42,22 @@ void bringForthBackBuffer(void)
 {
 	printf("Working on the back buffer.\n");
 	
+	//
+	unsigned short temp_deltaTime = SDL_GetTicks();
+	
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glUseProgram(*buffer_plane_shader->program);
 	
 	glActiveTexture(GL_TEXTURE0);
-	glUniform1i(BPS_texture_loc, 0);
 	glBindTexture(GL_TEXTURE_2D, backBufferTexture);
 	
 	draw_buffer_plane();
 	
 	glUseProgram(0);
-	glBindFramebuffer(GL_FRAMEBUFFER, backBuffer);
+	
+	printf("backbuffer transfer Took %hu milliseconds\n", SDL_GetTicks() - temp_deltaTime);
+	//
 	
 	printf("Done working on the back buffer.\n");
 }

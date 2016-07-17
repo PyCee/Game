@@ -1,13 +1,13 @@
 #version 130
 
-uniform sampler2D Texture;
+uniform sampler2D texture_map;
 
 in vec2 frag_uv_coords;
 out vec4 frag_color;
 
 void main()
 {
-	frag_color = texture(Texture, frag_uv_coords);
+	frag_color = texture(texture_map, frag_uv_coords);
 	
 	// opposite color
 	//frag_color = vec4(vec3(1.0, 1.0, 1.0) - texture(Texture, frag_uv_coords).xyz, texture(Texture, frag_uv_coords).w);

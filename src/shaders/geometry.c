@@ -75,5 +75,8 @@ void init_geometry_shader(void)
 	if(GS_clip_space_loc == -1) printf("ERROR::GS_clip_space_loc Not Found\n");
 	GS_texture_map_loc = glGetUniformLocation(*geometry_shader->program, "texture_map");
 	if(GS_texture_map_loc == -1) printf("ERROR::GS_texture_map_loc Not Found\n");
+	
+	glUseProgram(*geometry_shader->program);
+	glUniform1i(GS_texture_map_loc, 0);
 	glUseProgram(0);
 }

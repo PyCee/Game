@@ -5,14 +5,14 @@
 #include <stdlib.h>
 
 struct shader_program *buffer_plane_shader;
-unsigned int BPS_texture_loc;
+unsigned int BPS_texture_map_loc;
 
 unsigned int buffer_plane_vao, buffer_plane_vbo, buffer_plane_ebo;
 
-void init_buffer_plane_buffers(void)
+GLfloat buffer_plane[4][4];
+GLushort buffer_plane_indicies[6];
+void init_buffer_plane_buffer(void)
 {
-	GLfloat buffer_plane[4][4];
-	GLuint buffer_plane_indicies[6];
 	
 	char index;
 	for(index = 0; index < 4; index++){
@@ -41,7 +41,7 @@ void init_buffer_plane_buffers(void)
 	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(GLfloat), buffer_plane, GL_STATIC_DRAW); 
 	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_plane_ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), buffer_plane_indicies, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLushort), buffer_plane_indicies, GL_STATIC_DRAW);
 	
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0 * sizeof(GLfloat));
@@ -50,7 +50,7 @@ void init_buffer_plane_buffers(void)
 	
 	glBindVertexArray(0);
 }
-void init_buffer_plane_shaders(void)
+void init_buffer_plane_shader(void)
 {
 	buffer_plane_shader = malloc(sizeof(shader_program));
 	*buffer_plane_shader = gen_shader_program_vert_frag(SHADER_BUFFER_PLANE_VERTEX_PATH, SHADER_BUFFER_PLANE_FRAGMENT_PATH);
@@ -60,8 +60,13 @@ void init_buffer_plane_shaders(void)
 	glLinkProgram(*buffer_plane_shader->program);
 	glValidateProgram(*buffer_plane_shader->program);
 	
-	BPS_texture_loc = glGetUniformLocation(*buffer_plane_shader->program, "Texture");
-	if(BPS_texture_loc == -1) printf("ERROR::BPS_texture_loc of buffer_plane_shader Not Found\n");
+	BPS_texture_map_loc = glGetUniformLocation(*buffer_plane_shader->program, "texture_map");
+	if(BPS_texture_map_loc == -1) printf("ERROR::BPS_texture_map_loc of buffer_plane_shader Not Found\n");
+	
+	glUseProgram(*buffer_plane_shader->program);
+	glUniform1i(BPS_texture_map_loc, 0);
+	glUseProgram(0);
+	
 }
 void draw_buffer_plane(void)
 {
@@ -69,7 +74,7 @@ void draw_buffer_plane(void)
 	glDisable(GL_CULL_FACE);
 	
 	glBindVertexArray(buffer_plane_vao);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 	
 	glEnable(GL_CULL_FACE);

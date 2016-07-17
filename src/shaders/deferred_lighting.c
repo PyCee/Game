@@ -43,6 +43,7 @@ void init_deferred_lighting_shader(void)
 	glBindAttribLocation(*deferred_lighting_shader->program, 1, "uv_coords");
 	glLinkProgram(*deferred_lighting_shader->program);
 	glValidateProgram(*deferred_lighting_shader->program);
+	
 
 	DLS_deferred_lighting_position_map_loc = glGetUniformLocation(*deferred_lighting_shader->program, "deferred_lighting_position_map");
 	if(DLS_deferred_lighting_position_map_loc == -1) printf("ERROR::DLS_deferred_lighting_position_map_loc Not Found\n");
@@ -52,5 +53,12 @@ void init_deferred_lighting_shader(void)
 	if(DLS_deferred_lighting_color_specularity_map_loc == -1) printf("ERROR::DLS_deferred_lighting_color_specularity_map_loc Not Found\n");
 	DLS_camera_position_loc = glGetUniformLocation(*deferred_lighting_shader->program, "camera_position");
 	if(DLS_camera_position_loc == -1) printf("ERROR::DLS_camera_position_loc Not Found\n");
+	
+	
+	glUseProgram(*deferred_lighting_shader->program);
+	glUniform1i(DLS_deferred_lighting_position_map_loc, 0);
+	glUniform1i(DLS_deferred_lighting_normal_map_loc, 1);
+	glUniform1i(DLS_deferred_lighting_color_specularity_map_loc, 2);
+	
 	glUseProgram(0);
 }

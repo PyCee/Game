@@ -30,8 +30,8 @@ void initRender(void)
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 	
-	init_buffer_plane_buffers();
-	init_buffer_plane_shaders();
+	init_buffer_plane_buffer();
+	init_buffer_plane_shader();
 	init_deferred_lighting_buffer();
 	init_deferred_lighting_shader();
 	init_geometry_buffer();
@@ -48,9 +48,9 @@ void freeRenderComponent()
 void updateRenderComponent(unsigned short deltaMS)
 {
 //	Should be using grometry_shader
-	if(SHOULD_RENDER == 0){
-		return;
-	}
+	if(SHOULD_RENDER == 0) return;
+	// if actor is behind camera
+	// if actor is not in frustum
 	// TODO: more culling
 	
 //	Culling done. Render something.
@@ -69,7 +69,6 @@ void updateRenderComponent(unsigned short deltaMS)
 	GLuint index;
 	for(index = 0; index < NUM_MESHES; index++){
 		glActiveTexture(GL_TEXTURE0);
-		glUniform1i(GS_texture_map_loc, 0);
 		glBindTexture(GL_TEXTURE_2D, MESHES[index].textures[0].id);
 		
 		glBindVertexArray(MESHES[index].VAO);
